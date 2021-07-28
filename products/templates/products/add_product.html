@@ -1,0 +1,7 @@
+{% block content %}
+<form action="{% url 'products:add_product' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add product</button>
+</form>
+{% endblock content %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.views import View
+from .forms import ProductCreateForm
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY 
@@ -30,3 +31,27 @@ class CheckoutSession(View):
             cancel_url = "http://127.0.0.1:8000/cancel"
         )
         return redirect(checkout_session.url, code=303)
+
+class ProductCreate(View):
+    def get(self, request):
+        form = ProductCreateForm()
+        context = {"form": form}
+        return render(request, "products/add_product.html", context)
+
+    def post(self, request):
+        form = ProductCreateForm(data=request.POST)
+        if form.is_valid():
+            product_name = form.cleaned_data.get("name")
+            product_description = form.cleaned_data.get("description")
+            product_price = form.cleaned_data.get("price")
+            product = stripe.Product.create(
+                name = product_name,
+                description = product_description
+            )
+            stripe.Price.create(
+                product = product.id,
+                currency = "CZK",
+                unit_amount = product_price * 100
+            )
+            form.save()
+            return redirect("products:index")
