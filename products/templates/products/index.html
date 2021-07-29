@@ -1,3 +1,4 @@
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,7 +24,9 @@
         {% csrf_token %}
         <button type="submit">Checkout</button>
       </form>
-      <a href="{% url 'products:add_product' %}">Add product</a>
+      <a href="{% url 'products:product_read' %}">Show products</a>
+      <a href="{% url 'products:product_create' %}">Add product</a>
     </section>
   </body>
 </html>
+{% endblock content %}

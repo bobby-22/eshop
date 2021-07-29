@@ -1,0 +1,7 @@
+{% block content %}
+{% for product in products %}
+    <p>{{ product.name }} {{ product.price }}</p>
+    <a href="{% url 'products:product_details' product.id %}">Details</a>
+    <a href="{% url 'products:product_update' product.id %}">Edit</a>
+{% endfor %}
+{% endblock content %}

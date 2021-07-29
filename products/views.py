@@ -1,7 +1,8 @@
+from products.models import ProductModel
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.views import View
-from .forms import ProductCreateForm
+from .forms import ProductForm
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY 
@@ -34,12 +35,12 @@ class CheckoutSession(View):
 
 class ProductCreate(View):
     def get(self, request):
-        form = ProductCreateForm()
+        form = ProductForm()
         context = {"form": form}
-        return render(request, "products/add_product.html", context)
+        return render(request, "products/product_create.html", context)
 
     def post(self, request):
-        form = ProductCreateForm(data=request.POST)
+        form = ProductForm(data=request.POST)
         if form.is_valid():
             product_name = form.cleaned_data.get("name")
             product_description = form.cleaned_data.get("description")
@@ -53,5 +54,21 @@ class ProductCreate(View):
                 currency = "CZK",
                 unit_amount = product_price * 100
             )
-            form.save()
+            model_instance = form.save(commit=False)
+            model_instance.product_id_stripe = product.id
+            model_instance.save()
             return redirect("products:index")
+        context = {"form": form}
+        return render(request, "products/product_create.html", context)
+
+def product_read(request):
+    products = ProductModel.objects.all()
+
+    context = {"products": products}
+    return render(request, "products/product_read.html", context)
+
+def product_details(request, product_id):
+    product = ProductModel.objects.get(id=product_id)
+
+    context = {"product": product}
+    return render(request, "products/product_details.html", context)
