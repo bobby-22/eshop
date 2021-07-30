@@ -42,20 +42,20 @@ class ProductCreate(View):
     def post(self, request):
         form = ProductForm(data=request.POST)
         if form.is_valid():
-            product_name = form.cleaned_data.get("name")
-            product_description = form.cleaned_data.get("description")
-            product_price = form.cleaned_data.get("price")
+            name = form.cleaned_data.get("name")
+            description = form.cleaned_data.get("description")
+            price = form.cleaned_data.get("price")
             product = stripe.Product.create(
-                name = product_name,
-                description = product_description
+                name = name,
+                description = description
             )
             stripe.Price.create(
                 product = product.id,
                 currency = "CZK",
-                unit_amount = product_price * 100
+                unit_amount = price * 100
             )
             model_instance = form.save(commit=False)
-            model_instance.product_id_stripe = product.id
+            model_instance.stripe_id = product.id
             model_instance.save()
             return redirect("products:index")
         context = {"form": form}
@@ -67,8 +67,12 @@ def product_read(request):
     context = {"products": products}
     return render(request, "products/product_read.html", context)
 
-def product_details(request, product_id):
-    product = ProductModel.objects.get(id=product_id)
+def product_details(request, stripe_id):
+    contents = ProductModel.objects.all().filter(stripe_id=stripe_id)
+    for content in contents:
+        name = content.name
+        description = content.description
+        price = content.price
 
-    context = {"product": product}
+    context = {"name": name, "description": description, "price": price}
     return render(request, "products/product_details.html", context)
