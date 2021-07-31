@@ -98,6 +98,10 @@ class ProductUpdate(View):
                 name = model_instance.name,
                 description = model_instance.description
                 )
+            stripe.Price.modify(
+                ProductModel.objects.get(stripe_product_id=stripe_product_id).stripe_price_id,
+                active = "false",
+            )
             stripe.Price.create(
                 product = stripe_product_id,
                 currency = "CZK",
