@@ -1,5 +1,5 @@
 {% block content %}
-<form action="{% url 'products:product_update' product.id %}" method="POST">
+<form action="{% url 'products:product_update' product.stripe_product_id %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save changes</button>
