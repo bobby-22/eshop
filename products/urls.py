@@ -1,4 +1,5 @@
 from collections import namedtuple
+from django.conf.urls import url
 from django.urls import path
 from . import views
 
@@ -11,5 +12,6 @@ urlpatterns = [
     path("product_read", views.product_read, name="product_read"),
     path("product_details/<slug:stripe_product_id>", views.product_details, name="product_details"),
     path("product_update/<slug:stripe_product_id>", views.ProductUpdate.as_view(), name="product_update"),
+    path("product_delete/<slug:stripe_product_id>", views.product_delete, name="product_delete"),
     path("checkout_session/", views.CheckoutSession.as_view(), name="checkout_session"),
 ]

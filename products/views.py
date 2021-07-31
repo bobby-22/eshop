@@ -3,6 +3,7 @@ from products.models import ProductModel
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.views import View
+from django.views.generic.base import RedirectView
 from .forms import ProductForm
 import stripe
 
@@ -112,3 +113,14 @@ class ProductUpdate(View):
             return redirect("products:index")
         context = {"form": form}
         return render(request, "products/product_update.html", context)
+
+def product_delete(request, stripe_product_id):
+    if request.method == "GET":
+        stripe.Product.modify(
+            stripe_product_id,
+            active = "false"
+        )
+        product = ProductModel.objects.get(stripe_product_id=stripe_product_id)
+        product.delete()
+        return redirect("products:product_read")
+    return render(request, "products/product_read.html")

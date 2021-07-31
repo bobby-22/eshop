@@ -3,5 +3,6 @@
     <p>{{ product.name }} {{ product.price }}</p>
     <a href="{% url 'products:product_details' product.stripe_product_id %}">Details</a>
     <a href="{% url 'products:product_update' product.stripe_product_id %}">Edit</a>
+    <a href="{% url 'products:product_delete' product.stripe_product_id %}">Delete</a>
 {% endfor %}
 {% endblock content %}
