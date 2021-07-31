@@ -92,21 +92,23 @@ class ProductUpdate(View):
             placeholder = object
         form = ProductForm(instance=object, data=request.POST)
         if form.is_valid():
+            stripe.Price.modify(
+                ProductModel.objects.get(stripe_product_id=stripe_product_id).stripe_price_id,
+                active = "false"
+            )
             model_instance = form.save()
             stripe.Product.modify(
                 stripe_product_id,
                 name = model_instance.name,
                 description = model_instance.description
                 )
-            stripe.Price.modify(
-                ProductModel.objects.get(stripe_product_id=stripe_product_id).stripe_price_id,
-                active = "false",
-            )
-            stripe.Price.create(
+            price = stripe.Price.create(
                 product = stripe_product_id,
                 currency = "CZK",
                 unit_amount = model_instance.price * 100
             )
+            model_instance.stripe_price_id = price.id
+            model_instance.save()
             return redirect("products:index")
         context = {"form": form}
         return render(request, "products/product_update.html", context)
