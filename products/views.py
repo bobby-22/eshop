@@ -44,16 +44,19 @@ class ProductCreate(View):
     def post(self, request):
         form = ProductForm(data=request.POST)
         if form.is_valid():
-            model_instance = form.save()
+            product_name = form.cleaned_data.get("name")
+            product_description = form.cleaned_data.get("description")
+            product_price = form.cleaned_data.get("price")
             product = stripe.Product.create(
-                name = model_instance.name,
-                description = model_instance.description
+                name = product_name,
+                description = product_description
             )
             price = stripe.Price.create(
                 product = product.id,
                 currency = "CZK",
-                unit_amount = model_instance.price * 100
+                unit_amount = product_price * 100
             )
+            model_instance = form.save()
             model_instance.stripe_product_id = product.id
             model_instance.stripe_price_id = price.id
             model_instance.save()
@@ -80,7 +83,7 @@ def product_details(request, stripe_product_id):
 class ProductUpdate(View):
     def get(self, request, stripe_product_id):
         product = ProductModel.objects.get(stripe_product_id=stripe_product_id)
-        objects = ProductModel.objects.filter(stripe_product_id=stripe_product_id)
+        objects = ProductModel.objects.all().filter(stripe_product_id=stripe_product_id)
         for object in objects:
             placeholder = object
         form = ProductForm(instance=object)
@@ -88,28 +91,36 @@ class ProductUpdate(View):
         return render(request, "products/product_update.html", context)
 
     def post(self, request, stripe_product_id):
-        objects = ProductModel.objects.filter(stripe_product_id=stripe_product_id)
+        objects = ProductModel.objects.all().filter(stripe_product_id=stripe_product_id)
         for object in objects:
             placeholder = object
         form = ProductForm(instance=object, data=request.POST)
         if form.is_valid():
-            stripe.Price.modify(
-                ProductModel.objects.get(stripe_product_id=stripe_product_id).stripe_price_id,
-                active = "false"
-            )
-            model_instance = form.save()
-            stripe.Product.modify(
-                stripe_product_id,
-                name = model_instance.name,
-                description = model_instance.description
+            product_name = form.cleaned_data.get("name")
+            product_description = form.cleaned_data.get("description")
+            product_price = form.cleaned_data.get("price")
+            if "price" in form.changed_data:
+                stripe.Price.modify(
+                    object.stripe_price_id,
+                    active = "false"
                 )
-            price = stripe.Price.create(
-                product = stripe_product_id,
-                currency = "CZK",
-                unit_amount = model_instance.price * 100
-            )
-            model_instance.stripe_price_id = price.id
-            model_instance.save()
+                price = stripe.Price.create(
+                    product = stripe_product_id,
+                    currency = "CZK",
+                    unit_amount = product_price * 100
+                )
+                object.stripe_price_id = price.id
+            if "name" in form.changed_data:
+                stripe.Product.modify(
+                    stripe_product_id,
+                    name = product_name,
+                    )
+            if "description" in form.changed_data:
+                stripe.Product.modify(
+                    stripe_product_id,
+                    description = product_description
+                )
+            form.save()
             return redirect("products:index")
         context = {"form": form}
         return render(request, "products/product_update.html", context)
@@ -120,7 +131,6 @@ def product_delete(request, stripe_product_id):
             stripe_product_id,
             active = "false"
         )
-        product = ProductModel.objects.get(stripe_product_id=stripe_product_id)
-        product.delete()
+        ProductModel.objects.get(stripe_product_id=stripe_product_id).delete()
         return redirect("products:product_read")
     return render(request, "products/product_read.html")
