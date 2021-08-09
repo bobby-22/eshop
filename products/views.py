@@ -83,25 +83,20 @@ def product_details(request, stripe_product_id):
 class ProductUpdate(View):
     def get(self, request, stripe_product_id):
         product = ProductModel.objects.get(stripe_product_id=stripe_product_id)
-        objects = ProductModel.objects.all().filter(stripe_product_id=stripe_product_id)
-        for object in objects:
-            placeholder = object
-        form = ProductForm(instance=object)
+        form = ProductForm(instance=product)
         context = {"product": product, "form": form}
         return render(request, "products/product_update.html", context)
 
     def post(self, request, stripe_product_id):
-        objects = ProductModel.objects.all().filter(stripe_product_id=stripe_product_id)
-        for object in objects:
-            placeholder = object
-        form = ProductForm(instance=object, data=request.POST)
+        product = ProductModel.objects.get(stripe_product_id=stripe_product_id)
+        form = ProductForm(instance=product, data=request.POST)
         if form.is_valid():
             product_name = form.cleaned_data.get("name")
             product_description = form.cleaned_data.get("description")
             product_price = form.cleaned_data.get("price")
             if "price" in form.changed_data:
                 stripe.Price.modify(
-                    object.stripe_price_id,
+                    product.stripe_price_id,
                     active = "false"
                 )
                 price = stripe.Price.create(
@@ -109,7 +104,7 @@ class ProductUpdate(View):
                     currency = "CZK",
                     unit_amount = product_price * 100
                 )
-                object.stripe_price_id = price.id
+                product.stripe_price_id = price.id
             if "name" in form.changed_data:
                 stripe.Product.modify(
                     stripe_product_id,
@@ -133,4 +128,5 @@ def product_delete(request, stripe_product_id):
         )
         ProductModel.objects.get(stripe_product_id=stripe_product_id).delete()
         return redirect("products:product_read")
+
     return render(request, "products/product_read.html")
