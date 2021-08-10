@@ -1,9 +1,8 @@
-import products
 from products.models import ProductModel
 from django.shortcuts import render, redirect
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.views import View
-from django.views.generic.base import RedirectView
 from .forms import ProductForm
 import stripe
 
@@ -61,12 +60,9 @@ class ProductCreate(View):
             model_instance.stripe_price_id = price.id
             model_instance.save()
             return redirect("products:index")
-        context = {"form": form}
-        return render(request, "products/product_create.html", context)
 
 def product_read(request):
     products = ProductModel.objects.all()
-
     context = {"products": products}
     return render(request, "products/product_read.html", context)
 
@@ -117,8 +113,6 @@ class ProductUpdate(View):
                 )
             form.save()
             return redirect("products:index")
-        context = {"form": form}
-        return render(request, "products/product_update.html", context)
 
 def product_delete(request, stripe_product_id):
     if request.method == "GET":

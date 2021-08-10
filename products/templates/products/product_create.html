@@ -1,3 +1,5 @@
+{% extends "products/base.html" %}
+
 {% block content %}
 <form action="{% url 'products:product_create' %}" method="POST">
     {% csrf_token %}
