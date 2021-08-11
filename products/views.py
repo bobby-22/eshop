@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from products.models import ProductModel
 from django.shortcuts import render, redirect
 from django.conf import settings
@@ -10,9 +11,6 @@ import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY 
 
 # Create your views here.
-def index(request):
-    return render(request, "products/index.html")
-
 def success(request):
     return render(request, "products/success.html")
 
@@ -34,6 +32,15 @@ class CheckoutSession(View):
             cancel_url = "http://127.0.0.1:8000/cancel"
         )
         return redirect(checkout_session.url, code=303)
+
+def index(request):
+    return render(request, "products/index.html")
+
+@login_required
+def product_owner(request):
+    products = ProductModel.objects.all().filter(owner=request.user)
+    context = {"products": products}
+    return render(request, "products/product_owner.html", context)
 
 class ProductCreate(LoginRequiredMixin, View):
     def get(self, request):
@@ -62,11 +69,6 @@ class ProductCreate(LoginRequiredMixin, View):
             model_instance.stripe_price_id = price.id
             model_instance.save()
             return redirect("products:index")
-
-def product_owner(request):
-    products = ProductModel.objects.all().filter(owner=request.user)
-    context = {"products": products}
-    return render(request, "products/product_owner.html", context)
 
 def product_read(request):
     products = ProductModel.objects.all()
