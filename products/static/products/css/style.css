@@ -1,0 +1,31 @@
+.dropButton {
+    background-color: white;
+    border-color: black;
+}
+
+.dropButton:hover, .dropButton:focus {
+    background-color: seashell;
+}
+
+.dropDown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropContent {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 100%;
+    box-shadow: 5px 10px 15px grey;
+}
+
+.dropContent a {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+.dropContent a:hover {background-color: seashell}
+
+.show {display:block;}

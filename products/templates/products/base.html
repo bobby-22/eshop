@@ -1,13 +1,36 @@
-<p>
-    <a href="{% url 'products:index' %}">Home</a>
-    {% if user.is_authenticated %}
-        <strong>Hello, {{ user }}</strong>
-        <a href="{% url 'products:profile' %}">Profile</a>
-        <a href="{% url 'accounts:user_logout' %}">Logout</a>
-    {% else %}
-        <a href="{% url 'accounts:user_login' %}">Login</a>
-        <a href="{% url 'accounts:user_register' %}">Register</a>
-    {% endif %}
-</p>
+{% load static %}
 
-{% block content %}{% endblock content %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta lang="en">
+        <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
+        <script src="{% static 'products/js/script.js' %}" defer></script>
+    </head>
+    <body>
+        <div>
+            <a href="{% url 'products:index' %}">Home</a>
+            <div class="dropDown">
+                <button onclick="dropDown()" class="dropButton">Categories</button>
+                <div id="dropContent" class="dropContent">
+                    <a href="{% url 'products:cables' %}">Cables</a>
+                    <a href="{% url 'products:deskmats' %}">Deskmats</a>
+                    <a href="{% url 'products:keyboards' %}">Keyboards</a>
+                    <a href="{% url 'products:keycaps' %}">Keycaps</a>
+                    <a href="{% url 'products:others' %}">Others</a>
+                    <a href="{% url 'products:switches' %}">Switches</a>
+                </div>
+            </div>
+            {% if user.is_authenticated %}
+                <strong>Hello, {{ user }}</strong>
+                <a href="{% url 'products:profile' %}">Profile</a>
+                <a href="{% url 'accounts:user_logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'accounts:user_login' %}">Login</a>
+                <a href="{% url 'accounts:user_register' %}">Register</a>
+            {% endif %}
+        </div>
+        {% block content %}{% endblock content %}
+    </body>
+</html>

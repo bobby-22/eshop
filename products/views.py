@@ -36,6 +36,36 @@ class CheckoutSession(View):
 def index(request):
     return render(request, "products/index.html")
 
+def cables(request):
+    products = ProductModel.objects.all().filter(category=1)
+    context = {"products": products}
+    return render(request, "products/cables.html", context)
+
+def deskmats(request):
+    products = ProductModel.objects.all().filter(category=2)
+    context = {"products": products}
+    return render(request, "products/deskmats.html", context)
+
+def keyboards(request):
+    products = ProductModel.objects.all().filter(category=3)
+    context = {"products": products}
+    return render(request, "products/keyboards.html", context)
+
+def keycaps(request):
+    products = ProductModel.objects.all().filter(category=4)
+    context = {"products": products}
+    return render(request, "products/keycaps.html", context)
+
+def switches(request):
+    products = ProductModel.objects.all().filter(category=5)
+    context = {"products": products}
+    return render(request, "products/switches.html", context)
+
+def others(request):
+    products = ProductModel.objects.all().filter(category=6)
+    context = {"products": products}
+    return render(request, "products/others.html", context)
+
 @login_required
 def profile(request):
     products = ProductModel.objects.all().filter(owner=request.user)
@@ -78,12 +108,14 @@ def product_read(request):
 def product_details(request, stripe_product_id):
     objects = ProductModel.objects.all().filter(stripe_product_id=stripe_product_id)
     for object in objects:
+        date_added = object.date_added
         name = object.name
         description = object.description
         price = object.price
         owner = object.owner
+        category = object.category
 
-    context = {"name": name, "description": description, "price": price, "owner": owner}
+    context = {"date_added": date_added, "name": name, "description": description, "price": price, "owner": owner, "category": category}
     return render(request, "products/product_details.html", context)
 
 class ProductUpdate(LoginRequiredMixin, View):

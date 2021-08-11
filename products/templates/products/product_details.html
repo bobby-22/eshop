@@ -1,6 +1,10 @@
 {% extends "products/base.html" %}
 
 {% block content %}
-<p>{{ name }} {{ description }} {{ price }}</p>
+<h1>{{ name }}</h1>
+<h2>Price: {{ price }}</h2>
+<h3>Date added: {{ date_added|date:"d/m/Y" }}</h3>
+<p>Description: {{ description }}</p>
 <p>Posted by: {{ owner }}</p>
+<p>Category: {{ category }}</p>
 {% endblock content %}

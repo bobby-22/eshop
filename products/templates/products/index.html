@@ -1,4 +1,5 @@
 {% extends "products/base.html" %}
+{% load static %}
 
 {% block content %}
 <!DOCTYPE html>
@@ -28,6 +29,7 @@
       </form>
       <a href="{% url 'products:product_read' %}">Show products</a>
       <a href="{% url 'products:product_create' %}">Add product</a>
+      <img src="{% static 'products/images/test.png' %}" alt="My image">
     </section>
   </body>
 </html>
