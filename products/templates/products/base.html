@@ -1,6 +1,8 @@
 <p>
+    <a href="{% url 'products:index' %}">Home</a>
     {% if user.is_authenticated %}
         <strong>Hello, {{ user }}</strong>
+        <a href="{% url 'products:product_owner' %}">My products</a>
         <a href="{% url 'accounts:user_logout' %}">Logout</a>
     {% else %}
         <a href="{% url 'accounts:user_login' %}">Login</a>

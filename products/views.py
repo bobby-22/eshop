@@ -2,6 +2,7 @@ from products.models import ProductModel
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from .forms import ProductForm
 import stripe
@@ -34,7 +35,7 @@ class CheckoutSession(View):
         )
         return redirect(checkout_session.url, code=303)
 
-class ProductCreate(View):
+class ProductCreate(LoginRequiredMixin, View):
     def get(self, request):
         form = ProductForm()
         context = {"form": form}
@@ -55,11 +56,17 @@ class ProductCreate(View):
                 currency = "CZK",
                 unit_amount = product_price * 100
             )
-            model_instance = form.save()
+            model_instance = form.save(commit=False)
+            model_instance.owner = request.user
             model_instance.stripe_product_id = product.id
             model_instance.stripe_price_id = price.id
             model_instance.save()
             return redirect("products:index")
+
+def product_owner(request):
+    products = ProductModel.objects.all().filter(owner=request.user)
+    context = {"products": products}
+    return render(request, "products/product_owner.html", context)
 
 def product_read(request):
     products = ProductModel.objects.all()
@@ -72,13 +79,16 @@ def product_details(request, stripe_product_id):
         name = object.name
         description = object.description
         price = object.price
+        owner = object.owner
 
-    context = {"name": name, "description": description, "price": price}
+    context = {"name": name, "description": description, "price": price, "owner": owner}
     return render(request, "products/product_details.html", context)
 
-class ProductUpdate(View):
+class ProductUpdate(LoginRequiredMixin, View):
     def get(self, request, stripe_product_id):
         product = ProductModel.objects.get(stripe_product_id=stripe_product_id)
+        if product.owner != request.user:
+            return redirect("products:product_read")
         form = ProductForm(instance=product)
         context = {"product": product, "form": form}
         return render(request, "products/product_update.html", context)
@@ -114,13 +124,17 @@ class ProductUpdate(View):
             form.save()
             return redirect("products:index")
 
+@login_required
 def product_delete(request, stripe_product_id):
     if request.method == "GET":
+        product = ProductModel.objects.get(stripe_product_id=stripe_product_id)
+        if product.owner != request.user:
+            return redirect("products:product_read")
         stripe.Product.modify(
             stripe_product_id,
             active = "false"
         )
-        ProductModel.objects.get(stripe_product_id=stripe_product_id).delete()
+        product.delete()
         return redirect("products:product_read")
 
     return render(request, "products/product_read.html")

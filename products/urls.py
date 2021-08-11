@@ -7,6 +7,7 @@ urlpatterns = [
     path("success/", views.success, name="success"),
     path("cancel/", views.success, name="cancel"),
     path("product_create/", views.ProductCreate.as_view(), name="product_create"),
+    path("product_owner/", views.product_owner, name="product_owner"),
     path("product_read/", views.product_read, name="product_read"),
     path("product_details/<slug:stripe_product_id>/", views.product_details, name="product_details"),
     path("product_update/<slug:stripe_product_id>/", views.ProductUpdate.as_view(), name="product_update"),
