@@ -37,10 +37,10 @@ def index(request):
     return render(request, "products/index.html")
 
 @login_required
-def product_owner(request):
+def profile(request):
     products = ProductModel.objects.all().filter(owner=request.user)
     context = {"products": products}
-    return render(request, "products/product_owner.html", context)
+    return render(request, "products/profile.html", context)
 
 class ProductCreate(LoginRequiredMixin, View):
     def get(self, request):
