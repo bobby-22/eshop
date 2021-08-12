@@ -1,19 +1,18 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta lang="en">
-        <link rel="stylesheet" href="{% static 'products/css/style.css' %}">
-        <script src="{% static 'products/js/script.js' %}" defer></script>
+        <link rel="stylesheet" href="{% static 'products/css/styles.css' %}">
+        <script src="{% static 'products/js/main.js' %}" defer></script>
     </head>
     <body>
         <div>
             <a href="{% url 'products:index' %}">Home</a>
-            <div class="dropDown">
-                <button onclick="dropDown()" class="dropButton">Categories</button>
-                <div id="dropContent" class="dropContent">
+            <div class="dropdown_container">
+                <button onclick="dropdown_list_show()" class="dropdown_button">Categories</button>
+                <div id="dropdown_list" class="dropdown_list">
                     <a href="{% url 'products:cables' %}">Cables</a>
                     <a href="{% url 'products:deskmats' %}">Deskmats</a>
                     <a href="{% url 'products:keyboards' %}">Keyboards</a>
@@ -30,6 +29,15 @@
                 <a href="{% url 'accounts:user_login' %}">Login</a>
                 <a href="{% url 'accounts:user_register' %}">Register</a>
             {% endif %}
+            <button id="donate_button">Donate</button>
+            <div id="window" class="window">
+                <div class="window_content">
+                    <span id="close_button" class="close_button">&times;</span>
+                    <p>Some text in the Modal..</p>
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus suscipit quaerat minima numquam. Tempora officia quae similique obcaecati aut unde expedita, rem voluptate fuga distinctio ullam, laboriosam a quia natus?</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque quam possimus, consequatur doloribus libero rerum ducimus sunt similique itaque, culpa maiores nobis, sapiente reprehenderit praesentium accusamus iusto sed error nihil?</p>
+                </div>
+            </div>
         </div>
         {% block content %}{% endblock content %}
     </body>

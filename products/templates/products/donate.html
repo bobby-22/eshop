@@ -5,11 +5,13 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Homepage</title>
+        <title>Donate</title>
     </head>
     <body>
-        <a href="{% url 'products:product_read' %}">Show products</a>
-        <a href="{% url 'products:product_create' %}">Add product</a>
+        <form action="{% url 'products:donate %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Donate</button>
+        </form>
     </body>
 </html>
 {% endblock content %}

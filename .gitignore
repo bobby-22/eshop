@@ -5,9 +5,10 @@ e_env
 
 db.sqlite3
 
-/static/
-/staticfiles
-
 .vscode/
 
 .env
+
+node_modules
+
+eshop_vue/node_modules

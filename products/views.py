@@ -17,13 +17,17 @@ def success(request):
 def cancel(request):
     return render(request, "products/cancel.html")
 
-class CheckoutSession(View):
+class Donate(View):
     def post(self, request):
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=["card"],
             line_items=[
                 {
-                    "price": "price_1JHWT5GipF6CtVMryttURxRC",
+                    "price": "price_1JNJftGipF6CtVMryAn0ON5T",
+                    "quantity": 1
+                },
+                {
+                    "price": "price_1JNJftGipF6CtVMrlCfxytYD",
                     "quantity": 1
                 }
             ],
@@ -114,7 +118,6 @@ def product_details(request, stripe_product_id):
         price = object.price
         owner = object.owner
         category = object.category
-
     context = {"date_added": date_added, "name": name, "description": description, "price": price, "owner": owner, "category": category}
     return render(request, "products/product_details.html", context)
 
@@ -170,5 +173,4 @@ def product_delete(request, stripe_product_id):
         )
         product.delete()
         return redirect("products:product_read")
-
     return render(request, "products/product_read.html")

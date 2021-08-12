@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.deletion import CASCADE
+from PIL import Image
 
 # Create your models here.
 class CategoryModel(models.Model):
@@ -23,7 +24,7 @@ class ProductModel(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{}, {}, {}, {}, {}, {}, {}".format(self.date_added, self.name, self.description, self.price, self.category, self.stripe_product_id, self.stripe_price_id)
+        return self.name
 
     class Meta:
         verbose_name_plural = "Products"
