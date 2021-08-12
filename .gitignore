@@ -9,6 +9,4 @@ db.sqlite3
 
 .env
 
-node_modules
-
-eshop_vue/node_modules
+vue/node_modules
