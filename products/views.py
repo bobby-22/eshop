@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from .forms import ProductForm
+from PIL import Image
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY 
@@ -83,7 +84,7 @@ class ProductCreate(LoginRequiredMixin, View):
         return render(request, "products/product_create.html", context)
 
     def post(self, request):
-        form = ProductForm(data=request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
             product_name = form.cleaned_data.get("name")
             product_description = form.cleaned_data.get("description")
@@ -110,15 +111,8 @@ def product_read(request):
     return render(request, "products/product_read.html", context)
 
 def product_details(request, stripe_product_id):
-    objects = ProductModel.objects.all().filter(stripe_product_id=stripe_product_id)
-    for object in objects:
-        date_added = object.date_added
-        name = object.name
-        description = object.description
-        price = object.price
-        owner = object.owner
-        category = object.category
-    context = {"date_added": date_added, "name": name, "description": description, "price": price, "owner": owner, "category": category}
+    details = ProductModel.objects.all().filter(stripe_product_id=stripe_product_id)
+    context = {"details": details}
     return render(request, "products/product_details.html", context)
 
 class ProductUpdate(LoginRequiredMixin, View):

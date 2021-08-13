@@ -4,14 +4,14 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="{% static 'products/css/styles.css' %}">
-        <script src="{% static 'products/js/main.js' %}" defer></script>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <script src="{% static 'js/main.js' %}" defer></script>
     </head>
     <body>
         <div>
             <a href="{% url 'products:index' %}">Home</a>
             <div class="dropdown_container">
-                <button onclick="dropdown_list_show()" class="dropdown_button">Categories</button>
+                <button onclick="dropdown_list_show()" class="dropdown_button">Category</button>
                 <div id="dropdown_list" class="dropdown_list">
                     <a href="{% url 'products:cables' %}">Cables</a>
                     <a href="{% url 'products:deskmats' %}">Deskmats</a>

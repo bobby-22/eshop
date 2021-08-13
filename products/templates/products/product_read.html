@@ -2,8 +2,13 @@
 
 {% block content %}
 {% for product in products %}
-    <h1>{{ product.name }}</h1><p>
-    <h2>Price: {{ product.price }}</h2>
+    <h1>{{ product.name }}</h1>
+    {% if product.thumbnail %}
+        <h2><img src=" {{ product.thumbnail.url }}"></h2>
+        {% else %}
+            <p>Image unavailable</p>
+    {% endif %}
+    <h3>Price: {{ product.price }}</h3>
     <a href="{% url 'products:product_details' product.stripe_product_id %}">Details</a>
 {% endfor %}
 {% endblock content %}
