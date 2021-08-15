@@ -21,12 +21,7 @@
 
 <script>
 export default {
-    name: "Dropdown",
-    data() {
-        return {
-            collapse: false
-        }
-    }
+    name: "NavbarDropdown"
 }
 </script>
 

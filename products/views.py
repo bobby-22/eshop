@@ -1,4 +1,6 @@
 from django.contrib.auth import login
+from django.db.models import manager
+from rest_framework import serializers
 from products.models import ProductModel
 from django.shortcuts import render, redirect
 from django.conf import settings
@@ -6,7 +8,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from .forms import ProductForm
-from PIL import Image
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.views import APIView
+from products.serializers import ProductModelSerializer
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY 
@@ -74,8 +79,13 @@ def others(request):
 @login_required
 def profile(request):
     products = ProductModel.objects.all().filter(owner=request.user)
-    context = {"products": products}
-    return render(request, "products/profile.html", context)
+    serializers = ProductModelSerializer(products, many=True)
+    return JsonResponse(serializers.data, safe=False)
+
+def latest(request):
+    products = ProductModel.objects.all()
+    serializers = ProductModelSerializer(products, many=True)
+    return JsonResponse(ProductModelSerializer(products, many=True, context={"request": request}).data, safe=False)
 
 class ProductCreate(LoginRequiredMixin, View):
     def get(self, request):
@@ -105,26 +115,13 @@ class ProductCreate(LoginRequiredMixin, View):
             model_instance.save()
             return redirect("products:index")
 
-def product_read(request):
-    products = ProductModel.objects.all()
-    context = {"products": products}
-    return render(request, "products/product_read.html", context)
-
-def product_details(request, stripe_product_id):
-    details = ProductModel.objects.all().filter(stripe_product_id=stripe_product_id)
-    context = {"details": details}
-    return render(request, "products/product_details.html", context)
-
-class ProductUpdate(LoginRequiredMixin, View):
+class ProductDetails(APIView):
     def get(self, request, stripe_product_id):
-        product = ProductModel.objects.get(stripe_product_id=stripe_product_id)
-        if product.owner != request.user:
-            return redirect("products:product_read")
-        form = ProductForm(instance=product)
-        context = {"product": product, "form": form}
-        return render(request, "products/product_update.html", context)
+        details = ProductModel.objects.all().filter(stripe_product_id=stripe_product_id)
+        serializers = ProductModelSerializer(details, many=True)
+        return JsonResponse(serializers.data, safe=False)
 
-    def post(self, request, stripe_product_id):
+    def put(self, request, stripe_product_id):
         product = ProductModel.objects.get(stripe_product_id=stripe_product_id)
         form = ProductForm(instance=product, data=request.POST)
         if form.is_valid():
@@ -153,11 +150,8 @@ class ProductUpdate(LoginRequiredMixin, View):
                     description = product_description
                 )
             form.save()
-            return redirect("products:index")
 
-@login_required
-def product_delete(request, stripe_product_id):
-    if request.method == "GET":
+    def delete(self, request, stripe_product_id):
         product = ProductModel.objects.get(stripe_product_id=stripe_product_id)
         if product.owner != request.user:
             return redirect("products:product_read")
@@ -166,5 +160,3 @@ def product_delete(request, stripe_product_id):
             active = "false"
         )
         product.delete()
-        return redirect("products:product_read")
-    return render(request, "products/product_read.html")

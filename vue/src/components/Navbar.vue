@@ -4,7 +4,7 @@
             <div class="navbar-brand">
                 <router-link to="/" class="navbar-item"><strong>MechMarketEU</strong></router-link>
                 <router-link to="/latest" class="navbar-item">Latest</router-link>
-                <Dropdown  class="navbar-item"/>
+                <NavbarDropdown  class="navbar-item"/>
                 <div class="navbar-burger" data-target="collapse_burger" @click="collapse = !collapse">
                     <span></span>
                     <span></span>
@@ -32,11 +32,11 @@
 </template>
 
 <script>
-import Dropdown from "./Dropdown"
+import NavbarDropdown from "./NavbarDropdown"
 export default {
     name: "Navbar",
     components: {
-        Dropdown
+        NavbarDropdown
     },
     data() {
         return {
