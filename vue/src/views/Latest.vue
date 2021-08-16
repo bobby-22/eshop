@@ -1,15 +1,15 @@
 <template>
-<div class="columns is-multiline">
-    <div v-for="product in products" :key="product.id" class="column is-one-third">
+<div class="columns is-multiline is-vcentered">
+    <div v-for="product in latestProducts" :key="product.id" class="column is-one-third">
         <div class="card">
             <div class="card-image">
-                <figure class="image">
-                    <span>{{ product.thumbnail.url }}</span>
+                <figure id="thumbnail" class="image">
+                    <img v-bind:src="product.thumbnail">
                 </figure>
             </div>
             <div class="card-content">
                 <div class="content">
-                    <span class="title is-4">
+                    <span class="title is-5">
                         <router-link v-bind:to="product.stripe_product_id">{{ product.name }}</router-link>
                     </span>
                 </div>
@@ -23,21 +23,54 @@
 </template>
 
 <script>
-import { getAPI } from "../axios"
+import { djangoAPI } from "../axios"
 export default {
-    name: "Latest",
+    name: "LatestProducts",
     data() {
         return {
-            products: []
+            latestProducts: null
         }
     },
+    methods: {
+        getProducts() {
+            djangoAPI
+                .get('/latest/',)
+                .then(latestProductsResponse => {
+                    this.latestProducts = latestProductsResponse.data
+                })
+        },
+    },
     created() {
-        getAPI
-            .get('/latest/',)
-            .then(response => {this.products = response.data})
+        this.getProducts()
     }
 }
 </script>
 
-<style>
+<style scoped>
+.card {
+    border-radius: 5px;
+}
+.card-image {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 200px;
+}
+.content {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 0px;
+}
+.card-content {
+    padding: 15px;
+}
+a:link, a:visited {
+    color: dodgerblue;
+ }
+a:active, a:hover {
+  color: darksalmon;
+}
+
 </style>

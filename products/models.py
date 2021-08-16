@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.urls import reverse
 from django.db.models.deletion import CASCADE
 from PIL import Image
 
@@ -32,10 +31,9 @@ class ProductModel(models.Model):
     def save(self, *args, **kwargs):
         super(ProductModel, self).save(*args, **kwargs)
         thumbnail = Image.open(self.thumbnail.path)
-        if thumbnail.width > 400 or thumbnail.height> 300:
-            output_size = (400, 300)
-            thumbnail.thumbnail(output_size)
+        if thumbnail.width < thumbnail.height:
+            thumbnail = thumbnail.rotate(90)
             thumbnail.save(self.thumbnail.path)
-
+    
     class Meta:
         verbose_name_plural = "Products"

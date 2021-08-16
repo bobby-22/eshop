@@ -1,5 +1,6 @@
 *.pyc
 __pycache__
+products/migrations
 
 e_env
 

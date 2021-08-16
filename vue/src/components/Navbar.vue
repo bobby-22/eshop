@@ -1,11 +1,11 @@
 <template>
     <div id="container">
-        <nav class="navbar is-transparent">
+        <nav class="navbar is-light">
             <div class="navbar-brand">
                 <router-link to="/" class="navbar-item"><strong>MechMarketEU</strong></router-link>
-                <router-link to="/latest" class="navbar-item">Latest</router-link>
+                <router-link to="/latest-products" class="navbar-item">Latest</router-link>
                 <NavbarDropdown  class="navbar-item"/>
-                <div class="navbar-burger" data-target="collapse_burger" @click="collapse = !collapse">
+                <div class="navbar-burger" data-target="collapse_burger" v-on:click="collapse = !collapse">
                     <span></span>
                     <span></span>
                     <span></span>

@@ -1,15 +1,11 @@
-from django.contrib.auth import login
-from django.db.models import manager
-from rest_framework import serializers
-from products.models import ProductModel
 from django.shortcuts import render, redirect
 from django.conf import settings
+from products.models import ProductModel
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from .forms import ProductForm
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
 from products.serializers import ProductModelSerializer
 import stripe
