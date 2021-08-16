@@ -49,11 +49,11 @@ export default {
 
 <style scoped>
 .card {
-    border-radius: 5px;
+    border-radius: 10px;
 }
 .card-image {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,5 +73,4 @@ a:link, a:visited {
 a:active, a:hover {
   color: darksalmon;
 }
-
 </style>

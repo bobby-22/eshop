@@ -2,7 +2,7 @@
     <div id="container">
         <nav class="navbar is-light">
             <div class="navbar-brand">
-                <router-link to="/" class="navbar-item"><strong>MechMarketEU</strong></router-link>
+                <router-link style="border-radius:10px; border-top-right-radius:0px; border-bottom-right-radius:0px" to="/" class="navbar-item"><strong>MechMarketEU</strong></router-link>
                 <router-link to="/latest-products" class="navbar-item">Latest</router-link>
                 <NavbarDropdown  class="navbar-item"/>
                 <div class="navbar-burger" data-target="collapse_burger" v-on:click="collapse = !collapse">
@@ -14,9 +14,9 @@
 
             <div class="navbar-menu" id="collapse_burger" v-bind:class="{'is-active': collapse}">
                 <div class="navbar-end">
+                    <router-link to="/log-in" class="navbar-item">Log in</router-link>
+                    <router-link to="/sign-up" class="navbar-item">Sign up</router-link>
                     <div class="navbar-item">
-                        <router-link to="/log-in" class="button is-light">Log in</router-link>
-                        <router-link to="/sign-up" class="button is-info">Sign up</router-link>
                         <router-link to="/donate" class="button is-warning">Donate</router-link>
                     </div>
                 </div>
@@ -48,4 +48,11 @@ export default {
 
 <style lang="scss">
 @import "../../node_modules/bulma";
+.navbar {
+    margin-top: 15px;
+    border-radius: 10px;
+}
+.button {
+    border-radius: 10px;
+}
 </style>
