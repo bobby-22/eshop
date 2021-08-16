@@ -78,10 +78,10 @@ def profile(request):
     serializers = ProductModelSerializer(products, many=True)
     return JsonResponse(serializers.data, safe=False)
 
-def latest(request):
+def latest(self):
     products = ProductModel.objects.all()
     serializers = ProductModelSerializer(products, many=True)
-    return JsonResponse(ProductModelSerializer(products, many=True, context={"request": request}).data, safe=False)
+    return JsonResponse(serializers.data, safe=False)
 
 class ProductCreate(LoginRequiredMixin, View):
     def get(self, request):

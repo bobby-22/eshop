@@ -1,8 +1,7 @@
 <template>
 <div class="container">
-    <h1>Title</h1>
-    <div id="test" v-for="detail in productDetails" :key="detail.id">
-        <p>{{ detail.name }}</p>
+    <div v-for="detail in productDetails" :key="detail.id">
+        <img v-bind:src="'http://localhost:8000' + detail.image">
     </div>
 </div>
 </template>
@@ -24,6 +23,7 @@ export default {
                 url: `${stripe_product_id}`
             }).then(productDetailsResponse => {
                 this.productDetails = productDetailsResponse.data
+                console.log(this.productDetails)
             })
         },
     },

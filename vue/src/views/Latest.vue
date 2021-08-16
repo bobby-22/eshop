@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-image">
                 <figure id="thumbnail" class="image">
-                    <img v-bind:src="product.thumbnail">
+                    <img v-bind:src="'http://localhost:8000' + product.thumbnail">
                 </figure>
             </div>
             <div class="card-content">
@@ -34,9 +34,10 @@ export default {
     methods: {
         getProducts() {
             djangoAPI
-                .get('/latest/',)
+                .get('/latest-products/',)
                 .then(latestProductsResponse => {
                     this.latestProducts = latestProductsResponse.data
+                    console.log(this.latestProducts)
                 })
         },
     },
