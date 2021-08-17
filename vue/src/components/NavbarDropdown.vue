@@ -16,7 +16,7 @@
             <hr class="dropdown-divider">
             <router-link to="/switches" class="dropdown-item">Switches</router-link>
             <hr class="dropdown-divider">
-            <router-link style="border-bottom-right-radius:15px; border-bottom-left-radius:15px;" to="/other" class="dropdown-item">Others</router-link>
+            <router-link style="border-bottom-right-radius:10px; border-bottom-left-radius:10px;" to="/other" class="dropdown-item">Others</router-link>
         </div>
     </div>
 </template>
@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 .dropdown-menu {
-    border-radius: 15px;
+    border-radius: 10px;
     box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.20);
     background-color: white;
     padding: 0px;

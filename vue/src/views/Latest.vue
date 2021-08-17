@@ -62,13 +62,13 @@ export default {
     padding: 30px;
 }
 .card {
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
 }
 .card-image {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
