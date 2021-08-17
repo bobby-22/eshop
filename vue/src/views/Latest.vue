@@ -1,12 +1,13 @@
 <template>
 <div class="columns is-multiline is-vcentered">
-    <div v-for="product in latestProducts" :key="product.id" class="column is-one-third">
+    <div v-for="product in latestProducts" :key="product.id" class="column is-one-quarter">
         <div class="card">
             <div class="card-image">
                 <figure id="thumbnail" class="image">
                     <img v-bind:src="'http://localhost:8000' + product.thumbnail">
                 </figure>
             </div>
+
             <div class="card-content">
                 <div class="content">
                     <span class="title is-5">
@@ -14,7 +15,16 @@
                     </span>
                 </div>
                 <div class="content">
-                    <span class="subtitle">{{ product.price }}€</span>
+                    <div class="split">
+                        <span class="subtitle">
+                            <i class="fas fa-euro-sign"></i>
+                            <span>{{ product.price }}</span>
+                        </span>
+                        <span class="subtitle">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ product.location }}</span>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -39,7 +49,7 @@ export default {
                     this.latestProducts = latestProductsResponse.data
                     console.log(this.latestProducts)
                 })
-        },
+        }
     },
     created() {
         this.getProducts()
@@ -48,8 +58,13 @@ export default {
 </script>
 
 <style scoped>
+.columns.is-multiline.is-vcentered {
+    padding: 30px;
+}
 .card {
     border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+
 }
 .card-image {
     border-top-left-radius: 10px;
@@ -58,19 +73,31 @@ export default {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    height: 200px;
-}
-.content {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-bottom: 0px;
+    max-height: 200px;
 }
 .card-content {
     padding: 15px;
+}
+.split {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px;
+    margin-top: 5px;
+    padding-bottom: 0px;
+}
+.subtitle {
+    -webkit-text-size-adjust: none;
+    align-items: baseline;
+    margin-bottom: 0px;
+}
+.fas {
+    margin-right: 5px;
 }
 a:link, a:visited {
     color: dodgerblue;
  }
 a:active, a:hover {
-  color: darksalmon;
+    color: darksalmon;
 }
 </style>

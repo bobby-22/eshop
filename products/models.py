@@ -15,15 +15,16 @@ class CategoryModel(models.Model):
 
 class ProductModel(models.Model):
     name = models.CharField(max_length=100)
-    thumbnail = models.ImageField(upload_to="images/", blank=True, null=True)
-    image = models.ImageField(upload_to="images/", blank=True, null=True)
-    date_added = models.DateTimeField(auto_now_add=True)
+    thumbnail = models.ImageField(upload_to="images/")
+    date = models.DateTimeField(auto_now_add=True)
+    location = models.CharField(max_length=100, default="")
     price = models.IntegerField(default="")
     description = models.TextField(default="")
+    image = models.FileField(upload_to="images/")
     category = models.ForeignKey(CategoryModel, on_delete=CASCADE)
-    stripe_product_id = models.CharField(blank=True, max_length=200, default="")
-    stripe_price_id = models.CharField(blank=True, max_length=200, default="")
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    stripe_product_id = models.CharField(max_length=200, default="")
+    stripe_price_id = models.CharField(max_length=200, default="")
 
     def __str__(self):
         return self.name
@@ -34,6 +35,6 @@ class ProductModel(models.Model):
         if thumbnail.width < thumbnail.height:
             thumbnail = thumbnail.rotate(90)
             thumbnail.save(self.thumbnail.path)
-    
+
     class Meta:
         verbose_name_plural = "Products"

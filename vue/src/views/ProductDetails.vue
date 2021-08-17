@@ -25,13 +25,16 @@ export default {
                 this.productDetails = productDetailsResponse.data
                 console.log(this.productDetails)
             })
-        },
+        }
     },
     created() {
         this.getDetails()
-    },
+    }
 }
 </script>
 
-<style>
+<style scoped>
+.container {
+    padding: 30px
+}
 </style>

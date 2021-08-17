@@ -1,34 +1,26 @@
 <template>
-    <div id="container">
-        <nav class="navbar is-light">
-            <div class="navbar-brand">
-                <router-link style="border-radius:10px; border-top-right-radius:0px; border-bottom-right-radius:0px" to="/" class="navbar-item"><strong>MechMarketEU</strong></router-link>
-                <router-link to="/latest-products" class="navbar-item">Latest</router-link>
-                <NavbarDropdown  class="navbar-item"/>
-                <div class="navbar-burger" data-target="collapse_burger" v-on:click="collapse = !collapse">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+    <nav class="navbar is-light">
+        <div class="navbar-brand">
+            <router-link style="border-top-left-radius:15px; border-bottom-left-radius:15px" to="/" class="navbar-item"><strong>MechMarketEU</strong></router-link>
+            <router-link to="/latest-products" class="navbar-item">Latest</router-link>
+            <NavbarDropdown  class="navbar-item"/>
+            <div class="navbar-burger" data-target="collapse_burger" v-on:click="collapseHamburger()" v-bind:class="{'is-active': collapseBoolean}">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+        </div>
 
-            <div class="navbar-menu" id="collapse_burger" v-bind:class="{'is-active': collapse}">
-                <div class="navbar-end">
-                    <router-link to="/log-in" class="navbar-item">Log in</router-link>
-                    <router-link to="/sign-up" class="navbar-item">Sign up</router-link>
-                    <div class="navbar-item">
-                        <router-link to="/donate" class="button is-warning">Donate</router-link>
-                    </div>
+        <div class="navbar-menu" id="collapse_burger" v-bind:class="{'is-active': collapseBoolean}">
+            <div class="navbar-end">
+                <router-link to="/log-in" class="navbar-item">Log in</router-link>
+                <router-link to="/sign-up" class="navbar-item">Sign up</router-link>
+                <div class="navbar-item">
+                    <router-link to="/donate" class="button is-warning">Donate</router-link>
                 </div>
             </div>
-        </nav>
-        <section class="section">
-            <router-view/>
-        </section>
-        <footer class="footer">
-            <p class="has-text-centered">Copyright (C) 2021</p>
-        </footer>
-    </div>
+        </div>
+    </nav>
 </template>
 
 <script>
@@ -40,19 +32,33 @@ export default {
     },
     data() {
         return {
-            collapse: false
+            collapseBoolean: false
         }
     },
+    methods: {
+        collapseHamburger() {
+            this.collapseBoolean = !this.collapseBoolean
+        }
+    }
 }
 </script>
 
-<style lang="scss">
-@import "../../node_modules/bulma";
-.navbar {
+<style>
+.navbar.is-light {
+    border-radius: 15px;
     margin-top: 15px;
-    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
-.button {
-    border-radius: 10px;
+.button.is-warning {
+    border-radius: 15px;
+}
+@media (max-width: 1024px) {
+    .navbar.is-light {
+        border-radius: 0px;
+        margin-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 }
 </style>
