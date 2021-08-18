@@ -22,7 +22,7 @@
                         </span>
                         <span class="subtitle">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span style="font-weight:100;">{{ product.location }}</span>
+                            <span style="font-weight:300;">{{ product.location }}</span>
                         </span>
                     </div>
                 </div>
@@ -83,7 +83,6 @@ export default {
     padding-bottom: 0px;
 }
 .subtitle {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     -webkit-text-size-adjust: none;
     align-items: baseline;
     margin-bottom: 0px;

@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <img alt="Vue logo" src="../assets/logo.png">
-  </div>
+    <div class="container">
+        <img alt="Vue logo" src="../assets/logo.png">
+    </div>
 </template>
 
 <script>
@@ -10,5 +10,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.container {
+  padding: 30px;
+}
 </style>

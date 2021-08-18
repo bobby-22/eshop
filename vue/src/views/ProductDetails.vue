@@ -2,7 +2,16 @@
 <div class="container">
     <div class="holder" v-for="detail in productDetails" :key="detail.id">
         <div class="left">
-            <img v-bind:src="'http://localhost:8000' + detail.thumbnail">
+            <div class="image-title">
+                <img v-bind:src="'http://localhost:8000' + detail.thumbnail">
+            </div>
+            <div class="image-container">
+                <img v-bind:src="'http://localhost:8000' + detail.image">
+                <img v-bind:src="'http://localhost:8000' + detail.image">
+                <img v-bind:src="'http://localhost:8000' + detail.image">
+                <img v-bind:src="'http://localhost:8000' + detail.image">
+                <img v-bind:src="'http://localhost:8000' + detail.image">
+            </div>
         </div>
         <div class="right">
             <div class="content-header">
@@ -25,6 +34,7 @@ export default {
     data() {
         return {
             productDetails: null,
+            modalBoolean: false
         }
     },
     methods: {
@@ -41,6 +51,9 @@ export default {
     },
     created() {
         this.getDetails()
+    },
+    mounted() {
+        window.scrollTo(0, 0)
     }
 }
 </script>
@@ -55,7 +68,43 @@ export default {
     justify-content: space-between;
 }
 .left {
-    flex: 0 0 500px;
-    margin-right: 50px;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+    margin-right: 30px;
+}
+.image-title > img {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.image-container {
+    display:flex;
+    flex-direction: row;
+    overflow: scroll;
+    overflow-y: hidden;
+}
+.image-container > img {
+    height: 150px;
+    margin-right: 5px;
+}
+.right {
+    flex-basis: 50%;
+}
+::-webkit-scrollbar {
+    widows: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #c2c9d2;
+}
+@media (max-width: 1024px) {
+    .holder {
+        flex-direction: column;
+    }
+    .left {
+        margin-right: 0px;
+        margin-bottom: 30px;
+    }
 }
 </style>

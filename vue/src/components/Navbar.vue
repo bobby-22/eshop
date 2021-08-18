@@ -1,10 +1,10 @@
 <template>
-    <nav class="navbar is-light">
+    <nav class="navbar is-light" style="background-color:#f2f2f2">
         <div class="navbar-brand">
             <router-link style="border-top-left-radius:10px; border-bottom-left-radius:10px" to="/" class="navbar-item"><strong>MechMarketEU</strong></router-link>
             <router-link to="/latest-products" class="navbar-item">Latest</router-link>
             <NavbarDropdown  class="navbar-item"/>
-            <div class="navbar-burger" data-target="collapse_burger" v-on:click="collapseHamburger()" v-bind:class="{'is-active': collapseBoolean}">
+            <div class="navbar-burger" data-target="collapse_burger" v-on:click="collapseHamburger" v-bind:class="{'is-active': collapseBoolean}">
                 <span></span>
                 <span></span>
                 <span></span>
