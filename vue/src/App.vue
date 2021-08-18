@@ -1,9 +1,7 @@
 <template>
     <div class="container">
         <Navbar />
-        <transition name="animation">
-            <router-view/>
-        </transition>
+        <router-view/>
     </div>
 </template>
 
@@ -14,11 +12,10 @@ export default {
     name: "App",
     components: {
         Navbar
-    },
+    }
 }
 </script>
 
 <style lang="scss">
 @import "../node_modules/bulma";
-
 </style>

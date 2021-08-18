@@ -29,12 +29,5 @@ class ProductModel(models.Model):
     def __str__(self):
         return self.name
     
-    def save(self, *args, **kwargs):
-        super(ProductModel, self).save(*args, **kwargs)
-        thumbnail = Image.open(self.thumbnail.path)
-        if thumbnail.width < thumbnail.height:
-            thumbnail = thumbnail.rotate(90)
-            thumbnail.save(self.thumbnail.path)
-
     class Meta:
         verbose_name_plural = "Products"

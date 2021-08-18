@@ -1,11 +1,11 @@
 <template>
-<div class="columns is-multiline is-vcentered">
-    <div v-for="product in latestProducts" :key="product.id" class="column is-one-quarter">
+<div class="columns is-multiline is-mobile is-vcentered">
+    <div v-for="product in latestProducts" :key="product.id" class="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
         <div class="card">
             <div class="card-image">
-                <figure id="thumbnail" class="image">
+                <router-link v-bind:to="product.stripe_product_id">
                     <img v-bind:src="'http://localhost:8000' + product.thumbnail">
-                </figure>
+                </router-link>
             </div>
 
             <div class="card-content">
@@ -14,7 +14,7 @@
                         <router-link v-bind:to="product.stripe_product_id">{{ product.name }}</router-link>
                     </span>
                 </div>
-                <div class="content">
+                <div class="content" style="border-top: 1px solid #f0f0f0;">
                     <div class="split">
                         <span class="subtitle">
                             <i class="fas fa-euro-sign"></i>
@@ -22,7 +22,7 @@
                         </span>
                         <span class="subtitle">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>{{ product.location }}</span>
+                            <span style="font-weight:100;">{{ product.location }}</span>
                         </span>
                     </div>
                 </div>
@@ -61,22 +61,18 @@ export default {
 .columns.is-multiline.is-vcentered {
     padding: 30px;
 }
-.card {
-    border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
+.column.is-one-quarter-desktop.is-one-third-tablet.is-half-mobile {
+    padding: 8px;
 }
-.card-image {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    max-height: 200px;
+.card {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
 }
 .card-content {
     padding: 15px;
+}
+.content {
+    margin: 0px 0px 10px;
 }
 .split {
     display: flex;
@@ -87,6 +83,7 @@ export default {
     padding-bottom: 0px;
 }
 .subtitle {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     -webkit-text-size-adjust: none;
     align-items: baseline;
     margin-bottom: 0px;
@@ -99,5 +96,10 @@ a:link, a:visited {
  }
 a:active, a:hover {
     color: darksalmon;
+}
+img {
+    height: 200px;
+    width: 800px;
+    object-fit: cover;
 }
 </style>

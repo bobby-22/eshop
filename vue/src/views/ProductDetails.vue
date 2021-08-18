@@ -1,7 +1,19 @@
 <template>
 <div class="container">
-    <div v-for="detail in productDetails" :key="detail.id">
-        <img v-bind:src="'http://localhost:8000' + detail.image">
+    <div class="holder" v-for="detail in productDetails" :key="detail.id">
+        <div class="left">
+            <img v-bind:src="'http://localhost:8000' + detail.thumbnail">
+        </div>
+        <div class="right">
+            <div class="content-header">
+                <p>{{ detail.name }}</p>
+                <p>{{ detail.date }}</p>
+                <p>{{ detail.location}}</p>
+            </div>
+            <div class="content-others">
+                <p>{{ detail.description }}</p>
+            </div>
+        </div>
     </div>
 </div>
 </template>
@@ -36,5 +48,14 @@ export default {
 <style scoped>
 .container {
     padding: 30px
+}
+.holder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.left {
+    flex: 0 0 500px;
+    margin-right: 50px;
 }
 </style>
