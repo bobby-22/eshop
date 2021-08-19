@@ -84,7 +84,7 @@ export default {
     overflow-y: hidden;
 }
 .image-container > img {
-    height: 150px;
+    height: 100px;
     margin-right: 5px;
 }
 .right {
