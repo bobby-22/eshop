@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar is-light" style="background-color:#f2f2f2">
-        <div class="navbar-brand">
-            <router-link style="border-top-left-radius:10px; border-bottom-left-radius:10px" to="/" class="navbar-item"><strong>MechMarketEU</strong></router-link>
+        <div class="navbar-brand" style="margin:0px;">
+            <router-link style="border-top-left-radius:10px; border-bottom-left-radius:10px;" to="/" class="navbar-item"><strong>MechMarketEU</strong></router-link>
             <router-link to="/latest-products" class="navbar-item">Latest</router-link>
             <NavbarDropdown  class="navbar-item"/>
             <div class="navbar-burger" data-target="collapse_burger" v-on:click="collapseHamburger" v-bind:class="{'is-active': collapseBoolean}">
@@ -14,8 +14,8 @@
         <div class="navbar-menu" id="collapse_burger" v-bind:class="{'is-active': collapseBoolean}">
             <div class="navbar-end">
                 <router-link to="/log-in" class="navbar-item">Log in</router-link>
-                <router-link to="/sign-up" class="navbar-item">Sign up</router-link>
-                <div class="navbar-item">
+                <div class="navbar-item" style="margin-right:7px">
+                    <router-link to="/sign-up" class="button is-info">Sign up</router-link>
                     <router-link to="/donate" class="button is-warning">Donate</router-link>
                 </div>
             </div>
@@ -43,15 +43,19 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .navbar.is-light {
     border-radius: 10px;
     margin-top: 15px;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 .button.is-warning {
-    border-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+}
+.button.is-info {
+    border-radius: 0px;
 }
 @media (max-width: 1024px) {
     .navbar.is-light {

@@ -5,7 +5,7 @@
             <p>Have any improvements or found a bug? Let me know at one of these places &#128578;</p>
             <a href="mailto:nlongn22@icloud.com"><i class="fas fa-at"></i></a>
             <a href="https://www.reddit.com/message/compose/?to=bobby--22"><i class="fab fa-reddit" style="margin-left:10px; margin-right:10px;"></i></a>
-            <a href="https://www.reddit.com/message/compose/?to=bobby--22"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/bobby-22/marketplace/issues/new"><i class="fab fa-github"></i></a>
         </div>
     </div>
     <div class="footer-bottom">
@@ -26,6 +26,7 @@ footer {
     color: #949494;
     border-top: 1px solid #e4e4e4;
     padding: 15px 30px 15px 30px;
+    margin-top: 15px;
     text-align: center;
 }
 .footer-content {
