@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar is-light" style="background-color:#f2f2f2">
+    <nav class="navbar is-light" style="background-color:#f2f2f2; box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;">
         <div class="navbar-brand" style="margin:0px;">
             <router-link style="border-top-left-radius:10px; border-bottom-left-radius:10px;" to="/" class="navbar-item"><strong>MechMarketEU</strong></router-link>
             <router-link to="/latest-products" class="navbar-item">Latest</router-link>
