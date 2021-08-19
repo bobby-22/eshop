@@ -6,7 +6,7 @@
         </div>
 
         <div class="dropdown-menu">
-            <router-link to="/cables" class="dropdown-item">Cables</router-link>
+            <router-link to="/cables" class="dropdown-item" style="border-top-right-radius:10px; border-top-left-radius:10px;">Cables</router-link>
             <hr class="dropdown-divider">
             <router-link to="/deskmats" class="dropdown-item">Deskmats</router-link>
             <hr class="dropdown-divider">
@@ -16,7 +16,7 @@
             <hr class="dropdown-divider">
             <router-link to="/switches" class="dropdown-item">Switches</router-link>
             <hr class="dropdown-divider">
-            <router-link style="border-bottom-right-radius:10px; border-bottom-left-radius:10px;" to="/other" class="dropdown-item">Others</router-link>
+            <router-link to="/other" class="dropdown-item" style="border-bottom-right-radius:10px; border-bottom-left-radius:10px;">Others</router-link>
         </div>
     </div>
 </template>
