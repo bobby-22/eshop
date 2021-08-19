@@ -6,6 +6,7 @@
                 <router-link v-bind:to="product.stripe_product_id">
                     <img v-bind:src="'http://localhost:8000' + product.thumbnail">
                 </router-link>
+                <a v-on:click="addToWish" class="far fa-bookmark"></a>
             </div>
 
             <div class="card-content">
@@ -34,6 +35,7 @@
 
 <script>
 import { djangoAPI } from "../axios"
+import { toast } from "bulma-toast"
 export default {
     name: "LatestProducts",
     data() {
@@ -49,6 +51,24 @@ export default {
                     this.latestProducts = latestProductsResponse.data
                     console.log(this.latestProducts)
                 })
+        },
+        addToWish() {
+            if (isNaN(this.quantity) || this.quantity < 1) {
+                this.quantity = 1
+            }
+            const item = {
+                product: this.latestProducts,
+                quantity: this.quantity
+            }
+            this.$store.commit("addToWish", item)
+            toast({
+                message: "This product was added to your wishlist!",
+                type: "is-success",
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 2000,
+                position: "bottom-right"
+            })
         }
     },
     created() {
@@ -96,8 +116,16 @@ a:active, a:hover {
     color: darksalmon;
 }
 img {
+    position: relative;
     height: 200px;
     width: 800px;
     object-fit: cover;
+}
+.far.fa-bookmark {
+    position: absolute;
+    right:0;
+    font-size:25px;
+    color:#616161;
+    margin:5px;
 }
 </style>
