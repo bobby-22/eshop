@@ -6,12 +6,15 @@
 
 <script>
 export default {
-  name: "Home"
+  name: "Home",
+  created() {
+      document.title = "Home Page | MechMarketEU"
+  }
 }
 </script>
 
 <style scoped>
 .container {
-  padding: 30px;
+    padding: 30px;
 }
 </style>

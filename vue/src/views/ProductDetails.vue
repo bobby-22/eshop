@@ -34,6 +34,7 @@ export default {
     data() {
         return {
             productDetails: null,
+            product: null,
             modalBoolean: false
         }
     },
@@ -45,7 +46,10 @@ export default {
                 url: `${stripe_product_id}`
             }).then(productDetailsResponse => {
                 this.productDetails = productDetailsResponse.data
-                console.log(this.productDetails)
+                for (let i = 0; i < this.productDetails.length; i++) {
+                    this.product = this.productDetails[i]
+                }
+                document.title = this.product.name + " | MechMarketEU"
             })
         }
     },

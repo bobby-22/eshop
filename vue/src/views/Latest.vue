@@ -49,7 +49,6 @@ export default {
                 .get('/latest-products/',)
                 .then(latestProductsResponse => {
                     this.latestProducts = latestProductsResponse.data
-                    console.log(this.latestProducts)
                 })
         },
         addToWish() {
@@ -72,6 +71,7 @@ export default {
         }
     },
     created() {
+        document.title = "Latest Products | MechMarketEU",
         this.getProducts()
     }
 }
