@@ -6,17 +6,29 @@
         </div>
 
         <div class="dropdown-menu">
-            <router-link to="/cables" class="dropdown-item" style="border-top-right-radius:10px; border-top-left-radius:10px;">Cables</router-link>
+            <router-link v-bind:to="{name: 'Category', params: { category_id: 1 }}" class="dropdown-item" style="border-top-right-radius:10px; border-top-left-radius:10px;">
+                Cables
+            </router-link>
             <hr class="dropdown-divider">
-            <router-link to="/deskmats" class="dropdown-item">Deskmats</router-link>
+            <router-link v-bind:to="{name: 'Category', params: { category_id: 2 }}" class="dropdown-item">
+                Deskmats
+            </router-link>
             <hr class="dropdown-divider">
-            <router-link to="/keyboards" class="dropdown-item">Keyboards</router-link>
+            <router-link v-bind:to="{name: 'Category', params: { category_id: 3 }}" class="dropdown-item">
+                Keyboards
+            </router-link>
             <hr class="dropdown-divider">
-            <router-link to="/keycaps" class="dropdown-item">Keycaps</router-link>
+            <router-link v-bind:to="{name: 'Category', params: { category_id: 4 }}" class="dropdown-item">
+                Keycaps
+            </router-link>
             <hr class="dropdown-divider">
-            <router-link to="/switches" class="dropdown-item">Switches</router-link>
+            <router-link v-bind:to="{name: 'Category', params: { category_id: 5 }}" class="dropdown-item">
+                Switches
+            </router-link>
             <hr class="dropdown-divider">
-            <router-link to="/other" class="dropdown-item" style="border-bottom-right-radius:10px; border-bottom-left-radius:10px;">Others</router-link>
+            <router-link v-bind:to="{name: 'Category', params: { category_id: 6 }}" class="dropdown-item" style="border-bottom-right-radius:10px; border-bottom-left-radius:10px;">
+                Others
+            </router-link>
         </div>
     </div>
 </template>

@@ -1,9 +1,9 @@
 <template>
-<div class="columns is-multiline">
-    <div v-for="product in latestProducts" :key="product.id" class="column is-one-quarter-desktop is-one-third-tablet">
+<div class="columns is-multiline is-mobile is-vcentered">
+    <div v-for="product in latestProducts" :key="product.id" class="column is-one-quarter-desktop is-one-third-tablet is-half-mobile">
         <div class="card">
             <div class="card-image">
-                <router-link :to="{name: 'ProductDetails', params: { stripe_product_id: product.stripe_product_id }}">
+                <router-link v-bind:to="{name: 'ProductDetails', params: { stripe_product_id: product.stripe_product_id }}">
                     <img v-bind:src="'http://localhost:8000' + product.thumbnail">
                 </router-link>
                 <a v-on:click="addToWish" class="far fa-bookmark"></a>
@@ -12,7 +12,7 @@
             <div class="card-content">
                 <div class="content">
                     <span class="title is-5">
-                        <router-link :to="{name: 'ProductDetails', params: { stripe_product_id: product.stripe_product_id }}">
+                        <router-link v-bind:to="{name: 'ProductDetails', params: { stripe_product_id: product.stripe_product_id }}">
                             {{ product.name }}
                         </router-link>
                     </span>
@@ -39,7 +39,7 @@
 import { djangoAPI } from "../axios"
 import { toast } from "bulma-toast"
 export default {
-    name: "LatestProducts",
+    name: "Category",
     data() {
         return {
             latestProducts: null
@@ -47,11 +47,13 @@ export default {
     },
     methods: {
         getProducts() {
-            djangoAPI
-                .get('/latest-products/')
-                .then(latestProductsResponse => {
-                    this.latestProducts = latestProductsResponse.data
-                })
+            let category_id = this.$route.params.category_id
+            djangoAPI({
+                method: "GET",
+                url: `/category/${category_id}`
+            }).then(latestProductsResponse => {
+                this.latestProducts = latestProductsResponse.data
+            })
         },
         addToWish() {
             if (isNaN(this.quantity) || this.quantity < 1) {
@@ -73,14 +75,21 @@ export default {
         }
     },
     created() {
-        document.title = "Latest Products | MechMarketEU",
+        document.title = "Category | MechMarketEU",
         this.getProducts()
+    },
+    watch: {
+        $route(to, from) {
+            if(to.name === "Category") {
+                this.getProducts()
+            }
+        }
     }
 }
 </script>
 
 <style scoped>
-.columns.is-multiline {
+.columns.is-multiline.is-vcentered {
     padding: 30px;
 }
 .column.is-one-quarter-desktop.is-one-third-tablet.is-half-mobile {

@@ -13,13 +13,13 @@
 
         <div class="navbar-menu" id="collapse_burger" v-bind:class="{'is-active': collapseBoolean}">
             <div class="navbar-end">
-                <router-link to="/log-in" class="navbar-item">Log in</router-link>
+                <router-link to="/" class="navbar-item">Log in</router-link>
                 <router-link to="/" class="navbar-item">
                     <span class="fas fa-bookmark" ><sup>{{ wishLength }}</sup></span>
                 </router-link>
                 <div class="navbar-item" style="margin-right:7px;">
-                    <router-link to="/sign-up" class="button is-info">Sign up</router-link>
-                    <router-link to="/donate" class="button is-warning">Donate</router-link>
+                    <router-link to="/" class="button is-info">Sign up</router-link>
+                    <router-link to="/" class="button is-warning">Donate</router-link>
                 </div>
             </div>
         </div>

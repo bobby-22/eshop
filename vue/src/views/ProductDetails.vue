@@ -43,7 +43,7 @@ export default {
             let stripe_product_id = this.$route.params.stripe_product_id
             djangoAPI({
                 method: "GET",
-                url: `${stripe_product_id}`
+                url: `/product/${stripe_product_id}`
             }).then(productDetailsResponse => {
                 this.productDetails = productDetailsResponse.data
                 for (let i = 0; i < this.productDetails.length; i++) {
