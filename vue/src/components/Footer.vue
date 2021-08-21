@@ -20,11 +20,14 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$footer-border-top-color: #e4e4e4;
+$footer-border-bottom-color: #f1f1f1;
+$footer-text-color: #949494;
 footer {
     font-weight: 100;
-    color: #949494;
-    border-top: 1px solid #e4e4e4;
+    color: $footer-text-color;
+    border-top: 1px solid $footer-border-top-color;
     padding: 15px 30px 15px 30px;
     margin-top: auto;
     text-align: center;
@@ -33,7 +36,7 @@ footer {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    border-bottom: 1px solid #f1f1f1;
+    border-bottom: 1px solid $footer-border-bottom-color;
     margin-bottom: 15px;
     padding-bottom: 15px;
 }

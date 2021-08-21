@@ -63,7 +63,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$scrollbar-thumb-color: #c2c9d2;
 .container {
     padding: 30px
 }
@@ -101,7 +102,7 @@ export default {
 }
 ::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background: #c2c9d2;
+    background: $scrollbar-thumb-color;
 }
 @media (max-width: 1024px) {
     .details {

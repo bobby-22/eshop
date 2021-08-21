@@ -15,7 +15,9 @@
             <div class="navbar-end">
                 <router-link to="/" class="navbar-item">Log in</router-link>
                 <router-link to="/" class="navbar-item">
-                    <span class="fas fa-bookmark" ><sup>{{ wishLength }}</sup></span>
+                    <span class="fas fa-bookmark" >
+                        <span class="counter">{{ wishLength }}</span>
+                    </span>
                 </router-link>
                 <div class="navbar-item" style="margin-right:7px;">
                     <router-link to="/" class="button is-info">Sign up</router-link>
@@ -64,31 +66,39 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$navbar-background-color: #f2f2f2;
+$counter-color: #c9a0ff;
 .navbar.is-light {
-    background-color:#f2f2f2;
+    background-color: $navbar-background-color;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     border-radius: 10px;
     margin-top: 15px;
 }
-.button.is-warning {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 0px;
-    border-top-left-radius: 0px;
-}
-.button.is-info {
-    border-radius: 0px;
+.button {
+    .is-warning {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
+    }
+    .button.is-info {
+        border-radius: 0px;
+    }
 }
 .fas.fa-bookmark {
     font-size: 25px;
+    position: relative;
 }
-sup {
+.counter {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
     border-radius: 50%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 700;
     font-size: 13px;
-    background: plum;
+    background: $counter-color;
     padding: 3px;
 }
 @media (max-width: 1024px) {

@@ -88,7 +88,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$bookmark-color: #616161;
+$content-bottom-border-top-color: #f0f0f0;
+$link-blue: dodgerblue;
+$link-orange: darksalmon;
 .columns.is-multiline.is-vcentered {
     padding: 30px;
 }
@@ -102,7 +106,7 @@ export default {
     position: absolute;
     right:0;
     font-size:25px;
-    color:#616161;
+    color: $bookmark-color;
     margin:5px;
 }
 .card-content {
@@ -115,7 +119,7 @@ export default {
     margin: 0px 0px 10px;
 }
 #content-bottom {
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid $content-bottom-border-top-color;
 }
 .split {
     display: flex;
@@ -134,10 +138,10 @@ export default {
     margin-right: 5px;
 }
 a:link, a:visited {
-    color: dodgerblue;
+    color: $link-blue;
  }
 a:active, a:hover {
-    color: darksalmon;
+    color: $link-orange;
 }
 img {
     position: relative;
