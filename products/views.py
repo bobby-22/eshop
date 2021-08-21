@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
-from products.models import CategoryModel, ProductModel
+from products.models import ProductModel
 from products.serializers import ProductModelSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import generics, filters
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY 
@@ -27,7 +28,11 @@ class Category(APIView):
         serializers = ProductModelSerializer(products, many=True)
         return Response(serializers.data)
 
-#class ProductsSearch(APIView):
+class Search(generics.ListAPIView):
+    queryset = ProductModel.objects.all()
+    serializer_class = ProductModelSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ["name", "description"]
 
 class Profile(APIView):
     def get(self, request):

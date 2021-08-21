@@ -12,6 +12,22 @@
         </div>
 
         <div class="navbar-menu" id="collapse_burger" v-bind:class="{'is-active': collapseBoolean}">
+            <div class="navbar-start">
+                <div class="navbar-item">
+                    <form method="post" action="/search">
+                        <div class="field has-addons">
+                            <div class="control">
+                                <input type="text" class="input" placeholder="Search..." name="query">
+                            </div>
+                            <div class="control">
+                                <a href="" class="button is-danger">
+                                    <i class="fas fa-search"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="navbar-end">
                 <router-link to="/" class="navbar-item">Log in</router-link>
                 <router-link to="/" class="navbar-item">
@@ -67,27 +83,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$navbar-background-color: #f2f2f2;
 $counter-color: #c9a0ff;
 .navbar.is-light {
-    background-color: $navbar-background-color;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     border-radius: 10px;
     margin-top: 15px;
 }
+.navbar-start {
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+
+}
+.input, .button.is-danger {
+    border-radius: 10px;
+}
 .button {
-    .is-warning {
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-        border-bottom-left-radius: 0px;
-        border-top-left-radius: 0px;
+    &.is-warning {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
     }
-    .button.is-info {
-        border-radius: 0px;
+    &.is-info {
+    border-radius: 0px;
     }
 }
 .fas.fa-bookmark {
-    font-size: 25px;
+    font-size: 20px;
     position: relative;
 }
 .counter {
@@ -97,7 +120,7 @@ $counter-color: #c9a0ff;
     border-radius: 50%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 11px;
     background: $counter-color;
     padding: 3px;
 }
