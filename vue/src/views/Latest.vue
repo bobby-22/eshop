@@ -10,10 +10,10 @@
 
 <script>
 import { djangoAPI } from "../axios"
-import Cards from "../components/Cards.vue"
+import Content from "../components/Content.vue"
 export default {
     name: "Latest",
-    components: { Cards },
+    components: { Content },
     data() {
         return {
             products: null
