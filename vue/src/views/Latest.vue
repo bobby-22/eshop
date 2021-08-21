@@ -1,9 +1,9 @@
 <template>
 <div class="columns is-multiline">
-    <div v-for="product in latestProducts" :key="product.id" class="column is-one-quarter-desktop is-one-third-tablet">
+    <div v-for="product in products" :key="product.id" class="column is-one-quarter-desktop is-one-third-tablet">
         <div class="card">
             <div class="card-image">
-                <router-link :to="{name: 'ProductDetails', params: { stripe_product_id: product.stripe_product_id }}">
+                <router-link :to="{name: 'Details', params: { stripe_product_id: product.stripe_product_id }}">
                     <img v-bind:src="'http://localhost:8000' + product.thumbnail">
                 </router-link>
                 <a v-on:click="addToWish" class="far fa-bookmark"></a>
@@ -12,7 +12,7 @@
             <div class="card-content">
                 <div class="content">
                     <span class="title is-5">
-                        <router-link :to="{name: 'ProductDetails', params: { stripe_product_id: product.stripe_product_id }}">
+                        <router-link :to="{name: 'Details', params: { stripe_product_id: product.stripe_product_id }}">
                             {{ product.name }}
                         </router-link>
                     </span>
@@ -39,18 +39,18 @@
 import { djangoAPI } from "../axios"
 import { toast } from "bulma-toast"
 export default {
-    name: "LatestProducts",
+    name: "Latest",
     data() {
         return {
-            latestProducts: null
+            products: null
         }
     },
     methods: {
         getProducts() {
             djangoAPI
-                .get('/latest-products/')
-                .then(latestProductsResponse => {
-                    this.latestProducts = latestProductsResponse.data
+                .get('/latest/')
+                .then(latestResponse => {
+                    this.products = latestResponse.data
                 })
         },
         addToWish() {
@@ -58,7 +58,7 @@ export default {
                 this.quantity = 1
             }
             const item = {
-                product: this.latestProducts,
+                product: this.products,
                 quantity: this.quantity
             }
             this.$store.commit("addToWish", item)

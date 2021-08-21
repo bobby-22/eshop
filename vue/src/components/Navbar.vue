@@ -2,7 +2,7 @@
     <nav class="navbar is-light">
         <div class="navbar-brand" style="margin:0px;">
             <router-link to="/" class="navbar-item" style="border-top-left-radius:10px; border-bottom-left-radius:10px;"><strong>MechMarketEU</strong></router-link>
-            <router-link to="/latest-products" class="navbar-item">Latest</router-link>
+            <router-link to="/latest/" class="navbar-item">Latest</router-link>
             <NavbarDropdown  class="navbar-item"/>
             <div class="navbar-burger" data-target="collapse_burger" v-on:click="collapseHamburger" v-bind:class="{'is-active': collapseBoolean}">
                 <span></span>

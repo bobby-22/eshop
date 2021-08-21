@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-    <div class="details" v-for="detail in productDetails" :key="detail.id">
+    <div class="details" v-for="detail in details" :key="detail.id">
         <div class="details-left">
             <div class="detail-thumbnail">
                 <img v-bind:src="'http://localhost:8000' + detail.thumbnail">
@@ -31,10 +31,10 @@
 <script>
 import { djangoAPI } from "../axios"
 export default {
-    name: "ProductDetails",
+    name: "Details",
     data() {
         return {
-            productDetails: null,
+            details: null,
             product: null,
             modalBoolean: false
         }
@@ -45,10 +45,10 @@ export default {
             djangoAPI({
                 method: "GET",
                 url: `/product/${stripe_product_id}`
-            }).then(productDetailsResponse => {
-                this.productDetails = productDetailsResponse.data
-                for (let i = 0; i < this.productDetails.length; i++) {
-                    this.product = this.productDetails[i]
+            }).then(detailsResponse => {
+                this.details = detailsResponse.data
+                for (let i = 0; i < this.details.length; i++) {
+                    this.product = this.details[i]
                 }
                 document.title = this.product.name + " | MechMarketEU"
             })

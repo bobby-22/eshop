@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Latest from "../views/Latest.vue"
-import ProductDetails from '../views/ProductDetails.vue'
+import Details from '../views/Details.vue'
 import Category from '../views/Category.vue'
 
 const routes = [
@@ -11,14 +11,14 @@ const routes = [
     component: Home
   },
   {
-    path: "/latest-products/",
-    name: "LatestProducts",
+    path: "/latest/",
+    name: "Latest",
     component: Latest
   },
   {
     path: "/product/:stripe_product_id",
-    name: "ProductDetails",
-    component: ProductDetails
+    name: "Details",
+    component: Details
   },
   {
     path: "/category/:category_id",

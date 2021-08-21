@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 from products.models import CategoryModel, ProductModel
-from products.serializers import ProductModelSerializer, CategoryModelSerializer
+from products.serializers import ProductModelSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import stripe
@@ -9,13 +9,13 @@ import stripe
 stripe.api_key = settings.STRIPE_SECRET_KEY 
 
 # Create your views here.
-class LatestProducts(APIView):
+class Latest(APIView):
     def get(self, request):
         products = ProductModel.objects.all()
         serializers = ProductModelSerializer(products, many=True)
         return Response(serializers.data)
 
-class ProductDetails(APIView):
+class Details(APIView):
     def get(self, request, stripe_product_id):
         details = ProductModel.objects.filter(stripe_product_id=stripe_product_id)
         serializers = ProductModelSerializer(details, many=True)
@@ -26,6 +26,8 @@ class Category(APIView):
         products = ProductModel.objects.filter(category=category_id)
         serializers = ProductModelSerializer(products, many=True)
         return Response(serializers.data)
+
+#class ProductsSearch(APIView):
 
 class Profile(APIView):
     def get(self, request):
