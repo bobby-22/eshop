@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Latest from "../views/Latest.vue"
 import Details from '../views/Details.vue'
 import Category from '../views/Category.vue'
+import Search from '../views/Search.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/category/:category_id",
     name: "Category",
     component: Category
+  },
+  {
+    path: "/?search=:keyword",
+    name: "Search",
+    component: Search
   }
 ]
 

@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-image">
             <router-link :to="{name: 'Details', params: { stripe_product_id: product.stripe_product_id }}">
-                <img v-bind:src="'http://localhost:8000' + product.thumbnail">
+                <img v-bind:src="product.thumbnail">
             </router-link>
             <a v-on:click="addToWish" class="far fa-bookmark"></a>
         </div>
@@ -37,11 +37,6 @@
 import { toast } from "bulma-toast"
 export default {
     name: "Cards",
-    data() {
-        return {
-            products: null
-        }
-    },
     props: {
         product: Object
     },

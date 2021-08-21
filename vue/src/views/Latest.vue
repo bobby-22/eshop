@@ -1,6 +1,6 @@
 <template>
 <div class="columns is-multiline">
-    <Cards
+    <Content
         v-for="product in products"
         v-bind:key="product.id" 
         v-bind:product="product"
@@ -25,6 +25,7 @@ export default {
                 .get('/latest/')
                 .then(latestResponse => {
                     this.products = latestResponse.data
+                    console.log(this.products)
                 })
         }
     },

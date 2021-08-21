@@ -12,8 +12,8 @@
 import { djangoAPI } from "../axios"
 import Content from '../components/Content.vue'
 export default {
-  components: { Content },
     name: "Category",
+    components: { Content },
     data() {
         return {
             products: null
@@ -27,6 +27,7 @@ export default {
                 url: `/category/${category_id}`
             }).then(categoryResponse => {
                 this.products = categoryResponse.data
+                console.log(this.products)
             })
         },
     },

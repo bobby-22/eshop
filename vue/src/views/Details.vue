@@ -3,14 +3,14 @@
     <div class="details" v-for="detail in details" :key="detail.id">
         <div class="details-left">
             <div class="detail-thumbnail">
-                <img v-bind:src="'http://localhost:8000' + detail.thumbnail">
+                <img v-bind:src="detail.thumbnail">
             </div>
             <div class="detail-images">
-                <img v-bind:src="'http://localhost:8000' + detail.image">
-                <img v-bind:src="'http://localhost:8000' + detail.image">
-                <img v-bind:src="'http://localhost:8000' + detail.image">
-                <img v-bind:src="'http://localhost:8000' + detail.image">
-                <img v-bind:src="'http://localhost:8000' + detail.image">
+                <img v-bind:src="detail.image">
+                <img v-bind:src="detail.image">
+                <img v-bind:src="detail.image">
+                <img v-bind:src="detail.image">
+                <img v-bind:src="detail.image">
             </div>
         </div>
 
@@ -47,6 +47,7 @@ export default {
                 url: `/product/${stripe_product_id}`
             }).then(detailsResponse => {
                 this.details = detailsResponse.data
+                console.log(this.details)
                 for (let i = 0; i < this.details.length; i++) {
                     this.product = this.details[i]
                 }

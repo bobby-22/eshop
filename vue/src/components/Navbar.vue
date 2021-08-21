@@ -14,15 +14,15 @@
         <div class="navbar-menu" id="collapse_burger" v-bind:class="{'is-active': collapseBoolean}">
             <div class="navbar-start">
                 <div class="navbar-item">
-                    <form method="post" action="/search">
+                    <form @submit.stop.prevent="submit">
                         <div class="field has-addons">
                             <div class="control">
-                                <input type="text" class="input" placeholder="Search..." name="query">
+                                <input type="text" class="input" placeholder="Search..." v-model="keyword">
                             </div>
                             <div class="control">
-                                <a href="" class="button is-danger">
+                                <button type="submit" class="button is-danger">
                                     <i class="fas fa-search"></i>
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -56,12 +56,16 @@ export default {
             collapseBoolean: false,
             wish: {
                 items: []
-            }
+            },
+            keyword: null
         }
     },
     methods: {
         collapseHamburger() {
             this.collapseBoolean = !this.collapseBoolean
+        },
+        submit() {
+            this.$router.push({name: "Search", params: { keyword: this.keyword }})
         }
     },
     computed: {
