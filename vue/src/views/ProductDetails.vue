@@ -1,11 +1,11 @@
 <template>
 <div class="container">
-    <div class="holder" v-for="detail in productDetails" :key="detail.id">
-        <div class="left">
-            <div class="image-title">
+    <div class="details" v-for="detail in productDetails" :key="detail.id">
+        <div class="details-left">
+            <div class="detail-thumbnail">
                 <img v-bind:src="'http://localhost:8000' + detail.thumbnail">
             </div>
-            <div class="image-container">
+            <div class="detail-images">
                 <img v-bind:src="'http://localhost:8000' + detail.image">
                 <img v-bind:src="'http://localhost:8000' + detail.image">
                 <img v-bind:src="'http://localhost:8000' + detail.image">
@@ -13,13 +13,14 @@
                 <img v-bind:src="'http://localhost:8000' + detail.image">
             </div>
         </div>
-        <div class="right">
-            <div class="content-header">
+
+        <div class="details-right">
+            <div class="detail-header">
                 <p>{{ detail.name }}</p>
                 <p>{{ detail.date }}</p>
                 <p>{{ detail.location}}</p>
             </div>
-            <div class="content-others">
+            <div class="detail-content">
                 <p>{{ detail.description }}</p>
             </div>
         </div>
@@ -66,32 +67,32 @@ export default {
 .container {
     padding: 30px
 }
-.holder {
+.details {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.left {
+.details-left {
     display: flex;
     flex-direction: column;
     flex-basis: 50%;
     margin-right: 30px;
 }
-.image-title > img {
+.detail-thumbnail > img {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-.image-container {
+.detail-images {
     display:flex;
     flex-direction: row;
     overflow: scroll;
     overflow-y: hidden;
 }
-.image-container > img {
+.detail-images > img {
     height: 100px;
     margin-right: 5px;
 }
-.right {
+.details-right {
     flex-basis: 50%;
 }
 ::-webkit-scrollbar {
@@ -103,10 +104,10 @@ export default {
     background: #c2c9d2;
 }
 @media (max-width: 1024px) {
-    .holder {
+    .details {
         flex-direction: column;
     }
-    .left {
+    .details-left {
         margin-right: 0px;
         margin-bottom: 30px;
     }

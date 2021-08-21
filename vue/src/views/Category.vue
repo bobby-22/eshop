@@ -17,7 +17,7 @@
                         </router-link>
                     </span>
                 </div>
-                <div class="content" style="border-top: 1px solid #f0f0f0;">
+                <div class="content" id="content-bottom">
                     <div class="split">
                         <span class="subtitle">
                             <i class="fas fa-euro-sign"></i>
@@ -25,7 +25,7 @@
                         </span>
                         <span class="subtitle">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span style="font-weight:300;">{{ product.location }}</span>
+                            <span>{{ product.location }}</span>
                         </span>
                     </div>
                 </div>
@@ -98,6 +98,13 @@ export default {
 .card {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
+.far.fa-bookmark {
+    position: absolute;
+    right:0;
+    font-size:25px;
+    color:#616161;
+    margin:5px;
+}
 .card-content {
     padding: 15px;
 }
@@ -106,6 +113,9 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 0px 0px 10px;
+}
+#content-bottom {
+    border-top: 1px solid #f0f0f0;
 }
 .split {
     display: flex;
@@ -134,13 +144,6 @@ img {
     height: 200px;
     width: 800px;
     object-fit: cover;
-}
-.far.fa-bookmark {
-    position: absolute;
-    right:0;
-    font-size:25px;
-    color:#616161;
-    margin:5px;
 }
 @media (max-width: 769px) {
     img {
