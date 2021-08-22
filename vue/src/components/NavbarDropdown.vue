@@ -6,29 +6,17 @@
         </div>
 
         <div class="dropdown-menu">
-            <router-link v-bind:to="{name: 'Category', params: { category_id: 1 }}" class="dropdown-item" id="first">
-                Cables
-            </router-link>
+            <router-link class="dropdown-item" id="first" v-bind:to="{name: 'Category', params: { category_id: 1 }}">Cables</router-link>
             <hr class="dropdown-divider">
-            <router-link v-bind:to="{name: 'Category', params: { category_id: 2 }}" class="dropdown-item">
-                Deskmats
-            </router-link>
+            <router-link class="dropdown-item" v-bind:to="{name: 'Category', params: { category_id: 2 }}">Deskmats</router-link>
             <hr class="dropdown-divider">
-            <router-link v-bind:to="{name: 'Category', params: { category_id: 3 }}" class="dropdown-item">
-                Keyboards
-            </router-link>
+            <router-link class="dropdown-item" v-bind:to="{name: 'Category', params: { category_id: 3 }}">Keyboards</router-link>
             <hr class="dropdown-divider">
-            <router-link v-bind:to="{name: 'Category', params: { category_id: 4 }}" class="dropdown-item">
-                Keycaps
-            </router-link>
+            <router-link class="dropdown-item" v-bind:to="{name: 'Category', params: { category_id: 4 }}">Keycaps</router-link>
             <hr class="dropdown-divider">
-            <router-link v-bind:to="{name: 'Category', params: { category_id: 5 }}" class="dropdown-item">
-                Switches
-            </router-link>
+            <router-link class="dropdown-item" v-bind:to="{name: 'Category', params: { category_id: 5 }}">Switches</router-link>
             <hr class="dropdown-divider">
-            <router-link v-bind:to="{name: 'Category', params: { category_id: 6 }}" class="dropdown-item" id="last">
-                Others
-            </router-link>
+            <router-link class="dropdown-item" id="last" v-bind:to="{name: 'Category', params: { category_id: 6 }}">Others</router-link>
         </div>
     </div>
 </template>

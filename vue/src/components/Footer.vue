@@ -3,9 +3,15 @@
     <div class="footer-content">
         <div class="content">
             <p>Have any improvements or found a bug? Let me know at one of these places &#128578;</p>
-            <a href="mailto:nlongn22@icloud.com"><i class="fas fa-at"></i></a>
-            <a href="https://www.reddit.com/message/compose/?to=bobby--22"><i class="fab fa-reddit"></i></a>
-            <a href="https://github.com/bobby-22/marketplace/issues/new"><i class="fab fa-github"></i></a>
+            <a href="mailto:nlongn22@icloud.com">
+                <i class="fas fa-at"></i>
+            </a>
+            <a href="https://www.reddit.com/message/compose/?to=bobby--22">
+                <i class="fab fa-reddit"></i>
+            </a>
+            <a href="https://github.com/bobby-22/marketplace/issues/new">
+                <i class="fab fa-github"></i>
+            </a>
         </div>
     </div>
     <div class="footer-bottom">

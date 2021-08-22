@@ -1,7 +1,9 @@
 <template>
     <nav class="navbar is-light">
         <div class="navbar-brand" style="margin:0px;">
-            <router-link to="/" class="navbar-item" id="brand"><strong>MechMarketEU</strong></router-link>
+            <router-link to="/" class="navbar-item" id="brand">
+                <strong>MechMarketEU</strong>
+            </router-link>
             <router-link to="/latest" class="navbar-item">Latest</router-link>
             <NavbarDropdown  class="navbar-item"/>
             <div class="navbar-burger" data-target="collapse_burger" v-on:click="collapseHamburger" v-bind:class="{'is-active': collapseBoolean}">
@@ -17,10 +19,10 @@
                     <form @submit.stop.prevent="submitSearch">
                         <div class="field has-addons">
                             <div class="control">
-                                <input type="text" class="input" placeholder="Search..." v-model="keyword">
+                                <input class="input" type="text" placeholder="Search..." v-model="keyword">
                             </div>
                             <div class="control">
-                                <button type="submit" class="button is-danger">
+                                <button class="button is-danger" type="submit">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>

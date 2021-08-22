@@ -6,7 +6,7 @@
                 <img v-bind:src="product.thumbnail">
             </router-link>
             <div class="bookmark" v-if="checkBookmarkBoolean">
-                <a v-on:click="addToBookmark" class="far fa-bookmark" v-bind:class="[{'fas fa-bookmark': savedBoolean}]" v-bind="countItems"></a>
+                <a class="far fa-bookmark" v-on:click="addToBookmark" v-bind:class="[{'fas fa-bookmark': savedBoolean}]"></a>
             </div>
         </div>
 
@@ -57,7 +57,6 @@ export default {
             this.savedBoolean = !this.savedBoolean
             let item = {
                 product: this.product,
-                savedBoolean: this.savedBoolean
             }
             this.$store.commit("addToBookmark", item)
             toast({
@@ -99,7 +98,7 @@ $link-orange: darksalmon;
     right: 0;
 }
 .far.fa-bookmark {
-    font-size: 25px;
+    font-size: 30px;
     color: $bookmark-color;
     margin: 5px;
 }
