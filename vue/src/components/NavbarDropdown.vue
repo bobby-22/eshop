@@ -6,7 +6,7 @@
         </div>
 
         <div class="dropdown-menu">
-            <router-link v-bind:to="{name: 'Category', params: { category_id: 1 }}" class="dropdown-item" style="border-top-right-radius:10px; border-top-left-radius:10px;">
+            <router-link v-bind:to="{name: 'Category', params: { category_id: 1 }}" class="dropdown-item" id="first">
                 Cables
             </router-link>
             <hr class="dropdown-divider">
@@ -26,7 +26,7 @@
                 Switches
             </router-link>
             <hr class="dropdown-divider">
-            <router-link v-bind:to="{name: 'Category', params: { category_id: 6 }}" class="dropdown-item" style="border-bottom-right-radius:10px; border-bottom-left-radius:10px;">
+            <router-link v-bind:to="{name: 'Category', params: { category_id: 6 }}" class="dropdown-item" id="last">
                 Others
             </router-link>
         </div>
@@ -49,6 +49,14 @@ $dropdown-menu-background-color: white;
 }
 .dropdown-divider {
     margin: 0px;
+}
+#first {
+    border-top-right-radius:10px;
+    border-top-left-radius:10px;
+}
+#last {
+    border-bottom-right-radius:10px;
+    border-bottom-left-radius:10px;
 }
 .fas {
     margin-left: 3px;

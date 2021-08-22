@@ -31,15 +31,19 @@ export default {
                 console.log(this.products)
             })
         },
+        getTitle() {
+            document.title = `${this.$route.params.keyword} | MechMarketEU`
+        }
     },
     created() {
-        document.title = "Search | MechMarketEU",
         this.getProducts()
+        this.getTitle()
     },
     watch: {
         $route(to, from) {
             if(to.name === "Search") {
                 this.getProducts()
+                this.getTitle()
             }
         }
     }

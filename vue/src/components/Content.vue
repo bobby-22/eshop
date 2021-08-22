@@ -50,8 +50,9 @@ export default {
                 quantity: this.quantity
             }
             this.$store.commit("addToWish", item)
+            console.log(item)
             toast({
-                message: "This product was added to your wishlist!",
+                message: "Item has been added to bookmark!",
                 type: "is-success",
                 dismissible: true,
                 pauseOnHover: true,

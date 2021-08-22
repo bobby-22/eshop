@@ -4,6 +4,7 @@ import Latest from "../views/Latest.vue"
 import Details from '../views/Details.vue'
 import Category from '../views/Category.vue'
 import Search from '../views/Search.vue'
+import Bookmark from '../views/Bookmark.vue'
 
 const routes = [
   {
@@ -12,7 +13,7 @@ const routes = [
     component: Home
   },
   {
-    path: "/latest/",
+    path: "/latest",
     name: "Latest",
     component: Latest
   },
@@ -30,6 +31,11 @@ const routes = [
     path: "/?search=:keyword",
     name: "Search",
     component: Search
+  },
+  {
+    path: "/bookmark",
+    name: "Bookmark",
+    component: Bookmark
   }
 ]
 

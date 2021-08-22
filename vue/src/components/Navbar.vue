@@ -1,8 +1,8 @@
 <template>
     <nav class="navbar is-light">
         <div class="navbar-brand" style="margin:0px;">
-            <router-link to="/" class="navbar-item" style="border-top-left-radius:10px; border-bottom-left-radius:10px;"><strong>MechMarketEU</strong></router-link>
-            <router-link to="/latest/" class="navbar-item">Latest</router-link>
+            <router-link to="/" class="navbar-item" id="brand"><strong>MechMarketEU</strong></router-link>
+            <router-link to="/latest" class="navbar-item">Latest</router-link>
             <NavbarDropdown  class="navbar-item"/>
             <div class="navbar-burger" data-target="collapse_burger" v-on:click="collapseHamburger" v-bind:class="{'is-active': collapseBoolean}">
                 <span></span>
@@ -30,12 +30,12 @@
             </div>
             <div class="navbar-end">
                 <router-link to="/" class="navbar-item">Log in</router-link>
-                <router-link to="/" class="navbar-item">
+                <router-link to="/bookmark" class="navbar-item">
                     <span class="fas fa-bookmark" >
                         <span class="counter">{{ wishLength }}</span>
                     </span>
                 </router-link>
-                <div class="navbar-item" style="margin-right:7px;">
+                <div class="navbar-item" id="button-area">
                     <router-link to="/" class="button is-info">Sign up</router-link>
                     <router-link to="/" class="button is-warning">Donate</router-link>
                 </div>
@@ -93,6 +93,10 @@ $counter-color: #c9a0ff;
     border-radius: 10px;
     margin-top: 15px;
 }
+#brand {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
 .navbar-start {
     flex-grow: 1;
     justify-content: center;
@@ -100,7 +104,10 @@ $counter-color: #c9a0ff;
 
 }
 .input, .button.is-danger {
-    border-radius: 10px;
+    border-radius: 15px;
+}
+#button-area {
+    margin-right:7px;
 }
 .button {
     &.is-warning {
@@ -134,6 +141,14 @@ $counter-color: #c9a0ff;
         margin-top: 0px;
         padding-left: 0px;
         padding-right: 0px;
+    }
+    #brand {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+    .button.is-warning {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
     }
 }
 </style>

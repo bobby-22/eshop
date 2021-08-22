@@ -22,7 +22,7 @@ export default {
     methods: {
         getProducts() {
             djangoAPI
-                .get('/latest/')
+                .get('/latest')
                 .then(latestResponse => {
                     this.products = latestResponse.data
                     console.log(this.products)
