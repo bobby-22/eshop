@@ -14,7 +14,9 @@ import { djangoAPI } from "../axios"
 import Content from "../components/Content.vue"
 export default {
     name: "Search",
-    components: { Content },
+    components: {
+        Content
+    },
     data() {
         return {
             products: null

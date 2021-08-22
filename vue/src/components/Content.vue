@@ -1,11 +1,13 @@
 <template>
 <div class="column is-one-quarter-desktop is-one-third-tablet">
-    <div class="card">
+    <div class="card" v-if="bookmark.items">
         <div class="card-image">
             <router-link :to="{name: 'Details', params: { stripe_product_id: product.stripe_product_id }}">
                 <img v-bind:src="product.thumbnail">
             </router-link>
-            <a v-on:click="addToWish" class="far fa-bookmark"></a>
+            <div class="bookmark" v-if="checkBookmarkBoolean">
+                <a v-on:click="addToBookmark" class="far fa-bookmark" v-bind:class="[{'fas fa-bookmark': savedBoolean}]" v-bind="countItems"></a>
+            </div>
         </div>
 
         <div class="card-content">
@@ -36,21 +38,28 @@
 <script>
 import { toast } from "bulma-toast"
 export default {
-    name: "Cards",
+    name: "Content",
     props: {
         product: Object
     },
+    data() {
+        return {
+            savedBoolean: false,
+            checkBookmarkBoolean: false,
+            keyword: null,
+            bookmark: {
+                items: []
+            },
+        }
+    },
     methods: {
-        addToWish() {
-            if (isNaN(this.quantity) || this.quantity < 1) {
-                this.quantity = 1
-            }
-            const item = {
+        addToBookmark() {
+            this.savedBoolean = !this.savedBoolean
+            let item = {
                 product: this.product,
-                quantity: this.quantity
+                savedBoolean: this.savedBoolean
             }
-            this.$store.commit("addToWish", item)
-            console.log(item)
+            this.$store.commit("addToBookmark", item)
             toast({
                 message: "Item has been added to bookmark!",
                 type: "is-success",
@@ -59,7 +68,16 @@ export default {
                 duration: 2000,
                 position: "bottom-right"
             })
+        },
+        checkBookmark() {
+            let array = JSON.parse(localStorage.getItem("bookmark"))
+            let checkBookmarkBoolean = JSON.stringify(array.items).includes(this.product.stripe_product_id)
+            this.checkBookmarkBoolean = !checkBookmarkBoolean
         }
+    },
+    mounted() {
+        this.bookmark = this.$store.state.bookmark
+        this.checkBookmark()
     }
 }
 </script>
@@ -75,9 +93,12 @@ $link-orange: darksalmon;
 .card {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
-.far.fa-bookmark {
-    position: absolute;
+.bookmark {
+    position:absolute;
+    top: 0;
     right: 0;
+}
+.far.fa-bookmark {
     font-size: 25px;
     color: $bookmark-color;
     margin: 5px;

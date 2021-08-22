@@ -14,7 +14,7 @@
         <div class="navbar-menu" id="collapse_burger" v-bind:class="{'is-active': collapseBoolean}">
             <div class="navbar-start">
                 <div class="navbar-item">
-                    <form @submit.stop.prevent="submit">
+                    <form @submit.stop.prevent="submitSearch">
                         <div class="field has-addons">
                             <div class="control">
                                 <input type="text" class="input" placeholder="Search..." v-model="keyword">
@@ -32,7 +32,7 @@
                 <router-link to="/" class="navbar-item">Log in</router-link>
                 <router-link to="/bookmark" class="navbar-item">
                     <span class="fas fa-bookmark" >
-                        <span class="counter">{{ wishLength }}</span>
+                        <span class="counter">{{ bookmarkLength }}</span>
                     </span>
                 </router-link>
                 <div class="navbar-item" id="button-area">
@@ -54,7 +54,7 @@ export default {
     data() {
         return {
             collapseBoolean: false,
-            wish: {
+            bookmark: {
                 items: []
             },
             keyword: null
@@ -64,24 +64,21 @@ export default {
         collapseHamburger() {
             this.collapseBoolean = !this.collapseBoolean
         },
-        submit() {
+        submitSearch() {
             this.$router.push({name: "Search", params: { keyword: this.keyword }})
         }
     },
     computed: {
-        wishLength() {
-            let length = 0
-            for (let i = 0; i < this.wish.items.length; i++) {
-                length += this.wish.items[i].quantity
-            }
+        bookmarkLength() {
+            let length = this.bookmark.items.length
             return length
         }
     },
     beforeCreate() {
-        this.$store.commit("initializeStore")
+        this.$store.commit("localStorageManipulation")
     },
     mounted() {
-        this.wish = this.$store.state.wish
+        this.bookmark = this.$store.state.bookmark
     }
 }
 </script>

@@ -13,7 +13,9 @@ import { djangoAPI } from "../axios"
 import Content from '../components/Content.vue'
 export default {
     name: "Category",
-    components: { Content },
+    components: {
+        Content
+    },
     data() {
         return {
             products: null
@@ -29,7 +31,7 @@ export default {
                 this.products = categoryResponse.data
                 console.log(this.products)
             })
-        },
+        }
     },
     created() {
         document.title = "Category | MechMarketEU",

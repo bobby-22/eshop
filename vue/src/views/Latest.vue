@@ -13,7 +13,9 @@ import { djangoAPI } from "../axios"
 import Content from "../components/Content.vue"
 export default {
     name: "Latest",
-    components: { Content },
+    components: {
+        Content
+    },
     data() {
         return {
             products: null

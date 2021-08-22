@@ -2,29 +2,21 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    wish: {
+    bookmark: {
       items: [],
     },
-    isAuthenticated: false,
-    token: "",
-    isLoading: false
   },
   mutations: {
-    initializeStore(state) {
-      if (localStorage.getItem("wish")) {
-        state.wish = JSON.parse(localStorage.getItem("wish"))
+    localStorageManipulation(state) {
+      if (localStorage.getItem("bookmark")) {
+        state.bookmark = JSON.parse(localStorage.getItem("bookmark"))
       } else {
-        localStorage.setItem("wish", JSON.stringify(state.wish))
+        localStorage.setItem("bookmark", JSON.stringify(state.bookmark))
       }
     },
-    addToWish(state, item) {
-      const exists = state.wish.items.filter(i => i.product.id === item.product.id)
-      if (exists.length) {
-        exists[0].quantity = parseInt(exists[0].quantity) + parseInt(item.quantity)
-      } else {
-        state.wish.items.push(item)
-      }
-      localStorage.setItem("wish", JSON.stringify(state.wish))
+    addToBookmark(state, item) {
+      state.bookmark.items.push(item)
+      localStorage.setItem("bookmark", JSON.stringify(state.bookmark))
     }
   },
   actions: {
