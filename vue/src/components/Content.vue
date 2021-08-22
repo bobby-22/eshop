@@ -97,6 +97,9 @@ $link-orange: darksalmon;
     top: 0;
     right: 0;
 }
+a:hover {
+    text-shadow: 0px 0px 30px rgba(50, 50, 50, 1)
+}
 .far.fa-bookmark {
     font-size: 30px;
     color: $bookmark-color;
@@ -113,6 +116,7 @@ $link-orange: darksalmon;
 }
 #content-bottom {
     border-top: 1px solid $content-bottom-border-top-color;
+    margin: 0px;
 }
 .split {
     display: flex;
