@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
-        <img alt="Vue logo" src="../assets/logo.png">
-    </div>
+<div class="container">
+    <h1 class="title">Home page</h1>
+</div>
 </template>
 
 <script>
@@ -15,6 +15,7 @@ export default {
 
 <style scoped>
 .container {
+    min-height: 100%;
     padding: 30px;
 }
 </style>

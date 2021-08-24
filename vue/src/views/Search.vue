@@ -1,25 +1,29 @@
 <template>
-<div class="columns is-multiline">
-    <Content
-        v-for="product in products"
-        v-bind:key="product.id"
-        v-bind:product="product"
-        v-bind:src="product.thumbnail"
-    />
+<div class="container">
+    <h1 class="title">Searched keyword: {{ keyword }}</h1>
+    <div class="columns is-multiline">
+        <ProductsContent
+            v-for="product in products"
+            v-bind:key="product.id"
+            v-bind:product="product"
+            v-bind:src="product.thumbnail"
+        />
+    </div>
 </div>
 </template>
 
 <script>
 import { djangoAPI } from "../axios"
-import Content from "../components/Content.vue"
+import ProductsContent from "../components/ProductsContent.vue"
 export default {
     name: "Search",
     components: {
-        Content
+        ProductsContent
     },
     data() {
         return {
-            products: null
+            products: null,
+            keyword: this.$route.params.keyword
         }
     },
     methods: {
@@ -53,7 +57,8 @@ export default {
 </script>
 
 <style scoped>
-.columns.is-multiline {
+.container {
+    min-height: 100%;
     padding: 30px;
 }
 </style>

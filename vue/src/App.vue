@@ -24,12 +24,6 @@ export default {
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-}
-@media (max-width: 1024px) {
-    .container {
-        height: 100%;
-    }
+    min-height: 100vh;
 }
 </style>

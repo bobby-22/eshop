@@ -1,20 +1,22 @@
 <template>
-<div class="columns is-multiline">
-    <Content
-        v-for="product in products"
-        v-bind:key="product.id"
-        v-bind:product="product"
-    />
+<div class="container">
+    <div class="columns is-multiline">
+        <ProductsContent
+            v-for="product in products"
+            v-bind:key="product.id"
+            v-bind:product="product"
+        />
+    </div>
 </div>
 </template>
 
 <script>
 import { djangoAPI } from "../axios"
-import Content from '../components/Content.vue'
+import ProductsContent from '../components/ProductsContent.vue'
 export default {
     name: "Category",
     components: {
-        Content
+        ProductsContent
     },
     data() {
         return {
@@ -48,7 +50,8 @@ export default {
 </script>
 
 <style scoped>
-.columns.is-multiline {
+.container {
+    min-height: 100%;
     padding: 30px;
 }
 </style>

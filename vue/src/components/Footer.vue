@@ -35,7 +35,6 @@ footer {
     color: $footer-text-color;
     border-top: 1px solid $footer-border-top-color;
     padding: 15px 30px 15px 30px;
-    margin-top: auto;
     text-align: center;
 }
 .footer-content {
