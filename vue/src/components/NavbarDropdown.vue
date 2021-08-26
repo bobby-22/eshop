@@ -32,7 +32,7 @@ $dropdown-menu-background-color: white;
 .dropdown-menu {
     border-radius: 10px;
     box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.20);
-    background-color: $dropdown-menu-background-color;
+    background: $dropdown-menu-background-color;
     padding: 0px;
 }
 .dropdown-divider {

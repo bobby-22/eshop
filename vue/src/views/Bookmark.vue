@@ -1,21 +1,21 @@
 <template>
 <div class="container">
     <h1 class="title">Bookmarked products:</h1>
-    <ProductsBookmark
+    <ContentBookmark
         v-for="item in bookmark.items"
         v-bind:key="item.product.id"
         v-bind:initialItem="item"
-        v-on:removeFromBookmark="removeFromBookmark"
+        v-on:removeBookmark="removeBookmark"
     />
 </div>
 </template>
 
 <script>
-import ProductsBookmark from "../components/ProductsBookmark"
+import ContentBookmark from "../components/ContentBookmark"
 export default {
     name: "Bookmark",
     components: {
-        ProductsBookmark
+        ContentBookmark
     },
     data() {
         return {
@@ -28,7 +28,7 @@ export default {
         updateBookmark() {
             localStorage.setItem("bookmark", JSON.stringify(this.$store.state.bookmark))
         },
-        removeFromBookmark(item) {
+        removeBookmark(item) {
             this.bookmark.items = this.bookmark.items.filter(i => {
                 return i.product.stripe_product_id !== item.product.stripe_product_id
             })

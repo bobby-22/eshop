@@ -2,7 +2,7 @@
 <div class="container">
     <h1 class="title">Searched keyword: {{ keyword }}</h1>
     <div class="columns is-multiline">
-        <ProductsContent
+        <Content
             v-for="product in products"
             v-bind:key="product.id"
             v-bind:product="product"
@@ -14,11 +14,11 @@
 
 <script>
 import { djangoAPI } from "../axios"
-import ProductsContent from "../components/ProductsContent.vue"
+import Content from "../components/Content.vue"
 export default {
     name: "Search",
     components: {
-        ProductsContent
+        Content
     },
     data() {
         return {

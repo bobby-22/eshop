@@ -1,7 +1,7 @@
 <template>
 <div class="container">
     <div class="columns is-multiline">
-        <ProductsContent
+        <Content
             v-for="product in products"
             v-bind:key="product.id"
             v-bind:product="product"
@@ -12,11 +12,11 @@
 
 <script>
 import { djangoAPI } from "../axios"
-import ProductsContent from '../components/ProductsContent.vue'
+import Content from '../components/Content.vue'
 export default {
     name: "Category",
     components: {
-        ProductsContent
+        Content
     },
     data() {
         return {

@@ -4,16 +4,16 @@
             <router-link to="/" class="navbar-item" id="brand">
                 <strong>MechMarketEU</strong>
             </router-link>
-            <router-link to="/latest" class="navbar-item">Latest</router-link>
+            <router-link to="/products/latest" class="navbar-item">Latest</router-link>
             <NavbarDropdown  class="navbar-item"/>
-            <div class="navbar-burger" data-target="collapse_burger" v-on:click="collapseHamburger" v-bind:class="{'is-active': collapseBoolean}">
+            <div class="navbar-burger" data-target="hamburger" v-on:click="openHamburger" v-bind:class="{'is-active': hamburgerBoolean}">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
         </div>
 
-        <div class="navbar-menu" id="collapse_burger" v-bind:class="{'is-active': collapseBoolean}">
+        <div class="navbar-menu" id="collapse_burger" v-bind:class="{'is-active': hamburgerBoolean}">
             <div class="navbar-start">
                 <div class="navbar-item">
                     <form @submit.stop.prevent="submitSearch">
@@ -32,13 +32,13 @@
             </div>
             <div class="navbar-end">
                 <router-link to="/" class="navbar-item">Log in</router-link>
-                <router-link to="/bookmark" class="navbar-item">
+                <router-link to="/products/bookmark" class="navbar-item">
                     <span class="fas fa-bookmark" >
                         <span class="counter">{{ bookmarkLength }}</span>
                     </span>
                 </router-link>
                 <div class="navbar-item" id="button-area">
-                    <router-link to="/" class="button is-info">Sign up</router-link>
+                    <router-link to="/accounts/register" class="button is-info" >Register</router-link>
                     <router-link to="/" class="button is-warning">Donate</router-link>
                 </div>
             </div>
@@ -51,11 +51,11 @@ import NavbarDropdown from "./NavbarDropdown"
 export default {
     name: "Navbar",
     components: {
-        NavbarDropdown
+        NavbarDropdown,
     },
     data() {
         return {
-            collapseBoolean: false,
+            hamburgerBoolean: false,
             bookmark: {
                 items: []
             },
@@ -63,8 +63,8 @@ export default {
         }
     },
     methods: {
-        collapseHamburger() {
-            this.collapseBoolean = !this.collapseBoolean
+        openHamburger() {
+            this.hamburgerBoolean = !this.hamburgerBoolean
         },
         submitSearch() {
             this.$router.push({name: "Search", params: { keyword: this.keyword }})
@@ -88,8 +88,9 @@ export default {
 <style lang="scss" scoped>
 $counter-color: #c9a0ff;
 .navbar.is-light {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 10px;
+    background: #f8f8f8;
     margin-top: 15px;
 }
 #brand {

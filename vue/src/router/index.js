@@ -5,6 +5,7 @@ import Details from '../views/Details.vue'
 import Category from '../views/Category.vue'
 import Search from '../views/Search.vue'
 import Bookmark from '../views/Bookmark.vue'
+import Register from '../views/Register.vue'
 
 const routes = [
   {
@@ -13,7 +14,7 @@ const routes = [
     component: Home
   },
   {
-    path: "/latest",
+    path: "/products/latest",
     name: "Latest",
     component: Latest
   },
@@ -23,19 +24,24 @@ const routes = [
     component: Details
   },
   {
-    path: "/category/:category_id",
+    path: "/category/:category_id/products",
     name: "Category",
     component: Category
   },
   {
-    path: "/?search=:keyword",
+    path: "/products/?search=:keyword",
     name: "Search",
     component: Search
   },
   {
-    path: "/bookmark",
+    path: "/products/bookmark",
     name: "Bookmark",
     component: Bookmark
+  },
+  {
+    path: "/accounts/register",
+    name: "Register",
+    component: Register
   }
 ]
 

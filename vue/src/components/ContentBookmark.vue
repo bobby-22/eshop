@@ -10,7 +10,7 @@
                 <router-link :to="{name: 'Details', params: { stripe_product_id: item.product.stripe_product_id }}">
                     {{ item.product.name }}
                 </router-link>
-                <a class="far fa-trash-alt" v-on:click="removeFromBookmark(item)"></a>
+                <a class="far fa-trash-alt" v-on:click="removeBookmark(item)"></a>
             </span>
         </div>
         <div class="content" id="content-bottom">
@@ -43,8 +43,8 @@ export default {
         }
     },
     methods: {
-        removeFromBookmark(item) {
-            this.$emit("removeFromBookmark", item)
+        removeBookmark(item) {
+            this.$emit("removeBookmark", item)
             toast({
                 message: "Item has been removed from bookmark!",
                 type: "is-success",

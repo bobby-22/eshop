@@ -67,7 +67,9 @@ export default {
 <style lang="scss" scoped>
 $scrollbar-thumb-color: #c2c9d2;
 .container {
+    border-radius: 5px;
     min-height: 100%;
+    margin: 30px;
     padding: 30px;
 }
 .details {
