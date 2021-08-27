@@ -1,71 +1,83 @@
 <template>
-<div class="card">
-    <div class="card-image">
-        <img v-bind:src="item.product.thumbnail">
-    </div>
-
-    <div class="card-content">
-        <div class="content" id="title">
-            <span class="title is-4">
-                <router-link :to="{name: 'Details', params: { stripe_product_id: item.product.stripe_product_id }}">
-                    {{ item.product.name }}
-                </router-link>
-                <a class="far fa-trash-alt" v-on:click="removeBookmark(item)"></a>
-            </span>
+    <div class="card">
+        <div class="card-image">
+            <img v-bind:src="item.product.thumbnail" />
         </div>
-        <div class="content" id="content-bottom">
-            <div class="split">
-                <span class="subtitle">
-                    <i class="fas fa-euro-sign"></i>
-                    <span>{{ item.product.price }}</span>
-                </span>
-                <span class="subtitle">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>{{ item.product.location }}</span>
+
+        <div class="card-content">
+            <div class="content" id="title">
+                <span class="title is-4">
+                    <router-link
+                        :to="{
+                            name: 'Details',
+                            params: {
+                                stripe_product_id:
+                                    item.product.stripe_product_id,
+                            },
+                        }"
+                    >
+                        {{ item.product.name }}
+                    </router-link>
+                    <a
+                        class="far fa-trash-alt"
+                        v-on:click="removeFromBookmark(item)"
+                    ></a>
                 </span>
             </div>
-            <span>{{ item.product.description }}</span>
+            <div class="content" id="content-bottom">
+                <div class="split">
+                    <span class="subtitle">
+                        <i class="fas fa-euro-sign"></i>
+                        <span>{{ item.product.price }}</span>
+                    </span>
+                    <span class="subtitle">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{ item.product.location }}</span>
+                    </span>
+                </div>
+                <span>{{ item.product.description }}</span>
+            </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
-import { toast } from "bulma-toast"
+import { toast } from "bulma-toast";
 export default {
     name: "BookmarkItem",
     props: {
-        initialItem: Object
+        initialItem: Object,
     },
     data() {
         return {
-            item: this.initialItem
-        }
+            item: this.initialItem,
+        };
     },
     methods: {
-        removeBookmark(item) {
-            this.$emit("removeBookmark", item)
+        removeFromBookmark(item) {
+            this.$emit("removeFromBookmark", item);
             toast({
                 message: "Item has been removed from bookmark!",
-                type: "is-success",
+                type: "is-danger",
                 dismissible: true,
                 pauseOnHover: true,
-                duration: 2000,
-                position: "bottom-right"
-            })
-        }
-    }
-}
+                duration: 3000,
+                position: "bottom-right",
+            });
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-$content-bottom-border-top-color: #ededed;
+$content-bottom-border-top-color: #f0f0f0;
 $link-blue: dodgerblue;
 $link-orange: darksalmon;
 $link-grey: #363636;
 $link-red: #f14668;
 .card {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
+        rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 16px;
@@ -99,13 +111,16 @@ $link-red: #f14668;
 a {
     color: $link-grey;
 }
-.far.fa-trash-alt:active, .far.fa-trash-alt:hover {
+.far.fa-trash-alt:active,
+.far.fa-trash-alt:hover {
     color: $link-red;
 }
-a:link, a:visited {
+a:link,
+a:visited {
     color: $link-blue;
- }
-a:active, a:hover {
+}
+a:active,
+a:hover {
     color: $link-orange;
 }
 #content-bottom {

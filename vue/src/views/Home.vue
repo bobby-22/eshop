@@ -1,16 +1,16 @@
 <template>
-<div class="container">
-    <h1 class="title">Home page</h1>
-</div>
+    <div class="container">
+        <h1 class="title">Home page</h1>
+    </div>
 </template>
 
 <script>
 export default {
-  name: "Home",
-  created() {
-      document.title = "Home Page | MechMarketEU"
-  }
-}
+    name: "Home",
+    created() {
+        document.title = "Home Page | MechMarketEU";
+    },
+};
 </script>
 
 <style scoped>

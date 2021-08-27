@@ -5,28 +5,46 @@ User = get_user_model()
 
 class RegisterSerializer(serializers.ModelSerializer):
     username = serializers.CharField(
-        min_length=3,
-        max_length=20,
-        required=True
+        min_length = 3,
+        max_length = 20,
+        required = True,
+        error_messages = {
+            "blank": "Username cannot be empty",
+            "min_length": "Username must be between 3 and 20 characters"
+            }
         )
+
     email = serializers.EmailField(
-        required=True
+        required = True,
+        error_messages = {
+            "blank": "Email cannot be empty",
+            }
         )
+
     password1 = serializers.CharField(
-        label="Password",
-        style={'input_type': 'password'},
-        min_length=4,
-        max_length=128,
-        write_only=True,
-        required=True
+        label = "Password",
+        style = {'input_type': 'password'},
+        min_length = 4,
+        max_length = 128,
+        write_only = True,
+        required = True,
+        error_messages = {
+            "blank": "Password cannot be empty",
+            "min_length": "Password must be between longer than 4 characters"
+            }
         )
     password2 = serializers.CharField(
         label="Confirm password",
         style={'input_type': 'password'},
-        min_length=4,
-        max_length=128,
-        write_only=True,
-        required=True)
+        min_length = 4,
+        max_length = 128,
+        write_only = True,
+        required = True,
+        error_messages = {
+            "blank": "Password confirmation cannot be empty",
+            "min_length": "Password must be longer than 4 characters"
+            }
+        )
 
     class Meta:
         model = User
@@ -36,12 +54,14 @@ class RegisterSerializer(serializers.ModelSerializer):
             "password1",
             "password2"
             )
-    
+
     def validate(self, attrs):
+        if attrs["username"] == '' or attrs["username"] is None:
+            raise serializers.ValidationError("Username is required")
         if User.objects.filter(username=attrs["username"]).exists():
             raise serializers.ValidationError("This username is already taken")
         if User.objects.filter(email=attrs["email"]).exists():
-            raise serializers.ValidationError("This e-mail is already used")
+            raise serializers.ValidationError("This email is already used")
         if attrs["password1"] != attrs["password2"]:
             raise serializers.ValidationError("Passwords didn't match")
         return super().validate(attrs)
@@ -57,14 +77,16 @@ class RegisterSerializer(serializers.ModelSerializer):
     
 class LoginSerializer(serializers.ModelSerializer):
     username = serializers.CharField(
-        min_length=3,
-        max_length=20,
-        required=True
+        required = True,
+        error_messages = {
+            "blank": "Username cannot be empty",
+            }
         )
     password1 = serializers.CharField(
         style={'input_type': 'password'},
-        min_length=4,
-        max_length=128,
         write_only=True,
-        required=True
-    )
+        required=True,
+        error_messages = {
+            "blank": "Password cannot be empty",
+            }
+        )

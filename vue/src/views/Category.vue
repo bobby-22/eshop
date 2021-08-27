@@ -1,54 +1,55 @@
 <template>
-<div class="container">
-    <div class="columns is-multiline">
-        <Content
-            v-for="product in products"
-            v-bind:key="product.id"
-            v-bind:product="product"
-        />
+    <div class="container">
+        <div class="columns is-multiline">
+            <Content
+                v-for="product in products"
+                v-bind:key="product.id"
+                v-bind:product="product"
+            />
+        </div>
     </div>
-</div>
 </template>
 
 <script>
-import { djangoAPI } from "../axios"
-import Content from '../components/Content.vue'
+import { djangoAPI } from "../axios";
+import Content from "../components/Content.vue";
 export default {
     name: "Category",
     components: {
-        Content
+        Content,
     },
     data() {
         return {
-            products: null
-        }
+            products: null,
+        };
     },
     methods: {
         getProducts() {
-            let category_id = this.$route.params.category_id
+            let category_id = this.$route.params.category_id;
             djangoAPI({
                 method: "GET",
-                url: `/category/${category_id}`
-            }).then(categoryResponse => {
-                this.products = categoryResponse.data
-                console.log(this.products)
-            }).catch(error => {
-                console.log(error)
+                url: `/category/${category_id}`,
             })
-        }
+                .then((categoryResponse) => {
+                    this.products = categoryResponse.data;
+                    console.log(this.products);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     },
     created() {
-        document.title = "Category | MechMarketEU",
-        this.getProducts()
+        (document.title = "Category | MechMarketEU"), this.getProducts();
     },
     watch: {
         $route(to, from) {
-            if(to.name === "Category") {
-                this.getProducts()
+            if (to.name === "Category") {
+                this.getProducts();
             }
-        }
-    }
-}
+        },
+    },
+};
 </script>
 
 <style scoped>

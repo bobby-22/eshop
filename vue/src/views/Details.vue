@@ -1,75 +1,76 @@
 <template>
-<div class="container">
-    <div class="details" v-for="detail in details" :key="detail.id">
-        <div class="details-left">
-            <div class="detail-thumbnail">
-                <img v-bind:src="detail.thumbnail">
+    <div class="container">
+        <div class="details" v-for="detail in details" :key="detail.id">
+            <div class="details-left">
+                <div class="detail-thumbnail">
+                    <img v-bind:src="detail.thumbnail" />
+                </div>
+                <div class="detail-images">
+                    <img v-bind:src="detail.image" />
+                    <img v-bind:src="detail.image" />
+                    <img v-bind:src="detail.image" />
+                    <img v-bind:src="detail.image" />
+                    <img v-bind:src="detail.image" />
+                </div>
             </div>
-            <div class="detail-images">
-                <img v-bind:src="detail.image">
-                <img v-bind:src="detail.image">
-                <img v-bind:src="detail.image">
-                <img v-bind:src="detail.image">
-                <img v-bind:src="detail.image">
-            </div>
-        </div>
 
-        <div class="details-right">
-            <div class="detail-header">
-                <p>{{ detail.name }}</p>
-                <p>{{ detail.date }}</p>
-                <p>{{ detail.location}}</p>
-            </div>
-            <div class="detail-content">
-                <p>{{ detail.description }}</p>
+            <div class="details-right">
+                <div class="detail-header">
+                    <p>{{ detail.name }}</p>
+                    <p>{{ detail.date }}</p>
+                    <p>{{ detail.location }}</p>
+                </div>
+                <div class="detail-content">
+                    <p>{{ detail.description }}</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
-import { djangoAPI } from "../axios"
+import { djangoAPI } from "../axios";
 export default {
     name: "Details",
     data() {
         return {
             details: null,
             product: null,
-            modalBoolean: false
-        }
+            modalBoolean: false,
+        };
     },
     methods: {
         getDetails() {
-            let stripe_product_id = this.$route.params.stripe_product_id
+            let stripe_product_id = this.$route.params.stripe_product_id;
             djangoAPI({
                 method: "GET",
-                url: `/product/${stripe_product_id}`
-            }).then(detailsResponse => {
-                this.details = detailsResponse.data
-                console.log(this.details)
-                for (let i = 0; i < this.details.length; i++) {
-                    this.product = this.details[i]
-                }
-                document.title = this.product.name + " | MechMarketEU"
-            }).catch(error => {
-                console.log(error)
+                url: `/product/${stripe_product_id}`,
             })
-        }
+                .then((detailsResponse) => {
+                    this.details = detailsResponse.data;
+                    console.log(this.details);
+                    for (let i = 0; i < this.details.length; i++) {
+                        this.product = this.details[i];
+                    }
+                    document.title = this.product.name + " | MechMarketEU";
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     },
     created() {
-        this.getDetails()
+        this.getDetails();
     },
     mounted() {
-        window.scrollTo(0, 0)
-    }
-}
+        window.scrollTo(0, 0);
+    },
+};
 </script>
 
 <style lang="scss" scoped>
 $scrollbar-thumb-color: #c2c9d2;
 .container {
-    border-radius: 5px;
     min-height: 100%;
     margin: 30px;
     padding: 30px;
@@ -86,11 +87,11 @@ $scrollbar-thumb-color: #c2c9d2;
     margin-right: 30px;
 }
 .detail-thumbnail > img {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 .detail-images {
-    display:flex;
+    display: flex;
     flex-direction: row;
     overflow: scroll;
     overflow-y: hidden;
@@ -107,7 +108,7 @@ $scrollbar-thumb-color: #c2c9d2;
     height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-    border-radius: 5px;
+    border-radius: 10px;
     background: $scrollbar-thumb-color;
 }
 @media (max-width: 1024px) {

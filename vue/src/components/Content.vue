@@ -1,46 +1,77 @@
 <template>
-<div class="column is-one-quarter-desktop is-one-third-tablet">
-    <div class="card" v-if="bookmark.items">
-        <div class="card-image">
-            <router-link :to="{name: 'Details', params: { stripe_product_id: product.stripe_product_id }}">
-                <img v-bind:src="product.thumbnail">
-            </router-link>
-            <div class="bookmark" v-if="checkBookmarkBoolean">
-                <a class="far fa-bookmark" v-on:click="addToBookmark" v-bind:class="[{'fas fa-bookmark': savedBoolean}]"></a>
+    <div class="column is-one-quarter-desktop is-one-third-tablet">
+        <div class="card" v-if="bookmark.items">
+            <div class="card-image" style="border-radius: 10px;">
+                <router-link
+                    :to="{
+                        name: 'Details',
+                        params: {
+                            stripe_product_id: product.stripe_product_id,
+                        },
+                    }"
+                >
+                    <img
+                        style="border-top-right-radius:10px; border-top-left-radius:10px;"
+                        v-bind:src="product.thumbnail"
+                    />
+                </router-link>
+                <div class="bookmark" v-if="checkBookmarkBoolean">
+                    <div class="saved" v-if="savedBoolean">
+                        <a
+                            class="fas fa-bookmark"
+                            v-on:click="removeFromBookmark"
+                            v-bind:class="[{ 'far fa-bookmark': savedBoolean }]"
+                        ></a>
+                    </div>
+                    <div class="notSaved" v-else>
+                        <a
+                            class="far fa-bookmark"
+                            v-on:click="addToBookmark"
+                            v-bind:class="[{ 'fas fa-bookmark': savedBoolean }]"
+                        ></a>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="card-content">
-            <div class="content">
-                <span class="title is-5">
-                    <router-link :to="{name: 'Details', params: { stripe_product_id: product.stripe_product_id }}">
-                        {{ product.name }}
-                    </router-link>
-                </span>
-            </div>
-            <div class="content" id="content-bottom">
-                <div class="split">
-                    <span class="subtitle">
-                        <i class="fas fa-euro-sign"></i>
-                        <span>{{ product.price }}</span>
+            <div class="card-content">
+                <div class="content">
+                    <span class="title is-5">
+                        <router-link
+                            :to="{
+                                name: 'Details',
+                                params: {
+                                    stripe_product_id:
+                                        product.stripe_product_id,
+                                },
+                            }"
+                        >
+                            {{ product.name }}
+                        </router-link>
                     </span>
-                    <span class="subtitle">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>{{ product.location }}</span>
-                    </span>
+                </div>
+                <div class="content" id="content-bottom">
+                    <div class="split">
+                        <span class="subtitle">
+                            <i class="fas fa-euro-sign"></i>
+                            <span>{{ product.price }}</span>
+                        </span>
+                        <span class="subtitle">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{{ product.location }}</span>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
-import { toast } from "bulma-toast"
+import { toast } from "bulma-toast";
 export default {
     name: "Content",
     props: {
-        product: Object
+        product: Object,
     },
     data() {
         return {
@@ -48,62 +79,92 @@ export default {
             checkBookmarkBoolean: false,
             keyword: null,
             bookmark: {
-                items: []
+                items: [],
             },
-        }
+        };
     },
     methods: {
         addToBookmark() {
-            this.savedBoolean = !this.savedBoolean
+            this.savedBoolean = !this.savedBoolean;
             let item = {
                 product: this.product,
-            }
-            this.$store.commit("addToBookmark", item)
+            };
+            this.$store.commit("addToBookmark", item);
             toast({
                 message: "Item has been added to bookmark!",
                 type: "is-success",
                 dismissible: true,
                 pauseOnHover: true,
-                duration: 2000,
-                position: "bottom-right"
-            })
+                duration: 3000,
+                position: "bottom-right",
+            });
+        },
+        updateBookmark() {
+            localStorage.setItem(
+                "bookmark",
+                JSON.stringify(this.$store.state.bookmark)
+            );
+        },
+        removeFromBookmark() {
+            this.savedBoolean = !this.savedBoolean;
+            let item = {
+                product: this.product,
+            };
+            this.bookmark.items = this.bookmark.items.filter((i) => {
+                return (
+                    i.product.stripe_product_id !==
+                    item.product.stripe_product_id
+                );
+            });
+            toast({
+                message: "Item has been removed bookmark!",
+                type: "is-danger",
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 3000,
+                position: "bottom-right",
+            });
+            this.updateBookmark();
         },
         checkBookmark() {
-            let array = JSON.parse(localStorage.getItem("bookmark"))
-            let checkBookmarkBoolean = JSON.stringify(array.items).includes(this.product.stripe_product_id)
-            this.checkBookmarkBoolean = !checkBookmarkBoolean
-        }
+            let array = JSON.parse(localStorage.getItem("bookmark"));
+            let checkBookmarkBoolean = JSON.stringify(array.items).includes(
+                this.product.stripe_product_id
+            );
+            this.checkBookmarkBoolean = !checkBookmarkBoolean;
+        },
     },
     mounted() {
-        this.bookmark = this.$store.state.bookmark
-        this.checkBookmark()
-    }
-}
+        this.bookmark = this.$store.state.bookmark;
+        this.checkBookmark();
+    },
+};
 </script>
 
 <style lang="scss" scoped>
 $bookmark-color: #616161;
-$content-bottom-border-top-color: #ededed;
+$content-bottom-border-top-color: #f0f0f0;
 $link-blue: dodgerblue;
 $link-orange: darksalmon;
 .column.is-one-quarter-desktop.is-one-third-tablet {
     padding: 8px;
 }
 .card {
+    border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 .bookmark {
-    position:absolute;
+    position: absolute;
     top: 0;
     right: 0;
 }
 .bookmark:hover {
-    text-shadow: 0px 0px 30px rgba(50, 50, 50, 1)
+    text-shadow: 0px 0px 30px rgba(50, 50, 50, 1);
 }
 .far.fa-bookmark {
     font-size: 30px;
     color: $bookmark-color;
-    margin: 5px;
+    margin: 10px;
 }
 .card-content {
     padding: 15px;
@@ -134,10 +195,12 @@ $link-orange: darksalmon;
 .fas {
     margin-right: 5px;
 }
-a:link, a:visited {
+a:link,
+a:visited {
     color: $link-blue;
- }
-a:active, a:hover {
+}
+a:active,
+a:hover {
     color: $link-orange;
 }
 img {

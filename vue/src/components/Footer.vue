@@ -1,34 +1,37 @@
 <template>
-<footer>
-    <div class="footer-content">
-        <div class="content">
-            <p>Have any improvements or found a bug? Let me know at one of these places &#128578;</p>
-            <a href="mailto:nlongn22@icloud.com">
-                <i class="fas fa-at"></i>
-            </a>
-            <a href="https://www.reddit.com/message/compose/?to=bobby--22">
-                <i class="fab fa-reddit"></i>
-            </a>
-            <a href="https://github.com/bobby-22/marketplace/issues/new">
-                <i class="fab fa-github"></i>
-            </a>
+    <footer>
+        <div class="footer-content">
+            <div class="content">
+                <p>
+                    Have any improvements or found a bug? Let me know at one of
+                    these places &#128578;
+                </p>
+                <a href="mailto:nlongn22@icloud.com">
+                    <i class="fas fa-at"></i>
+                </a>
+                <a href="https://www.reddit.com/message/compose/?to=bobby--22">
+                    <i class="fab fa-reddit"></i>
+                </a>
+                <a href="https://github.com/bobby-22/marketplace/issues/new">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="footer-bottom">
-        <span>&copy; 2021 mechmarket.eu</span>
-    </div>
-</footer>
+        <div class="footer-bottom">
+            <span>&copy; 2021 mechmarket.eu</span>
+        </div>
+    </footer>
 </template>
 
 <script>
 export default {
-    name: "Footer"
-}
+    name: "Footer",
+};
 </script>
 
 <style lang="scss" scoped>
 $footer-border-top-color: #ededed;
-$footer-border-bottom-color: #f8f8f8;
+$footer-border-bottom-color: #f5f5f5;
 $footer-text-color: #949494;
 footer {
     font-weight: 100;
@@ -52,7 +55,7 @@ i {
     font-size: 25px;
 }
 .fab.fa-reddit {
-    margin-left:10px;
-    margin-right:10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 </style>

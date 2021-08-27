@@ -1,47 +1,46 @@
 <template>
-<div class="container">
-    <h1 class="title">Latest products:</h1>
-    <div class="columns is-multiline">
-        <Content
-            v-for="product in products"
-            v-bind:key="product.id" 
-            v-bind:product="product"
-        />
+    <div class="container">
+        <h1 class="title">Latest products:</h1>
+        <div class="columns is-multiline">
+            <Content
+                v-for="product in products"
+                v-bind:key="product.id"
+                v-bind:product="product"
+            />
+        </div>
     </div>
-</div>
 </template>
 
 <script>
-import { djangoAPI } from "../axios"
-import Content from "../components/Content.vue"
+import { djangoAPI } from "../axios";
+import Content from "../components/Content.vue";
 export default {
     name: "Latest",
     components: {
-        Content
+        Content,
     },
     data() {
         return {
-            products: null
-        }
+            products: null,
+        };
     },
     methods: {
         getProducts() {
             djangoAPI
-                .get('/latest')
-                .then(latestResponse => {
-                    this.products = latestResponse.data
-                    console.log(this.products)
+                .get("/latest")
+                .then((latestResponse) => {
+                    this.products = latestResponse.data;
+                    console.log(this.products);
                 })
-                .catch(error => {
-                    console.log(error)
-                })
-        }
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     },
     created() {
-        document.title = "Latest Products | MechMarketEU",
-        this.getProducts()
-    }
-}
+        (document.title = "Latest Products | MechMarketEU"), this.getProducts();
+    },
+};
 </script>
 
 <style scoped>

@@ -4,22 +4,38 @@
             <router-link to="/" class="navbar-item" id="brand">
                 <strong>MechMarketEU</strong>
             </router-link>
-            <router-link to="/products/latest" class="navbar-item">Latest</router-link>
-            <NavbarDropdown  class="navbar-item"/>
-            <div class="navbar-burger" data-target="hamburger" v-on:click="openHamburger" v-bind:class="{'is-active': hamburgerBoolean}">
+            <router-link to="/products/latest" class="navbar-item"
+                >Latest</router-link
+            >
+            <NavbarDropdown class="navbar-item" />
+            <div
+                class="navbar-burger"
+                data-target="hamburger"
+                v-on:click="openHamburger"
+                v-bind:class="{ 'is-active': hamburgerBoolean }"
+            >
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
         </div>
 
-        <div class="navbar-menu" id="collapse_burger" v-bind:class="{'is-active': hamburgerBoolean}">
+        <div
+            class="navbar-menu"
+            id="collapse_burger"
+            v-bind:class="{ 'is-active': hamburgerBoolean }"
+        >
             <div class="navbar-start">
                 <div class="navbar-item">
                     <form @submit.stop.prevent="submitSearch">
                         <div class="field has-addons">
                             <div class="control">
-                                <input class="input" type="text" placeholder="Search..." v-model="keyword">
+                                <input
+                                    class="input"
+                                    type="text"
+                                    placeholder="Search..."
+                                    v-model="keyword"
+                                />
                             </div>
                             <div class="control">
                                 <button class="button is-danger" type="submit">
@@ -33,13 +49,17 @@
             <div class="navbar-end">
                 <router-link to="/" class="navbar-item">Log in</router-link>
                 <router-link to="/products/bookmark" class="navbar-item">
-                    <span class="fas fa-bookmark" >
+                    <span class="fas fa-bookmark">
                         <span class="counter">{{ bookmarkLength }}</span>
                     </span>
                 </router-link>
                 <div class="navbar-item" id="button-area">
-                    <router-link to="/accounts/register" class="button is-info" >Register</router-link>
-                    <router-link to="/" class="button is-warning">Donate</router-link>
+                    <router-link to="/accounts/register" class="button is-info"
+                        >Register</router-link
+                    >
+                    <router-link to="/" class="button is-warning"
+                        >Donate</router-link
+                    >
                 </div>
             </div>
         </div>
@@ -47,7 +67,7 @@
 </template>
 
 <script>
-import NavbarDropdown from "./NavbarDropdown"
+import NavbarDropdown from "./NavbarDropdown";
 export default {
     name: "Navbar",
     components: {
@@ -57,68 +77,72 @@ export default {
         return {
             hamburgerBoolean: false,
             bookmark: {
-                items: []
+                items: [],
             },
-            keyword: null
-        }
+            keyword: null,
+        };
     },
     methods: {
         openHamburger() {
-            this.hamburgerBoolean = !this.hamburgerBoolean
+            this.hamburgerBoolean = !this.hamburgerBoolean;
         },
         submitSearch() {
-            this.$router.push({name: "Search", params: { keyword: this.keyword }})
-        }
+            this.$router.push({
+                name: "Search",
+                params: { keyword: this.keyword },
+            });
+        },
     },
     computed: {
         bookmarkLength() {
-            let length = this.bookmark.items.length
-            return length
-        }
+            let length = this.bookmark.items.length;
+            return length;
+        },
     },
     beforeCreate() {
-        this.$store.commit("localStorageManipulation")
+        this.$store.commit("localStorageManipulation");
     },
     mounted() {
-        this.bookmark = this.$store.state.bookmark
-    }
-}
+        this.bookmark = this.$store.state.bookmark;
+    },
+};
 </script>
 
 <style lang="scss" scoped>
 $navbar-background-color: #f8f8f8;
 $counter-color: #c9a0ff;
 .navbar.is-light {
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+        rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    border-radius: 15px;
     background: $navbar-background-color;
     margin-top: 15px;
 }
 #brand {
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 .navbar-start {
     flex-grow: 1;
     justify-content: center;
     align-items: center;
-
 }
-.input, .button.is-danger {
+.input,
+.button.is-danger {
     border-radius: 15px;
 }
 #button-area {
-    margin-right:7px;
+    margin-right: 7px;
 }
 .button {
     &.is-warning {
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 0px;
-    border-top-left-radius: 0px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 0px;
+        border-top-left-radius: 0px;
     }
     &.is-info {
-    border-radius: 0px;
+        border-radius: 0px;
     }
 }
 .fas.fa-bookmark {
@@ -130,7 +154,7 @@ $counter-color: #c9a0ff;
     bottom: 50%;
     left: 50%;
     border-radius: 50%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 700;
     font-size: 11px;
     background: $counter-color;
