@@ -27,7 +27,7 @@
         >
             <div class="navbar-start">
                 <div class="navbar-item">
-                    <form @submit.stop.prevent="submitSearch">
+                    <form v-on:submit.stop.prevent="submitSearch">
                         <div class="field has-addons">
                             <div class="control">
                                 <input

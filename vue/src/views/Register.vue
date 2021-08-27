@@ -1,5 +1,5 @@
 <template>
-    <form class="container" @submit.stop.prevent="submitRegister">
+    <form class="container" v-on:submit.stop.prevent="submitRegister">
         <h1 class="title">
             Register
             <i class="fas fa-user-circle"></i>

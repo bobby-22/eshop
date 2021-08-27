@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="title">Searched keyword: {{ keyword }}</h1>
+        <h1 class="title">Searched keyword: "{{ keyword }}"</h1>
         <div class="columns is-multiline">
             <Content
                 v-for="product in products"
@@ -23,7 +23,7 @@ export default {
     data() {
         return {
             products: null,
-            keyword: this.$route.params.keyword,
+            keyword: null,
         };
     },
     methods: {
@@ -40,16 +40,21 @@ export default {
         getTitle() {
             document.title = `${this.$route.params.keyword} | MechMarketEU`;
         },
+        getKeyword() {
+            return (this.keyword = this.$route.params.keyword);
+        },
     },
     created() {
         this.getProducts();
         this.getTitle();
+        this.getKeyword();
     },
     watch: {
         $route(to, from) {
             if (to.name === "Search") {
                 this.getProducts();
                 this.getTitle();
+                this.getKeyword();
             }
         },
     },
