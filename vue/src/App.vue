@@ -26,6 +26,9 @@ export default {
     flex-direction: column;
     min-height: 100vh;
 }
+.title {
+    color: black;
+}
 ::selection {
     background-color: #fbe38b;
 }

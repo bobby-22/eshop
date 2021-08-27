@@ -1,12 +1,16 @@
 <template>
 <form class="container" @submit.stop.prevent="submitRegister">
+    <h1 class="title">
+        Register
+        <i class="fas fa-user-circle"></i>
+    </h1>
     <div class="notification is-danger" v-if="errors.length">
         <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
     </div>
     <div class="field">
-        <span class="label">Username</span>
-        <div class="control has-icons-left">
-            <input class="input is-success" type="text" placeholder="example" v-model="username">
+        <label class="label">Username</label>
+        <div class="control has-icons-left has-icons-right">
+            <input class="input" type="text" placeholder="example" v-model="username">
             <span class="icon is-small is-left">
                 <i class="fas fa-user"></i>
             </span>
@@ -16,7 +20,7 @@
     <div class="field">
         <span class="label">Email</span>
         <div class="control has-icons-left">
-            <input class="input is-success" type="email" placeholder="example@example.com" v-model="email">
+            <input class="input" type="email" placeholder="example@example.com" v-model="email">
             <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
             </span>
@@ -26,7 +30,7 @@
     <div class="field">
         <span class="label">Password</span>
         <div class="control has-icons-left">
-            <input class="input" type="password" placeholder="supersecretpassword" v-model="password1">
+            <input class="input" type="password" placeholder="supersecretpassword123" v-model="password1">
             <span class="icon is-small is-left">
                 <i class="fas fa-key"></i>
             </span>
@@ -36,7 +40,7 @@
     <div class="field">
         <span class="label">Confirm password</span>
         <div class="control has-icons-left">
-            <input class="input" type="password" placeholder="supersecretpassword" v-model="password2">
+            <input class="input" type="password" placeholder="supersecretpassword123" v-model="password2">
             <span class="icon is-small is-left">
                 <i class="fas fa-key"></i>
             </span>
@@ -47,7 +51,7 @@
         <div class="control">
             <span class="checkbox">
                 <input type="checkbox">
-                I agree to the <a href="#">terms and conditions</a>
+                I agree to the <a href="/">terms and conditions</a>
             </span>
         </div>
     </div>
@@ -57,8 +61,11 @@
             <button class="button is-link">Submit</button>
         </div>
     </div>
-    <div class="section" style="padding:0px;">
-        <p>Already registered? Login</p>
+    <div class="section">
+        <p>
+            Already registered?
+            <router-link to="/accounts/login">Login</router-link>
+        </p>
     </div>
 </form>
 </template>
@@ -119,8 +126,10 @@ export default {
     margin-bottom: 30px;
     padding: 30px;
 }
-.label {
-  text-align: start;
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }
 .checkbox {
   color: black;
