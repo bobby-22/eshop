@@ -52,6 +52,8 @@ export default {
                     this.product = this.details[i]
                 }
                 document.title = this.product.name + " | MechMarketEU"
+            }).catch(error => {
+                console.log(error)
             })
         }
     },

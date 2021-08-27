@@ -86,11 +86,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$navbar-background-color: #f8f8f8;
 $counter-color: #c9a0ff;
 .navbar.is-light {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 10px;
-    background: #f8f8f8;
+    background: $navbar-background-color;
     margin-top: 15px;
 }
 #brand {

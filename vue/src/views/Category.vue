@@ -32,6 +32,8 @@ export default {
             }).then(categoryResponse => {
                 this.products = categoryResponse.data
                 console.log(this.products)
+            }).catch(error => {
+                console.log(error)
             })
         }
     },

@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$footer-border-top-color: #f0f0f0;
+$footer-border-top-color: #ededed;
 $footer-border-bottom-color: #f8f8f8;
 $footer-text-color: #949494;
 footer {

@@ -59,7 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$content-bottom-border-top-color: #f0f0f0;
+$content-bottom-border-top-color: #ededed;
 $link-blue: dodgerblue;
 $link-orange: darksalmon;
 $link-grey: #363636;

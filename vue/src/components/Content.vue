@@ -83,7 +83,7 @@ export default {
 
 <style lang="scss" scoped>
 $bookmark-color: #616161;
-$content-bottom-border-top-color: #f0f0f0;
+$content-bottom-border-top-color: #ededed;
 $link-blue: dodgerblue;
 $link-orange: darksalmon;
 .column.is-one-quarter-desktop.is-one-third-tablet {
