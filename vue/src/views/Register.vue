@@ -1,93 +1,98 @@
 <template>
-    <form class="container" v-on:submit.stop.prevent="submitRegister">
-        <h1 class="title">
-            Register
-            <i class="fas fa-user-circle"></i>
-        </h1>
-        <div class="notification is-danger" v-if="errors.length">
-            <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
-        </div>
-        <div class="field">
-            <label class="label">Username</label>
-            <div class="control has-icons-left has-icons-right">
-                <input
-                    class="input"
-                    type="text"
-                    placeholder="example"
-                    v-model="username"
-                />
-                <span class="icon is-small is-left">
-                    <i class="fas fa-user"></i>
-                </span>
+    <div class="container">
+        <form class="form" v-on:submit.stop.prevent="submitRegister">
+            <h1 class="title">
+                Register
+                <i class="fas fa-user-circle"></i>
+            </h1>
+            <div class="notification is-danger" v-if="errors.length">
+                <p id="error" v-for="error in errors" v-bind:key="error">
+                    {{ error }}
+                </p>
             </div>
-        </div>
+            <div class="field">
+                <label class="label">Username</label>
+                <div class="control has-icons-left">
+                    <input
+                        class="input"
+                        type="text"
+                        placeholder="example"
+                        v-model="username"
+                    />
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>
+            </div>
 
-        <div class="field">
-            <label class="label">Email</label>
-            <div class="control has-icons-left">
-                <input
-                    class="input"
-                    type="email"
-                    placeholder="example@example.com"
-                    v-model="email"
-                />
-                <span class="icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
-                </span>
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left">
+                    <input
+                        class="input"
+                        type="email"
+                        placeholder="example@example.com"
+                        v-model="email"
+                    />
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
             </div>
-        </div>
 
-        <div class="field">
-            <label class="label">Password</label>
-            <div class="control has-icons-left">
-                <input
-                    class="input"
-                    type="password"
-                    placeholder="supersecretpassword123"
-                    v-model="password1"
-                />
-                <span class="icon is-small is-left">
-                    <i class="fas fa-key"></i>
-                </span>
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control has-icons-left">
+                    <input
+                        class="input"
+                        type="password"
+                        placeholder="supersecretpassword123"
+                        v-model="password1"
+                    />
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-key"></i>
+                    </span>
+                </div>
             </div>
-        </div>
 
-        <div class="field">
-            <span class="label">Confirm password</span>
-            <div class="control has-icons-left">
-                <input
-                    class="input"
-                    type="password"
-                    placeholder="supersecretpassword123"
-                    v-model="password2"
-                />
-                <span class="icon is-small is-left">
-                    <i class="fas fa-key"></i>
-                </span>
+            <div class="field">
+                <span class="label">Confirm password</span>
+                <div class="control has-icons-left">
+                    <input
+                        class="input"
+                        type="password"
+                        placeholder="supersecretpassword123"
+                        v-model="password2"
+                    />
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-key"></i>
+                    </span>
+                </div>
             </div>
-        </div>
 
-        <div class="field">
-            <div class="control">
-                <span class="checkbox">
-                    <input type="checkbox" />
-                    I agree to the <a href="/">terms and conditions</a>
-                </span>
+            <div class="field">
+                <div class="control">
+                    <span class="checkbox" id="checkbox">
+                        <input type="checkbox" />
+                        <span id="terms"
+                            >I agree to the
+                            <a href="/">terms and conditions</a></span
+                        >
+                    </span>
+                </div>
             </div>
-        </div>
 
-        <div class="field">
-            <div class="control">
-                <button class="button is-link">Submit</button>
+            <div class="field">
+                <div class="control">
+                    <button class="button is-link">Submit</button>
+                </div>
             </div>
-        </div>
-        <div class="section">
             <p>
                 Already registered?
                 <router-link to="/accounts/login">Login</router-link>
             </p>
-        </div>
-    </form>
+        </form>
+    </div>
 </template>
 
 <script>
@@ -140,27 +145,33 @@ export default {
 <style lang="scss" scoped>
 .container {
     min-height: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.form {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 10px;
-    margin-top: 30px;
-    margin-bottom: 30px;
     padding: 30px;
+}
+#error {
+    text-align: left;
 }
 .title {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
 }
-input {
+.input {
     height: 100%;
 }
-.checkbox {
-    color: black;
+#checkbox {
+    display: flex;
+    align-items: center;
 }
-@media (max-width: 769px) {
-    .container {
-        box-shadow: none;
-        margin: 0px;
-    }
+#terms {
+    margin-left: 15px;
+}
+p {
+    text-align: center;
 }
 </style>

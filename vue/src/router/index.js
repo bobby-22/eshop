@@ -6,6 +6,7 @@ import Category from '../views/Category.vue'
 import Search from '../views/Search.vue'
 import Bookmark from '../views/Bookmark.vue'
 import Register from '../views/Register.vue'
+import Login from '../views/Login.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: "/accounts/register",
     name: "Register",
     component: Register
+  },
+  {
+    path: "/accounts/login",
+    name: "Login",
+    component: Login
   }
 ]
 

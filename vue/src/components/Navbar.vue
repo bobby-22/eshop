@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="navbar-end">
-                <router-link to="/" class="navbar-item">Log in</router-link>
+                <router-link to="/accounts/login" class="navbar-item">Log in</router-link>
                 <router-link to="/products/bookmark" class="navbar-item">
                     <span class="fas fa-bookmark">
                         <span class="counter">{{ bookmarkLength }}</span>
@@ -100,7 +100,7 @@ export default {
         },
     },
     beforeCreate() {
-        this.$store.commit("localStorageManipulation");
+        this.$store.commit("localStorageBookmark");
     },
     mounted() {
         this.bookmark = this.$store.state.bookmark;
