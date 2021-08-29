@@ -16,32 +16,61 @@
             <router-link
                 class="dropdown-item"
                 v-bind:to="{ name: 'Category', params: { category_id: 2 } }"
-                >Deskmats</router-link
+                >Cases</router-link
             >
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
                 v-bind:to="{ name: 'Category', params: { category_id: 3 } }"
-                >Keyboards</router-link
+                >Deskmats</router-link
             >
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
                 v-bind:to="{ name: 'Category', params: { category_id: 4 } }"
-                >Keycaps</router-link
+                >Keyboards</router-link
             >
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
                 v-bind:to="{ name: 'Category', params: { category_id: 5 } }"
+                >Keycaps</router-link
+            >
+            <hr class="dropdown-divider" />
+            <router-link
+                class="dropdown-item"
+                v-bind:to="{ name: 'Category', params: { category_id: 6 } }"
+                >Others</router-link
+            >
+            <hr class="dropdown-divider" />
+            <router-link
+                class="dropdown-item"
+                v-bind:to="{ name: 'Category', params: { category_id: 7 } }"
+                >PCBs</router-link
+            >
+            <hr class="dropdown-divider" />
+            <router-link
+                class="dropdown-item"
+                v-bind:to="{ name: 'Category', params: { category_id: 8 } }"
+                >Plates</router-link
+            >
+            <hr class="dropdown-divider" />
+            <router-link
+                class="dropdown-item"
+                v-bind:to="{ name: 'Category', params: { category_id: 9 } }"
                 >Switches</router-link
+            >
+            <router-link
+                class="dropdown-item"
+                v-bind:to="{ name: 'Category', params: { category_id: 10 } }"
+                >Travelling cases</router-link
             >
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
                 id="last"
-                v-bind:to="{ name: 'Category', params: { category_id: 6 } }"
-                >Others</router-link
+                v-bind:to="{ name: 'Category', params: { category_id: 11 } }"
+                >Wrist-rests</router-link
             >
         </div>
     </div>

@@ -162,8 +162,12 @@ $link-orange: darksalmon;
     text-shadow: 0px 0px 30px rgba(50, 50, 50, 1);
 }
 .far.fa-bookmark {
+    border-radius: 5px;
+    opacity: 0.4;
+    background: white;
     font-size: 30px;
     color: $bookmark-color;
+    padding: 5px;
     margin: 10px;
 }
 .card-content {
