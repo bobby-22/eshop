@@ -11,12 +11,14 @@ from rest_framework import(
     generics,
     filters
 )
+from rest_framework.permissions import IsAuthenticated
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY 
 
 # Create your views here.
 class LatestView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request):
         queryset = ProductModel.objects.all()
         serializers = ProductModelSerializer(queryset, many=True, context={"request": request})

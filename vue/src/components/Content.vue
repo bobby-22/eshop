@@ -1,6 +1,6 @@
 <template>
     <div class="column is-one-quarter-desktop is-one-third-tablet">
-        <div class="card" v-if="bookmark.items">
+        <div class="card" v-if="savedProducts.items">
             <div class="card-image" style="border-radius: 10px;">
                 <router-link
                     :to="{
@@ -15,18 +15,18 @@
                         v-bind:src="product.thumbnail"
                     />
                 </router-link>
-                <div class="bookmark" v-if="checkBookmarkBoolean">
-                    <div class="saved" v-if="savedBoolean">
+                <div class="bookmark" v-if="checkSavedBoolean">
+                    <div class="bookmark" v-if="savedBoolean">
                         <a
                             class="fas fa-bookmark"
-                            v-on:click="removeFromBookmark"
+                            v-on:click="unsaveProduct"
                             v-bind:class="[{ 'far fa-bookmark': savedBoolean }]"
                         ></a>
                     </div>
                     <div class="notSaved" v-else>
                         <a
                             class="far fa-bookmark"
-                            v-on:click="addToBookmark"
+                            v-on:click="saveProduct"
                             v-bind:class="[{ 'fas fa-bookmark': savedBoolean }]"
                         ></a>
                     </div>
@@ -76,22 +76,22 @@ export default {
     data() {
         return {
             savedBoolean: false,
-            checkBookmarkBoolean: false,
+            checkSavedBoolean: false,
             keyword: null,
-            bookmark: {
+            savedProducts: {
                 items: [],
             },
         };
     },
     methods: {
-        addToBookmark() {
+        saveProduct() {
             this.savedBoolean = !this.savedBoolean;
             let item = {
                 product: this.product,
             };
-            this.$store.commit("addToBookmark", item);
+            this.$store.commit("saveProductState", item);
             toast({
-                message: "Item has been added to bookmark!",
+                message: "Item has been saved!",
                 type: "is-success",
                 dismissible: true,
                 pauseOnHover: true,
@@ -101,23 +101,23 @@ export default {
         },
         updateBookmark() {
             localStorage.setItem(
-                "bookmark",
-                JSON.stringify(this.$store.state.bookmark)
+                "savedProducts",
+                JSON.stringify(this.$store.state.savedProducts)
             );
         },
-        removeFromBookmark() {
+        unsaveProduct() {
             this.savedBoolean = !this.savedBoolean;
             let item = {
                 product: this.product,
             };
-            this.bookmark.items = this.bookmark.items.filter((i) => {
+            this.savedProducts.items = this.savedProducts.items.filter((i) => {
                 return (
                     i.product.stripe_product_id !==
                     item.product.stripe_product_id
                 );
             });
             toast({
-                message: "Item has been removed bookmark!",
+                message: "Item has been unsaved!",
                 type: "is-danger",
                 dismissible: true,
                 pauseOnHover: true,
@@ -127,15 +127,15 @@ export default {
             this.updateBookmark();
         },
         checkBookmark() {
-            let array = JSON.parse(localStorage.getItem("bookmark"));
-            let checkBookmarkBoolean = JSON.stringify(array.items).includes(
+            let array = JSON.parse(localStorage.getItem("savedProducts"));
+            let checkSavedBoolean = JSON.stringify(array.items).includes(
                 this.product.stripe_product_id
             );
-            this.checkBookmarkBoolean = !checkBookmarkBoolean;
+            this.checkSavedBoolean = !checkSavedBoolean;
         },
     },
-    mounted() {
-        this.bookmark = this.$store.state.bookmark;
+    created() {
+        this.savedProducts = this.$store.state.savedProducts;
         this.checkBookmark();
     },
 };
@@ -163,9 +163,9 @@ $link-orange: darksalmon;
 }
 .far.fa-bookmark {
     border-radius: 5px;
-    opacity: 0.4;
+    opacity: 0.3;
     background: white;
-    font-size: 30px;
+    font-size: 25px;
     color: $bookmark-color;
     padding: 5px;
     margin: 10px;

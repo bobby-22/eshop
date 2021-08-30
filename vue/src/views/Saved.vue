@@ -1,25 +1,25 @@
 <template>
     <div class="container">
-        <h1 class="title">Bookmarked products:</h1>
-        <ContentBookmark
-            v-for="item in bookmark.items"
+        <h1 class="title">Saved products:</h1>
+        <ContentSaved
+            v-for="item in savedProducts.items"
             v-bind:key="item.product.id"
             v-bind:initialItem="item"
-            v-on:removeFromBookmark="removeFromBookmark"
+            v-on:unsaveProduct="unsaveProduct"
         />
     </div>
 </template>
 
 <script>
-import ContentBookmark from "../components/ContentBookmark";
+import ContentSaved from "../components/ContentSaved";
 export default {
-    name: "Bookmark",
+    name: "Saved",
     components: {
-        ContentBookmark,
+        ContentSaved,
     },
     data() {
         return {
-            bookmark: {
+            savedProducts: {
                 items: [],
             },
         };
@@ -27,12 +27,12 @@ export default {
     methods: {
         updateBookmark() {
             localStorage.setItem(
-                "bookmark",
-                JSON.stringify(this.$store.state.bookmark)
+                "savedProducts",
+                JSON.stringify(this.$store.state.savedProducts)
             );
         },
-        removeFromBookmark(item) {
-            this.bookmark.items = this.bookmark.items.filter((i) => {
+        unsaveProduct(item) {
+            this.savedProducts.items = this.savedProducts.items.filter((i) => {
                 return (
                     i.product.stripe_product_id !==
                     item.product.stripe_product_id
@@ -42,8 +42,9 @@ export default {
             this.$router.go(0);
         },
     },
-    mounted() {
-        this.bookmark = this.$store.state.bookmark;
+    created() {
+        document.title = "Saved Products | MechMarketEU";
+        this.savedProducts = this.$store.state.savedProducts;
     },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar is-light">
-        <div class="navbar-brand" style="margin:0px;">
+        <div class="navbar-brand" style="margin: 0px">
             <router-link to="/" class="navbar-item" id="brand">
                 <strong>MechMarketEU</strong>
             </router-link>
@@ -46,9 +46,27 @@
                     </form>
                 </div>
             </div>
-            <div class="navbar-end">
-                <router-link to="/accounts/login" class="navbar-item">Log in</router-link>
-                <router-link to="/products/bookmark" class="navbar-item">
+            <div class="navbar-end" v-if="!authenticated">
+                <span class="navbar-item">Hello, </span>
+                <router-link to="/products/savedProducts" class="navbar-item">
+                    <span class="fas fa-bookmark">
+                        <span class="counter">{{ bookmarkLength }}</span>
+                    </span>
+                </router-link>
+                <div class="navbar-item" id="button-area">
+                    <span class="button is-info" v-on:click="logout"
+                        >Logout</span
+                    >
+                    <router-link to="/" class="button is-warning"
+                        >Donate</router-link
+                    >
+                </div>
+            </div>
+            <div class="navbar-end" v-else>
+                <router-link to="/accounts/login" class="navbar-item"
+                    >Log in</router-link
+                >
+                <router-link to="/products/savedProducts" class="navbar-item">
                     <span class="fas fa-bookmark">
                         <span class="counter">{{ bookmarkLength }}</span>
                     </span>
@@ -76,10 +94,11 @@ export default {
     data() {
         return {
             hamburgerBoolean: false,
-            bookmark: {
+            savedProducts: {
                 items: [],
             },
             keyword: null,
+            authenticated: false
         };
     },
     methods: {
@@ -92,18 +111,28 @@ export default {
                 params: { keyword: this.keyword },
             });
         },
+        logout() {
+            this.$store.commit("removeTokenState");
+            this.$store.commit("authenticated")
+            this.$router.push("/accounts/login");
+        },
     },
     computed: {
         bookmarkLength() {
-            let length = this.bookmark.items.length;
+            let length = this.savedProducts.items.length;
             return length;
         },
     },
     beforeCreate() {
-        this.$store.commit("localStorageBookmark");
+        this.$store.commit("localStorageSavedProducts");
     },
-    mounted() {
-        this.bookmark = this.$store.state.bookmark;
+    created() {
+        this.savedProducts = this.$store.state.savedProducts;
+    },
+    watch: {
+        "$store.state.authenticated": function () {
+            this.authenticated = !this.authenticated
+        },
     },
 };
 </script>

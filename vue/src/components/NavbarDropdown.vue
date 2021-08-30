@@ -60,6 +60,7 @@
                 v-bind:to="{ name: 'Category', params: { category_id: 9 } }"
                 >Switches</router-link
             >
+            <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
                 v-bind:to="{ name: 'Category', params: { category_id: 10 } }"

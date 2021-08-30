@@ -27,7 +27,11 @@ export default {
     methods: {
         getProducts() {
             djangoAPI
-                .get("/latest")
+                .get("/latest", {
+                    headers: {
+                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                    },
+                })
                 .then((latestResponse) => {
                     this.products = latestResponse.data;
                     console.log(this.products);
@@ -36,6 +40,9 @@ export default {
                     console.log(error);
                 });
         },
+    },
+    beforeCreate() {
+        this.$store.commit("localStorageSavedTokens");
     },
     created() {
         (document.title = "Latest Products | MechMarketEU"), this.getProducts();

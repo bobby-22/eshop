@@ -31,7 +31,7 @@ export default {
             let keyword = this.$route.params.keyword;
             djangoAPI({
                 method: "GET",
-                url: `/?search=${keyword}`,
+                url: `search/?search=${keyword}`,
             }).then((searchResponse) => {
                 this.products = searchResponse.data;
                 console.log(this.products);

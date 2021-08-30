@@ -4,7 +4,7 @@ import Latest from "../views/Latest.vue"
 import Details from '../views/Details.vue'
 import Category from '../views/Category.vue'
 import Search from '../views/Search.vue'
-import Bookmark from '../views/Bookmark.vue'
+import Saved from '../views/Saved.vue'
 import Register from '../views/Register.vue'
 import Login from '../views/Login.vue'
 
@@ -35,9 +35,9 @@ const routes = [
     component: Search
   },
   {
-    path: "/products/bookmark",
-    name: "Bookmark",
-    component: Bookmark
+    path: "/products/savedProducts",
+    name: "Saved",
+    component: Saved
   },
   {
     path: "/accounts/register",

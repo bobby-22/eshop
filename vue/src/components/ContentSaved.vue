@@ -20,7 +20,7 @@
                     </router-link>
                     <a
                         class="far fa-trash-alt"
-                        v-on:click="removeFromBookmark(item)"
+                        v-on:click="unsaveProduct(item)"
                     ></a>
                 </span>
             </div>
@@ -44,7 +44,7 @@
 <script>
 import { toast } from "bulma-toast";
 export default {
-    name: "BookmarkItem",
+    name: "ContentSaved",
     props: {
         initialItem: Object,
     },
@@ -54,10 +54,10 @@ export default {
         };
     },
     methods: {
-        removeFromBookmark(item) {
-            this.$emit("removeFromBookmark", item);
+        unsaveProduct(item) {
+            this.$emit("unsaveProduct", item);
             toast({
-                message: "Item has been removed from bookmark!",
+                message: "Item has been unsaved!",
                 type: "is-danger",
                 dismissible: true,
                 pauseOnHover: true,

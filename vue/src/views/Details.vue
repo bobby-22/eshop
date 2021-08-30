@@ -61,8 +61,6 @@ export default {
     },
     created() {
         this.getDetails();
-    },
-    mounted() {
         window.scrollTo(0, 0);
     },
 };

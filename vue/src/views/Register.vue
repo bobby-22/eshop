@@ -139,6 +139,9 @@ export default {
                 });
         },
     },
+    created() {
+        document.title = "Register | MechMarketEU";
+    },
 };
 </script>
 
@@ -147,6 +150,8 @@ export default {
     min-height: 100%;
     display: flex;
     justify-content: space-around;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .form {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;

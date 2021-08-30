@@ -12,7 +12,12 @@
             </div>
             <div class="field">
                 <p class="control has-icons-left">
-                    <input class="input" type="text" placeholder="Username" />
+                    <input
+                        class="input"
+                        type="text"
+                        placeholder="Username"
+                        v-model="username"
+                    />
                     <span class="icon is-small is-left">
                         <i class="fas fa-user"></i>
                     </span>
@@ -24,6 +29,7 @@
                         class="input"
                         type="password"
                         placeholder="Password"
+                        v-model="password"
                     />
                     <span class="icon is-small is-left">
                         <i class="fas fa-lock"></i>
@@ -32,9 +38,7 @@
             </div>
             <div class="field">
                 <p class="control">
-                    <button class="button is-success">
-                        Login
-                    </button>
+                    <button class="button is-success">Login</button>
                 </p>
             </div>
         </form>
@@ -55,31 +59,27 @@ export default {
     },
     methods: {
         submitLogin() {
-            let user = {
-                username: this.username,
-                password: this.password,
-            };
             djangoAPI
-                .post("/accounts/login/", user)
+                .post("/accounts/login/", {
+                    username: this.username,
+                    password: this.password,
+                })
                 .then((loginResponse) => {
                     console.log(loginResponse);
-                    toast({
-                        message: "You have been successfully logged in!",
-                        type: "is-success",
-                        dismissible: true,
-                        pauseOnHover: true,
-                        duration: 2000,
-                        position: "bottom-right",
+                    this.$store.commit("saveTokenState", {
+                        access: loginResponse.data.access,
+                        refresh: loginResponse.data.refresh,
                     });
+                    this.$store.commit("authenticated")
                     this.$router.push("/");
                 })
                 .catch((error) => {
-                    this.errors.splice(0, this.errors.length);
-                    for (let property in error.response.data) {
-                        this.errors.push(`${error.response.data[property]}`);
-                    }
+                    console.log(error);
                 });
         },
+    },
+    created() {
+        document.title = "Login | MechMarketEU";
     },
 };
 </script>
@@ -89,6 +89,8 @@ export default {
     min-height: 100%;
     display: flex;
     justify-content: space-around;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .form {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
