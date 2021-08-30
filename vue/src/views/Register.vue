@@ -132,6 +132,7 @@ export default {
                     this.$router.push("/");
                 })
                 .catch((error) => {
+                    console.log(error)
                     this.errors.splice(0, this.errors.length);
                     for (let property in error.response.data) {
                         this.errors.push(`${error.response.data[property]}`);

@@ -32,10 +32,14 @@ export default {
             djangoAPI({
                 method: "GET",
                 url: `search/?search=${keyword}`,
-            }).then((searchResponse) => {
-                this.products = searchResponse.data;
-                console.log(this.products);
-            });
+            })
+                .then((searchResponse) => {
+                    console.log(searchResponse);
+                    this.products = searchResponse.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
         getTitle() {
             document.title = `${this.$route.params.keyword} | MechMarketEU`;

@@ -35,23 +35,32 @@ export default createStore({
                 state.tokenAccess = JSON.parse(
                     localStorage.getItem("tokenAccess")
                 );
+                state.tokenRefresh = JSON.parse(
+                    localStorage.getItem("tokenRefresh")
+                );
             } else {
                 localStorage.setItem(
                     "tokenAccess",
                     JSON.stringify(state.tokenAccess)
                 );
+                localStorage.setItem(
+                    "tokenRefresh",
+                    JSON.stringify(state.tokenRefresh)
+                );
             }
         },
         authenticated(state) {
-            state.authenticated = !state.authenticated
+            state.authenticated = !state.authenticated;
         },
-        saveTokenState(state, { access, refresh }) {
+        saveTokenAccessState(state, access) {
             state.tokenAccess = access;
-            state.tokenRefresh = refresh;
             localStorage.setItem(
                 "tokenAccess",
                 JSON.stringify(state.tokenAccess)
             );
+        },
+        saveTokenRefreshState(state, refresh) {
+            state.tokenRefresh = refresh;
             localStorage.setItem(
                 "tokenRefresh",
                 JSON.stringify(state.tokenRefresh)

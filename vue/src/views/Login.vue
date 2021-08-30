@@ -5,10 +5,8 @@
                 Login
                 <i class="far fa-user-circle"></i>
             </h1>
-            <div class="notification is-danger" v-if="errors.length">
-                <p id="error" v-for="error in errors" v-bind:key="error">
-                    {{ error }}
-                </p>
+            <div class="notification is-danger" v-if="error">
+                <p id="error">Incorrect username or password</p>
             </div>
             <div class="field">
                 <p class="control has-icons-left">
@@ -54,7 +52,7 @@ export default {
         return {
             username: "",
             password: "",
-            errors: [],
+            error: false,
         };
     },
     methods: {
@@ -66,15 +64,30 @@ export default {
                 })
                 .then((loginResponse) => {
                     console.log(loginResponse);
-                    this.$store.commit("saveTokenState", {
-                        access: loginResponse.data.access,
-                        refresh: loginResponse.data.refresh,
-                    });
-                    this.$store.commit("authenticated")
+                    this.$store.commit(
+                        "saveTokenAccessState",
+                        loginResponse.data.access
+                    );
+                    this.$store.commit(
+                        "saveTokenRefreshState",
+                        loginResponse.data.refresh
+                    );
+                    this.$store.commit("authenticated");
                     this.$router.push("/");
+                    toast({
+                        message: "You were successfully logged in!",
+                        type: "is-success",
+                        dismissible: true,
+                        pauseOnHover: true,
+                        duration: 2000,
+                        position: "bottom-right",
+                    });
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.log(error)
+                    if (error) {
+                        this.error = true;
+                    }
                 });
         },
     },

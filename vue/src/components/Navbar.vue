@@ -98,7 +98,7 @@ export default {
                 items: [],
             },
             keyword: null,
-            authenticated: false
+            authenticated: false,
         };
     },
     methods: {
@@ -113,7 +113,7 @@ export default {
         },
         logout() {
             this.$store.commit("removeTokenState");
-            this.$store.commit("authenticated")
+            this.$store.commit("authenticated");
             this.$router.push("/accounts/login");
         },
     },
@@ -131,7 +131,7 @@ export default {
     },
     watch: {
         "$store.state.authenticated": function () {
-            this.authenticated = !this.authenticated
+            this.authenticated = !this.authenticated;
         },
     },
 };

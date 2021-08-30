@@ -47,8 +47,8 @@ export default {
                 url: `/product/${stripe_product_id}`,
             })
                 .then((detailsResponse) => {
+                    console.log(detailsResponse);
                     this.details = detailsResponse.data;
-                    console.log(this.details);
                     for (let i = 0; i < this.details.length; i++) {
                         this.product = this.details[i];
                     }

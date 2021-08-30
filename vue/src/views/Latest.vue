@@ -33,8 +33,8 @@ export default {
                     },
                 })
                 .then((latestResponse) => {
+                    console.log(latestResponse);
                     this.products = latestResponse.data;
-                    console.log(this.products);
                 })
                 .catch((error) => {
                     console.log(error);

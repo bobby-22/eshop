@@ -31,8 +31,8 @@ export default {
                 url: `/category/${category_id}`,
             })
                 .then((categoryResponse) => {
+                    console.log(categoryResponse);
                     this.products = categoryResponse.data;
-                    console.log(this.products);
                 })
                 .catch((error) => {
                     console.log(error);
