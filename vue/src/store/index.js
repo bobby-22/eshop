@@ -9,6 +9,7 @@ export default createStore({
         authenticated: false,
         tokenAccess: null,
         tokenRefresh: null,
+        currentUser: "",
     },
     mutations: {
         localStorageSavedProducts(state) {
@@ -49,6 +50,18 @@ export default createStore({
                 );
             }
         },
+        localStorageSavedCurrentUser(state) {
+            if (localStorage.getItem("currentUser")) {
+                state.currentUser = JSON.parse(
+                    localStorage.getItem("currentUser")
+                );
+            } else {
+                localStorage.setItem(
+                    "currentUser",
+                    JSON.stringify(state.currentUser)
+                );
+            }
+        },
         authenticated(state) {
             state.authenticated = !state.authenticated;
         },
@@ -66,9 +79,10 @@ export default createStore({
                 JSON.stringify(state.tokenRefresh)
             );
         },
-        removeTokenState(state) {
+        removeCredentialsState(state) {
             state.tokenAccess = null;
             state.tokenRefresh = null;
+            state.currentUser = "";
             localStorage.setItem(
                 "tokenAccess",
                 JSON.stringify(state.tokenAccess)
@@ -76,6 +90,17 @@ export default createStore({
             localStorage.setItem(
                 "tokenRefresh",
                 JSON.stringify(state.tokenRefresh)
+            );
+            localStorage.setItem(
+                "currentUser",
+                JSON.stringify(state.currentUser)
+            );
+        },
+        saveCurrentUserState(state, currentUser) {
+            state.currentUser = currentUser;
+            localStorage.setItem(
+                "currentUser",
+                JSON.stringify(state.currentUser)
             );
         },
     },

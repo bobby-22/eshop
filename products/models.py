@@ -15,15 +15,15 @@ class CategoryModel(models.Model):
         ordering = ("name",)
 
 class ProductModel(models.Model):
-    name = models.CharField(max_length=100)
     thumbnail = models.ImageField(upload_to="images/")
+    image = models.FileField(upload_to="images/")
+    name = models.CharField(max_length=100)
     date = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=100, default="")
     price = models.IntegerField(default="")
     description = models.TextField(default="")
-    image = models.FileField(upload_to="images/")
-    category = models.ForeignKey(CategoryModel, related_name="products", on_delete=CASCADE)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(CategoryModel, related_name="products", on_delete=CASCADE)
     stripe_product_id = models.SlugField(max_length=200, default="")
     stripe_price_id = models.SlugField(max_length=200, default="")
 

@@ -27,7 +27,7 @@ export default {
     methods: {
         getProducts() {
             djangoAPI
-                .get("/latest", {
+                .get("/products/latest", {
                     headers: {
                         Authorization: `JWT ${this.$store.state.tokenAccess}`,
                     },
@@ -38,6 +38,10 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
+                    if (error.response.status === 401) {
+                        this.$store.commit("removeCredentialsState");
+                        this.$router.push("/accounts/login");
+                    }
                 });
         },
     },

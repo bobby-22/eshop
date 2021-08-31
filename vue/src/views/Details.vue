@@ -19,9 +19,14 @@
                     <p>{{ detail.name }}</p>
                     <p>{{ detail.date }}</p>
                     <p>{{ detail.location }}</p>
+                    <p>{{ detail.price }}</p>
                 </div>
                 <div class="detail-content">
                     <p>{{ detail.description }}</p>
+                </div>
+                <div class="detail-footer">
+                    <p>{{ detail.user }}</p>
+                    <p>{{ detail.category }}</p>
                 </div>
             </div>
         </div>

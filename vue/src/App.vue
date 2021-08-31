@@ -38,10 +38,13 @@ export default {
                 });
         },
     },
+    created() {
+        this.refreshToken();
+    },
     mounted() {
         setInterval(() => {
             this.refreshToken();
-        }, 50000);
+        }, 250000);
     },
 };
 </script>

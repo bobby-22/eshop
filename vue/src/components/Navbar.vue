@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="navbar-end" v-if="!authenticated">
-                <span class="navbar-item">Hello, </span>
+                <span class="navbar-item">Hello, {{ currentUser }} </span>
                 <router-link to="/products/savedProducts" class="navbar-item">
                     <span class="fas fa-bookmark">
                         <span class="counter">{{ bookmarkLength }}</span>
@@ -99,6 +99,7 @@ export default {
             },
             keyword: null,
             authenticated: false,
+            currentUser: "",
         };
     },
     methods: {
@@ -112,7 +113,7 @@ export default {
             });
         },
         logout() {
-            this.$store.commit("removeTokenState");
+            this.$store.commit("removeCredentialsState");
             this.$store.commit("authenticated");
             this.$router.push("/accounts/login");
         },
@@ -125,6 +126,7 @@ export default {
     },
     beforeCreate() {
         this.$store.commit("localStorageSavedProducts");
+        this.$store.commit("localStorageSavedCurrentUser");
     },
     created() {
         this.savedProducts = this.$store.state.savedProducts;
@@ -132,6 +134,9 @@ export default {
     watch: {
         "$store.state.authenticated": function () {
             this.authenticated = !this.authenticated;
+        },
+        "$store.state.currentUser": function () {
+            this.currentUser = this.$store.state.currentUser;
         },
     },
 };

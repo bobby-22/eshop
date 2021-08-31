@@ -72,6 +72,10 @@ export default {
                         "saveTokenRefreshState",
                         loginResponse.data.refresh
                     );
+                    this.$store.commit(
+                        "saveCurrentUserState",
+                        loginResponse.data.username
+                    );
                     this.$store.commit("authenticated");
                     this.$router.push("/");
                     toast({
