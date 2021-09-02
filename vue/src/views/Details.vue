@@ -16,17 +16,30 @@
 
             <div class="details-right">
                 <div class="detail-header">
-                    <p>{{ detail.name }}</p>
-                    <p>{{ detail.date }}</p>
-                    <p>{{ detail.location }}</p>
-                    <p>{{ detail.price }}</p>
+                    <h1 class="title">{{ detail.name }}</h1>
+                    <div class="detail-header-top">
+                        <h2 class="title is-5">
+                            <i class="fas fa-euro-sign"></i>
+                            {{ detail.price }}
+                        </h2>
+                        <h2 class="title is-5">
+                            <i class="fas fa-map-marker-alt"></i>
+                            {{ detail.location }}
+                        </h2>
+                    </div>
+                    <div class="detail-header-bottom">
+                        <h2 class="title is-6">
+                            <i class="fas fa-calendar-alt"></i>
+                            {{ detail.date }}
+                        </h2>
+                        <h2 class="title is-6">
+                            <i class="fas fa-user"></i>
+                            {{ detail.user }}
+                        </h2>
+                    </div>
                 </div>
-                <div class="detail-content">
+                <div class="detail-body">
                     <p>{{ detail.description }}</p>
-                </div>
-                <div class="detail-footer">
-                    <p>{{ detail.user }}</p>
-                    <p>{{ detail.category }}</p>
                 </div>
             </div>
         </div>
@@ -105,6 +118,19 @@ $scrollbar-thumb-color: #c2c9d2;
 }
 .details-right {
     flex-basis: 50%;
+}
+.detail-header-top {
+    display: flex;
+    justify-content: space-between;
+}
+.detail-header-bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -15px;
+    margin-bottom: 24px;
+}
+.title.is-6 {
+    margin-bottom: 0px;
 }
 ::-webkit-scrollbar {
     widows: 10px;

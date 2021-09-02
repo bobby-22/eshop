@@ -1,7 +1,7 @@
 <template>
     <div class="column is-one-quarter-desktop is-one-third-tablet">
         <div class="card" v-if="savedProducts.items">
-            <div class="card-image" style="border-radius: 10px;">
+            <div class="card-image" style="border-radius: 10px">
                 <router-link
                     :to="{
                         name: 'Details',
@@ -11,7 +11,10 @@
                     }"
                 >
                     <img
-                        style="border-top-right-radius:10px; border-top-left-radius:10px;"
+                        style="
+                            border-top-right-radius: 10px;
+                            border-top-left-radius: 10px;
+                        "
                         v-bind:src="product.thumbnail"
                     />
                 </router-link>

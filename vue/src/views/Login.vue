@@ -76,7 +76,7 @@ export default {
                         "saveCurrentUserState",
                         loginResponse.data.username
                     );
-                    this.$store.commit("authenticated");
+                    this.$store.commit("authenticate");
                     this.$router.push("/");
                     toast({
                         message: "You were successfully logged in!",

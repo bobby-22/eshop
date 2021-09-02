@@ -38,15 +38,12 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
-                    if (error.response.status === 401) {
+                    if (error) {
                         this.$store.commit("removeCredentialsState");
                         this.$router.push("/accounts/login");
                     }
                 });
         },
-    },
-    beforeCreate() {
-        this.$store.commit("localStorageSavedTokens");
     },
     created() {
         (document.title = "Latest Products | MechMarketEU"), this.getProducts();
@@ -54,9 +51,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$title-border-top-color: #ededed;
 .container {
     min-height: 100%;
     padding: 30px;
+}
+.title {
+    padding-bottom: 15px;
+    border-bottom: 1px solid $title-border-top-color;
+    margin-bottom: 26px;
 }
 </style>

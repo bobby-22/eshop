@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         refreshToken() {
-            let tokenRefresh = JSON.parse(localStorage.getItem("tokenRefresh"));
+            let tokenRefresh = this.$store.state.tokenRefresh
             djangoAPI
                 .post("/accounts/refresh/", { refresh: tokenRefresh })
                 .then((tokensResponse) => {
@@ -35,8 +35,15 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
+                    if (error) {
+                        this.$store.commit("removeCredentialsState");
+                        this.$router.push("/accounts/login");
+                    }
                 });
         },
+    },
+    beforeCreate() {
+        this.$store.commit("localStorageSavedTokens");
     },
     created() {
         this.refreshToken();
@@ -55,9 +62,6 @@ export default {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-}
-.title {
-    color: black;
 }
 ::selection {
     background-color: #fbe38b;

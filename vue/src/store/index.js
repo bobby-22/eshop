@@ -31,6 +31,25 @@ export default createStore({
                 JSON.stringify(state.savedProducts)
             );
         },
+        localStorageAuthenticated(state) {
+            if (localStorage.getItem("authenticated")) {
+                state.authenticated = JSON.parse(
+                    localStorage.getItem("authenticated")
+                );
+            } else {
+                localStorage.setItem(
+                    "authenticated",
+                    JSON.stringify(state.authenticated)
+                );
+            }
+        },
+        authenticate(state) {
+            state.authenticated = !state.authenticated;
+            localStorage.setItem(
+                "authenticated",
+                JSON.stringify(state.authenticated)
+            );
+        },
         localStorageSavedTokens(state) {
             if (localStorage.getItem("tokenAccess")) {
                 state.tokenAccess = JSON.parse(
@@ -50,21 +69,6 @@ export default createStore({
                 );
             }
         },
-        localStorageSavedCurrentUser(state) {
-            if (localStorage.getItem("currentUser")) {
-                state.currentUser = JSON.parse(
-                    localStorage.getItem("currentUser")
-                );
-            } else {
-                localStorage.setItem(
-                    "currentUser",
-                    JSON.stringify(state.currentUser)
-                );
-            }
-        },
-        authenticated(state) {
-            state.authenticated = !state.authenticated;
-        },
         saveTokenAccessState(state, access) {
             state.tokenAccess = access;
             localStorage.setItem(
@@ -79,10 +83,34 @@ export default createStore({
                 JSON.stringify(state.tokenRefresh)
             );
         },
+        localStorageSavedCurrentUser(state) {
+            if (localStorage.getItem("currentUser")) {
+                state.currentUser = JSON.parse(
+                    localStorage.getItem("currentUser")
+                );
+            } else {
+                localStorage.setItem(
+                    "currentUser",
+                    JSON.stringify(state.currentUser)
+                );
+            }
+        },
+        saveCurrentUserState(state, currentUser) {
+            state.currentUser = currentUser;
+            localStorage.setItem(
+                "currentUser",
+                JSON.stringify(state.currentUser)
+            );
+        },
         removeCredentialsState(state) {
+            state.authenticated = false;
             state.tokenAccess = null;
             state.tokenRefresh = null;
             state.currentUser = "";
+            localStorage.setItem(
+                "authenticated",
+                JSON.stringify(state.authenticated)
+            );
             localStorage.setItem(
                 "tokenAccess",
                 JSON.stringify(state.tokenAccess)
@@ -91,13 +119,6 @@ export default createStore({
                 "tokenRefresh",
                 JSON.stringify(state.tokenRefresh)
             );
-            localStorage.setItem(
-                "currentUser",
-                JSON.stringify(state.currentUser)
-            );
-        },
-        saveCurrentUserState(state, currentUser) {
-            state.currentUser = currentUser;
             localStorage.setItem(
                 "currentUser",
                 JSON.stringify(state.currentUser)

@@ -54,7 +54,7 @@
                     </span>
                 </router-link>
                 <div class="navbar-item" id="button-area">
-                    <span class="button is-info" v-on:click="logout"
+                    <span class="button is-info" v-on:click="logoutUser"
                         >Logout</span
                     >
                     <router-link to="/" class="button is-warning"
@@ -98,8 +98,8 @@ export default {
                 items: [],
             },
             keyword: null,
-            authenticated: false,
-            currentUser: "",
+            authenticated: this.$store.state.authenticated,
+            currentUser: this.$store.state.currentUser,
         };
     },
     methods: {
@@ -112,9 +112,8 @@ export default {
                 params: { keyword: this.keyword },
             });
         },
-        logout() {
+        logoutUser() {
             this.$store.commit("removeCredentialsState");
-            this.$store.commit("authenticated");
             this.$router.push("/accounts/login");
         },
     },
@@ -127,6 +126,7 @@ export default {
     beforeCreate() {
         this.$store.commit("localStorageSavedProducts");
         this.$store.commit("localStorageSavedCurrentUser");
+        this.$store.commit("localStorageAuthenticated");
     },
     created() {
         this.savedProducts = this.$store.state.savedProducts;

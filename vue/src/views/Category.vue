@@ -1,5 +1,6 @@
 <template>
     <div class="container">
+        <h1 class="title">Category {{ this.$route.params.category_id }}</h1>
         <div class="columns is-multiline">
             <Content
                 v-for="product in products"
@@ -52,9 +53,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$title-border-top-color: #ededed;
 .container {
     min-height: 100%;
     padding: 30px;
+}
+.title {
+    padding-bottom: 15px;
+    border-bottom: 1px solid $title-border-top-color;
+    margin-bottom: 26px;
 }
 </style>

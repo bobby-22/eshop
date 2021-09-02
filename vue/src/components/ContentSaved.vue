@@ -76,6 +76,7 @@ $link-orange: darksalmon;
 $link-grey: #363636;
 $link-red: #f14668;
 .card {
+    border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
         rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     display: flex;
@@ -87,8 +88,8 @@ $link-red: #f14668;
     flex-basis: 30%;
 }
 .card-image > img {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
     border-top-right-radius: 0px;
     height: 250px;
     width: 1000px;
