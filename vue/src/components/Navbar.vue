@@ -46,7 +46,7 @@
                     </form>
                 </div>
             </div>
-            <div class="navbar-end" v-if="!authenticated">
+            <div class="navbar-end" v-if="authenticated">
                 <span class="navbar-item">Hello, {{ currentUser }} </span>
                 <router-link to="/products/savedProducts" class="navbar-item">
                     <span class="fas fa-bookmark">
