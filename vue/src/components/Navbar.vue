@@ -47,7 +47,19 @@
                 </div>
             </div>
             <div class="navbar-end" v-if="authenticated">
-                <span class="navbar-item">Hello, {{ currentUser }} </span>
+                <span class="navbar-item"
+                    >Hello,
+                    <router-link
+                        id="profile"
+                        v-bind:to="{
+                            name: 'Profile',
+                            params: {
+                                user: currentUser,
+                            },
+                        }"
+                        >&nbsp;{{ currentUser }}
+                    </router-link>
+                </span>
                 <router-link to="/products/savedProducts" class="navbar-item">
                     <span class="fas fa-bookmark">
                         <span class="counter">{{ bookmarkLength }}</span>
@@ -144,6 +156,8 @@ export default {
 
 <style lang="scss" scoped>
 $navbar-background-color: #f8f8f8;
+$link-blue: dodgerblue;
+$link-orange: darksalmon;
 $counter-color: #c9a0ff;
 .navbar.is-light {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
@@ -164,6 +178,13 @@ $counter-color: #c9a0ff;
 .input,
 .button.is-danger {
     border-radius: 15px;
+}
+#profile {
+    font-weight: 500;
+    color: $link-blue;
+}
+#profile:hover {
+    color: $link-orange;
 }
 #button-area {
     margin-right: 7px;

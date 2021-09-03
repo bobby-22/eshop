@@ -76,6 +76,10 @@ export default {
                         "saveCurrentUserState",
                         loginResponse.data.username
                     );
+                    this.$store.commit(
+                        "saveCurrentUserIdState",
+                        loginResponse.data.user_id
+                    );
                     this.$store.commit("authenticate");
                     this.$router.push("/");
                     toast({
@@ -88,7 +92,7 @@ export default {
                     });
                 })
                 .catch((error) => {
-                    console.log(error)
+                    console.log(error);
                     if (error) {
                         this.error = true;
                     }

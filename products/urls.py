@@ -7,7 +7,7 @@ urlpatterns = [
     path("product/<slug:stripe_product_id>/", views.DetailsView.as_view()),
     path("category/<int:category_id>/", views.CategoryView.as_view()),
     path("search/", views.SearchView.as_view()),
-    path("profile/", views.ProfileView.as_view()),
+    path("user/<int:user_id>", views.ProfileView.as_view()),
     path("donate/", views.DonateView.as_view()),
     path("success/", views.success),
     path("cancel/", views.success)

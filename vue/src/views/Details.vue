@@ -88,7 +88,6 @@ export default {
 $scrollbar-thumb-color: #c2c9d2;
 .container {
     min-height: 100%;
-    margin: 30px;
     padding: 30px;
 }
 .details {

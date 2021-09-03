@@ -1,21 +1,21 @@
 <template>
     <div class="container">
         <h1 class="title">Saved products:</h1>
-        <ContentSaved
+        <ProductsSaved
             v-for="item in savedProducts.items"
             v-bind:key="item.product.id"
-            v-bind:initialItem="item"
+            v-bind:item="item"
             v-on:unsaveProduct="unsaveProduct"
         />
     </div>
 </template>
 
 <script>
-import ContentSaved from "../components/ContentSaved";
+import ProductsSaved from "../components/ProductsSaved";
 export default {
     name: "Saved",
     components: {
-        ContentSaved,
+        ProductsSaved,
     },
     data() {
         return {
@@ -25,7 +25,7 @@ export default {
         };
     },
     methods: {
-        updateBookmark() {
+        updateSavedProducts() {
             localStorage.setItem(
                 "savedProducts",
                 JSON.stringify(this.$store.state.savedProducts)
@@ -38,7 +38,7 @@ export default {
                     item.product.stripe_product_id
                 );
             });
-            this.updateBookmark();
+            this.updateSavedProducts();
             this.$router.go(0);
         },
     },

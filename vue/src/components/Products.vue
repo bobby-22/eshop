@@ -3,7 +3,7 @@
         <div class="card" v-if="savedProducts.items">
             <div class="card-image" style="border-radius: 10px">
                 <router-link
-                    :to="{
+                    v-bind:to="{
                         name: 'Details',
                         params: {
                             stripe_product_id: product.stripe_product_id,
@@ -72,7 +72,7 @@
 <script>
 import { toast } from "bulma-toast";
 export default {
-    name: "Content",
+    name: "Products",
     props: {
         product: Object,
     },
@@ -102,7 +102,7 @@ export default {
                 position: "bottom-right",
             });
         },
-        updateBookmark() {
+        updateSavedProducts() {
             localStorage.setItem(
                 "savedProducts",
                 JSON.stringify(this.$store.state.savedProducts)
@@ -127,7 +127,7 @@ export default {
                 duration: 3000,
                 position: "bottom-right",
             });
-            this.updateBookmark();
+            this.updateSavedProducts();
         },
         checkBookmark() {
             let array = JSON.parse(localStorage.getItem("savedProducts"));

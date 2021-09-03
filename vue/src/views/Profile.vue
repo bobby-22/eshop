@@ -1,23 +1,21 @@
 <template>
     <div class="container">
-        <h1 class="title">Latest products:</h1>
-        <div class="columns is-multiline">
-            <Products
-                v-for="product in products"
-                v-bind:key="product.id"
-                v-bind:product="product"
-            />
-        </div>
+        <h1 class="title">My products:</h1>
+        <ProductsProfile
+            v-for="product in products"
+            v-bind:key="product.id"
+            v-bind:product="product"
+        />
     </div>
 </template>
 
 <script>
 import { djangoAPI } from "../axios";
-import Products from "../components/Products.vue";
+import ProductsProfile from "../components/ProductsProfile.vue";
 export default {
-    name: "Latest",
+    name: "Profile",
     components: {
-        Products,
+        ProductsProfile,
     },
     data() {
         return {
@@ -27,26 +25,21 @@ export default {
     methods: {
         getProducts() {
             djangoAPI
-                .get("/products/latest", {
-                    headers: {
-                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
-                    },
-                })
+                .get("/user/" + this.$store.state.currentUserId)
                 .then((latestResponse) => {
                     console.log(latestResponse);
                     this.products = latestResponse.data;
                 })
                 .catch((error) => {
                     console.log(error);
-                    if (error) {
-                        this.$store.commit("removeCredentialsState");
-                        this.$router.push("/accounts/login");
-                    }
                 });
         },
     },
+    beforeCreate() {
+        this.$store.commit("localStorageSavedCurrentUserId");
+    },
     created() {
-        (document.title = "Latest Products | MechMarketEU"), this.getProducts();
+        (document.title = "My Products | MechMarketEU"), this.getProducts();
     },
 };
 </script>

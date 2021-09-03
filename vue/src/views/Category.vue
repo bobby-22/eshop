@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <h1 class="title">Category {{ this.$route.params.category_id }}</h1>
+        <h1 class="title">Category {{ this.$route.params.category_id }}:</h1>
         <div class="columns is-multiline">
-            <Content
+            <Products
                 v-for="product in products"
                 v-bind:key="product.id"
                 v-bind:product="product"
@@ -13,11 +13,11 @@
 
 <script>
 import { djangoAPI } from "../axios";
-import Content from "../components/Content.vue";
+import Products from "../components/Products.vue";
 export default {
     name: "Category",
     components: {
-        Content,
+        Products,
     },
     data() {
         return {

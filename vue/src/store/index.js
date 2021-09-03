@@ -10,6 +10,7 @@ export default createStore({
         tokenAccess: null,
         tokenRefresh: null,
         currentUser: "",
+        currentUserId: null,
     },
     mutations: {
         localStorageSavedProducts(state) {
@@ -102,11 +103,31 @@ export default createStore({
                 JSON.stringify(state.currentUser)
             );
         },
+        localStorageSavedCurrentUserId(state) {
+            if (localStorage.getItem("currentUserId")) {
+                state.currentUserId = JSON.parse(
+                    localStorage.getItem("currentUserId")
+                );
+            } else {
+                localStorage.setItem(
+                    "currentUserId",
+                    JSON.stringify(state.currentUserId)
+                );
+            }
+        },
+        saveCurrentUserIdState(state, currentUserId) {
+            state.currentUserId = currentUserId;
+            localStorage.setItem(
+                "currentUserId",
+                JSON.stringify(state.currentUserId)
+            );
+        },
         removeCredentialsState(state) {
             state.authenticated = false;
             state.tokenAccess = null;
             state.tokenRefresh = null;
             state.currentUser = "";
+            state.currentUserId = null;
             localStorage.setItem(
                 "authenticated",
                 JSON.stringify(state.authenticated)
@@ -122,6 +143,10 @@ export default createStore({
             localStorage.setItem(
                 "currentUser",
                 JSON.stringify(state.currentUser)
+            );
+            localStorage.setItem(
+                "currentUserId",
+                JSON.stringify(state.currentUserId)
             );
         },
     },

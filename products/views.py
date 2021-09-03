@@ -1,3 +1,4 @@
+from inspect import currentframe
 from django.shortcuts import(
     render,
     redirect
@@ -43,8 +44,8 @@ class SearchView(generics.ListAPIView):
     search_fields = ["name", "description", "location"]
 
 class ProfileView(APIView):
-    def get(self, request):
-        queryset = ProductModel.objects.filter(owner=request.user)
+    def get(self, request, user_id):
+        queryset = ProductModel.objects.filter(owner=user_id)
         serializers = ProductModelSerializer(queryset, many=True, context={"request": request})
         return Response(serializers.data)
 

@@ -7,6 +7,7 @@ import Search from "../views/Search.vue";
 import Saved from "../views/Saved.vue";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
+import Profile from "../views/Profile.vue";
 
 const routes = [
     {
@@ -49,6 +50,11 @@ const routes = [
         name: "Login",
         component: Login,
     },
+    {
+        path: "/user/:user",
+        name: "Profile",
+        component: Profile,
+    }
 ];
 
 const router = createRouter({

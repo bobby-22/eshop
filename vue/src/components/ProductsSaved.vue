@@ -19,7 +19,8 @@
                         {{ item.product.name }}
                     </router-link>
                     <a
-                        class="far fa-trash-alt"
+                        id="unsave"
+                        class="fas fa-bookmark"
                         v-on:click="unsaveProduct(item)"
                     ></a>
                 </span>
@@ -44,13 +45,13 @@
 <script>
 import { toast } from "bulma-toast";
 export default {
-    name: "ContentSaved",
+    name: "ProductsSaved",
     props: {
-        initialItem: Object,
+        item: Object,
     },
     data() {
         return {
-            item: this.initialItem,
+            item: this.item,
         };
     },
     methods: {
@@ -112,10 +113,6 @@ $link-red: #f14668;
 a {
     color: $link-grey;
 }
-.far.fa-trash-alt:active,
-.far.fa-trash-alt:hover {
-    color: $link-red;
-}
 a:link,
 a:visited {
     color: $link-blue;
@@ -131,6 +128,12 @@ a:hover {
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
+}
+#unsave {
+    margin-right: 0px;
+}
+#unsave:hover {
+    color: black;
 }
 .fas {
     margin-right: 5px;
