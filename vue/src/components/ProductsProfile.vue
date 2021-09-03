@@ -51,7 +51,6 @@ export default {
 $content-bottom-border-top-color: #f0f0f0;
 $link-blue: dodgerblue;
 $link-orange: darksalmon;
-$link-grey: #363636;
 $link-red: #f14668;
 .card {
     border-radius: 10px;
@@ -89,9 +88,6 @@ $link-red: #f14668;
 }
 #price {
     margin-right: 15px;
-}
-a {
-    color: $link-grey;
 }
 a:link,
 a:visited {

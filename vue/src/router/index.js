@@ -8,6 +8,7 @@ import Saved from "../views/Saved.vue";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import Profile from "../views/Profile.vue";
+import Create from "../views/Create.vue";
 
 const routes = [
     {
@@ -54,6 +55,11 @@ const routes = [
         path: "/user/:user",
         name: "Profile",
         component: Profile,
+    },
+    {
+        path: "/product/create",
+        name: "Create",
+        component: Create,
     }
 ];
 

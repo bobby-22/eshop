@@ -9,7 +9,7 @@
                 <p id="error">Incorrect username or password</p>
             </div>
             <div class="field">
-                <p class="control has-icons-left">
+                <div class="control has-icons-left">
                     <input
                         class="input"
                         type="text"
@@ -19,10 +19,10 @@
                     <span class="icon is-small is-left">
                         <i class="fas fa-user"></i>
                     </span>
-                </p>
+                </div>
             </div>
             <div class="field">
-                <p class="control has-icons-left">
+                <div class="control has-icons-left">
                     <input
                         class="input"
                         type="password"
@@ -32,13 +32,17 @@
                     <span class="icon is-small is-left">
                         <i class="fas fa-lock"></i>
                     </span>
-                </p>
+                </div>
             </div>
             <div class="field">
-                <p class="control">
+                <div class="control">
                     <button class="button is-success">Login</button>
-                </p>
+                </div>
             </div>
+            <p>
+                Don't have an account?
+                <router-link to="/accounts/register">Register</router-link>
+            </p>
         </form>
     </div>
 </template>
@@ -128,5 +132,18 @@ export default {
 }
 .input {
     height: 100%;
+}
+p {
+    text-align: center;
+}
+@media (max-width: 1024px) {
+    .container {
+        justify-content: start;
+        margin: 0px;
+    }
+    .form {
+        box-shadow: none;
+        border-radius: 0px;
+    }
 }
 </style>

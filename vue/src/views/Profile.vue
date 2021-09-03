@@ -1,6 +1,11 @@
 <template>
     <div class="container">
-        <h1 class="title">My products:</h1>
+        <h1 class="title">
+            My products:
+            <router-link id="create" to="/product/create">
+                <i class="far fa-plus-square"></i>
+            </router-link>
+        </h1>
         <ProductsProfile
             v-for="product in products"
             v-bind:key="product.id"
@@ -46,13 +51,23 @@ export default {
 
 <style lang="scss" scoped>
 $title-border-top-color: #ededed;
+$link-grey: #363636;
 .container {
     min-height: 100%;
     padding: 30px;
 }
 .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
     padding-bottom: 15px;
     border-bottom: 1px solid $title-border-top-color;
     margin-bottom: 26px;
+}
+a {
+    color: $link-grey;
+}
+#create:hover {
+    color: black;
 }
 </style>

@@ -2,8 +2,8 @@
     <div class="container">
         <form class="form" v-on:submit.stop.prevent="submitRegister">
             <h1 class="title">
-                Register
-                <i class="fas fa-user-circle"></i>
+                Post new product
+                <i class="fas fa-plus"></i>
             </h1>
             <div class="notification is-danger" v-if="errors.length">
                 <p id="error" v-for="error in errors" v-bind:key="error">
@@ -11,86 +11,61 @@
                 </p>
             </div>
             <div class="field">
-                <label class="label">Username</label>
+                <label class="label">Name</label>
                 <div class="control has-icons-left">
-                    <input
-                        class="input"
-                        type="text"
-                        placeholder="example"
-                        v-model="username"
-                    />
+                    <input class="input" type="text" v-model="username" />
                     <span class="icon is-small is-left">
-                        <i class="fas fa-user"></i>
+                        <i class="fas fa-heading"></i>
                     </span>
                 </div>
             </div>
 
             <div class="field">
-                <label class="label">Email</label>
+                <label class="label">Price</label>
                 <div class="control has-icons-left">
                     <input
+                        style="width: 50%"
                         class="input"
-                        type="email"
-                        placeholder="example@example.com"
+                        type="text"
                         v-model="email"
                     />
                     <span class="icon is-small is-left">
-                        <i class="fas fa-envelope"></i>
+                        <i class="fas fa-euro-sign"></i>
                     </span>
                 </div>
             </div>
 
             <div class="field">
-                <label class="label">Password</label>
+                <label class="label">Location</label>
                 <div class="control has-icons-left">
-                    <input
-                        class="input"
-                        type="password"
-                        placeholder="supersecretpassword123"
-                        v-model="password1"
-                    />
+                    <div class="select">
+                        <select>
+                            <option>Select country</option>
+                            <option>With options</option>
+                        </select>
+                    </div>
                     <span class="icon is-small is-left">
-                        <i class="fas fa-key"></i>
+                        <i class="fas fa-map-marker-alt"></i>
                     </span>
                 </div>
             </div>
 
             <div class="field">
-                <span class="label">Confirm password</span>
-                <div class="control has-icons-left">
-                    <input
-                        class="input"
-                        type="password"
-                        placeholder="supersecretpassword123"
+                <span class="label">Description</span>
+                <div class="control">
+                    <textarea
+                        class="textarea"
+                        type="text"
                         v-model="password2"
-                    />
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-key"></i>
-                    </span>
+                    ></textarea>
                 </div>
             </div>
 
             <div class="field">
                 <div class="control">
-                    <span class="checkbox">
-                        <input type="checkbox" />
-                        <span id="terms"
-                            >I agree to the
-                            <a href="/">terms and conditions</a></span
-                        >
-                    </span>
+                    <button class="button is-link">Create</button>
                 </div>
             </div>
-
-            <div class="field">
-                <div class="control">
-                    <button class="button is-link">Submit</button>
-                </div>
-            </div>
-            <p>
-                Already registered?
-                <router-link to="/accounts/login">Login</router-link>
-            </p>
         </form>
     </div>
 </template>
@@ -99,7 +74,7 @@
 import { djangoAPI } from "../axios";
 import { toast } from "bulma-toast";
 export default {
-    name: "Register",
+    name: "Create",
     data() {
         return {
             username: "",
@@ -151,8 +126,7 @@ export default {
     min-height: 100%;
     display: flex;
     justify-content: space-around;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin: 30px 300px 30px 300px;
 }
 .form {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -169,17 +143,6 @@ export default {
 }
 .input {
     height: 100%;
-}
-.checkbox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#terms {
-    margin-left: 15px;
-}
-p {
-    text-align: center;
 }
 @media (max-width: 1024px) {
     .container {
