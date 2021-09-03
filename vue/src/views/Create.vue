@@ -19,37 +19,49 @@
                     </span>
                 </div>
             </div>
-
-            <div class="field">
-                <label class="label">Price</label>
-                <div class="control has-icons-left">
-                    <input
-                        style="width: 50%"
-                        class="input"
-                        type="text"
-                        v-model="email"
-                    />
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-euro-sign"></i>
-                    </span>
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Location</label>
-                <div class="control has-icons-left">
-                    <div class="select">
-                        <select>
-                            <option>Select country</option>
-                            <option>With options</option>
-                        </select>
+            <div class="container-column">
+                <div class="column1">
+                    <div class="field">
+                        <label class="label">Price</label>
+                        <div class="control has-icons-left" id="price-input">
+                            <input class="input" type="text" v-model="email" />
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-euro-sign"></i>
+                            </span>
+                        </div>
                     </div>
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </span>
+                </div>
+                <div class="column2">
+                    <div class="field">
+                        <label class="label">Country</label>
+                        <div class="control has-icons-left">
+                            <div class="select">
+                                <select>
+                                    <option>Select</option>
+                                    <option>With options</option>
+                                </select>
+                            </div>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="field" id="category">
+                        <label class="label">Category</label>
+                        <div class="control has-icons-left">
+                            <div class="select">
+                                <select>
+                                    <option>Select</option>
+                                    <option>With options</option>
+                                </select>
+                            </div>
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-list"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
-
             <div class="field">
                 <span class="label">Description</span>
                 <div class="control">
@@ -60,7 +72,6 @@
                     ></textarea>
                 </div>
             </div>
-
             <div class="field">
                 <div class="control">
                     <button class="button is-link">Create</button>
@@ -143,6 +154,26 @@ export default {
 }
 .input {
     height: 100%;
+}
+.container-column {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+}
+.column1 {
+    flex-grow: 1;
+    margin-bottom: 10px;
+}
+#price-input {
+    height: 40px;
+}
+.column2 {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5px;
+}
+#category {
+    margin-bottom: 10px;
 }
 @media (max-width: 1024px) {
     .container {
