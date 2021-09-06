@@ -31,8 +31,8 @@ class DetailsView(APIView):
         return Response(serializers.data)
 
 class CategoryView(APIView):
-    def get(self, request, category_id):
-        queryset = ProductModel.objects.filter(category=category_id)
+    def get(self, request, category):
+        queryset = ProductModel.objects.filter(category=category)
         serializers = ProductModelSerializer(queryset, many=True, context={"request": request})
         return Response(serializers.data)
 

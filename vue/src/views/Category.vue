@@ -26,10 +26,10 @@ export default {
     },
     methods: {
         getProducts() {
-            let category_id = this.$route.params.category_id;
+            let category = this.$route.params.category;
             djangoAPI({
                 method: "GET",
-                url: `/category/${category_id}`,
+                url: `/category/${category}`,
             })
                 .then((categoryResponse) => {
                     console.log(categoryResponse);

@@ -52,7 +52,7 @@
                                 <option>Others</option>
                                 <option>PCBs</option>
                                 <option>Plates</option>
-                                <option>Travelling cases</option>
+                                <option>Travelling-cases</option>
                                 <option>Wrist-rests</option>
                             </select>
                         </div>
