@@ -2,7 +2,7 @@
     <div class="container">
         <h1 class="title">
             My products:
-            <router-link id="create" to="/product/create">
+            <router-link id="new" to="/product/new">
                 <i class="far fa-plus-square"></i>
             </router-link>
         </h1>
@@ -67,7 +67,7 @@ $link-grey: #363636;
 a {
     color: $link-grey;
 }
-#create:hover {
+#new:hover {
     color: black;
 }
 </style>

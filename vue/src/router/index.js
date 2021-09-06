@@ -8,7 +8,7 @@ import Saved from "../views/Saved.vue";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import Profile from "../views/Profile.vue";
-import Create from "../views/Create.vue";
+import New from "../views/New.vue";
 
 const routes = [
     {
@@ -57,9 +57,9 @@ const routes = [
         component: Profile,
     },
     {
-        path: "/product/create",
-        name: "Create",
-        component: Create,
+        path: "/product/new",
+        name: "New",
+        component: New,
     }
 ];
 

@@ -48,7 +48,7 @@
                                 },
                             }"
                         >
-                            {{ product.name }}
+                            {{ product.title }}
                         </router-link>
                     </span>
                 </div>
@@ -60,7 +60,7 @@
                         </span>
                         <span class="subtitle">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>{{ product.location }}</span>
+                            <span>{{ product.country }}</span>
                         </span>
                     </div>
                 </div>
@@ -181,6 +181,10 @@ $link-orange: darksalmon;
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 0px 0px 10px;
+}
+.content:hover {
+    overflow: visible;
+    white-space: normal;
 }
 #content-bottom {
     border-top: 1px solid $content-bottom-border-top-color;

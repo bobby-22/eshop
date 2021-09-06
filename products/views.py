@@ -1,11 +1,10 @@
-from inspect import currentframe
 from django.shortcuts import(
     render,
     redirect
 ) 
 from django.conf import settings
 from products.models import ProductModel
-from products.serializers import ProductModelSerializer
+from products.serializers import ProductModelSerializer, ProductNewSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import(
@@ -41,13 +40,16 @@ class SearchView(generics.ListAPIView):
     queryset = ProductModel.objects.all()
     serializer_class = ProductModelSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ["name", "description", "location"]
+    search_fields = ["title", "description", "country"]
 
 class ProfileView(APIView):
     def get(self, request, user_id):
         queryset = ProductModel.objects.filter(owner=user_id)
         serializers = ProductModelSerializer(queryset, many=True, context={"request": request})
         return Response(serializers.data)
+
+class ProductNewView(generics.CreateAPIView):
+    serializer_class = ProductNewSerializer
 
 def success(request):
     return render(request, "products/success.html")

@@ -15,7 +15,7 @@
                             },
                         }"
                     >
-                        {{ product.name }}
+                        {{ product.title }}
                     </router-link>
                 </span>
             </div>

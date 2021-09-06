@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('thumbnail', models.ImageField(upload_to='images/')),
                 ('date', models.DateTimeField(auto_now_add=True)),
-                ('location', models.CharField(default='', max_length=100)),
+                ('country', models.CharField(default='', max_length=100)),
                 ('price', models.IntegerField(default='')),
                 ('description', models.TextField(default='')),
                 ('image', models.FileField(upload_to='images/')),

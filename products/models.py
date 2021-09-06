@@ -18,9 +18,9 @@ class CategoryModel(models.Model):
 class ProductModel(models.Model):
     thumbnail = models.ImageField(upload_to="images/")
     image = models.FileField(upload_to="images/")
-    name = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, default="")
     price = models.IntegerField(default="")
-    location = models.CharField(max_length=25, default="")
+    country = models.CharField(max_length=25, default="")
     date = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=500, default="")
@@ -31,7 +31,7 @@ class ProductModel(models.Model):
     stripe_price_id = models.SlugField(max_length=100, default="")
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
         verbose_name_plural = "Products"

@@ -179,12 +179,8 @@ $counter-color: #c9a0ff;
 .button.is-danger {
     border-radius: 15px;
 }
-#profile {
-    font-weight: 500;
-    color: $link-blue;
-}
-#profile:hover {
-    color: $link-orange;
+#profile, #profile:hover {
+    color: black;
 }
 #button-area {
     margin-right: 7px;

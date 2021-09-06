@@ -16,7 +16,7 @@
 
             <div class="details-right">
                 <div class="detail-header">
-                    <h1 class="title">{{ detail.name }}</h1>
+                    <h1 class="title">{{ detail.title }}</h1>
                     <div class="detail-header-top">
                         <h2 class="title is-5">
                             <i class="fas fa-euro-sign"></i>
@@ -24,7 +24,7 @@
                         </h2>
                         <h2 class="title is-5">
                             <i class="fas fa-map-marker-alt"></i>
-                            {{ detail.location }}
+                            {{ detail.country }}
                         </h2>
                     </div>
                     <div class="detail-header-bottom">
@@ -70,7 +70,7 @@ export default {
                     for (let i = 0; i < this.details.length; i++) {
                         this.product = this.details[i];
                     }
-                    document.title = this.product.name + " | MechMarketEU";
+                    document.title = this.product.title + " | MechMarketEU";
                 })
                 .catch((error) => {
                     console.log(error);
@@ -79,7 +79,6 @@ export default {
     },
     created() {
         this.getDetails();
-        window.scrollTo(0, 0);
     },
 };
 </script>
@@ -110,10 +109,10 @@ $scrollbar-thumb-color: #c2c9d2;
     flex-direction: row;
     overflow: scroll;
     overflow-y: hidden;
+    column-gap: 5px;
 }
 .detail-images > img {
     height: 100px;
-    margin-right: 5px;
 }
 .details-right {
     flex-basis: 50%;

@@ -16,7 +16,7 @@
                             },
                         }"
                     >
-                        {{ item.product.name }}
+                        {{ item.product.title }}
                     </router-link>
                     <a
                         id="unsave"
@@ -33,7 +33,7 @@
                     </span>
                     <span class="subtitle">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>{{ item.product.location }}</span>
+                        <span>{{ item.product.country }}</span>
                     </span>
                 </div>
                 <span>{{ item.product.description }}</span>
