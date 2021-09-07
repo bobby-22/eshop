@@ -160,7 +160,7 @@ export default {
     padding: 30px;
 }
 #error {
-    text-align: left;
+    text-align: center;
 }
 .title {
     display: flex;

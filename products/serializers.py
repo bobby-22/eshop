@@ -18,8 +18,6 @@ class ProductModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductModel
         fields = (
-            "thumbnail",
-            "image",
             "title",
             "price",
             "country",
@@ -27,6 +25,8 @@ class ProductModelSerializer(serializers.ModelSerializer):
             "date",
             "user",
             "description",
+            "thumbnail",
+            "image",
             "stripe_product_id",
             "stripe_price_id",
         )
@@ -81,6 +81,8 @@ class ProductNewSerializer(serializers.ModelSerializer):
             "category",
             "owner",
             "description",
+            "thumbnail",
+            "image",
         )
 
     def create(self, validated_data):
@@ -99,6 +101,8 @@ class ProductNewSerializer(serializers.ModelSerializer):
             category=validated_data["category"],
             owner=validated_data["owner"],
             description=validated_data["description"],
+            thumbnail=validated_data["thumbnail"],
+            image=validated_data["image"],
             stripe_product_id=stripe_product.id,
             stripe_price_id=stripe_price.id,
         )

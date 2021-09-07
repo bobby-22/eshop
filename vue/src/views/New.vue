@@ -80,7 +80,9 @@
                         <input
                             class="file-input"
                             type="file"
+                            accept="image/*"
                             name="thumbnail"
+                            v-on:change="uploadThumbnail"
                         />
                         <span class="file-cta">
                             <span class="file-icon">
@@ -88,8 +90,11 @@
                             </span>
                             <span class="file-label">Choose a thumbnail</span>
                         </span>
-                        <span class="file-name">
-                            Screen Shot 2017-07-29 at 15.54.25.png
+                        <span class="file-name" v-if="!thumbnail">
+                            No thumbnail uploaded
+                        </span>
+                        <span class="file-name" v-else>
+                            {{ thumbnail.name }}
                         </span>
                     </label>
                 </div>
@@ -100,7 +105,10 @@
                         <input
                             class="file-input"
                             type="file"
-                            name="thumbnail"
+                            accept="image/*"
+                            name="images"
+                            v-on:change="uploadImage"
+                            multiple
                         />
                         <span class="file-cta">
                             <span class="file-icon">
@@ -108,8 +116,16 @@
                             </span>
                             <span class="file-label">Choose images</span>
                         </span>
-                        <span class="file-name">
-                            Screen Shot 2017-07-29 at 15.54.25.png
+                        <span class="file-name" v-if="!images">
+                            No images uploaded
+                        </span>
+                        <span
+                            class="file-name"
+                            v-else
+                            v-for="image in images"
+                            :key="image.id"
+                        >
+                            {{ image.name }}
                         </span>
                     </label>
                 </div>
@@ -140,19 +156,33 @@ export default {
             country: "",
             category: "",
             description: "",
+            thumbnail: null,
+            images: null,
             errors: [],
         };
     },
     methods: {
+        uploadThumbnail(event) {
+            this.thumbnail = event.target.files[0];
+        },
+        uploadImage(event) {
+            this.images = event.target.files;
+        },
         submitNewProduct() {
-            let product = {
-                title: this.title,
-                price: this.price,
-                country: this.country,
-                category: this.category,
-                owner: this.$store.state.currentUserId,
-                description: this.description,
-            };
+            let product = new FormData();
+            product.append("title", this.title);
+            product.append("price", this.price);
+            product.append("country", this.country);
+            product.append("category", this.category);
+            product.append("owner", this.$store.state.currentUserId);
+            product.append("description", this.description);
+            product.append("thumbnail", this.thumbnail);
+            if (!this.thumbnail || !this.images) {
+                this.errors[0] = "Upload thumbnail and product images";
+            }
+            for (let i = 0; i < this.images.length; i++) {
+                product.append("image", this.images[i]);
+            }
             djangoAPI
                 .post("/testing/new/", product)
                 .then((newProductResponse) => {
@@ -198,7 +228,7 @@ export default {
     padding: 30px;
 }
 #error {
-    text-align: left;
+    text-align: center;
 }
 .title {
     display: flex;

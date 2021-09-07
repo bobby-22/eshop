@@ -4,8 +4,6 @@ from django.db.models.deletion import CASCADE
 
 # Create your models here.
 class ProductModel(models.Model):
-    thumbnail = models.ImageField(upload_to="images/")
-    image = models.FileField(upload_to="images/")
     title = models.CharField(max_length=50, default="")
     price = models.IntegerField(default="")
     country = models.CharField(max_length=25, default="")
@@ -13,6 +11,8 @@ class ProductModel(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=500, default="")
+    thumbnail = models.ImageField(upload_to="images/")
+    image = models.FileField(upload_to="images/")
     stripe_product_id = models.SlugField(max_length=100, default="")
     stripe_price_id = models.SlugField(max_length=100, default="")
 
