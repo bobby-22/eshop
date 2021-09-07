@@ -72,10 +72,7 @@ export default {
 
 <style lang="scss" scoped>
 $content-bottom-border-top-color: #f0f0f0;
-$link-blue: dodgerblue;
-$link-orange: darksalmon;
-$link-grey: #363636;
-$link-red: #f14668;
+$link-grey: #424242;
 .card {
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
@@ -110,16 +107,8 @@ $link-red: #f14668;
     justify-content: space-between;
     align-items: baseline;
 }
-a {
+a#unsave {
     color: $link-grey;
-}
-a:link,
-a:visited {
-    color: $link-blue;
-}
-a:active,
-a:hover {
-    color: $link-orange;
 }
 #content-bottom {
     border-top: 1px solid $content-bottom-border-top-color;

@@ -51,7 +51,7 @@ export default {
 
 <style lang="scss" scoped>
 $title-border-top-color: #ededed;
-$link-grey: #363636;
+$link-grey: #424242;
 .container {
     min-height: 100%;
     padding: 30px;
@@ -64,7 +64,7 @@ $link-grey: #363636;
     border-bottom: 1px solid $title-border-top-color;
     margin-bottom: 26px;
 }
-a {
+a#new {
     color: $link-grey;
 }
 #new:hover {

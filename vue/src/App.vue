@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         refreshToken() {
-            let tokenRefresh = this.$store.state.tokenRefresh
+            let tokenRefresh = this.$store.state.tokenRefresh;
             djangoAPI
                 .post("/accounts/refresh/", { refresh: tokenRefresh })
                 .then((tokensResponse) => {
@@ -58,6 +58,8 @@ export default {
 
 <style lang="scss">
 @import "../node_modules/bulma";
+$link-blue: dodgerblue;
+$link-orange: darksalmon;
 .container {
     display: flex;
     flex-direction: column;
@@ -65,5 +67,13 @@ export default {
 }
 ::selection {
     background-color: #fbe38b;
+}
+a:link,
+a:visited {
+    color: $link-blue;
+}
+a:active,
+a:hover {
+    color: $link-orange;
 }
 </style>

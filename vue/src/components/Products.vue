@@ -147,8 +147,6 @@ export default {
 <style lang="scss" scoped>
 $bookmark-color: #616161;
 $content-bottom-border-top-color: #f0f0f0;
-$link-blue: dodgerblue;
-$link-orange: darksalmon;
 .column.is-one-quarter-desktop.is-one-third-tablet {
     padding: 8px;
 }
@@ -205,14 +203,6 @@ $link-orange: darksalmon;
 }
 .fas {
     margin-right: 5px;
-}
-a:link,
-a:visited {
-    color: $link-blue;
-}
-a:active,
-a:hover {
-    color: $link-orange;
 }
 img {
     position: relative;

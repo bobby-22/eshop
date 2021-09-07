@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="title">Category {{ this.$route.params.category_id }}:</h1>
+        <h1 class="title">{{ this.$route.params.category }}:</h1>
         <div class="columns is-multiline">
             <Products
                 v-for="product in products"

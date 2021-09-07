@@ -21,19 +21,28 @@
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
-                v-bind:to="{ name: 'Category', params: { category: 'Deskmats' } }"
+                v-bind:to="{
+                    name: 'Category',
+                    params: { category: 'Deskmats' },
+                }"
                 >Deskmats</router-link
             >
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
-                v-bind:to="{ name: 'Category', params: { category: 'Keyboards' } }"
+                v-bind:to="{
+                    name: 'Category',
+                    params: { category: 'Keyboards' },
+                }"
                 >Keyboards</router-link
             >
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
-                v-bind:to="{ name: 'Category', params: { category: 'Keycaps' } }"
+                v-bind:to="{
+                    name: 'Category',
+                    params: { category: 'Keycaps' },
+                }"
                 >Keycaps</router-link
             >
             <hr class="dropdown-divider" />
@@ -57,20 +66,29 @@
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
-                v-bind:to="{ name: 'Category', params: { category: 'Switches' } }"
+                v-bind:to="{
+                    name: 'Category',
+                    params: { category: 'Switches' },
+                }"
                 >Switches</router-link
             >
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
-                v-bind:to="{ name: 'Category', params: { category: 'Travelling-Cases' } }"
+                v-bind:to="{
+                    name: 'Category',
+                    params: { category: 'Travelling-Cases' },
+                }"
                 >Travelling cases</router-link
             >
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
                 id="last"
-                v-bind:to="{ name: 'Category', params: { category: 'Wrist-rests' } }"
+                v-bind:to="{
+                    name: 'Category',
+                    params: { category: 'Wrist-rests' },
+                }"
                 >Wrist-rests</router-link
             >
         </div>
@@ -104,5 +122,11 @@ $dropdown-menu-background-color: white;
 }
 .fas {
     margin-left: 3px;
+}
+a:link,
+a:visited,
+a:active,
+a:hover {
+    color: inherit;
 }
 </style>

@@ -156,8 +156,6 @@ export default {
 
 <style lang="scss" scoped>
 $navbar-background-color: #f8f8f8;
-$link-blue: dodgerblue;
-$link-orange: darksalmon;
 $counter-color: #c9a0ff;
 .navbar.is-light {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,

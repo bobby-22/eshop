@@ -49,16 +49,12 @@ export default {
 
 <style lang="scss" scoped>
 $content-bottom-border-top-color: #f0f0f0;
-$link-blue: dodgerblue;
-$link-orange: darksalmon;
-$link-red: #f14668;
 .card {
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
         rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 16px;
 }
 .card-image {
     display: flex;
@@ -88,14 +84,6 @@ $link-red: #f14668;
 }
 #price {
     margin-right: 15px;
-}
-a:link,
-a:visited {
-    color: $link-blue;
-}
-a:active,
-a:hover {
-    color: $link-orange;
 }
 #content-bottom {
     border-top: 1px solid $content-bottom-border-top-color;
