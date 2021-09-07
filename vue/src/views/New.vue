@@ -43,7 +43,9 @@
                     <div class="control has-icons-left">
                         <div class="select">
                             <select v-model="category">
-                                <option disabled value="">Select category</option>
+                                <option disabled value="">
+                                    Select category
+                                </option>
                                 <option>Cables</option>
                                 <option>Cases</option>
                                 <option>Deskmats</option>
@@ -148,6 +150,7 @@ export default {
                 price: this.price,
                 country: this.country,
                 category: this.category,
+                owner: this.$store.state.currentUserId,
                 description: this.description,
             };
             djangoAPI
@@ -172,6 +175,9 @@ export default {
                     }
                 });
         },
+    },
+    beforeCreate() {
+        this.$store.commit("localStorageSavedCurrentUserId");
     },
     created() {
         document.title = "New Product | MechMarketEU";
