@@ -65,15 +65,14 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-$title-border-top-color: #ededed;
+<style scoped>
 .container {
     min-height: 100%;
     padding: 30px;
 }
 .title {
     padding-bottom: 15px;
-    border-bottom: 1px solid $title-border-top-color;
+    border-bottom: 1px solid #ededed;
     margin-bottom: 26px;
 }
 </style>

@@ -29,14 +29,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-$footer-border-top-color: #ededed;
-$footer-border-bottom-color: #f5f5f5;
-$footer-text-color: #949494;
+<style scoped>
 footer {
     font-weight: 100;
-    color: $footer-text-color;
-    border-top: 1px solid $footer-border-top-color;
+    color: #949494;
+    border-top: 1px solid #ededed;
     padding: 15px 30px 15px 30px;
     text-align: center;
 }
@@ -44,7 +41,7 @@ footer {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    border-bottom: 1px solid $footer-border-bottom-color;
+    border-bottom: 1px solid #f5f5f5;
     margin-bottom: 15px;
     padding-bottom: 15px;
 }

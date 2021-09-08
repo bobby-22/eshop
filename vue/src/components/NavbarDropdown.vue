@@ -101,12 +101,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-$dropdown-menu-background-color: white;
+<style scoped>
 .dropdown-menu {
     border-radius: 10px;
     box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.2);
-    background: $dropdown-menu-background-color;
+    background: white;
     padding: 0px;
 }
 .dropdown-divider {

@@ -49,9 +49,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-$title-border-top-color: #ededed;
-$link-grey: #424242;
+<style scoped>
 .container {
     min-height: 100%;
     padding: 30px;
@@ -61,11 +59,11 @@ $link-grey: #424242;
     justify-content: space-between;
     align-items: baseline;
     padding-bottom: 15px;
-    border-bottom: 1px solid $title-border-top-color;
+    border-bottom: 1px solid #ededed;
     margin-bottom: 26px;
 }
 a#new {
-    color: $link-grey;
+    color: #424242;
 }
 #new:hover {
     color: black;

@@ -58,8 +58,6 @@ export default {
 
 <style lang="scss">
 @import "../node_modules/bulma";
-$link-blue: dodgerblue;
-$link-orange: darksalmon;
 .container {
     display: flex;
     flex-direction: column;
@@ -70,10 +68,10 @@ $link-orange: darksalmon;
 }
 a:link,
 a:visited {
-    color: $link-blue;
+    color: dodgerblue;
 }
 a:active,
 a:hover {
-    color: $link-orange;
+    color: darksalmon;
 }
 </style>

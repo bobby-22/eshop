@@ -10,16 +10,13 @@ class RegisterSerializer(serializers.ModelSerializer):
     username = serializers.CharField(
         min_length=3,
         max_length=20,
-        required=True,
         error_messages={
             "blank": "Username cannot be empty",
             "min_length": "Username must be between 3 and 20 characters",
-            "max_length"
         },
     )
 
     email = serializers.EmailField(
-        required=True,
         error_messages={
             "blank": "Email cannot be empty",
         },
@@ -31,7 +28,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         min_length=4,
         max_length=128,
         write_only=True,
-        required=True,
         error_messages={
             "blank": "Password cannot be empty",
             "min_length": "Password must be between longer than 4 characters",
@@ -43,7 +39,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         min_length=4,
         max_length=128,
         write_only=True,
-        required=True,
         error_messages={
             "blank": "Password confirmation cannot be empty",
             "min_length": "Password must be longer than 4 characters",
@@ -77,7 +72,6 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class LoginSerializer(serializers.ModelSerializer):
     username = serializers.CharField(
-        required=True,
         error_messages={
             "blank": "Username cannot be empty",
         },
@@ -85,7 +79,6 @@ class LoginSerializer(serializers.ModelSerializer):
     password1 = serializers.CharField(
         style={"input_type": "password"},
         write_only=True,
-        required=True,
         error_messages={
             "blank": "Password cannot be empty",
         },

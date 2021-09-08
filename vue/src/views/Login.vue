@@ -6,7 +6,7 @@
                 <i class="far fa-user-circle"></i>
             </h1>
             <div class="notification is-danger" v-if="error">
-                <p id="error">Incorrect username or password</p>
+                <p>Incorrect username or password</p>
             </div>
             <div class="field">
                 <div class="control has-icons-left">
@@ -109,7 +109,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .container {
     min-height: 100%;
     display: flex;
@@ -122,7 +122,10 @@ export default {
     border-radius: 10px;
     padding: 30px;
 }
-#error {
+.notification.is-danger {
+    padding: 20px 27px 20px 24px;
+}
+p {
     text-align: center;
 }
 .title {
@@ -132,9 +135,6 @@ export default {
 }
 .input {
     height: 100%;
-}
-p {
-    text-align: center;
 }
 @media (max-width: 1024px) {
     .container {

@@ -146,7 +146,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .container {
     min-height: 100%;
     display: flex;
@@ -160,7 +160,7 @@ export default {
     padding: 30px;
 }
 #error {
-    text-align: center;
+    text-align: left;
 }
 .title {
     display: flex;

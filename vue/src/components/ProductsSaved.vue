@@ -70,9 +70,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-$content-bottom-border-top-color: #f0f0f0;
-$link-grey: #424242;
+<style scoped>
 .card {
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
@@ -108,10 +106,10 @@ $link-grey: #424242;
     align-items: baseline;
 }
 a#unsave {
-    color: $link-grey;
+    color: #424242;
 }
 #content-bottom {
-    border-top: 1px solid $content-bottom-border-top-color;
+    border-top: 1px solid #f0f0f0;
 }
 .split {
     display: flex;

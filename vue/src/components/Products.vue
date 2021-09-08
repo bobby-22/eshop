@@ -144,9 +144,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-$bookmark-color: #616161;
-$content-bottom-border-top-color: #f0f0f0;
+<style scoped>
 .column.is-one-quarter-desktop.is-one-third-tablet {
     padding: 8px;
 }
@@ -167,7 +165,7 @@ $content-bottom-border-top-color: #f0f0f0;
     opacity: 0.3;
     background: white;
     font-size: 25px;
-    color: $bookmark-color;
+    color: #616161;
     padding: 5px;
     margin: 10px;
 }
@@ -185,7 +183,7 @@ $content-bottom-border-top-color: #f0f0f0;
     white-space: normal;
 }
 #content-bottom {
-    border-top: 1px solid $content-bottom-border-top-color;
+    border-top: 1px solid #f0f0f0;
     margin: 0px;
 }
 .split {

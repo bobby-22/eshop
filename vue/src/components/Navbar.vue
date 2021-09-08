@@ -155,13 +155,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$navbar-background-color: #f8f8f8;
-$counter-color: #c9a0ff;
 .navbar.is-light {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
         rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
     border-radius: 15px;
-    background: $navbar-background-color;
+    background: #f8f8f8;
     margin-top: 15px;
 }
 #brand {
@@ -177,7 +175,8 @@ $counter-color: #c9a0ff;
 .button.is-danger {
     border-radius: 15px;
 }
-#profile, #profile:hover {
+#profile,
+#profile:hover {
     color: black;
 }
 #button-area {
@@ -206,7 +205,7 @@ $counter-color: #c9a0ff;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 700;
     font-size: 11px;
-    background: $counter-color;
+    background: #c9a0ff;
     padding: 3px;
 }
 @media (max-width: 1024px) {

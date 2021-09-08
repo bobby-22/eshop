@@ -5,11 +5,6 @@
                 New product
                 <i class="fas fa-plus"></i>
             </h1>
-            <div class="notification is-danger" v-if="errors.length">
-                <p id="error" v-for="error in errors" v-bind:key="error">
-                    {{ error }}
-                </p>
-            </div>
             <div class="field">
                 <label class="label">Title</label>
                 <div class="control has-icons-left has-icons-right">
@@ -23,8 +18,7 @@
                         <i class="fas fa-heading"></i>
                     </span>
                     <span
-                        class="icon is-small is-right"
-                        id="countCharactersLimit"
+                        class="icon is-small is-right has-text-danger"
                         v-if="this.titleLength > 50"
                     >
                         {{ this.titleLength }}
@@ -65,8 +59,7 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </span>
                         <span
-                            class="icon is-small is-right"
-                            id="countCharactersLimit"
+                            class="icon is-small is-right has-text-danger"
                             v-if="this.countryLength > 25"
                         >
                             {{ this.countryLength }}
@@ -148,6 +141,10 @@
                         </span>
                     </label>
                 </div>
+                <p class="help is-danger" v-if="errorThumbnailBoolean">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ this.errorMessageThumbnail }}
+                </p>
             </div>
             <div class="field">
                 <div class="file has-name is-fullwidth">
@@ -179,6 +176,10 @@
                         </span>
                     </label>
                 </div>
+                <p class="help is-danger" v-if="errorImagesBoolean">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ this.errorMessageImages }}
+                </p>
             </div>
             <div class="field">
                 <div class="control">
@@ -270,6 +271,18 @@ export default {
             } else {
                 this.errorDescriptionBoolean = false;
             }
+            if (!this.thumbnail) {
+                this.errorThumbnailBoolean = true;
+                this.errorMessageThumbnail = "Upload a thumbnail";
+            } else {
+                this.errorThumbnailBoolean = false;
+            }
+            if (!this.images) {
+                this.errorImagesBoolean = true;
+                this.errorMessageImages = "Upload some images";
+            } else {
+                this.errorImagesBoolean = false;
+            }
         },
         countCharacters() {
             let titleLength = 0;
@@ -309,32 +322,19 @@ export default {
                         newProductResponse.data.stripe_product_id;
                     this.uploadImages();
                     console.log(newProductResponse);
-                    toast({
-                        message: "Product was successfully added!",
-                        type: "is-success",
-                        dismissible: true,
-                        pauseOnHover: true,
-                        duration: 2000,
-                        position: "bottom-right",
-                    });
-                    this.$router.push("/user/" + this.$store.state.currentUser);
                 })
                 .catch((error) => {
                     console.log(error);
-                    this.errors.splice(0, this.errors.length);
-                    for (let property in error.response.data) {
-                        this.errors.push(`${error.response.data[property]}`);
-                    }
                 });
         },
         uploadImages() {
-            let media = new FormData();
+            let images = new FormData();
             for (let i = 0; i < this.images.length; i++) {
-                media.append("stripe_product_id", this.stripe_product_id);
-                media.append("images", this.images[i]);
+                images.append("stripe_product_id", this.stripe_product_id);
+                images.append("images", this.images[i]);
             }
             djangoAPI
-                .post("/dobry/new/", media)
+                .post("/dobry/new/", images)
                 .then((newProductImagesResponse) => {
                     console.log(newProductImagesResponse);
                     toast({
@@ -349,10 +349,6 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
-                    this.errors.splice(0, this.errors.length);
-                    for (let property in error.response.data) {
-                        this.errors.push(`${error.response.data[property]}`);
-                    }
                 });
         },
     },
@@ -366,8 +362,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-$error-color: #f14668;
+<style scoped>
 .container {
     min-height: 100%;
     display: flex;
@@ -389,9 +384,6 @@ $error-color: #f14668;
 }
 .input {
     height: 100%;
-}
-#countCharactersLimit {
-    color: $error-color;
 }
 .container-column {
     display: flex;
