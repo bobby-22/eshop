@@ -1,14 +1,17 @@
-from django.http import request
+from django.conf import settings
 from rest_framework import serializers
-from .models import ProductModel
+from .models import ProductModel, ImageModel
 from django.contrib.auth import get_user_model
-
-User = get_user_model()
 import stripe
 
-from django.conf import settings
-
+User = get_user_model()
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+class ImageModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImageModel
+        fields = ("product_id", "images")
 
 
 class ProductModelSerializer(serializers.ModelSerializer):
@@ -26,51 +29,17 @@ class ProductModelSerializer(serializers.ModelSerializer):
             "user",
             "description",
             "thumbnail",
-            "image",
             "stripe_product_id",
             "stripe_price_id",
         )
 
 
 class ProductNewSerializer(serializers.ModelSerializer):
-    title = serializers.CharField(
-        max_length=50,
-        required=True,
-        error_messages={
-            "blank": "Title cannot be empty",
-            "max_length": "Title cannot be longer than 50 characters",
-        },
-    )
-    price = serializers.IntegerField(
-        required=True,
-        error_messages={
-            "blank": "Price cannot be empty",
-        },
-    )
-    country = serializers.CharField(
-        max_length=25,
-        required=True,
-        error_messages={
-            "blank": "Country cannot be empty",
-            "max_length": "Country cannot be longer than 25 characters",
-        },
-    )
-    category = serializers.CharField(
-        max_length=25,
-        required=True,
-        error_messages={
-            "blank": "Category cannot be empty",
-            "max_length": "Category cannot be longer than 25 characters",
-        },
-    )
-    description = serializers.CharField(
-        max_length=500,
-        required=True,
-        error_messages={
-            "blank": "Description cannot be empty",
-            "max_length": "Description cannot be longer than 500 characters",
-        },
-    )
+    title = serializers.CharField(max_length=50)
+    price = serializers.IntegerField()
+    country = serializers.CharField(max_length=25)
+    category = serializers.CharField(max_length=25)
+    description = serializers.CharField(max_length=500)
 
     class Meta:
         model = ProductModel
@@ -82,7 +51,7 @@ class ProductNewSerializer(serializers.ModelSerializer):
             "owner",
             "description",
             "thumbnail",
-            "image",
+            "stripe_product_id",
         )
 
     def create(self, validated_data):
@@ -102,8 +71,22 @@ class ProductNewSerializer(serializers.ModelSerializer):
             owner=validated_data["owner"],
             description=validated_data["description"],
             thumbnail=validated_data["thumbnail"],
-            image=validated_data["image"],
             stripe_product_id=stripe_product.id,
             stripe_price_id=stripe_price.id,
         )
         return product
+
+
+class ProductImagesNewSerializer(serializers.ModelSerializer):
+    images = serializers.ListField(child=serializers.FileField())
+
+    class Meta:
+        model = ImageModel
+        fields = ("stripe_product_id", "images")
+
+    def create(self, validated_data):
+        for image in validated_data.pop("images"):
+            images = ImageModel.objects.create(
+                stripe_product_id=validated_data["stripe_product_id"], images=image
+            )
+        return images

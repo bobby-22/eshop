@@ -12,31 +12,73 @@
             </div>
             <div class="field">
                 <label class="label">Title</label>
-                <div class="control has-icons-left">
-                    <input class="input" type="text" v-model="title" />
+                <div class="control has-icons-left has-icons-right">
+                    <input
+                        class="input"
+                        type="text"
+                        v-model="title"
+                        v-on:input="countCharacters()"
+                    />
                     <span class="icon is-small is-left">
                         <i class="fas fa-heading"></i>
                     </span>
+                    <span
+                        class="icon is-small is-right"
+                        id="countCharactersLimit"
+                        v-if="this.titleLength > 50"
+                    >
+                        {{ this.titleLength }}
+                    </span>
+                    <span class="icon is-small is-right" v-else>
+                        {{ this.titleLength }}
+                    </span>
                 </div>
+                <p class="help is-danger" v-if="errorTitleBoolean">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ this.errorMessageTitle }}
+                </p>
             </div>
             <div class="container-column">
                 <div class="field" id="price">
                     <label class="label">Price</label>
                     <div class="control has-icons-left">
-                        <input class="input" type="text" v-model="price" />
+                        <input class="input" type="number" v-model="price" />
                         <span class="icon is-small is-left">
                             <i class="fas fa-euro-sign"></i>
                         </span>
                     </div>
+                    <p class="help is-danger" v-if="errorPriceBoolean">
+                        <i class="fas fa-exclamation-circle"></i>
+                        {{ this.errorMessagePrice }}
+                    </p>
                 </div>
                 <div class="field" id="country">
                     <label class="label">Country</label>
-                    <div class="control has-icons-left">
-                        <input class="input" type="text" v-model="country" />
+                    <div class="control has-icons-left has-icons-right">
+                        <input
+                            class="input"
+                            type="text"
+                            v-model="country"
+                            v-on:input="countCharacters()"
+                        />
                         <span class="icon is-small is-left">
                             <i class="fas fa-map-marker-alt"></i>
                         </span>
+                        <span
+                            class="icon is-small is-right"
+                            id="countCharactersLimit"
+                            v-if="this.countryLength > 25"
+                        >
+                            {{ this.countryLength }}
+                        </span>
+                        <span class="icon is-small is-right" v-else>
+                            {{ this.countryLength }}
+                        </span>
                     </div>
+                    <p class="help is-danger" v-if="errorCountryBoolean">
+                        <i class="fas fa-exclamation-circle"></i>
+                        {{ this.errorMessageCountry }}
+                    </p>
                 </div>
                 <div class="field" id="category">
                     <label class="label">Category</label>
@@ -61,6 +103,10 @@
                         <span class="icon is-small is-left">
                             <i class="fas fa-list"></i>
                         </span>
+                        <p class="help is-danger" v-if="errorCategoryBoolean">
+                            <i class="fas fa-exclamation-circle"></i>
+                            {{ this.errorMessageCategory }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -73,6 +119,10 @@
                         v-model="description"
                     ></textarea>
                 </div>
+                <p class="help is-danger" v-if="errorDescriptionBoolean">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ this.errorMessageDescription }}
+                </p>
             </div>
             <div class="field">
                 <div class="file has-name is-fullwidth">
@@ -158,10 +208,81 @@ export default {
             description: "",
             thumbnail: null,
             images: null,
+            stripe_product_id: null,
             errors: [],
+            errorTitleBoolean: false,
+            errorCountryBoolean: false,
+            errorPriceBoolean: false,
+            errorCategoryBoolean: false,
+            errorDescriptionBoolean: false,
+            errorThumbnailBoolean: false,
+            errorImagesBoolean: false,
+
+            errorMessageTitle: null,
+            errorMessagePrice: null,
+            errorMessageCountry: null,
+            errorMessageCategory: null,
+            errorMessageDescription: null,
+            errorMessageThumbnail: null,
+            errorMessageImages: null,
+
+            titleLength: null,
+            countryLength: null,
         };
     },
     methods: {
+        checkErrors() {
+            if (!this.title) {
+                this.errorTitleBoolean = true;
+                this.errorMessageTitle = "Title cannot be empty";
+            } else if (this.title.length > 50) {
+                this.errorTitleBoolean = true;
+                this.errorMessageTitle =
+                    "Title cannot be longer than 50 characters";
+            } else {
+                this.errorTitleBoolean = false;
+            }
+            if (!this.price) {
+                this.errorPriceBoolean = true;
+                this.errorMessagePrice = "Price cannot be empty";
+            } else {
+                this.errorPriceBoolean = false;
+            }
+            if (!this.country) {
+                this.errorCountryBoolean = true;
+                this.errorMessageCountry = "Country cannot be empty";
+            } else if (this.country.length > 25) {
+                this.errorCountryBoolean = true;
+                this.errorMessageCountry =
+                    "Country cannot be longer than 25 characters";
+            } else {
+                this.errorCountryBoolean = false;
+            }
+            if (!this.category) {
+                this.errorCategoryBoolean = true;
+                this.errorMessageCategory = "Category cannot be empty";
+            } else {
+                this.errorCategoryBoolean = false;
+            }
+            if (!this.description) {
+                this.errorDescriptionBoolean = true;
+                this.errorMessageDescription = "Description cannot be empty";
+            } else {
+                this.errorDescriptionBoolean = false;
+            }
+        },
+        countCharacters() {
+            let titleLength = 0;
+            let countryLength = 0;
+            for (let i = 0; i < this.title.length; i++) {
+                titleLength++;
+            }
+            for (let j = 0; j < this.country.length; j++) {
+                countryLength++;
+            }
+            this.titleLength = titleLength;
+            this.countryLength = countryLength;
+        },
         uploadThumbnail(event) {
             this.thumbnail = event.target.files[0];
         },
@@ -169,6 +290,7 @@ export default {
             this.images = event.target.files;
         },
         submitNewProduct() {
+            this.checkErrors();
             let product = new FormData();
             product.append("title", this.title);
             product.append("price", this.price);
@@ -177,16 +299,44 @@ export default {
             product.append("owner", this.$store.state.currentUserId);
             product.append("description", this.description);
             product.append("thumbnail", this.thumbnail);
-            if (!this.thumbnail || !this.images) {
-                this.errors[0] = "Upload thumbnail and product images";
-            }
-            for (let i = 0; i < this.images.length; i++) {
-                product.append("image", this.images[i]);
+            if (this.thumbnail == null) {
+                this.errors.push("ahoj");
             }
             djangoAPI
-                .post("/testing/new/", product)
+                .post("/ahoj/new/", product)
                 .then((newProductResponse) => {
+                    this.stripe_product_id =
+                        newProductResponse.data.stripe_product_id;
+                    this.uploadImages();
                     console.log(newProductResponse);
+                    toast({
+                        message: "Product was successfully added!",
+                        type: "is-success",
+                        dismissible: true,
+                        pauseOnHover: true,
+                        duration: 2000,
+                        position: "bottom-right",
+                    });
+                    this.$router.push("/user/" + this.$store.state.currentUser);
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.errors.splice(0, this.errors.length);
+                    for (let property in error.response.data) {
+                        this.errors.push(`${error.response.data[property]}`);
+                    }
+                });
+        },
+        uploadImages() {
+            let media = new FormData();
+            for (let i = 0; i < this.images.length; i++) {
+                media.append("stripe_product_id", this.stripe_product_id);
+                media.append("images", this.images[i]);
+            }
+            djangoAPI
+                .post("/dobry/new/", media)
+                .then((newProductImagesResponse) => {
+                    console.log(newProductImagesResponse);
                     toast({
                         message: "Product was successfully added!",
                         type: "is-success",
@@ -210,12 +360,14 @@ export default {
         this.$store.commit("localStorageSavedCurrentUserId");
     },
     created() {
+        this.countCharacters();
         document.title = "New Product | MechMarketEU";
     },
 };
 </script>
 
 <style lang="scss" scoped>
+$error-color: #f14668;
 .container {
     min-height: 100%;
     display: flex;
@@ -238,6 +390,9 @@ export default {
 .input {
     height: 100%;
 }
+#countCharactersLimit {
+    color: $error-color;
+}
 .container-column {
     display: flex;
     flex-wrap: wrap;
@@ -246,6 +401,10 @@ export default {
 #price,
 #country {
     flex-grow: 1;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
 }
 select {
     height: 37px;

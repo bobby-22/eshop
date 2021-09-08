@@ -4,7 +4,7 @@ from django.shortcuts import(
 ) 
 from django.conf import settings
 from products.models import ProductModel
-from products.serializers import ProductModelSerializer, ProductNewSerializer
+from products.serializers import ProductImagesNewSerializer, ProductModelSerializer, ProductNewSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import(
@@ -50,6 +50,9 @@ class ProfileView(APIView):
 
 class ProductNewView(generics.CreateAPIView):
     serializer_class = ProductNewSerializer
+
+class ProductImagesNewView(generics.CreateAPIView):
+    serializer_class = ProductImagesNewSerializer
 
 def success(request):
     return render(request, "products/success.html")

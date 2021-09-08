@@ -14,6 +14,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         error_messages={
             "blank": "Username cannot be empty",
             "min_length": "Username must be between 3 and 20 characters",
+            "max_length"
         },
     )
 
