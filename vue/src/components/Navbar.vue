@@ -197,6 +197,9 @@ export default {
     font-size: 20px;
     position: relative;
 }
+.fas.fa-bookmark::before {
+    color: #4a4a4a;
+}
 .counter {
     position: absolute;
     bottom: 50%;
@@ -206,6 +209,7 @@ export default {
     font-weight: 700;
     font-size: 11px;
     background: #c9a0ff;
+    color: #4a4a4a;
     padding: 3px;
 }
 @media (max-width: 1024px) {

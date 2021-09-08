@@ -176,11 +176,7 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin: 0px 0px 10px;
-}
-.content:hover {
-    overflow: visible;
-    white-space: normal;
+    margin: 0px 0px 15px;
 }
 #content-bottom {
     border-top: 1px solid #f0f0f0;
@@ -189,18 +185,18 @@ export default {
 .split {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0px;
     margin-top: 5px;
-    padding-bottom: 0px;
+    padding-bottom: 1px;
 }
 .subtitle {
     -webkit-text-size-adjust: none;
-    align-items: baseline;
     margin-bottom: 0px;
 }
 .fas {
     margin-right: 5px;
+}
+.card-image {
+    height: 200px;
 }
 img {
     position: relative;
@@ -210,7 +206,7 @@ img {
 }
 @media (max-width: 769px) {
     img {
-        height: 100%;
+        min-height: 100%;
     }
 }
 </style>
