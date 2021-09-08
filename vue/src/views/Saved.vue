@@ -1,6 +1,12 @@
 <template>
     <div class="container">
-        <h1 class="title">Saved products:</h1>
+        <h1 class="title">
+            Saved products:
+        </h1>
+        <p v-if="!this.savedProducts.items.length">
+            No products saved...
+        </p>
+
         <ProductsSaved
             v-for="item in savedProducts.items"
             v-bind:key="item.product.id"
@@ -52,6 +58,7 @@ export default {
 <style scoped>
 .container {
     min-height: 100%;
+    min-width: 100%;
     padding: 30px;
 }
 .title {

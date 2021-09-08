@@ -1,16 +1,22 @@
 <template>
     <div class="container">
-        <div class="details" v-for="detail in details" :key="detail.id">
+        <div
+            class="details"
+            v-for="detail in details.slice(0, 1)"
+            :key="detail.id"
+        >
             <div class="details-left">
                 <div class="detail-thumbnail">
                     <img v-bind:src="detail.thumbnail" />
                 </div>
                 <div class="detail-images">
-                    <img v-bind:src="detail.image" />
-                    <img v-bind:src="detail.image" />
-                    <img v-bind:src="detail.image" />
-                    <img v-bind:src="detail.image" />
-                    <img v-bind:src="detail.image" />
+                    <div
+                        class="images"
+                        v-for="image in details.slice(1, this.details.length)"
+                        :key="image.id"
+                    >
+                        <img id="image" v-bind:src="image.images" />
+                    </div>
                 </div>
             </div>
 
@@ -52,7 +58,7 @@ export default {
     name: "Details",
     data() {
         return {
-            details: null,
+            details: [],
             product: null,
             modalBoolean: false,
         };
@@ -67,10 +73,10 @@ export default {
                 .then((detailsResponse) => {
                     console.log(detailsResponse);
                     this.details = detailsResponse.data;
-                    for (let i = 0; i < this.details.length; i++) {
+                    for (let i = 0; i < this.details.slice(0, 1).length; i++) {
                         this.product = this.details[i];
                     }
-                    document.title = this.product.title + " | MechMarketEU";
+                    document.title = this.product.title;
                 })
                 .catch((error) => {
                     console.log(error);
@@ -86,6 +92,7 @@ export default {
 <style scoped>
 .container {
     min-height: 100%;
+    min-width: 100%;
     padding: 30px;
 }
 .details {
@@ -110,7 +117,7 @@ export default {
     overflow-y: hidden;
     column-gap: 5px;
 }
-.detail-images > img {
+#image {
     height: 100px;
 }
 .details-right {
@@ -143,7 +150,11 @@ export default {
     }
     .details-left {
         margin-right: 0px;
-        margin-bottom: 30px;
+        margin-bottom: 15px;
+    }
+    .details-right {
+        border-top: 1px solid #f0f0f0;
+        padding-top: 15px;
     }
 }
 </style>

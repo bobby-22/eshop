@@ -6,6 +6,9 @@
                 <i class="far fa-plus-square"></i>
             </router-link>
         </h1>
+        <p v-if="!this.products.length">
+            No products added...
+        </p>
         <ProductsProfile
             v-for="product in products"
             v-bind:key="product.id"
@@ -52,6 +55,7 @@ export default {
 <style scoped>
 .container {
     min-height: 100%;
+    min-width: 100%;
     padding: 30px;
 }
 .title {

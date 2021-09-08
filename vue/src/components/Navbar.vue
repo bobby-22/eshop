@@ -60,7 +60,7 @@
                         >&nbsp;{{ currentUser }}
                     </router-link>
                 </span>
-                <router-link to="/products/savedProducts" class="navbar-item">
+                <router-link to="/products/saved" class="navbar-item">
                     <span class="fas fa-bookmark">
                         <span class="counter">{{ bookmarkLength }}</span>
                     </span>

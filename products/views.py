@@ -3,8 +3,8 @@ from django.shortcuts import(
     redirect
 ) 
 from django.conf import settings
-from products.models import ProductModel
-from products.serializers import ProductImagesNewSerializer, ProductModelSerializer, ProductNewSerializer
+from products.models import ProductModel, ImageModel
+from products.serializers import ProductImagesNewSerializer, ProductModelSerializer, ImageModelSerializer, ProductNewSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import(
@@ -26,9 +26,11 @@ class LatestView(APIView):
 
 class DetailsView(APIView):
     def get(self, request, stripe_product_id):
-        details = ProductModel.objects.filter(stripe_product_id=stripe_product_id)
-        serializers = ProductModelSerializer(details, many=True, context={"request": request})
-        return Response(serializers.data)
+        details_content = ProductModel.objects.filter(stripe_product_id=stripe_product_id)
+        details_images = ImageModel.objects.filter(stripe_product_id=stripe_product_id)
+        serializers_content = ProductModelSerializer(details_content, many=True, context={"request": request})
+        serializers_images = ImageModelSerializer(details_images, many=True, context={"request": request})
+        return Response(serializers_content.data + serializers_images.data)
 
 class CategoryView(APIView):
     def get(self, request, category):

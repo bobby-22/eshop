@@ -37,7 +37,7 @@ const routes = [
         component: Search,
     },
     {
-        path: "/products/savedProducts",
+        path: "/products/saved",
         name: "Saved",
         component: Saved,
     },

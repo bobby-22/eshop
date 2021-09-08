@@ -68,6 +68,7 @@ export default {
 <style scoped>
 .container {
     min-height: 100%;
+    min-width: 100%;
     padding: 30px;
 }
 .title {

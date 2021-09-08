@@ -11,7 +11,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 class ImageModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = ImageModel
-        fields = ("product_id", "images")
+        fields = ("stripe_product_id", "images")
 
 
 class ProductModelSerializer(serializers.ModelSerializer):
