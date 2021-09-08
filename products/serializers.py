@@ -1,6 +1,7 @@
 from django.conf import settings
 from rest_framework import serializers
 from .models import ProductModel, ImageModel
+from django.core.validators import MaxValueValidator
 from django.contrib.auth import get_user_model
 import stripe
 
@@ -35,10 +36,10 @@ class ProductModelSerializer(serializers.ModelSerializer):
 
 
 class ProductNewSerializer(serializers.ModelSerializer):
-    title = serializers.CharField(max_length=50)
-    price = serializers.IntegerField()
-    country = serializers.CharField(max_length=25)
-    category = serializers.CharField(max_length=25)
+    title = serializers.CharField(max_length=40)
+    price = serializers.IntegerField(validators=[MaxValueValidator(99999)])
+    country = serializers.CharField(max_length=20)
+    category = serializers.CharField(max_length=20)
     description = serializers.CharField(max_length=500)
 
     class Meta:

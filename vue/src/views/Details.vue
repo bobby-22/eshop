@@ -22,7 +22,7 @@
 
             <div class="details-right">
                 <div class="detail-header">
-                    <h1 class="title">{{ detail.title }}</h1>
+                    <h1 class="title" id="title">{{ detail.title }}</h1>
                     <div class="detail-header-top">
                         <h2 class="title is-5">
                             <i class="fas fa-euro-sign"></i>
@@ -123,6 +123,11 @@ export default {
 .details-right {
     flex-basis: 50%;
 }
+#title {
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
 .detail-header-top {
     display: flex;
     justify-content: space-between;
@@ -151,10 +156,6 @@ export default {
     .details-left {
         margin-right: 0px;
         margin-bottom: 15px;
-    }
-    .details-right {
-        border-top: 1px solid #f0f0f0;
-        padding-top: 15px;
     }
 }
 </style>

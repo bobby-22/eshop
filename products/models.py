@@ -4,10 +4,10 @@ from django.db.models.deletion import CASCADE
 
 # Create your models here.
 class ProductModel(models.Model):
-    title = models.CharField(max_length=50, default="")
+    title = models.CharField(max_length=40, default="")
     price = models.IntegerField(default="")
-    country = models.CharField(max_length=25, default="")
-    category = models.CharField(max_length=25, default="")
+    country = models.CharField(max_length=20, default="")
+    category = models.CharField(max_length=20, default="")
     date = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=500, default="")

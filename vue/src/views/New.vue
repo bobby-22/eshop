@@ -19,7 +19,7 @@
                     </span>
                     <span
                         class="icon is-small is-right has-text-danger"
-                        v-if="this.titleLength > 50"
+                        v-if="this.titleLength > 40"
                     >
                         {{ this.titleLength }}
                     </span>
@@ -60,7 +60,7 @@
                         </span>
                         <span
                             class="icon is-small is-right has-text-danger"
-                            v-if="this.countryLength > 25"
+                            v-if="this.countryLength > 20"
                         >
                             {{ this.countryLength }}
                         </span>
@@ -236,26 +236,30 @@ export default {
             if (!this.title) {
                 this.errorTitleBoolean = true;
                 this.errorMessageTitle = "Title cannot be empty";
-            } else if (this.title.length > 50) {
+            } else if (this.title.length > 40) {
                 this.errorTitleBoolean = true;
                 this.errorMessageTitle =
-                    "Title cannot be longer than 50 characters";
+                    "Title cannot be longer than 40 characters";
             } else {
                 this.errorTitleBoolean = false;
             }
             if (!this.price) {
                 this.errorPriceBoolean = true;
                 this.errorMessagePrice = "Price cannot be empty";
+            } else if (this.price > 99999) {
+                this.errorPriceBoolean = true;
+                this.errorMessagePrice =
+                    "Price cannot be bigger than 5 figures";
             } else {
                 this.errorPriceBoolean = false;
             }
             if (!this.country) {
                 this.errorCountryBoolean = true;
                 this.errorMessageCountry = "Country cannot be empty";
-            } else if (this.country.length > 25) {
+            } else if (this.country.length > 20) {
                 this.errorCountryBoolean = true;
                 this.errorMessageCountry =
-                    "Country cannot be longer than 25 characters";
+                    "Country cannot be longer than 20 characters";
             } else {
                 this.errorCountryBoolean = false;
             }

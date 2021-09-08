@@ -1,5 +1,5 @@
 <template>
-    <div class="column is-one-quarter-desktop is-one-third-tablet">
+    <div class="column is-one-third-desktop is-half-tablet">
         <div class="card" v-if="savedProducts.items">
             <div class="card-image" style="border-radius: 10px">
                 <router-link
@@ -58,7 +58,7 @@
                             <i class="fas fa-euro-sign"></i>
                             <span>{{ product.price }}</span>
                         </span>
-                        <span class="subtitle">
+                        <span class="subtitle" id="location">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>{{ product.country }}</span>
                         </span>
@@ -191,6 +191,12 @@ export default {
 .subtitle {
     -webkit-text-size-adjust: none;
     margin-bottom: 0px;
+}
+#location {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 15px;
 }
 .fas {
     margin-right: 5px;
