@@ -68,7 +68,7 @@ export default {
             let stripe_product_id = this.$route.params.stripe_product_id;
             djangoAPI({
                 method: "GET",
-                url: `/product/${stripe_product_id}`,
+                url: `/api/v1/product/${stripe_product_id}`,
             })
                 .then((detailsResponse) => {
                     console.log(detailsResponse);

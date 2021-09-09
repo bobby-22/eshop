@@ -320,7 +320,7 @@ export default {
                 this.errors.push("ahoj");
             }
             djangoAPI
-                .post("/ahoj/new/", product)
+                .post("/api/v1/product-create/new/", product)
                 .then((newProductResponse) => {
                     this.stripe_product_id =
                         newProductResponse.data.stripe_product_id;
@@ -338,11 +338,11 @@ export default {
                 images.append("images", this.images[i]);
             }
             djangoAPI
-                .post("/dobry/new/", images)
+                .post("/api/v1/images-create/new/", images)
                 .then((newProductImagesResponse) => {
                     console.log(newProductImagesResponse);
                     toast({
-                        message: "Product was successfully added!",
+                        message: "Product has been successfully added!",
                         type: "is-success",
                         dismissible: true,
                         pauseOnHover: true,

@@ -98,6 +98,7 @@
 
 <script>
 import NavbarDropdown from "./NavbarDropdown";
+import { toast } from "bulma-toast";
 export default {
     name: "Navbar",
     components: {
@@ -127,6 +128,14 @@ export default {
         logoutUser() {
             this.$store.commit("removeCredentialsState");
             this.$router.push("/accounts/login");
+            toast({
+                message: "You have been successfully logged out!",
+                type: "is-success",
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 2000,
+                position: "bottom-right",
+            });
         },
     },
     computed: {

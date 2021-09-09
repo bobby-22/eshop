@@ -62,7 +62,7 @@ export default {
     methods: {
         submitLogin() {
             djangoAPI
-                .post("/accounts/login/", {
+                .post("/api/v1/accounts/login/", {
                     username: this.username,
                     password: this.password,
                 })
@@ -87,7 +87,7 @@ export default {
                     this.$store.commit("authenticate");
                     this.$router.push("/");
                     toast({
-                        message: "You were successfully logged in!",
+                        message: "You have been successfully logged in!",
                         type: "is-success",
                         dismissible: true,
                         pauseOnHover: true,

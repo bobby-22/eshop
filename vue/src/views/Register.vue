@@ -118,7 +118,7 @@ export default {
                 password2: this.password2,
             };
             djangoAPI
-                .post("/accounts/register/", user)
+                .post("/api/v1/accounts/register/", user)
                 .then((registerResponse) => {
                     console.log(registerResponse);
                     toast({
