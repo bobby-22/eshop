@@ -145,7 +145,7 @@ export default {
 </script>
 
 <style scoped>
-.column.is-one-quarter-desktop.is-one-third-tablet {
+.column.is-one-third-desktop.is-half-tablet {
     padding: 8px;
 }
 .card {
@@ -194,7 +194,6 @@ export default {
 }
 #location {
     white-space: nowrap;
-    overflow: hidden;
     text-overflow: ellipsis;
     margin-left: 15px;
 }
