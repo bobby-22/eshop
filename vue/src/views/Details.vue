@@ -92,7 +92,7 @@ export default {
 <style scoped>
 .container {
     min-height: 100%;
-    min-width: 100%;
+    width: 100%;
     padding: 30px;
 }
 .details {
@@ -140,6 +140,9 @@ export default {
 }
 .title.is-6 {
     margin-bottom: 0px;
+}
+.detail-body {
+    overflow-wrap: break-word;
 }
 ::-webkit-scrollbar {
     widows: 10px;

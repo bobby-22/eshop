@@ -58,7 +58,7 @@
                             <i class="fas fa-euro-sign"></i>
                             <span>{{ product.price }}</span>
                         </span>
-                        <span class="subtitle" id="location">
+                        <span class="subtitle" id="country">
                             <i class="fas fa-map-marker-alt"></i>
                             <span>{{ product.country }}</span>
                         </span>
@@ -192,7 +192,7 @@ export default {
     -webkit-text-size-adjust: none;
     margin-bottom: 0px;
 }
-#location {
+#country {
     white-space: nowrap;
     text-overflow: ellipsis;
     margin-left: 15px;
@@ -210,7 +210,7 @@ img {
     object-fit: cover;
 }
 @media (min-width: 1024px) and (max-width: 1215px) {
-    #location {
+    #country {
         overflow: hidden;
     }
 }

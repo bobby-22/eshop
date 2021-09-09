@@ -23,16 +23,14 @@
                 <div class="split">
                     <span class="subtitle">
                         <i class="fas fa-euro-sign"></i>
-                        <span id="price">{{ product.price }}</span>
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>{{ product.location }}</span>
+                        <span>{{ product.price }}</span>
                     </span>
                     <span class="subtitle">
                         <i class="fas fa-calendar-alt"></i>
                         <span>{{ product.date }}</span>
                     </span>
                 </div>
-                <span>{{ product.description }}</span>
+                <span class="description">{{ product.description }}</span>
             </div>
         </div>
     </div>
@@ -82,8 +80,8 @@ export default {
     justify-content: space-between;
     align-items: baseline;
 }
-#price {
-    margin-right: 15px;
+a#unsave {
+    color: #424242;
 }
 #content-bottom {
     border-top: 1px solid #f0f0f0;
@@ -93,8 +91,20 @@ export default {
     justify-content: space-between;
     margin-top: 5px;
 }
+#country {
+    margin-left: 15px;
+}
+#unsave {
+    margin-right: 0px;
+}
+#unsave:hover {
+    color: black;
+}
 .fas {
     margin-right: 5px;
+}
+.description {
+    overflow-wrap: break-word;
 }
 @media (max-width: 769px) {
     .card {
@@ -105,6 +115,9 @@ export default {
         border-bottom-right-radius: 0px;
         border-bottom-left-radius: 0px;
         border-top-right-radius: 5px;
+    }
+    .split {
+        flex-direction: row;
     }
 }
 </style>

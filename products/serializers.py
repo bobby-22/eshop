@@ -37,7 +37,7 @@ class ProductModelSerializer(serializers.ModelSerializer):
 
 class ProductNewSerializer(serializers.ModelSerializer):
     title = serializers.CharField(max_length=40)
-    price = serializers.IntegerField(validators=[MaxValueValidator(99999)])
+    price = serializers.IntegerField(validators=[MaxValueValidator(9999)])
     country = serializers.CharField(max_length=20)
     category = serializers.CharField(max_length=20)
     description = serializers.CharField(max_length=500)

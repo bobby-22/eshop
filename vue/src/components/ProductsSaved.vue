@@ -27,16 +27,22 @@
             </div>
             <div class="content" id="content-bottom">
                 <div class="split">
-                    <span class="subtitle">
-                        <i class="fas fa-euro-sign"></i>
-                        <span>{{ item.product.price }}</span>
+                    <span class="subtitle" id="price-country">
+                        <div class="price">
+                            <i class="fas fa-euro-sign"></i>
+                            <span>{{ item.product.price }}</span>
+                        </div>
+                        <div class="country">
+                            <i class="fas fa-calendar-alt" id="date"></i>
+                            <span>{{ item.product.date }}</span>
+                        </div>
                     </span>
                     <span class="subtitle">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>{{ item.product.country }}</span>
                     </span>
                 </div>
-                <span>{{ item.product.description }}</span>
+                <span class="description">{{ item.product.description }}</span>
             </div>
         </div>
     </div>
@@ -107,6 +113,7 @@ export default {
 }
 a#unsave {
     color: #424242;
+    margin-left: 15px;
 }
 #content-bottom {
     border-top: 1px solid #f0f0f0;
@@ -115,6 +122,12 @@ a#unsave {
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
+}
+#price-country {
+    display: flex;
+}
+#date {
+    margin-left: 15px;
 }
 #unsave {
     margin-right: 0px;
@@ -125,6 +138,9 @@ a#unsave {
 .fas {
     margin-right: 5px;
 }
+.description {
+    overflow-wrap: break-word;
+}
 @media (max-width: 769px) {
     .card {
         flex-direction: column;
@@ -134,6 +150,14 @@ a#unsave {
         border-bottom-right-radius: 0px;
         border-bottom-left-radius: 0px;
         border-top-right-radius: 5px;
+    }
+    .split {
+        flex-direction: column;
+        margin-bottom: 22px;
+    }
+    #price-country {
+        justify-content: space-between;
+        margin-bottom: 5px;
     }
 }
 </style>

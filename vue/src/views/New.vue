@@ -246,10 +246,10 @@ export default {
             if (!this.price) {
                 this.errorPriceBoolean = true;
                 this.errorMessagePrice = "Price cannot be empty";
-            } else if (this.price > 99999) {
+            } else if (this.price > 9999) {
                 this.errorPriceBoolean = true;
                 this.errorMessagePrice =
-                    "Price cannot be bigger than 5 figures";
+                    "Price cannot be bigger than 4 figures";
             } else {
                 this.errorPriceBoolean = false;
             }
