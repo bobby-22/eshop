@@ -320,7 +320,7 @@ export default {
                 this.errors.push("ahoj");
             }
             djangoAPI
-                .post("/api/v1/product-create/new/", product)
+                .post("/api/v1/product-create/", product)
                 .then((newProductResponse) => {
                     this.stripe_product_id =
                         newProductResponse.data.stripe_product_id;
@@ -338,7 +338,7 @@ export default {
                 images.append("images", this.images[i]);
             }
             djangoAPI
-                .post("/api/v1/images-create/new/", images)
+                .post("/api/v1/images-create/", images)
                 .then((newProductImagesResponse) => {
                     console.log(newProductImagesResponse);
                     toast({
