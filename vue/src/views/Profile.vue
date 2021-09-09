@@ -6,9 +6,7 @@
                 <i class="far fa-plus-square"></i>
             </router-link>
         </h1>
-        <p v-if="!this.products.length">
-            No products added...
-        </p>
+        <p v-if="!this.products.length">No products added...</p>
         <ProductsProfile
             v-for="product in products"
             v-bind:key="product.id"
@@ -27,7 +25,7 @@ export default {
     },
     data() {
         return {
-            products: null,
+            products: [],
         };
     },
     methods: {

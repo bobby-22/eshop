@@ -1,11 +1,7 @@
 <template>
     <div class="container">
-        <h1 class="title">
-            Saved products:
-        </h1>
-        <p v-if="!this.savedProducts.items.length">
-            No products saved...
-        </p>
+        <h1 class="title">Saved products:</h1>
+        <p v-if="!this.savedProducts.items.length">No products saved...</p>
 
         <ProductsSaved
             v-for="item in savedProducts.items"
