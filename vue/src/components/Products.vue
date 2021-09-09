@@ -209,6 +209,11 @@ img {
     width: 800px;
     object-fit: cover;
 }
+@media (min-width: 1024px) and (max-width: 1215px) {
+    #location {
+        overflow: hidden;
+    }
+}
 @media (max-width: 769px) {
     img {
         min-height: 100%;
