@@ -38,7 +38,7 @@
                 <div class="control">
                     <button
                         class="button is-success"
-                        v-on:click="submitLogin"
+                        v-on:click="loginUser"
                         v-bind:disabled="submittedBoolean"
                     >
                         Login
@@ -60,14 +60,14 @@ export default {
     name: "Login",
     data() {
         return {
-            username: "",
-            password: "",
+            username: null,
+            password: null,
             submittedBoolean: false,
             error: false,
         };
     },
     methods: {
-        submitLogin() {
+        loginUser() {
             this.submittedBoolean = true;
             djangoAPI
                 .post("/api/v1/accounts/login/", {
@@ -111,9 +111,12 @@ export default {
                     }
                 });
         },
+        setTitle() {
+            document.title = "Login | MechMarketEU";
+        },
     },
     created() {
-        document.title = "Login | MechMarketEU";
+        this.setTitle();
     },
 };
 </script>

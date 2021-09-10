@@ -106,11 +106,11 @@ export default {
     },
     data() {
         return {
-            hamburgerBoolean: false,
-            savedProducts: [],
-            keyword: null,
+            savedProducts: this.$store.state.savedProducts,
             authenticated: this.$store.state.authenticated,
             currentUser: this.$store.state.currentUser,
+            keyword: null,
+            hamburgerBoolean: false,
         };
     },
     methods: {
@@ -146,9 +146,6 @@ export default {
         this.$store.commit("localStorageSavedProducts");
         this.$store.commit("localStorageSavedCurrentUser");
         this.$store.commit("localStorageAuthenticated");
-    },
-    created() {
-        this.savedProducts = this.$store.state.savedProducts;
     },
     watch: {
         "$store.state.authenticated": function () {

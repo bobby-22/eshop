@@ -78,10 +78,10 @@ export default {
     },
     data() {
         return {
+            savedProducts: this.$store.state.savedProducts,
+            keyword: null,
             savedBoolean: false,
             checkSavedBoolean: false,
-            keyword: null,
-            savedProducts: [],
         };
     },
     methods: {
@@ -120,8 +120,10 @@ export default {
             this.checkSavedBoolean = !checkSavedBoolean;
         },
     },
+    beforeCreate() {
+        this.$store.commit("localStorageSavedProducts");
+    },
     created() {
-        this.savedProducts = this.$store.state.savedProducts;
         this.checkBookmark();
     },
 };

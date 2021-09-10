@@ -22,7 +22,7 @@ export default {
     },
     data() {
         return {
-            savedProducts: [],
+            savedProducts: this.$store.state.savedProducts,
         };
     },
     methods: {
@@ -40,10 +40,15 @@ export default {
                 position: "bottom-right",
             });
         },
+        setTitle() {
+            document.title = "Saved Products | MechMarketEU";
+        },
+    },
+    beforeCreate() {
+        this.$store.commit("localStorageSavedProducts");
     },
     created() {
-        document.title = "Saved Products | MechMarketEU";
-        this.savedProducts = this.$store.state.savedProducts;
+        this.setTitle();
     },
 };
 </script>

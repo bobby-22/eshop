@@ -27,7 +27,7 @@ export default {
         };
     },
     methods: {
-        getProducts() {
+        getSearchProducts() {
             let keyword = this.$route.params.keyword;
             djangoAPI({
                 method: "GET",
@@ -41,24 +41,24 @@ export default {
                     console.log(error);
                 });
         },
-        getTitle() {
-            document.title = `${this.$route.params.keyword} | MechMarketEU`;
-        },
         getKeyword() {
             return (this.keyword = this.$route.params.keyword);
         },
+        setTitle() {
+            document.title = `${this.$route.params.keyword} | MechMarketEU`;
+        },
     },
     created() {
-        this.getProducts();
-        this.getTitle();
+        this.getSearchProducts();
         this.getKeyword();
+        this.setTitle();
     },
     watch: {
         $route(to, from) {
             if (to.name === "Search") {
-                this.getProducts();
-                this.getTitle();
+                this.getSearchProducts();
                 this.getKeyword();
+                this.setTitle();
             }
         },
     },

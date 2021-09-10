@@ -60,7 +60,6 @@ export default {
         return {
             details: [],
             product: null,
-            modalBoolean: false,
         };
     },
     methods: {
@@ -76,7 +75,7 @@ export default {
                     for (let i = 0; i < this.details.slice(0, 1).length; i++) {
                         this.product = this.details[i];
                     }
-                    document.title = this.product.title;
+                    document.title = `"${this.product.title}" | MechMarketEU`;
                 })
                 .catch((error) => {
                     console.log(error);

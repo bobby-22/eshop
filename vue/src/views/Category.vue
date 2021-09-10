@@ -39,9 +39,13 @@ export default {
                     console.log(error);
                 });
         },
+        setTitle() {
+            document.title = "Category | MechMarketEU";
+        },
     },
     created() {
-        (document.title = "Category | MechMarketEU"), this.getProducts();
+        this.getProducts();
+        this.setTitle();
     },
     watch: {
         $route(to, from) {

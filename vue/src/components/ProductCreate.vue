@@ -357,13 +357,16 @@ export default {
                     console.log(error);
                 });
         },
+        setTitle() {
+            document.title = "Create Product | MechMarketEU";
+        },
     },
     beforeCreate() {
         this.$store.commit("localStorageSavedCurrentUserId");
     },
     created() {
         this.countCharacters();
-        document.title = "Create Product | MechMarketEU";
+        this.setTitle();
     },
 };
 </script>

@@ -31,7 +31,7 @@ export default {
         };
     },
     methods: {
-        getProducts() {
+        getUserProducts() {
             djangoAPI
                 .get("/api/v1/user/" + this.$store.state.currentUserId)
                 .then((latestResponse) => {
@@ -55,12 +55,16 @@ export default {
                 position: "bottom-right",
             });
         },
+        setTitle() {
+            document.title = "My Products | MechMarketEU";
+        },
     },
     beforeCreate() {
         this.$store.commit("localStorageSavedCurrentUserId");
     },
     created() {
-        (document.title = "My Products | MechMarketEU"), this.getProducts();
+        this.getUserProducts();
+        this.setTitle();
     },
 };
 </script>

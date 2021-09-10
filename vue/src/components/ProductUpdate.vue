@@ -360,14 +360,16 @@ export default {
                     console.log(error);
                 });
         },
+        setTitle() {
+            document.title = `Update "${this.product.title}" | MechMarketEU`;
+        },
     },
     beforeCreate() {
         this.$store.commit("localStorageProductData");
-        console.log(this.$store.state.productData);
     },
     created() {
         this.countCharacters();
-        document.title = `Update "${this.product.title}" | MechMarketEU`;
+        this.setTitle();
     },
 };
 </script>

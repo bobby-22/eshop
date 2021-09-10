@@ -25,7 +25,7 @@ export default {
         };
     },
     methods: {
-        getProducts() {
+        getLatestProducts() {
             djangoAPI
                 .get("/api/v1/products/latest", {
                     headers: {
@@ -44,9 +44,13 @@ export default {
                     }
                 });
         },
+        setTitle() {
+            document.title = "Latest Products | MechMarketEU";
+        },
     },
     created() {
-        (document.title = "Latest Products | MechMarketEU"), this.getProducts();
+        this.getLatestProducts();
+        this.setTitle();
     },
 };
 </script>

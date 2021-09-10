@@ -86,7 +86,7 @@
                 <div class="control">
                     <button
                         class="button is-link"
-                        v-on:click="submitRegister"
+                        v-on:click="registerUser"
                         v-bind:disabled="submittedBoolean"
                     >
                         Submit
@@ -112,12 +112,12 @@ export default {
             email: "",
             password1: "",
             password2: "",
-            errors: [],
             submittedBoolean: false,
+            errors: [],
         };
     },
     methods: {
-        submitRegister() {
+        registerUser() {
             this.submittedBoolean = true;
             let user = {
                 username: this.username,
@@ -148,9 +148,12 @@ export default {
                     }
                 });
         },
+        setTitle() {
+            document.title = "Register | MechMarketEU";
+        },
     },
     created() {
-        document.title = "Register | MechMarketEU";
+        this.setTitle();
     },
 };
 </script>

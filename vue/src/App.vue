@@ -7,9 +7,9 @@
 </template>
 
 <script>
+import { djangoAPI } from "./axios";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer.vue";
-import { djangoAPI } from "./axios";
 
 export default {
     name: "App",

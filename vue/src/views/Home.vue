@@ -7,8 +7,13 @@
 <script>
 export default {
     name: "Home",
+    methods: {
+        setTitle() {
+            document.title = "Home Page | MechMarketEU";
+        },
+    },
     created() {
-        document.title = "Home Page | MechMarketEU";
+        this.setTitle();
     },
 };
 </script>
