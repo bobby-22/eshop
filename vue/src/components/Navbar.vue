@@ -107,9 +107,7 @@ export default {
     data() {
         return {
             hamburgerBoolean: false,
-            savedProducts: {
-                items: [],
-            },
+            savedProducts: [],
             keyword: null,
             authenticated: this.$store.state.authenticated,
             currentUser: this.$store.state.currentUser,
@@ -140,7 +138,7 @@ export default {
     },
     computed: {
         bookmarkLength() {
-            let length = this.savedProducts.items.length;
+            let length = this.$store.state.savedProducts.length;
             return length;
         },
     },

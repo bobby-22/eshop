@@ -35,7 +35,7 @@ class ProductModelSerializer(serializers.ModelSerializer):
         )
 
 
-class ProductNewSerializer(serializers.ModelSerializer):
+class ProductModelCreateSerializer(serializers.ModelSerializer):
     title = serializers.CharField(max_length=40)
     price = serializers.IntegerField(validators=[MaxValueValidator(9999)])
     country = serializers.CharField(max_length=20)
@@ -78,13 +78,22 @@ class ProductNewSerializer(serializers.ModelSerializer):
         return product
 
 
-class ProductImagesNewSerializer(serializers.ModelSerializer):
+class ImageModelCreateSerializer(serializers.ModelSerializer):
     images = serializers.ListField(child=serializers.FileField())
 
     class Meta:
         model = ImageModel
         fields = ("stripe_product_id", "images")
 
+    def create(self, validated_data):
+        for image in validated_data.pop("images"):
+            images = ImageModel.objects.create(
+                stripe_product_id=validated_data["stripe_product_id"], images=image
+            )
+        return images
+
+
+class ProductModelDeleteSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         for image in validated_data.pop("images"):
             images = ImageModel.objects.create(

@@ -2,14 +2,15 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from products.models import ProductModel, ImageModel
 from products.serializers import (
-    ProductImagesNewSerializer,
     ProductModelSerializer,
     ImageModelSerializer,
-    ProductNewSerializer,
+    ProductModelCreateSerializer,
+    ImageModelCreateSerializer,
+    ProductModelDeleteSerializer,
 )
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import generics, filters
+from rest_framework import generics, filters, serializers
 from rest_framework.permissions import IsAuthenticated
 import stripe
 
@@ -67,12 +68,22 @@ class ProfileView(APIView):
         return Response(serializers.data)
 
 
-class ProductNewView(generics.CreateAPIView):
-    serializer_class = ProductNewSerializer
+class ProductModelCreateView(generics.CreateAPIView):
+    serializer_class = ProductModelCreateSerializer
 
 
-class ProductImagesNewView(generics.CreateAPIView):
-    serializer_class = ProductImagesNewSerializer
+class ImageModelCreateView(generics.CreateAPIView):
+    serializer_class = ImageModelCreateSerializer
+
+
+class ProductModelDeleteView(APIView):
+    def post(self, request, stripe_product_id):
+        stripe.Product.modify(stripe_product_id, active="false")
+        product = ProductModel.objects.filter(stripe_product_id=stripe_product_id)
+        product.delete()
+        images = ImageModel.objects.filter(stripe_product_id=stripe_product_id)
+        images.delete()
+        return Response("Product has been successfully deleted")
 
 
 def success(request):

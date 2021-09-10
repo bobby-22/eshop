@@ -3,9 +3,7 @@ import { djangoAPI } from "../axios";
 
 export default createStore({
     state: {
-        savedProducts: {
-            items: [],
-        },
+        savedProducts: [],
         authenticated: false,
         tokenAccess: null,
         tokenRefresh: null,
@@ -25,8 +23,17 @@ export default createStore({
                 );
             }
         },
-        saveProductState(state, item) {
-            state.savedProducts.items.push(item);
+        saveProductState(state, product) {
+            state.savedProducts.push(product);
+            localStorage.setItem(
+                "savedProducts",
+                JSON.stringify(state.savedProducts)
+            );
+        },
+        updateSavedProductsState(state, product) {
+            state.savedProducts = state.savedProducts.filter((i) => {
+                return i.stripe_product_id !== product.stripe_product_id;
+            });
             localStorage.setItem(
                 "savedProducts",
                 JSON.stringify(state.savedProducts)

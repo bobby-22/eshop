@@ -1,6 +1,6 @@
 <template>
     <div class="column is-one-third-desktop is-half-tablet">
-        <div class="card" v-if="savedProducts.items">
+        <div class="card" v-if="savedProducts">
             <div class="card-image" style="border-radius: 10px">
                 <router-link
                     v-bind:to="{
@@ -81,20 +81,15 @@ export default {
             savedBoolean: false,
             checkSavedBoolean: false,
             keyword: null,
-            savedProducts: {
-                items: [],
-            },
+            savedProducts: [],
         };
     },
     methods: {
         saveProduct() {
             this.savedBoolean = !this.savedBoolean;
-            let item = {
-                product: this.product,
-            };
-            this.$store.commit("saveProductState", item);
+            this.$store.commit("saveProductState", this.product);
             toast({
-                message: "Item has been saved!",
+                message: "Product has been saved!",
                 type: "is-success",
                 dismissible: true,
                 pauseOnHover: true,
@@ -102,36 +97,24 @@ export default {
                 position: "bottom-right",
             });
         },
-        updateSavedProducts() {
-            localStorage.setItem(
-                "savedProducts",
-                JSON.stringify(this.$store.state.savedProducts)
-            );
-        },
         unsaveProduct() {
             this.savedBoolean = !this.savedBoolean;
-            let item = {
-                product: this.product,
-            };
-            this.savedProducts.items = this.savedProducts.items.filter((i) => {
-                return (
-                    i.product.stripe_product_id !==
-                    item.product.stripe_product_id
-                );
+            this.savedProducts = this.savedProducts.filter((i) => {
+                return i.stripe_product_id !== this.product.stripe_product_id;
             });
+            this.$store.commit("updateSavedProductsState", this.product);
             toast({
-                message: "Item has been unsaved!",
+                message: "Product has been unsaved!",
                 type: "is-danger",
                 dismissible: true,
                 pauseOnHover: true,
                 duration: 3000,
                 position: "bottom-right",
             });
-            this.updateSavedProducts();
         },
         checkBookmark() {
             let array = JSON.parse(localStorage.getItem("savedProducts"));
-            let checkSavedBoolean = JSON.stringify(array.items).includes(
+            let checkSavedBoolean = JSON.stringify(array).includes(
                 this.product.stripe_product_id
             );
             this.checkSavedBoolean = !checkSavedBoolean;

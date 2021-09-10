@@ -21,7 +21,7 @@ export default {
         refreshToken() {
             let tokenRefresh = this.$store.state.tokenRefresh;
             djangoAPI
-                .post("/accounts/refresh/", { refresh: tokenRefresh })
+                .post("/api/v1/accounts/refresh/", { refresh: tokenRefresh })
                 .then((tokensResponse) => {
                     console.log(tokensResponse);
                     this.$store.commit(

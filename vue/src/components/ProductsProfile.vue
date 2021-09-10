@@ -17,6 +17,11 @@
                     >
                         {{ product.title }}
                     </router-link>
+                    <a
+                        id="unsave"
+                        class="fas fa-trash-alt"
+                        v-on:click="deleteProduct"
+                    ></a>
                 </span>
             </div>
             <div class="content" id="content-bottom">
@@ -30,17 +35,33 @@
                         <span>{{ product.date }}</span>
                     </span>
                 </div>
-                <span class="description">{{ product.description }}</span>
+                <div class="description">{{ product.description }}</div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { djangoAPI } from "../axios";
 export default {
     name: "ProductsProfile",
     props: {
         product: Object,
+    },
+    methods: {
+        deleteProduct() {
+            djangoAPI
+                .post(
+                    `/api/v1/product-delete/${this.product.stripe_product_id}`
+                )
+                .then((productDeleteResponse) => {
+                    console.log(productDeleteResponse);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            this.$emit("deleteProduct", this.product);
+        },
     },
 };
 </script>
@@ -51,6 +72,7 @@ export default {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
         rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     display: flex;
+    height: 250px;
     justify-content: space-between;
     margin-bottom: 16px;
 }
@@ -80,11 +102,19 @@ export default {
     justify-content: space-between;
     align-items: baseline;
 }
-a#unsave {
+#unsave {
     color: #424242;
+    margin-left: 15px;
+    margin-right: 0px;
+}
+#unsave:hover {
+    color: black;
 }
 #content-bottom {
     border-top: 1px solid #f0f0f0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .split {
     display: flex;
@@ -94,21 +124,16 @@ a#unsave {
 #country {
     margin-left: 15px;
 }
-#unsave {
-    margin-right: 0px;
-}
-#unsave:hover {
-    color: black;
-}
 .fas {
     margin-right: 5px;
 }
 .description {
-    overflow-wrap: break-word;
+    white-space: pre-line;
 }
 @media (max-width: 769px) {
     .card {
         flex-direction: column;
+        height: auto;
     }
     .card-image > img {
         height: 100%;

@@ -106,10 +106,6 @@ export default {
     flex-basis: 50%;
     margin-right: 30px;
 }
-.detail-thumbnail > img {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
 .detail-images {
     display: flex;
     flex-direction: row;
@@ -142,7 +138,7 @@ export default {
     margin-bottom: 0px;
 }
 .detail-body {
-    overflow-wrap: break-word;
+    white-space: pre-line;
 }
 ::-webkit-scrollbar {
     widows: 10px;

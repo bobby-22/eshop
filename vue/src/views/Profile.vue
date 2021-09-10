@@ -6,17 +6,19 @@
                 <i class="far fa-plus-square"></i>
             </router-link>
         </h1>
-        <p v-if="!this.products.length">No products added...</p>
+        <p v-if="!products.length">No products added...</p>
         <ProductsProfile
             v-for="product in products"
             v-bind:key="product.id"
             v-bind:product="product"
+            v-on:deleteProduct="deleteProduct"
         />
     </div>
 </template>
 
 <script>
 import { djangoAPI } from "../axios";
+import { toast } from "bulma-toast";
 import ProductsProfile from "../components/ProductsProfile.vue";
 export default {
     name: "Profile",
@@ -39,6 +41,19 @@ export default {
                 .catch((error) => {
                     console.log(error);
                 });
+        },
+        deleteProduct(product) {
+            this.products = this.products.filter((i) => {
+                return i.stripe_product_id !== product.stripe_product_id;
+            });
+            toast({
+                message: "Product has been successfully deleted!",
+                type: "is-success",
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 3000,
+                position: "bottom-right",
+            });
         },
     },
     beforeCreate() {

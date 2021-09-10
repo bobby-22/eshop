@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-image">
-            <img v-bind:src="item.product.thumbnail" />
+            <img v-bind:src="product.thumbnail" />
         </div>
 
         <div class="card-content">
@@ -11,17 +11,16 @@
                         :to="{
                             name: 'Details',
                             params: {
-                                stripe_product_id:
-                                    item.product.stripe_product_id,
+                                stripe_product_id: product.stripe_product_id,
                             },
                         }"
                     >
-                        {{ item.product.title }}
+                        {{ product.title }}
                     </router-link>
                     <a
                         id="unsave"
                         class="fas fa-bookmark"
-                        v-on:click="unsaveProduct(item)"
+                        v-on:click="unsaveProduct()"
                     ></a>
                 </span>
             </div>
@@ -30,47 +29,33 @@
                     <span class="subtitle" id="price-country">
                         <div class="price">
                             <i class="fas fa-euro-sign"></i>
-                            <span>{{ item.product.price }}</span>
+                            <span>{{ product.price }}</span>
                         </div>
                         <div class="country">
                             <i class="fas fa-calendar-alt" id="date"></i>
-                            <span>{{ item.product.date }}</span>
+                            <span>{{ product.date }}</span>
                         </div>
                     </span>
                     <span class="subtitle">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>{{ item.product.country }}</span>
+                        <span>{{ product.country }}</span>
                     </span>
                 </div>
-                <span class="description">{{ item.product.description }}</span>
+                <span class="description">{{ product.description }}</span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { toast } from "bulma-toast";
 export default {
     name: "ProductsSaved",
     props: {
-        item: Object,
-    },
-    data() {
-        return {
-            item: this.item,
-        };
+        product: Object,
     },
     methods: {
-        unsaveProduct(item) {
-            this.$emit("unsaveProduct", item);
-            toast({
-                message: "Item has been unsaved!",
-                type: "is-danger",
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 3000,
-                position: "bottom-right",
-            });
+        unsaveProduct() {
+            this.$emit("unsaveProduct", this.product);
         },
     },
 };
@@ -81,6 +66,7 @@ export default {
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
         rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+    height: 250px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 16px;
@@ -111,12 +97,19 @@ export default {
     justify-content: space-between;
     align-items: baseline;
 }
-a#unsave {
+#unsave {
     color: #424242;
     margin-left: 15px;
+    margin-right: 0px;
+}
+#unsave:hover {
+    color: black;
 }
 #content-bottom {
     border-top: 1px solid #f0f0f0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .split {
     display: flex;
@@ -129,21 +122,16 @@ a#unsave {
 #date {
     margin-left: 15px;
 }
-#unsave {
-    margin-right: 0px;
-}
-#unsave:hover {
-    color: black;
-}
 .fas {
     margin-right: 5px;
 }
 .description {
-    overflow-wrap: break-word;
+    white-space: pre-line;
 }
 @media (max-width: 769px) {
     .card {
         flex-direction: column;
+        height: auto;
     }
     .card-image > img {
         height: 100%;

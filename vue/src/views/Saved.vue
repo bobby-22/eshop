@@ -1,18 +1,19 @@
 <template>
     <div class="container">
         <h1 class="title">Saved products:</h1>
-        <p v-if="!this.savedProducts.items.length">No products saved...</p>
+        <p v-if="!this.savedProducts.length">No products saved...</p>
 
         <ProductsSaved
-            v-for="item in savedProducts.items"
-            v-bind:key="item.product.id"
-            v-bind:item="item"
+            v-for="product in savedProducts"
+            v-bind:key="product.id"
+            v-bind:product="product"
             v-on:unsaveProduct="unsaveProduct"
         />
     </div>
 </template>
 
 <script>
+import { toast } from "bulma-toast";
 import ProductsSaved from "../components/ProductsSaved";
 export default {
     name: "Saved",
@@ -21,27 +22,23 @@ export default {
     },
     data() {
         return {
-            savedProducts: {
-                items: [],
-            },
+            savedProducts: [],
         };
     },
     methods: {
-        updateSavedProducts() {
-            localStorage.setItem(
-                "savedProducts",
-                JSON.stringify(this.$store.state.savedProducts)
-            );
-        },
-        unsaveProduct(item) {
-            this.savedProducts.items = this.savedProducts.items.filter((i) => {
-                return (
-                    i.product.stripe_product_id !==
-                    item.product.stripe_product_id
-                );
+        unsaveProduct(product) {
+            this.savedProducts = this.savedProducts.filter((i) => {
+                return i.stripe_product_id !== product.stripe_product_id;
             });
-            this.updateSavedProducts();
-            this.$router.go(0);
+            this.$store.commit("updateSavedProductsState", product);
+            toast({
+                message: "Product has been unsaved!",
+                type: "is-danger",
+                dismissible: true,
+                pauseOnHover: true,
+                duration: 3000,
+                position: "bottom-right",
+            });
         },
     },
     created() {
