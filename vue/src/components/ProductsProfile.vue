@@ -8,20 +8,35 @@
             <div class="content" id="title">
                 <span class="title is-4">
                     <router-link
-                        :to="{
+                        v-bind:to="{
                             name: 'Details',
                             params: {
                                 stripe_product_id: product.stripe_product_id,
                             },
                         }"
+                        v-on:click="getProductData"
                     >
                         {{ product.title }}
                     </router-link>
-                    <a
-                        id="unsave"
-                        class="fas fa-trash-alt"
-                        v-on:click="deleteProduct"
-                    ></a>
+                    <span class="actions">
+                        <router-link
+                            class="fas fa-edit"
+                            id="edit"
+                            v-on:click="getProductData(product)"
+                            v-bind:to="{
+                                name: 'ProductUpdate',
+                                params: {
+                                    stripe_product_id:
+                                        product.stripe_product_id,
+                                },
+                            }"
+                        ></router-link>
+                        <a
+                            class="fas fa-trash-alt"
+                            id="delete"
+                            v-on:click="deleteProduct"
+                        ></a>
+                    </span>
                 </span>
             </div>
             <div class="content" id="content-bottom">
@@ -61,6 +76,9 @@ export default {
                     console.log(error);
                 });
             this.$emit("deleteProduct", this.product);
+        },
+        getProductData(product) {
+            this.$store.commit("saveProductDataState", product);
         },
     },
 };
@@ -102,12 +120,16 @@ export default {
     justify-content: space-between;
     align-items: baseline;
 }
-#unsave {
+.actions {
+    white-space: nowrap;
+}
+#edit,
+#delete {
     color: #424242;
     margin-left: 15px;
     margin-right: 0px;
 }
-#unsave:hover {
+#delete:hover {
     color: black;
 }
 #content-bottom {

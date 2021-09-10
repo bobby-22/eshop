@@ -85,6 +85,36 @@ class ProductModelDeleteView(APIView):
         images.delete()
         return Response("Product has been successfully deleted")
 
+class ProductModelUpdateView(APIView):
+    def post(self, request, stripe_product_id):
+        product = ProductModel.objects.get(stripe_product_id=stripe_product_id)
+        form = ProductForm(instance=product, data=request.POST)
+        if form.is_valid():
+            product_name = form.cleaned_data.get("name")
+            product_description = form.cleaned_data.get("description")
+            product_price = form.cleaned_data.get("price")
+            if "price" in form.changed_data:
+                stripe.Price.modify(
+                    product.stripe_price_id,
+                    active = "false"
+                )
+                price = stripe.Price.create(
+                    product = stripe_product_id,
+                    currency = "CZK",
+                    unit_amount = product_price * 100
+                )
+                product.stripe_price_id = price.id
+            if "name" in form.changed_data:
+                stripe.Product.modify(
+                    stripe_product_id,
+                    name = product_name,
+                    )
+            if "description" in form.changed_data:
+                stripe.Product.modify(
+                    stripe_product_id,
+                    description = product_description
+                )
+            form.save()
 
 def success(request):
     return render(request, "products/success.html")

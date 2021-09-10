@@ -5,10 +5,11 @@ import Details from "../views/Details.vue";
 import Category from "../views/Category.vue";
 import Search from "../views/Search.vue";
 import Saved from "../views/Saved.vue";
-import Register from "../views/Register.vue";
-import Login from "../views/Login.vue";
+import Register from "../components/Register.vue";
+import Login from "../components/Login.vue";
 import Profile from "../views/Profile.vue";
-import New from "../views/New.vue";
+import ProductCreate from "../components/ProductCreate.vue";
+import ProductUpdate from "../components/ProductUpdate.vue";
 
 const routes = [
     {
@@ -58,9 +59,14 @@ const routes = [
     },
     {
         path: "/product/new",
-        name: "New",
-        component: New,
-    }
+        name: "ProductCreate",
+        component: ProductCreate,
+    },
+    {
+        path: "/product/:stripe_product_id/edit",
+        name: "ProductUpdate",
+        component: ProductUpdate,
+    },
 ];
 
 const router = createRouter({

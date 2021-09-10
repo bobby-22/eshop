@@ -4,6 +4,7 @@ import { djangoAPI } from "../axios";
 export default createStore({
     state: {
         savedProducts: [],
+        productData: Object,
         authenticated: false,
         tokenAccess: null,
         tokenRefresh: null,
@@ -37,6 +38,25 @@ export default createStore({
             localStorage.setItem(
                 "savedProducts",
                 JSON.stringify(state.savedProducts)
+            );
+        },
+        localStorageProductData(state) {
+            if (localStorage.getItem("productData")) {
+                state.productData = JSON.parse(
+                    localStorage.getItem("productData")
+                );
+            } else {
+                localStorage.setItem(
+                    "productData",
+                    JSON.stringify(state.productData)
+                );
+            }
+        },
+        saveProductDataState(state, product) {
+            state.productData = product;
+            localStorage.setItem(
+                "productData",
+                JSON.stringify(state.productData)
             );
         },
         localStorageAuthenticated(state) {

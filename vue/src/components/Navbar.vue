@@ -76,7 +76,7 @@
             </div>
             <div class="navbar-end" v-else>
                 <router-link to="/accounts/login" class="navbar-item"
-                    >Log in</router-link
+                    >Login</router-link
                 >
                 <router-link to="/products/savedProducts" class="navbar-item">
                     <span class="fas fa-bookmark">

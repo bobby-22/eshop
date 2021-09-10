@@ -1,9 +1,9 @@
 <template>
     <div class="container">
-        <form class="form" v-on:submit.stop.prevent="submitRegister">
+        <form class="form">
             <h1 class="title">
-                New product
-                <i class="fas fa-plus"></i>
+                Update "{{ product.title }}"
+                <i class="far fa-edit"></i>
             </h1>
             <div class="field">
                 <label class="label">Title</label>
@@ -19,17 +19,17 @@
                     </span>
                     <span
                         class="icon is-small is-right has-text-danger"
-                        v-if="this.titleLength > 40"
+                        v-if="titleLength > 40"
                     >
-                        {{ this.titleLength }}
+                        {{ titleLength }}
                     </span>
                     <span class="icon is-small is-right" v-else>
-                        {{ this.titleLength }}
+                        {{ titleLength }}
                     </span>
                 </div>
                 <p class="help is-danger" v-if="errorTitleBoolean">
                     <i class="fas fa-exclamation-circle"></i>
-                    {{ this.errorMessageTitle }}
+                    {{ errorMessageTitle }}
                 </p>
             </div>
             <div class="container-column">
@@ -43,7 +43,7 @@
                     </div>
                     <p class="help is-danger" v-if="errorPriceBoolean">
                         <i class="fas fa-exclamation-circle"></i>
-                        {{ this.errorMessagePrice }}
+                        {{ errorMessagePrice }}
                     </p>
                 </div>
                 <div class="field" id="country">
@@ -60,17 +60,17 @@
                         </span>
                         <span
                             class="icon is-small is-right has-text-danger"
-                            v-if="this.countryLength > 20"
+                            v-if="countryLength > 20"
                         >
-                            {{ this.countryLength }}
+                            {{ countryLength }}
                         </span>
                         <span class="icon is-small is-right" v-else>
-                            {{ this.countryLength }}
+                            {{ countryLength }}
                         </span>
                     </div>
                     <p class="help is-danger" v-if="errorCountryBoolean">
                         <i class="fas fa-exclamation-circle"></i>
-                        {{ this.errorMessageCountry }}
+                        {{ errorMessageCountry }}
                     </p>
                 </div>
                 <div class="field" id="category">
@@ -98,7 +98,7 @@
                         </span>
                         <p class="help is-danger" v-if="errorCategoryBoolean">
                             <i class="fas fa-exclamation-circle"></i>
-                            {{ this.errorMessageCategory }}
+                            {{ errorMessageCategory }}
                         </p>
                     </div>
                 </div>
@@ -108,13 +108,14 @@
                 <div class="control">
                     <textarea
                         class="textarea"
+                        rows="10"
                         type="text"
                         v-model="description"
                     ></textarea>
                 </div>
                 <p class="help is-danger" v-if="errorDescriptionBoolean">
                     <i class="fas fa-exclamation-circle"></i>
-                    {{ this.errorMessageDescription }}
+                    {{ errorMessageDescription }}
                 </p>
             </div>
             <div class="field">
@@ -143,11 +144,11 @@
                 </div>
                 <p class="help is-danger" v-if="errorThumbnailBoolean">
                     <i class="fas fa-exclamation-circle"></i>
-                    {{ this.errorMessageThumbnail }}
+                    {{ errorMessageThumbnail }}
                 </p>
             </div>
             <div class="field">
-                <div class="file has-name is-fullwidth">
+                <div class="file has-name is-fullwidth is-boxed">
                     <label class="file-label">
                         <input
                             class="file-input"
@@ -178,7 +179,7 @@
                 </div>
                 <p class="help is-danger" v-if="errorImagesBoolean">
                     <i class="fas fa-exclamation-circle"></i>
-                    {{ this.errorMessageImages }}
+                    {{ errorMessageImages }}
                 </p>
             </div>
             <div class="field">
@@ -186,8 +187,9 @@
                     <button
                         class="button is-link"
                         v-on:click="submitNewProduct"
+                        v-bind:disabled="submittedBoolean"
                     >
-                        Create
+                        Update
                     </button>
                 </div>
             </div>
@@ -199,17 +201,20 @@
 import { djangoAPI } from "../axios";
 import { toast } from "bulma-toast";
 export default {
-    name: "New",
+    name: "ProductUpdate",
     data() {
         return {
-            title: "",
-            price: "",
-            country: "",
-            category: "",
-            description: "",
+            product: this.$store.state.productData,
+            title: this.$store.state.productData.title,
+            price: this.$store.state.productData.price,
+            country: this.$store.state.productData.country,
+            category: this.$store.state.productData.category,
+            description: this.$store.state.productData.description,
+
             thumbnail: null,
             images: null,
             stripe_product_id: null,
+
             errors: [],
             errorTitleBoolean: false,
             errorCountryBoolean: false,
@@ -218,6 +223,7 @@ export default {
             errorDescriptionBoolean: false,
             errorThumbnailBoolean: false,
             errorImagesBoolean: false,
+            submittedBoolean: false,
 
             errorMessageTitle: null,
             errorMessagePrice: null,
@@ -307,6 +313,7 @@ export default {
             this.images = event.target.files;
         },
         submitNewProduct() {
+            this.submittedBoolean = true;
             this.checkErrors();
             let product = new FormData();
             product.append("title", this.title);
@@ -316,19 +323,17 @@ export default {
             product.append("owner", this.$store.state.currentUserId);
             product.append("description", this.description);
             product.append("thumbnail", this.thumbnail);
-            if (this.thumbnail == null) {
-                this.errors.push("ahoj");
-            }
             djangoAPI
                 .post("/api/v1/product-create/", product)
                 .then((newProductResponse) => {
+                    console.log(newProductResponse);
                     this.stripe_product_id =
                         newProductResponse.data.stripe_product_id;
                     this.uploadImages();
-                    console.log(newProductResponse);
                 })
                 .catch((error) => {
                     console.log(error);
+                    this.submittedBoolean = false;
                 });
         },
         uploadImages() {
@@ -342,7 +347,7 @@ export default {
                 .then((newProductImagesResponse) => {
                     console.log(newProductImagesResponse);
                     toast({
-                        message: "Product has been successfully added!",
+                        message: "Product has been successfully updated!",
                         type: "is-success",
                         dismissible: true,
                         pauseOnHover: true,
@@ -357,11 +362,12 @@ export default {
         },
     },
     beforeCreate() {
-        this.$store.commit("localStorageSavedCurrentUserId");
+        this.$store.commit("localStorageProductData");
+        console.log(this.$store.state.productData);
     },
     created() {
         this.countCharacters();
-        document.title = "New Product | MechMarketEU";
+        document.title = `Update "${this.product.title}" | MechMarketEU`;
     },
 };
 </script>
@@ -408,6 +414,10 @@ select {
 }
 #category {
     margin-bottom: 10px;
+}
+.file-label,
+.file-name {
+    text-align: center;
 }
 @media (max-width: 1024px) {
     .container {

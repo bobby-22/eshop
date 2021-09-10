@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <form class="form" v-on:submit.stop.prevent="submitRegister">
+        <form class="form">
             <h1 class="title">
                 Register
                 <i class="fas fa-user-circle"></i>
@@ -84,7 +84,13 @@
 
             <div class="field">
                 <div class="control">
-                    <button class="button is-link">Submit</button>
+                    <button
+                        class="button is-link"
+                        v-on:click="submitRegister"
+                        v-bind:disabled="submittedBoolean"
+                    >
+                        Submit
+                    </button>
                 </div>
             </div>
             <p>
@@ -107,10 +113,12 @@ export default {
             password1: "",
             password2: "",
             errors: [],
+            submittedBoolean: false,
         };
     },
     methods: {
         submitRegister() {
+            this.submittedBoolean = true;
             let user = {
                 username: this.username,
                 email: this.email,
@@ -133,6 +141,7 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
+                    this.submittedBoolean = false;
                     this.errors.splice(0, this.errors.length);
                     for (let property in error.response.data) {
                         this.errors.push(`${error.response.data[property]}`);

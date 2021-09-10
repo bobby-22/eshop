@@ -1,5 +1,5 @@
 <template>
-    <div class="container" v-on:submit.stop.prevent="submitLogin">
+    <div class="container">
         <form class="form">
             <h1 class="title">
                 Login
@@ -36,7 +36,13 @@
             </div>
             <div class="field">
                 <div class="control">
-                    <button class="button is-success">Login</button>
+                    <button
+                        class="button is-success"
+                        v-on:click="submitLogin"
+                        v-bind:disabled="submittedBoolean"
+                    >
+                        Login
+                    </button>
                 </div>
             </div>
             <p>
@@ -56,11 +62,13 @@ export default {
         return {
             username: "",
             password: "",
+            submittedBoolean: false,
             error: false,
         };
     },
     methods: {
         submitLogin() {
+            this.submittedBoolean = true;
             djangoAPI
                 .post("/api/v1/accounts/login/", {
                     username: this.username,
@@ -97,6 +105,7 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
+                    this.submittedBoolean = false;
                     if (error) {
                         this.error = true;
                     }
