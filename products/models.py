@@ -17,7 +17,7 @@ class ProductModel(models.Model):
 
     class Meta:
         verbose_name_plural = "Products"
-        ordering = ("-date",)
+        ordering = ("-id",)
 
 
 class ImageModel(models.Model):

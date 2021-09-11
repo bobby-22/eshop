@@ -11,11 +11,17 @@ urlpatterns = [
     path("accounts/users/<int:user_id>", views.ProfileView.as_view()),
     path("products/create/", views.ProductModelCreateView.as_view()),
     path("images/create/", views.ImageModelCreateView.as_view()),
-    path("product-update/", views.ProductModelUpdateView.as_view()),
-    path("images-update/", views.ImageModelUpdateView.as_view()),
+    path(
+        "products/<slug:stripe_product_id>/update/",
+        views.ProductModelUpdateView.as_view(),
+    ),
     path(
         "products/<slug:stripe_product_id>/delete/",
         views.ProductModelDeleteView.as_view(),
+    ),
+    path(
+        "images/<int:id>/delete/",
+        views.ImageModelDeleteView.as_view(),
     ),
     path("donate/", views.DonateView.as_view()),
     path("success/", views.success),

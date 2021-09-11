@@ -7,7 +7,6 @@ from products.serializers import (
     ProductModelCreateSerializer,
     ImageModelCreateSerializer,
     ProductModelUpdateSerializer,
-    ImageModelUpdateSerializer,
 )
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -55,7 +54,7 @@ class SearchView(generics.ListAPIView):
     queryset = ProductModel.objects.all()
     serializer_class = ProductModelSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ["title", "description", "country"]
+    search_fields = ["title", "country", "description"]
 
 
 class ProfileView(generics.ListAPIView):
@@ -68,7 +67,6 @@ class ProfileView(generics.ListAPIView):
 
 
 class ProductModelCreateView(generics.CreateAPIView):
-    queryset = ProductModel.objects.all()
     serializer_class = ProductModelCreateSerializer
 
 
@@ -76,49 +74,27 @@ class ImageModelCreateView(generics.CreateAPIView):
     serializer_class = ImageModelCreateSerializer
 
 
-class ProductModelDeleteView(APIView):
-    def post(self, request, stripe_product_id):
+class ProductModelUpdateView(generics.UpdateAPIView):
+    queryset = ProductModel.objects.all()
+    serializer_class = ProductModelUpdateSerializer
+    lookup_field = "stripe_product_id"
+
+
+class ProductModelDeleteView(generics.DestroyAPIView):
+    lookup_field = "stripe_product_id"
+
+    def get_queryset(self):
+        stripe_product_id = self.kwargs["stripe_product_id"]
         stripe.Product.modify(stripe_product_id, active="false")
         product = ProductModel.objects.filter(stripe_product_id=stripe_product_id)
         product.delete()
         images = ImageModel.objects.filter(stripe_product_id=stripe_product_id)
         images.delete()
-        return Response("Product has been successfully deleted")
 
 
-class ProductModelUpdateView(generics.UpdateAPIView):
-    queryset = ProductModel.objects.all()
-    serializer_class = ProductModelUpdateSerializer
-
-    def patch(self, request, instance):
-        title = request.data.get("title")
-        price = request.data.get("price")
-        description = request.data.get("description")
-        thumbnail = request.data.get("thumbnail")
-        stripe_product_id = request.data.get("stripe_product_id")
-        stripe_price_id = request.data.get("stripe_price_id")
-        if "price" in instance.changed_data:
-            stripe.Price.modify(stripe_price_id, active="false")
-            price = stripe.Price.create(
-                product=stripe_product_id,
-                currency="EUR",
-                unit_amount=price * 100,
-            )
-            stripe_price_id = price.id
-        if "name" in instance.changed_data:
-            stripe.Product.modify(stripe_product_id, name=title)
-        if "description" in instance.changed_data:
-            stripe.Product.modify(stripe_product_id, description=description)
-        instance = self.get_object()
-        instance.title = title
-        instance.price = price
-        instance.description = description
-        instance.thumbnail = thumbnail
-        instance.save()
-
-
-class ImageModelUpdateView(generics.CreateAPIView):
-    serializer_class = ImageModelUpdateSerializer
+class ImageModelDeleteView(generics.DestroyAPIView):
+    queryset = ImageModel.objects.all()
+    lookup_field = "id"
 
 
 def success(request):
