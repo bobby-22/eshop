@@ -117,6 +117,9 @@ export default {
     flex-basis: 50%;
     margin-right: 30px;
 }
+.detail-thumbnail > img {
+    max-height: 600px;
+}
 .detail-images {
     display: flex;
     flex-direction: row;

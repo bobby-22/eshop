@@ -29,7 +29,7 @@ class ProductModelCreateSerializer(serializers.ModelSerializer):
     price = serializers.IntegerField(validators=[MaxValueValidator(9999)])
     country = serializers.CharField(max_length=20)
     category = serializers.CharField(max_length=20)
-    description = serializers.CharField(max_length=500)
+    description = serializers.CharField(max_length=1000)
 
     class Meta:
         model = ProductModel
@@ -78,7 +78,7 @@ class ProductModelUpdateSerializer(serializers.ModelSerializer):
     price = serializers.IntegerField(validators=[MaxValueValidator(9999)])
     country = serializers.CharField(max_length=20)
     category = serializers.CharField(max_length=20)
-    description = serializers.CharField(max_length=500)
+    description = serializers.CharField(max_length=1000)
     thumbnail = serializers.ImageField(required=False)
 
     class Meta:
