@@ -10,11 +10,7 @@
                     <img v-bind:src="detail.thumbnail" />
                 </div>
                 <div class="detail-images">
-                    <div
-                        class="images"
-                        v-for="image in details.slice(1, this.details.length)"
-                        :key="image.id"
-                    >
+                    <div class="images" v-for="image in images" :key="image.id">
                         <img id="image" v-bind:src="image.images" />
                     </div>
                 </div>
@@ -59,6 +55,7 @@ export default {
     data() {
         return {
             details: [],
+            images: [],
             product: null,
         };
     },
@@ -67,7 +64,7 @@ export default {
             let stripe_product_id = this.$route.params.stripe_product_id;
             djangoAPI({
                 method: "GET",
-                url: `/api/v1/product/${stripe_product_id}`,
+                url: `/api/v1/products/${stripe_product_id}/details/`,
             })
                 .then((detailsResponse) => {
                     console.log(detailsResponse);
@@ -81,9 +78,24 @@ export default {
                     console.log(error);
                 });
         },
+        getImages() {
+            let stripe_product_id = this.$route.params.stripe_product_id;
+            djangoAPI({
+                method: "GET",
+                url: `/api/v1/products/${stripe_product_id}/images/`,
+            })
+                .then((imagesResponse) => {
+                    console.log(imagesResponse);
+                    this.images = imagesResponse.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
     },
     created() {
         this.getDetails();
+        this.getImages();
     },
 };
 </script>

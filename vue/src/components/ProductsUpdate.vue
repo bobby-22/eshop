@@ -186,7 +186,7 @@
                 <div class="control">
                     <button
                         class="button is-link"
-                        v-on:click="submitNewProduct"
+                        v-on:click="submitUpdatedProduct"
                         v-bind:disabled="submittedBoolean"
                     >
                         Update
@@ -201,7 +201,7 @@
 import { djangoAPI } from "../axios";
 import { toast } from "bulma-toast";
 export default {
-    name: "ProductUpdate",
+    name: "ProductsUpdate",
     data() {
         return {
             product: this.$store.state.productData,
@@ -213,7 +213,6 @@ export default {
 
             thumbnail: null,
             images: null,
-            stripe_product_id: null,
 
             errors: [],
             errorTitleBoolean: false,
@@ -312,7 +311,7 @@ export default {
         uploadImage(event) {
             this.images = event.target.files;
         },
-        submitNewProduct() {
+        submitUpdatedProduct() {
             this.submittedBoolean = true;
             this.checkErrors();
             let product = new FormData();
@@ -323,12 +322,12 @@ export default {
             product.append("owner", this.$store.state.currentUserId);
             product.append("description", this.description);
             product.append("thumbnail", this.thumbnail);
+            product.append("stripe_product_id", this.product.stripe_product_id);
+            product.append("stripe_price_id", this.product.stripe_price_id);
             djangoAPI
-                .post("/api/v1/product-create/", product)
-                .then((newProductResponse) => {
-                    console.log(newProductResponse);
-                    this.stripe_product_id =
-                        newProductResponse.data.stripe_product_id;
+                .post("/api/v1/product-update/", this.product.stripe_product_id)
+                .then((updatedProductResponse) => {
+                    console.log(updatedProductResponse);
                     this.uploadImages();
                 })
                 .catch((error) => {
@@ -339,13 +338,16 @@ export default {
         uploadImages() {
             let images = new FormData();
             for (let i = 0; i < this.images.length; i++) {
-                images.append("stripe_product_id", this.stripe_product_id);
+                images.append(
+                    "stripe_product_id",
+                    this.product.stripe_product_id
+                );
                 images.append("images", this.images[i]);
             }
             djangoAPI
-                .post("/api/v1/images-create/", images)
-                .then((newProductImagesResponse) => {
-                    console.log(newProductImagesResponse);
+                .post("/api/v1/images-update/", images)
+                .then((updatedProductImagesResponse) => {
+                    console.log(updatedProductImagesResponse);
                     toast({
                         message: "Product has been successfully updated!",
                         type: "is-success",

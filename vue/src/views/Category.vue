@@ -29,7 +29,7 @@ export default {
             let category = this.$route.params.category;
             djangoAPI({
                 method: "GET",
-                url: `api/v1/category/${category}`,
+                url: `/api/v1/products/category/${category}/`,
             })
                 .then((categoryResponse) => {
                     console.log(categoryResponse);

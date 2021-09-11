@@ -21,10 +21,10 @@
                     <span class="actions">
                         <router-link
                             class="fas fa-edit"
-                            id="edit"
+                            id="update"
                             v-on:click="getProductData(product)"
                             v-bind:to="{
-                                name: 'ProductUpdate',
+                                name: 'ProductsUpdate',
                                 params: {
                                     stripe_product_id:
                                         product.stripe_product_id,
@@ -67,7 +67,7 @@ export default {
         deleteProduct() {
             djangoAPI
                 .post(
-                    `/api/v1/product-delete/${this.product.stripe_product_id}`
+                    `/api/v1/products/${this.product.stripe_product_id}/delete/`
                 )
                 .then((productDeleteResponse) => {
                     console.log(productDeleteResponse);
@@ -123,7 +123,7 @@ export default {
 .actions {
     white-space: nowrap;
 }
-#edit,
+#update,
 #delete {
     color: #424242;
     margin-left: 15px;

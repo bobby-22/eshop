@@ -200,7 +200,7 @@
 import { djangoAPI } from "../axios";
 import { toast } from "bulma-toast";
 export default {
-    name: "ProductCreate",
+    name: "ProductsCreate",
     data() {
         return {
             title: "",
@@ -321,7 +321,7 @@ export default {
             product.append("description", this.description);
             product.append("thumbnail", this.thumbnail);
             djangoAPI
-                .post("/api/v1/product-create/", product)
+                .post("/api/v1/products/create/", product)
                 .then((newProductResponse) => {
                     console.log(newProductResponse);
                     this.stripe_product_id =
@@ -340,7 +340,7 @@ export default {
                 images.append("images", this.images[i]);
             }
             djangoAPI
-                .post("/api/v1/images-create/", images)
+                .post("/api/v1/images/create/", images)
                 .then((newProductImagesResponse) => {
                     console.log(newProductImagesResponse);
                     toast({

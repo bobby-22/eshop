@@ -27,7 +27,7 @@ export default {
     methods: {
         getLatestProducts() {
             djangoAPI
-                .get("/api/v1/products/latest", {
+                .get("/api/v1/products/latest/", {
                     headers: {
                         Authorization: `JWT ${this.$store.state.tokenAccess}`,
                     },

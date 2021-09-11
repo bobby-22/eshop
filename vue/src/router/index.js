@@ -8,8 +8,8 @@ import Saved from "../views/Saved.vue";
 import Register from "../components/Register.vue";
 import Login from "../components/Login.vue";
 import Profile from "../views/Profile.vue";
-import ProductCreate from "../components/ProductCreate.vue";
-import ProductUpdate from "../components/ProductUpdate.vue";
+import ProductsCreate from "../components/ProductsCreate.vue";
+import ProductsUpdate from "../components/ProductsUpdate.vue";
 
 const routes = [
     {
@@ -18,54 +18,54 @@ const routes = [
         component: Home,
     },
     {
-        path: "/products/latest",
+        path: "/products/latest/",
         name: "Latest",
         component: Latest,
     },
     {
-        path: "/product/:stripe_product_id",
+        path: "/products/:stripe_product_id/",
         name: "Details",
         component: Details,
     },
     {
-        path: "/category/:category/products",
+        path: "/products/category/:category/",
         name: "Category",
         component: Category,
     },
     {
-        path: "/products/?search=:keyword",
+        path: "/products/?search=:keyword/",
         name: "Search",
         component: Search,
     },
     {
-        path: "/products/saved",
+        path: "/products/saved/",
         name: "Saved",
         component: Saved,
     },
     {
-        path: "/accounts/register",
+        path: "/accounts/register/",
         name: "Register",
         component: Register,
     },
     {
-        path: "/accounts/login",
+        path: "/accounts/login/",
         name: "Login",
         component: Login,
     },
     {
-        path: "/user/:user",
+        path: "/accounts/users/:user/",
         name: "Profile",
         component: Profile,
     },
     {
-        path: "/product/new",
-        name: "ProductCreate",
-        component: ProductCreate,
+        path: "/products/create/",
+        name: "ProductsCreate",
+        component: ProductsCreate,
     },
     {
-        path: "/product/:stripe_product_id/edit",
-        name: "ProductUpdate",
-        component: ProductUpdate,
+        path: "/products/:stripe_product_id/update/",
+        name: "ProductsUpdate",
+        component: ProductsUpdate,
     },
 ];
 

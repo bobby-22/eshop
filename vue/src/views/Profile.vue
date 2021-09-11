@@ -2,7 +2,7 @@
     <div class="container">
         <h1 class="title">
             My products:
-            <router-link id="new" to="/product/new">
+            <router-link id="create" to="/products/create">
                 <i class="far fa-plus-square"></i>
             </router-link>
         </h1>
@@ -33,7 +33,7 @@ export default {
     methods: {
         getUserProducts() {
             djangoAPI
-                .get("/api/v1/user/" + this.$store.state.currentUserId)
+                .get("/api/v1/accounts/users/" + this.$store.state.currentUserId)
                 .then((latestResponse) => {
                     console.log(latestResponse);
                     this.products = latestResponse.data;
@@ -83,10 +83,10 @@ export default {
     border-bottom: 1px solid #ededed;
     margin-bottom: 26px;
 }
-a#new {
+a#create {
     color: #424242;
 }
-#new:hover {
+#create:hover {
     color: black;
 }
 </style>
