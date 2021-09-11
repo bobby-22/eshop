@@ -72,7 +72,7 @@ export default {
         deleteProduct() {
             djangoAPI
                 .delete(
-                    `/api/v1/products/${this.product.stripe_product_id}/delete/`
+                    `/api/v1/products/${this.product.stripe_product_id}/delete`
                 )
                 .then((deletedProductResponse) => {
                     console.log(deletedProductResponse);

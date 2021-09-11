@@ -383,9 +383,9 @@ export default {
                 images.append("images", this.images[i]);
             }
             djangoAPI
-                .post("/api/v1/images/update/", images)
-                .then((updatedImagesResponse) => {
-                    console.log(updatedImagesResponse);
+                .post("/api/v1/images/create/", images)
+                .then((createdImagesResponse) => {
+                    console.log(createdImagesResponse);
                     toast({
                         message: "Product has been successfully updated!",
                         type: "is-success",

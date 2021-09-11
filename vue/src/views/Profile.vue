@@ -33,7 +33,9 @@ export default {
     methods: {
         getUserProducts() {
             djangoAPI
-                .get("/api/v1/accounts/users/" + this.$store.state.currentUserId)
+                .get(
+                    "/api/v1/accounts/users/" + this.$store.state.currentUserId
+                )
                 .then((latestResponse) => {
                     console.log(latestResponse);
                     this.products = latestResponse.data;
