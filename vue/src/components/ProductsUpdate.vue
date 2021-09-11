@@ -134,8 +134,15 @@
                             </span>
                             <span class="file-label">Choose a thumbnail</span>
                         </span>
-                        <span class="file-name" v-if="!thumbnail">
-                            No thumbnail uploaded
+                        <span
+                            class="file-name"
+                            id="thumbnail"
+                            v-if="!thumbnail"
+                        >
+                            <img v-bind:src="thumbnailCloud" />
+                            <span class="thumbnail-name">
+                                {{ thumbnailCloud }}
+                            </span>
                         </span>
                         <span class="file-name" v-else>
                             {{ thumbnail.name }}
@@ -148,14 +155,14 @@
                 </p>
             </div>
             <div class="field">
-                <div class="file has-name is-fullwidth is-boxed">
+                <div class="file has-name is-fullwidth is-boxed" id="images">
                     <label class="file-label">
                         <input
                             class="file-input"
                             type="file"
                             accept="image/*"
                             name="images"
-                            v-on:change="uploadImage"
+                            v-on:change="uploadImages"
                             multiple
                         />
                         <span class="file-cta">
@@ -164,23 +171,39 @@
                             </span>
                             <span class="file-label">Choose images</span>
                         </span>
-                        <span class="file-name" v-if="!images">
-                            No images uploaded
+                    </label>
+                    <span
+                        class="file-name"
+                        id="file-name"
+                        v-for="image in imagesCloud"
+                        :key="image.id"
+                    >
+                        <img v-bind:src="image.images" />
+                        <span class="image-name">
+                            {{ image.images }}
                         </span>
-                        <span
-                            class="file-name"
-                            v-else
-                            v-for="image in images"
-                            :key="image.id"
-                        >
+                        <a
+                            class="image-delete"
+                            v-on:click="deleteImageCloud(image)"
+                            ><i class="far fa-times-circle"></i
+                        ></a>
+                    </span>
+                    <span
+                        class="file-name"
+                        id="file-name"
+                        v-for="image in images"
+                        :key="image.id"
+                    >
+                        <span class="image-name">
                             {{ image.name }}
                         </span>
-                    </label>
+                        <a
+                            class="image-delete"
+                            v-on:click="deleteImageLocal(image)"
+                            ><i class="far fa-times-circle"></i
+                        ></a>
+                    </span>
                 </div>
-                <p class="help is-danger" v-if="errorImagesBoolean">
-                    <i class="fas fa-exclamation-circle"></i>
-                    {{ errorMessageImages }}
-                </p>
             </div>
             <div class="field">
                 <div class="control">
@@ -211,8 +234,10 @@ export default {
             category: this.$store.state.productData.category,
             description: this.$store.state.productData.description,
 
-            thumbnail: null,
+            thumbnail: "",
+            thumbnailCloud: this.$store.state.productData.thumbnail,
             images: null,
+            imagesCloud: this.$store.state.imagesCloud,
 
             errors: [],
             errorTitleBoolean: false,
@@ -220,8 +245,6 @@ export default {
             errorPriceBoolean: false,
             errorCategoryBoolean: false,
             errorDescriptionBoolean: false,
-            errorThumbnailBoolean: false,
-            errorImagesBoolean: false,
             submittedBoolean: false,
 
             errorMessageTitle: null,
@@ -229,8 +252,6 @@ export default {
             errorMessageCountry: null,
             errorMessageCategory: null,
             errorMessageDescription: null,
-            errorMessageThumbnail: null,
-            errorMessageImages: null,
 
             titleLength: null,
             countryLength: null,
@@ -280,18 +301,6 @@ export default {
             } else {
                 this.errorDescriptionBoolean = false;
             }
-            if (!this.thumbnail) {
-                this.errorThumbnailBoolean = true;
-                this.errorMessageThumbnail = "Upload a thumbnail";
-            } else {
-                this.errorThumbnailBoolean = false;
-            }
-            if (!this.images) {
-                this.errorImagesBoolean = true;
-                this.errorMessageImages = "Upload some images";
-            } else {
-                this.errorImagesBoolean = false;
-            }
         },
         countCharacters() {
             let titleLength = 0;
@@ -308,8 +317,20 @@ export default {
         uploadThumbnail(event) {
             this.thumbnail = event.target.files[0];
         },
-        uploadImage(event) {
+        uploadImages(event) {
             this.images = event.target.files;
+        },
+        deleteImageLocal(image) {
+            this.images = Object.values(this.images).filter((i) => {
+                return i.name !== image.name;
+            });
+        },
+        deleteImageCloud(image) {
+            this.imagesCloud = Object.values(this.imagesCloud).filter((i) => {
+                return i.id !== image.id;
+            });
+            this.$store.commit("saveImagesCloudState", this.imagesCloud);
+            this.deleteImage(image.id);
         },
         submitUpdatedProduct() {
             this.submittedBoolean = true;
@@ -319,23 +340,40 @@ export default {
             product.append("price", this.price);
             product.append("country", this.country);
             product.append("category", this.category);
-            product.append("owner", this.$store.state.currentUserId);
+            product.append("owner", this.product.owner);
             product.append("description", this.description);
             product.append("thumbnail", this.thumbnail);
             product.append("stripe_product_id", this.product.stripe_product_id);
             product.append("stripe_price_id", this.product.stripe_price_id);
             djangoAPI
-                .post("/api/v1/product-update/", this.product.stripe_product_id)
+                .put(
+                    `/api/v1/products/${this.product.stripe_product_id}/update/`,
+                    product
+                )
                 .then((updatedProductResponse) => {
                     console.log(updatedProductResponse);
-                    this.uploadImages();
+                    if (this.images !== null) {
+                        this.submitNewImages();
+                    } else {
+                        toast({
+                            message: "Product has been successfully updated!",
+                            type: "is-success",
+                            dismissible: true,
+                            pauseOnHover: true,
+                            duration: 2000,
+                            position: "bottom-right",
+                        });
+                        this.$router.push(
+                            "/accounts/users/" + this.$store.state.currentUser
+                        );
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
                     this.submittedBoolean = false;
                 });
         },
-        uploadImages() {
+        submitNewImages() {
             let images = new FormData();
             for (let i = 0; i < this.images.length; i++) {
                 images.append(
@@ -345,9 +383,9 @@ export default {
                 images.append("images", this.images[i]);
             }
             djangoAPI
-                .post("/api/v1/images-update/", images)
-                .then((updatedProductImagesResponse) => {
-                    console.log(updatedProductImagesResponse);
+                .post("/api/v1/images/update/", images)
+                .then((updatedImagesResponse) => {
+                    console.log(updatedImagesResponse);
                     toast({
                         message: "Product has been successfully updated!",
                         type: "is-success",
@@ -356,7 +394,27 @@ export default {
                         duration: 2000,
                         position: "bottom-right",
                     });
-                    this.$router.push("/user/" + this.$store.state.currentUser);
+                    this.$router.push(
+                        "/accounts/users/" + this.$store.state.currentUser
+                    );
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
+        deleteImage(image_id) {
+            djangoAPI
+                .delete(`/api/v1/images/${image_id}/delete/`)
+                .then((deletedImagesResponse) => {
+                    console.log(deletedImagesResponse);
+                    toast({
+                        message: "Image has been successfully deleted!",
+                        type: "is-success",
+                        dismissible: true,
+                        pauseOnHover: true,
+                        duration: 2000,
+                        position: "bottom-right",
+                    });
                 })
                 .catch((error) => {
                     console.log(error);
@@ -368,6 +426,7 @@ export default {
     },
     beforeCreate() {
         this.$store.commit("localStorageProductData");
+        this.$store.commit("localStorageProductImages");
     },
     created() {
         this.countCharacters();
@@ -419,9 +478,49 @@ select {
 #category {
     margin-bottom: 10px;
 }
+img {
+    height: inherit;
+}
 .file-label,
 .file-name {
     text-align: center;
+}
+#file-name {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+#thumbnail {
+    display: flex;
+    padding-left: 0px;
+}
+#images {
+    display: flex;
+    flex-direction: column;
+}
+.thumbnail-name,
+.image-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.thumbnail-name {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.image-delete {
+    position: absolute;
+    right: 15px;
+}
+a {
+    color: #424242;
+}
+a:hover {
+    color: black;
 }
 @media (max-width: 1024px) {
     .container {

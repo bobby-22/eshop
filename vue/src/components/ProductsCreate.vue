@@ -147,14 +147,14 @@
                 </p>
             </div>
             <div class="field">
-                <div class="file has-name is-fullwidth is-boxed">
+                <div class="file has-name is-fullwidth is-boxed" id="images">
                     <label class="file-label">
                         <input
                             class="file-input"
                             type="file"
                             accept="image/*"
                             name="images"
-                            v-on:change="uploadImage"
+                            v-on:change="uploadImages"
                             multiple
                         />
                         <span class="file-cta">
@@ -163,23 +163,21 @@
                             </span>
                             <span class="file-label">Choose images</span>
                         </span>
-                        <span class="file-name" v-if="!images">
-                            No images uploaded
-                        </span>
-                        <span
-                            class="file-name"
-                            v-else
-                            v-for="image in images"
-                            :key="image.id"
-                        >
+                    </label>
+                    <span
+                        class="file-name"
+                        id="file-name"
+                        v-for="image in images"
+                        :key="image.id"
+                    >
+                        <span class="image-name">
                             {{ image.name }}
                         </span>
-                    </label>
+                        <a class="image-delete" v-on:click="deleteImage(image)"
+                            ><i class="far fa-times-circle"></i
+                        ></a>
+                    </span>
                 </div>
-                <p class="help is-danger" v-if="errorImagesBoolean">
-                    <i class="fas fa-exclamation-circle"></i>
-                    {{ errorMessageImages }}
-                </p>
             </div>
             <div class="field">
                 <div class="control">
@@ -219,7 +217,6 @@ export default {
             errorCategoryBoolean: false,
             errorDescriptionBoolean: false,
             errorThumbnailBoolean: false,
-            errorImagesBoolean: false,
             submittedBoolean: false,
 
             errorMessageTitle: null,
@@ -228,7 +225,6 @@ export default {
             errorMessageCategory: null,
             errorMessageDescription: null,
             errorMessageThumbnail: null,
-            errorMessageImages: null,
 
             titleLength: null,
             countryLength: null,
@@ -284,12 +280,6 @@ export default {
             } else {
                 this.errorThumbnailBoolean = false;
             }
-            if (!this.images) {
-                this.errorImagesBoolean = true;
-                this.errorMessageImages = "Upload some images";
-            } else {
-                this.errorImagesBoolean = false;
-            }
         },
         countCharacters() {
             let titleLength = 0;
@@ -306,8 +296,13 @@ export default {
         uploadThumbnail(event) {
             this.thumbnail = event.target.files[0];
         },
-        uploadImage(event) {
+        uploadImages(event) {
             this.images = event.target.files;
+        },
+        deleteImage(image) {
+            this.images = Object.values(this.images).filter((i) => {
+                return i.name !== image.name;
+            });
         },
         submitNewProduct() {
             this.submittedBoolean = true;
@@ -322,18 +317,32 @@ export default {
             product.append("thumbnail", this.thumbnail);
             djangoAPI
                 .post("/api/v1/products/create/", product)
-                .then((newProductResponse) => {
-                    console.log(newProductResponse);
+                .then((createdProductResponse) => {
+                    console.log(createdProductResponse);
                     this.stripe_product_id =
-                        newProductResponse.data.stripe_product_id;
-                    this.uploadImages();
+                        createdProductResponse.data.stripe_product_id;
+                    if (this.images !== null) {
+                        this.submitNewImages();
+                    } else {
+                        toast({
+                            message: "Product has been successfully created!",
+                            type: "is-success",
+                            dismissible: true,
+                            pauseOnHover: true,
+                            duration: 2000,
+                            position: "bottom-right",
+                        });
+                        this.$router.push(
+                            "/accounts/users/" + this.$store.state.currentUser
+                        );
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
                     this.submittedBoolean = false;
                 });
         },
-        uploadImages() {
+        submitNewImages() {
             let images = new FormData();
             for (let i = 0; i < this.images.length; i++) {
                 images.append("stripe_product_id", this.stripe_product_id);
@@ -341,8 +350,8 @@ export default {
             }
             djangoAPI
                 .post("/api/v1/images/create/", images)
-                .then((newProductImagesResponse) => {
-                    console.log(newProductImagesResponse);
+                .then((createdImagesResponse) => {
+                    console.log(createdImagesResponse);
                     toast({
                         message: "Product has been successfully created!",
                         type: "is-success",
@@ -351,7 +360,9 @@ export default {
                         duration: 2000,
                         position: "bottom-right",
                     });
-                    this.$router.push("/user/" + this.$store.state.currentUser);
+                    this.$router.push(
+                        "/accounts/users/" + this.$store.state.currentUser
+                    );
                 })
                 .catch((error) => {
                     console.log(error);
@@ -417,6 +428,34 @@ select {
 .file-label,
 .file-name {
     text-align: center;
+}
+#file-name {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+#images {
+    display: flex;
+    flex-direction: column;
+}
+.image-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.image-delete {
+    position: absolute;
+    right: 15px;
+}
+a {
+    color: #424242;
+}
+a:hover {
+    color: black;
 }
 @media (max-width: 1024px) {
     .container {

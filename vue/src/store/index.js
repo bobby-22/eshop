@@ -5,6 +5,7 @@ export default createStore({
     state: {
         savedProducts: [],
         productData: Object,
+        imagesCloud: [],
         authenticated: false,
         tokenAccess: null,
         tokenRefresh: null,
@@ -57,6 +58,25 @@ export default createStore({
             localStorage.setItem(
                 "productData",
                 JSON.stringify(state.productData)
+            );
+        },
+        localStorageProductImages(state) {
+            if (localStorage.getItem("imagesCloud")) {
+                state.imagesCloud = JSON.parse(
+                    localStorage.getItem("imagesCloud")
+                );
+            } else {
+                localStorage.setItem(
+                    "imagesCloud",
+                    JSON.stringify(state.imagesCloud)
+                );
+            }
+        },
+        saveImagesCloudState(state, images) {
+            state.imagesCloud = images;
+            localStorage.setItem(
+                "imagesCloud",
+                JSON.stringify(state.imagesCloud)
             );
         },
         localStorageAuthenticated(state) {

@@ -63,23 +63,46 @@ export default {
     props: {
         product: Object,
     },
+    data() {
+        return {
+            images: [],
+        };
+    },
     methods: {
         deleteProduct() {
             djangoAPI
-                .post(
+                .delete(
                     `/api/v1/products/${this.product.stripe_product_id}/delete/`
                 )
-                .then((productDeleteResponse) => {
-                    console.log(productDeleteResponse);
+                .then((deletedProductResponse) => {
+                    console.log(deletedProductResponse);
                 })
                 .catch((error) => {
                     console.log(error);
                 });
             this.$emit("deleteProduct", this.product);
         },
+        getImages() {
+            let stripe_product_id = this.product.stripe_product_id;
+            djangoAPI({
+                method: "GET",
+                url: `/api/v1/products/${stripe_product_id}/images/`,
+            })
+                .then((imagesResponse) => {
+                    console.log(imagesResponse);
+                    this.images = imagesResponse.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
         getProductData(product) {
             this.$store.commit("saveProductDataState", product);
+            this.$store.commit("saveImagesCloudState", this.images);
         },
+    },
+    created() {
+        this.getImages();
     },
 };
 </script>
