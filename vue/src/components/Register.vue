@@ -129,15 +129,15 @@ export default {
                 .post("/api/v1/accounts/register/", user)
                 .then((registerResponse) => {
                     console.log(registerResponse);
+                    this.$router.push("/");
                     toast({
-                        message: "Account was successfully created!",
+                        message: "Account has been successfully created!",
                         type: "is-success",
                         dismissible: true,
                         pauseOnHover: true,
-                        duration: 2000,
+                        duration: 3000,
                         position: "bottom-right",
                     });
-                    this.$router.push("/");
                 })
                 .catch((error) => {
                     console.log(error);

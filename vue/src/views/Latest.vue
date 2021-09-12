@@ -27,21 +27,13 @@ export default {
     methods: {
         getLatestProducts() {
             djangoAPI
-                .get("/api/v1/products/latest/", {
-                    headers: {
-                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
-                    },
-                })
+                .get("/api/v1/products/latest/")
                 .then((latestResponse) => {
                     console.log(latestResponse);
                     this.products = latestResponse.data;
                 })
                 .catch((error) => {
                     console.log(error);
-                    if (error) {
-                        this.$store.commit("removeCredentialsState");
-                        this.$router.push("/accounts/login");
-                    }
                 });
         },
         setTitle() {

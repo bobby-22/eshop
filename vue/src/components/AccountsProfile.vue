@@ -59,7 +59,7 @@
 <script>
 import { djangoAPI } from "../axios";
 export default {
-    name: "ProductsProfile",
+    name: "AccountsProfile",
     props: {
         product: Object,
     },
@@ -72,13 +72,26 @@ export default {
         deleteProduct() {
             djangoAPI
                 .delete(
-                    `/api/v1/products/${this.product.stripe_product_id}/delete`
+                    `/api/v1/products/${this.product.stripe_product_id}/delete`,
+                    {
+                        headers: {
+                            Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                        },
+                    }
                 )
                 .then((deletedProductResponse) => {
                     console.log(deletedProductResponse);
                 })
                 .catch((error) => {
                     console.log(error);
+                    if (error.response.status === 403) {
+                        this.$router.push({
+                            name: "Error",
+                            params: {
+                                message: "403",
+                            },
+                        });
+                    }
                 });
             this.$emit("deleteProduct", this.product);
         },

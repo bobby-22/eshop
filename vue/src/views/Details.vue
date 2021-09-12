@@ -36,7 +36,15 @@
                         </h2>
                         <h2 class="title is-6">
                             <i class="fas fa-user"></i>
-                            {{ detail.user }}
+                            <router-link
+                                v-bind:to="{
+                                    name: 'User',
+                                    params: {
+                                        user: detail.user,
+                                    },
+                                }"
+                                >&nbsp;{{ detail.user }}
+                            </router-link>
                         </h2>
                     </div>
                 </div>

@@ -8,7 +8,8 @@ urlpatterns = [
     path("products/<slug:stripe_product_id>/images/", views.Details2View.as_view()),
     path("products/category/<slug:category>/", views.CategoryView.as_view()),
     path("products/search/", views.SearchView.as_view()),
-    path("accounts/users/<int:user_id>", views.ProfileView.as_view()),
+    path("accounts/profile/<int:profile_id>", views.ProfileView.as_view()),
+    path("accounts/user/<slug:username>", views.UserView.as_view()),
     path("products/create/", views.ProductModelCreateView.as_view()),
     path("images/create/", views.ImageModelCreateView.as_view()),
     path(

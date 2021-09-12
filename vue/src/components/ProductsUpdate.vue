@@ -149,10 +149,6 @@
                         </span>
                     </label>
                 </div>
-                <p class="help is-danger" v-if="errorThumbnailBoolean">
-                    <i class="fas fa-exclamation-circle"></i>
-                    {{ errorMessageThumbnail }}
-                </p>
             </div>
             <div class="field">
                 <div class="file has-name is-fullwidth is-boxed" id="images">
@@ -348,34 +344,49 @@ export default {
             djangoAPI
                 .put(
                     `/api/v1/products/${this.product.stripe_product_id}/update/`,
-                    product
+                    product,
+                    {
+                        headers: {
+                            Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                        },
+                    }
                 )
                 .then((updatedProductResponse) => {
                     console.log(updatedProductResponse);
                     if (this.images !== null) {
                         this.submitNewImages();
                     } else {
+                        this.$router.push(
+                            "/accounts/users/" + this.$store.state.currentUser
+                        );
                         toast({
                             message: "Product has been successfully updated!",
                             type: "is-success",
                             dismissible: true,
                             pauseOnHover: true,
-                            duration: 2000,
+                            duration: 3000,
                             position: "bottom-right",
                         });
-                        this.$router.push(
-                            "/accounts/users/" + this.$store.state.currentUser
-                        );
                     }
                 })
                 .catch((error) => {
                     console.log(error);
                     this.submittedBoolean = false;
+                    if (error.response.status === 403) {
+                        this.$router.push({
+                            name: "Error",
+                            params: {
+                                message: "403",
+                            },
+                        });
+                    }
                 });
         },
         submitNewImages() {
+            this.submittedBoolean = true;
             let images = new FormData();
             for (let i = 0; i < this.images.length; i++) {
+                images.append("owner", this.$store.state.currentUserId);
                 images.append(
                     "stripe_product_id",
                     this.product.stripe_product_id
@@ -383,28 +394,37 @@ export default {
                 images.append("images", this.images[i]);
             }
             djangoAPI
-                .post("/api/v1/images/create/", images)
+                .post("/api/v1/images/create/", images, {
+                    headers: {
+                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                    },
+                })
                 .then((createdImagesResponse) => {
                     console.log(createdImagesResponse);
+                    this.$router.push(
+                        "/accounts/users/" + this.$store.state.currentUser
+                    );
                     toast({
                         message: "Product has been successfully updated!",
                         type: "is-success",
                         dismissible: true,
                         pauseOnHover: true,
-                        duration: 2000,
+                        duration: 3000,
                         position: "bottom-right",
                     });
-                    this.$router.push(
-                        "/accounts/users/" + this.$store.state.currentUser
-                    );
                 })
                 .catch((error) => {
                     console.log(error);
+                    this.submittedBoolean = false;
                 });
         },
         deleteImage(image_id) {
             djangoAPI
-                .delete(`/api/v1/images/${image_id}/delete/`)
+                .delete(`/api/v1/images/${image_id}/delete/`, {
+                    headers: {
+                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                    },
+                })
                 .then((deletedImagesResponse) => {
                     console.log(deletedImagesResponse);
                     toast({
@@ -412,12 +432,20 @@ export default {
                         type: "is-success",
                         dismissible: true,
                         pauseOnHover: true,
-                        duration: 2000,
+                        duration: 3000,
                         position: "bottom-right",
                     });
                 })
                 .catch((error) => {
                     console.log(error);
+                    if (error.response.status === 403) {
+                        this.$router.push({
+                            name: "Error",
+                            params: {
+                                message: "403",
+                            },
+                        });
+                    }
                 });
         },
         setTitle() {

@@ -316,7 +316,11 @@ export default {
             product.append("description", this.description);
             product.append("thumbnail", this.thumbnail);
             djangoAPI
-                .post("/api/v1/products/create/", product)
+                .post("/api/v1/products/create/", product, {
+                    headers: {
+                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                    },
+                })
                 .then((createdProductResponse) => {
                     console.log(createdProductResponse);
                     this.stripe_product_id =
@@ -324,48 +328,71 @@ export default {
                     if (this.images !== null) {
                         this.submitNewImages();
                     } else {
+                        this.$router.push(
+                            "/accounts/users/" + this.$store.state.currentUser
+                        );
                         toast({
                             message: "Product has been successfully created!",
                             type: "is-success",
                             dismissible: true,
                             pauseOnHover: true,
-                            duration: 2000,
+                            duration: 3000,
                             position: "bottom-right",
                         });
-                        this.$router.push(
-                            "/accounts/users/" + this.$store.state.currentUser
-                        );
                     }
                 })
                 .catch((error) => {
                     console.log(error);
                     this.submittedBoolean = false;
+                    if (error.response.status === 403) {
+                        this.$router.push({
+                            name: "Error",
+                            params: {
+                                message: "403",
+                            },
+                        });
+                    }
                 });
         },
         submitNewImages() {
+            this.submittedBoolean = true;
             let images = new FormData();
             for (let i = 0; i < this.images.length; i++) {
+                images.append("owner", this.$store.state.currentUserId);
                 images.append("stripe_product_id", this.stripe_product_id);
                 images.append("images", this.images[i]);
             }
             djangoAPI
-                .post("/api/v1/images/create/", images)
+                .post("/api/v1/images/create/", images, {
+                    headers: {
+                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                    },
+                })
                 .then((createdImagesResponse) => {
                     console.log(createdImagesResponse);
+                    this.$router.push(
+                        "/accounts/users/" + this.$store.state.currentUser
+                    );
                     toast({
                         message: "Product has been successfully created!",
                         type: "is-success",
                         dismissible: true,
                         pauseOnHover: true,
-                        duration: 2000,
+                        duration: 3000,
                         position: "bottom-right",
                     });
-                    this.$router.push(
-                        "/accounts/users/" + this.$store.state.currentUser
-                    );
                 })
                 .catch((error) => {
                     console.log(error);
+                    this.submittedBoolean = false;
+                    if (error.response.status === 403) {
+                        this.$router.push({
+                            name: "Error",
+                            params: {
+                                message: "403",
+                            },
+                        });
+                    }
                 });
         },
         setTitle() {

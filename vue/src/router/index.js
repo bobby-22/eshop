@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import Error from "../views/Error.vue";
 import Latest from "../views/Latest.vue";
 import Details from "../views/Details.vue";
 import Category from "../views/Category.vue";
@@ -8,6 +9,7 @@ import Saved from "../views/Saved.vue";
 import Register from "../components/Register.vue";
 import Login from "../components/Login.vue";
 import Profile from "../views/Profile.vue";
+import User from "../views/User.vue";
 import ProductsCreate from "../components/ProductsCreate.vue";
 import ProductsUpdate from "../components/ProductsUpdate.vue";
 
@@ -16,6 +18,11 @@ const routes = [
         path: "/",
         name: "Home",
         component: Home,
+    },
+    {
+        path: "/error/:message/",
+        name: "Error",
+        component: Error,
     },
     {
         path: "/products/latest/",
@@ -53,9 +60,14 @@ const routes = [
         component: Login,
     },
     {
-        path: "/accounts/users/:user/",
+        path: "/accounts/profile/:profile/",
         name: "Profile",
         component: Profile,
+    },
+    {
+        path: "/accounts/user/:user/",
+        name: "User",
+        component: User,
     },
     {
         path: "/products/create/",

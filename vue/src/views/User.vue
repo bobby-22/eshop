@@ -1,13 +1,8 @@
 <template>
     <div class="container">
-        <h1 class="title">
-            My products:
-            <router-link id="create" to="/products/create">
-                <i class="far fa-plus-square"></i>
-            </router-link>
-        </h1>
+        <h1 class="title">{{ username }}'s products:</h1>
         <p v-if="!products.length">No products added...</p>
-        <AccountsProfile
+        <AccountsUser
             v-for="product in products"
             v-bind:key="product.id"
             v-bind:product="product"
@@ -18,30 +13,26 @@
 
 <script>
 import { djangoAPI } from "../axios";
-import { toast } from "bulma-toast";
-import AccountsProfile from "../components/AccountsProfile.vue";
+import AccountsUser from "../components/AccountsUser.vue";
 export default {
-    name: "Profile",
+    name: "User",
     components: {
-        AccountsProfile,
+        AccountsUser,
     },
     data() {
         return {
             products: [],
+            username: this.$route.params.user,
         };
     },
     methods: {
         getUserProducts() {
             djangoAPI
-                .get(
-                    "/api/v1/accounts/profile/" +
-                        this.$store.state.currentUserId,
-                    {
-                        headers: {
-                            Authorization: `JWT ${this.$store.state.tokenAccess}`,
-                        },
-                    }
-                )
+                .get("/api/v1/accounts/user/" + this.$route.params.user, {
+                    headers: {
+                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                    },
+                })
                 .then((profileResponse) => {
                     console.log(profileResponse);
                     this.products = profileResponse.data;
@@ -58,25 +49,9 @@ export default {
                     }
                 });
         },
-        deleteProduct(product) {
-            this.products = this.products.filter((i) => {
-                return i.stripe_product_id !== product.stripe_product_id;
-            });
-            toast({
-                message: "Product has been successfully deleted!",
-                type: "is-success",
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 3000,
-                position: "bottom-right",
-            });
-        },
         setTitle() {
-            document.title = "My Products | MechMarketEU";
+            document.title = `${this.$route.params.user}'s Products | MechMarketEU`;
         },
-    },
-    beforeCreate() {
-        this.$store.commit("localStorageSavedCurrentUserId");
     },
     created() {
         this.getUserProducts();
@@ -98,11 +73,5 @@ export default {
     padding-bottom: 15px;
     border-bottom: 1px solid #ededed;
     margin-bottom: 26px;
-}
-a#create {
-    color: #424242;
-}
-#create:hover {
-    color: black;
 }
 </style>

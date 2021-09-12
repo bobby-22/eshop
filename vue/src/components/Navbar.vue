@@ -54,7 +54,7 @@
                         v-bind:to="{
                             name: 'Profile',
                             params: {
-                                user: currentUser,
+                                profile: currentUser,
                             },
                         }"
                         >&nbsp;{{ currentUser }}
@@ -131,7 +131,7 @@ export default {
                 type: "is-success",
                 dismissible: true,
                 pauseOnHover: true,
-                duration: 2000,
+                duration: 3000,
                 position: "bottom-right",
             });
         },
