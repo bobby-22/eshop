@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import Terms from "../views/Terms.vue";
 import Error from "../views/Error.vue";
 import Latest from "../views/Latest.vue";
 import Details from "../views/Details.vue";
@@ -18,6 +19,11 @@ const routes = [
         path: "/",
         name: "Home",
         component: Home,
+    },
+    {
+        path: "/terms/",
+        name: "Terms",
+        component: Terms,
     },
     {
         path: "/error/:message/",
