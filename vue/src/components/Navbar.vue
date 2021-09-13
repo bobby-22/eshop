@@ -10,7 +10,6 @@
             <NavbarDropdown class="navbar-item" />
             <div
                 class="navbar-burger"
-                data-target="hamburger"
                 v-on:click="openHamburger"
                 v-bind:class="{ 'is-active': hamburgerBoolean }"
             >
@@ -22,12 +21,11 @@
 
         <div
             class="navbar-menu"
-            id="collapse_burger"
             v-bind:class="{ 'is-active': hamburgerBoolean }"
         >
             <div class="navbar-start">
                 <div class="navbar-item">
-                    <form v-on:submit.stop.prevent="submitSearch">
+                    <form @submit.prevent="submitSearch">
                         <div class="field has-addons">
                             <div class="control">
                                 <input

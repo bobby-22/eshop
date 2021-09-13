@@ -37,7 +37,7 @@
             <div class="field">
                 <div class="control">
                     <button
-                        class="button is-success"
+                        class="button is-link"
                         v-on:click="loginUser"
                         v-bind:disabled="submittedBoolean"
                     >

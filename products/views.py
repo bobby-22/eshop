@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
+from products import serializers
 from products.models import ProductModel, ImageModel
 from django.contrib.auth import get_user_model
 from products.serializers import (
@@ -11,8 +12,10 @@ from products.serializers import (
 )
 from rest_framework.views import APIView
 from rest_framework import generics, filters
+from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsOwnerOrReadOnly
+from django.core.mail import send_mail
 
 import stripe
 
@@ -121,6 +124,24 @@ class ImageModelDeleteView(generics.DestroyAPIView):
     queryset = ImageModel.objects.all()
     lookup_field = "id"
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+
+
+class ContactView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        owner = User.objects.get(id=request.data.get("owner"))
+        send_mail(
+            subject="MechMarketEU - Somebody is interested in your product",
+            message=request.data.get("description")
+            + "\n"
+            + "\nPlease contact me at this email adress: "
+            + request.data.get("email"),
+            from_email="noreply.mechmarketeu@gmail.com",
+            recipient_list=[owner.email],
+            fail_silently=False,
+        )
+        return Response("Message has been successfully sent")
 
 
 def success(request):

@@ -18,7 +18,108 @@
 
             <div class="details-right">
                 <div class="detail-header">
-                    <h1 class="title" id="title">{{ detail.title }}</h1>
+                    <div class="detail-title">
+                        <h1 class="title" id="title-header">
+                            {{ detail.title }}
+                        </h1>
+                        <div class="modalActivate">
+                            <button
+                                class="button is-success"
+                                v-if="authenticated"
+                                v-on:click="modalBoolean = true"
+                            >
+                                Contact
+                            </button>
+                            <div
+                                class="modal"
+                                v-bind:class="{ 'is-active': modalBoolean }"
+                            >
+                                <div class="modal-background"></div>
+                                <div class="modal-content">
+                                    <form class="form" @submit.prevent>
+                                        <h1 class="title" id="title-modal">
+                                            Contact {{ detail.user }}
+                                            <i class="far fa-address-book"></i>
+                                        </h1>
+                                        <div class="field">
+                                            <span class="label">Email</span>
+                                            <div class="control has-icons-left">
+                                                <input
+                                                    class="input"
+                                                    type="email"
+                                                    placeholder="example@example.com"
+                                                    v-model="email"
+                                                />
+                                                <span
+                                                    class="
+                                                        icon
+                                                        is-small is-left
+                                                    "
+                                                >
+                                                    <i
+                                                        class="fas fa-envelope"
+                                                    ></i>
+                                                </span>
+                                            </div>
+                                            <p
+                                                class="help is-danger"
+                                                v-if="errorEmailBoolean"
+                                            >
+                                                <i
+                                                    class="
+                                                        fas
+                                                        fa-exclamation-circle
+                                                    "
+                                                ></i>
+                                                {{ errorMessageEmail }}
+                                            </p>
+                                        </div>
+                                        <div class="field">
+                                            <span class="label">Message</span>
+                                            <div class="control">
+                                                <textarea
+                                                    class="textarea"
+                                                    rows="10"
+                                                    type="text"
+                                                    v-model="description"
+                                                ></textarea>
+                                            </div>
+                                            <p
+                                                class="help is-danger"
+                                                v-if="errorDescriptionBoolean"
+                                            >
+                                                <i
+                                                    class="
+                                                        fas
+                                                        fa-exclamation-circle
+                                                    "
+                                                ></i>
+                                                {{ errorMessageDescription }}
+                                            </p>
+                                        </div>
+                                        <div class="field">
+                                            <div class="control">
+                                                <button
+                                                    class="button is-success"
+                                                    v-on:click="contactUser"
+                                                    v-bind:disabled="
+                                                        submittedBoolean
+                                                    "
+                                                >
+                                                    Send
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <button
+                                    class="modal-close is-large"
+                                    aria-label="close"
+                                    v-on:click="modalBoolean = false"
+                                ></button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="detail-header-top">
                         <h2 class="title is-5">
                             <i class="fas fa-euro-sign"></i>
@@ -58,6 +159,7 @@
 
 <script>
 import { djangoAPI } from "../axios";
+import { toast } from "bulma-toast";
 export default {
     name: "Details",
     data() {
@@ -65,6 +167,16 @@ export default {
             details: [],
             images: [],
             product: null,
+            authenticated: this.$store.state.authenticated,
+            email: null,
+            description: null,
+            errorMessageEmail: null,
+            errorMessageDescription: null,
+
+            errorEmailBoolean: false,
+            errorDescriptionBoolean: false,
+            submittedBoolean: false,
+            modalBoolean: false,
         };
     },
     methods: {
@@ -98,6 +210,58 @@ export default {
                 })
                 .catch((error) => {
                     console.log(error);
+                });
+        },
+        contactUser() {
+            if (!this.email) {
+                this.errorEmailBoolean = true;
+                this.errorMessageEmail = "Email cannot be empty";
+                return;
+            } else {
+                this.errorEmailBoolean = false;
+            }
+            if (!this.description) {
+                this.errorDescriptionBoolean = true;
+                this.errorMessageDescription = "Description cannot be empty";
+                return;
+            } else {
+                this.errorDescriptionBoolean = false;
+            }
+            this.submittedBoolean = true;
+            let message = {
+                owner: this.product.owner,
+                email: this.email,
+                description: this.description,
+            };
+            djangoAPI
+                .post("/api/v1/contact/user/", message, {
+                    headers: {
+                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                    },
+                })
+                .then((contactedUserResponse) => {
+                    console.log(contactedUserResponse);
+                    this.modalBoolean = false;
+                    toast({
+                        message: "Message has been successfully sent!",
+                        type: "is-success",
+                        dismissible: true,
+                        pauseOnHover: true,
+                        duration: 3000,
+                        position: "bottom-right",
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.submittedBoolean = false;
+                    if (error.response.status === 401) {
+                        this.$router.push({
+                            name: "Error",
+                            params: {
+                                message: "401",
+                            },
+                        });
+                    }
                 });
         },
     },
@@ -141,10 +305,16 @@ export default {
 .details-right {
     flex-basis: 50%;
 }
-#title {
+.detail-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid #f0f0f0;
     padding-bottom: 15px;
     margin-bottom: 15px;
+}
+#title-header {
+    margin-bottom: 0px;
 }
 .detail-header-top {
     display: flex;
@@ -177,6 +347,34 @@ export default {
     .details-left {
         margin-right: 0px;
         margin-bottom: 15px;
+    }
+}
+.modal-content {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+}
+.notification.is-danger {
+    padding: 20px 27px 20px 24px;
+}
+#title-modal {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.input {
+    height: 100%;
+}
+#error {
+    text-align: center;
+}
+@media (max-width: 1024px) {
+    .container {
+        justify-content: start;
+        margin: 0px;
+    }
+    .modal-content {
+        border-radius: 0px;
     }
 }
 </style>

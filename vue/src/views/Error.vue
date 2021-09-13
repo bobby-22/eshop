@@ -16,9 +16,14 @@ export default {
     methods: {
         setTitle() {
             if ((this.$router.params = "403")) {
-                document.title = `Unauthorized | MechMarketEU`;
+                document.title = "Unauthorized | MechMarketEU";
                 this.errorMessage =
                     "You are not authorized to perform this action!";
+            }
+            if ((this.$router.params = "401")) {
+                document.title = "Unauthenticated | MechMarketEU";
+                this.errorMessage =
+                    "You are not authenticated to perform this action! Please login.";
             }
         },
     },

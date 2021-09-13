@@ -24,6 +24,7 @@ urlpatterns = [
         "images/<int:id>/delete/",
         views.ImageModelDeleteView.as_view(),
     ),
+    path("contact/user/", views.ContactView.as_view()),
     path("donate/", views.DonateView.as_view()),
     path("success/", views.success),
     path("cancel/", views.success),
