@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="title">{{ username }}'s products:</h1>
+        <h1 class="title">{{ username }}'s products</h1>
         <p v-if="!products.length">No products added...</p>
         <AccountsUser
             v-for="product in products"

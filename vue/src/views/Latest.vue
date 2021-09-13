@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="title">Latest products:</h1>
+        <h1 class="title">Latest products</h1>
         <div class="columns is-multiline">
             <Products
                 v-for="product in products"

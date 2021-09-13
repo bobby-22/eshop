@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="title">Saved products:</h1>
+        <h1 class="title">Saved products</h1>
         <p v-if="!this.savedProducts.length">No products saved...</p>
 
         <ProductsSaved

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h1 class="title">
-            My products:
+            My products
             <router-link id="create" to="/products/create">
                 <i class="far fa-plus-square"></i>
             </router-link>
