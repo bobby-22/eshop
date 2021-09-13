@@ -1,13 +1,23 @@
 <template>
     <div class="container">
-        <h1 class="title" id="main-title">Home page</h1>
+        <h1 class="title" id="main-title">Welcome to MechMarketEU</h1>
         <div class="categories">
             <div class="grid-item">
                 <img
                     src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/cables.jpg"
                 />
                 <div class="title" id="title">
-                    <h1>Cables</h1>
+                    <h1>
+                        <router-link
+                            class="dropdown-item"
+                            id="first"
+                            v-bind:to="{
+                                name: 'Category',
+                                params: { category: 'Cables' },
+                            }"
+                            >Cables</router-link
+                        >
+                    </h1>
                 </div>
             </div>
             <div class="grid-item">
@@ -15,7 +25,17 @@
                     src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/cases.jpg"
                 />
                 <div class="title" id="title">
-                    <h1>Cases</h1>
+                    <h1>
+                        <router-link
+                            class="dropdown-item"
+                            id="first"
+                            v-bind:to="{
+                                name: 'Category',
+                                params: { category: 'Cases' },
+                            }"
+                            >Cases</router-link
+                        >
+                    </h1>
                 </div>
             </div>
             <div class="grid-item">
@@ -23,7 +43,17 @@
                     src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/deskmats.jpg"
                 />
                 <div class="title" id="title">
-                    <h1>Deskmats</h1>
+                    <h1>
+                        <router-link
+                            class="dropdown-item"
+                            id="first"
+                            v-bind:to="{
+                                name: 'Category',
+                                params: { category: 'Deskmats' },
+                            }"
+                            >Deskmats</router-link
+                        >
+                    </h1>
                 </div>
             </div>
             <div class="grid-item">
@@ -31,7 +61,17 @@
                     src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/keyboards.jpg"
                 />
                 <div class="title" id="title">
-                    <h1>Keyboards</h1>
+                    <h1>
+                        <router-link
+                            class="dropdown-item"
+                            id="first"
+                            v-bind:to="{
+                                name: 'Category',
+                                params: { category: 'Keyboards' },
+                            }"
+                            >Keyboards</router-link
+                        >
+                    </h1>
                 </div>
             </div>
             <div class="grid-item">
@@ -39,7 +79,17 @@
                     src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/keycaps.jpg"
                 />
                 <div class="title" id="title">
-                    <h1>Keycaps</h1>
+                    <h1>
+                        <router-link
+                            class="dropdown-item"
+                            id="first"
+                            v-bind:to="{
+                                name: 'Category',
+                                params: { category: 'Keycaps' },
+                            }"
+                            >Keycaps</router-link
+                        >
+                    </h1>
                 </div>
             </div>
             <div class="grid-item">
@@ -47,7 +97,17 @@
                     src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/others.jpg"
                 />
                 <div class="title" id="title">
-                    <h1>Others</h1>
+                    <h1>
+                        <router-link
+                            class="dropdown-item"
+                            id="first"
+                            v-bind:to="{
+                                name: 'Category',
+                                params: { category: 'Others' },
+                            }"
+                            >Others</router-link
+                        >
+                    </h1>
                 </div>
             </div>
             <div class="grid-item">
@@ -55,7 +115,35 @@
                     src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/pcbs.jpg"
                 />
                 <div class="title" id="title">
-                    <h1>PCBs</h1>
+                    <h1>
+                        <router-link
+                            class="dropdown-item"
+                            id="first"
+                            v-bind:to="{
+                                name: 'Category',
+                                params: { category: 'PCBs' },
+                            }"
+                            >PCBs</router-link
+                        >
+                    </h1>
+                </div>
+            </div>
+            <div class="grid-item">
+                <img
+                    src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/pcbs.jpg"
+                />
+                <div class="title" id="title">
+                    <h1>
+                        <router-link
+                            class="dropdown-item"
+                            id="first"
+                            v-bind:to="{
+                                name: 'Category',
+                                params: { category: 'Plates' },
+                            }"
+                            >Plates</router-link
+                        >
+                    </h1>
                 </div>
             </div>
             <div class="grid-item">
@@ -63,7 +151,17 @@
                     src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/switches.jpg"
                 />
                 <div class="title" id="title">
-                    <h1>Switches</h1>
+                    <h1>
+                        <router-link
+                            class="dropdown-item"
+                            id="first"
+                            v-bind:to="{
+                                name: 'Category',
+                                params: { category: 'Switches' },
+                            }"
+                            >Switches</router-link
+                        >
+                    </h1>
                 </div>
             </div>
             <div class="grid-item">
@@ -71,7 +169,17 @@
                     src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/travelling_cases.jpg"
                 />
                 <div class="title" id="title">
-                    <h1>Travelling cases</h1>
+                    <h1>
+                        <router-link
+                            class="dropdown-item"
+                            id="first"
+                            v-bind:to="{
+                                name: 'Category',
+                                params: { category: 'Travelling-cases' },
+                            }"
+                            >Travelling cases</router-link
+                        >
+                    </h1>
                 </div>
             </div>
             <div class="grid-item">
@@ -79,7 +187,17 @@
                     src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/wrist_rests.jpg"
                 />
                 <div class="title" id="title">
-                    <h1>Wrist-rests</h1>
+                    <h1>
+                        <router-link
+                            class="dropdown-item"
+                            id="first"
+                            v-bind:to="{
+                                name: 'Category',
+                                params: { category: 'Wrist-rests' },
+                            }"
+                            >Wrist-rests</router-link
+                        >
+                    </h1>
                 </div>
             </div>
         </div>
@@ -113,7 +231,7 @@ export default {
 }
 .categories {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
     grid-gap: 16px;
 }
 .grid-item {
@@ -146,8 +264,8 @@ img:hover {
     color: #f2f2f2;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    font-size: 25px;
-    padding: 15px;
+    font-size: 20px;
+    padding: 10px;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.5s, visibility 0.5s;
@@ -155,6 +273,14 @@ img:hover {
 .grid-item:hover #title {
     visibility: visible;
     opacity: 1;
+}
+a:link,
+a:visited,
+a:active {
+    color: inherit;
+    background: inherit;
+    font-size: inherit;
+    text-decoration: none;
 }
 @media (max-width: 769px) {
     .categories {
