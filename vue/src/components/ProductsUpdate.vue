@@ -402,7 +402,7 @@ export default {
                 .then((createdImagesResponse) => {
                     console.log(createdImagesResponse);
                     this.$router.push(
-                        "/accounts/users/" + this.$store.state.currentUser
+                        "/accounts/profile/" + this.$store.state.currentUser
                     );
                     toast({
                         message: "Product has been successfully updated!",
