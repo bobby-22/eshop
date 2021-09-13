@@ -357,7 +357,7 @@ export default {
                         this.submitNewImages();
                     } else {
                         this.$router.push(
-                            "/accounts/users/" + this.$store.state.currentUser
+                            "/accounts/profile/" + this.$store.state.currentUser
                         );
                         toast({
                             message: "Product has been successfully updated!",

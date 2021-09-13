@@ -11,8 +11,8 @@ class ProductModel(models.Model):
     category = models.CharField(max_length=20, default="")
     date = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = models.TextField(max_length=500, default="")
-    thumbnail = models.ImageField(max_length=200, upload_to="images/")
+    description = models.TextField(max_length=1000, default="")
+    thumbnail = models.FileField(max_length=200, upload_to="thumbnails/")
     stripe_product_id = models.SlugField(max_length=100, default="")
     stripe_price_id = models.SlugField(max_length=100, default="")
 
