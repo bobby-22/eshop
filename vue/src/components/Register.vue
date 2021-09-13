@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <form class="form">
+        <form class="form" @submit.prevent>
             <h1 class="title">
                 Register
                 <i class="fas fa-user-circle"></i>
@@ -72,14 +72,18 @@
 
             <div class="field">
                 <div class="control">
-                    <span class="checkbox">
-                        <input type="checkbox" />
+                    <span class="checkbox" style="margin: 0px;">
+                        <input type="checkbox" v-model="checkedTermsBoolean"/>
                         <span id="terms"
                             >I agree to the
-                            <a href="/">terms and conditions</a></span
+                            <router-link to="/terms">terms and conditions</router-link></span
                         >
                     </span>
                 </div>
+                <p class="help is-danger" v-if="errorCheckedTermsBoolean">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ errorMessageCheckedTerms }}
+                </p>
             </div>
 
             <div class="field">
@@ -113,11 +117,22 @@ export default {
             password1: "",
             password2: "",
             submittedBoolean: false,
+            checkedTermsBoolean: false,
+            errorCheckedTermsBoolean: false,
+            errorMessageCheckedTerms: null,
             errors: [],
         };
     },
     methods: {
         registerUser() {
+            if (!this.checkedTermsBoolean) {
+                this.errorCheckedTermsBoolean = true;
+                this.errorMessageCheckedTerms = "You must agree to the terms and conditions";
+                return
+            } else {
+                this.errorCheckedTermsBoolean = false;
+                this.checkedTermsBoolean = true;
+            }
             this.submittedBoolean = true;
             let user = {
                 username: this.username,

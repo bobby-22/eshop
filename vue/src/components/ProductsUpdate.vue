@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <form class="form">
+        <form class="form" @submit.prevent>
             <h1 class="title">
                 Update "{{ product.title }}"
                 <i class="far fa-edit"></i>

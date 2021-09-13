@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <form class="form">
+        <form class="form" @submit.prevent>
             <h1 class="title">
                 Create product
                 <i class="fas fa-plus"></i>
