@@ -18,6 +18,7 @@
             </div>
         </div>
         <div class="footer-bottom">
+            <router-link class="terms" to="/terms">Terms and Conditions</router-link>
             <span>&copy; 2021 mechmarket.eu</span>
         </div>
     </footer>
@@ -54,5 +55,17 @@ i {
 .fab.fa-reddit {
     margin-left: 10px;
     margin-right: 10px;
+}
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.terms,
+a:link,
+a:visited,
+a:active,
+a:hover {
+    color: inherit
 }
 </style>
