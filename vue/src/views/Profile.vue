@@ -31,6 +31,29 @@ export default {
         };
     },
     methods: {
+        refreshTokens() {
+            let tokenRefresh = this.$store.state.tokenRefresh;
+            djangoAPI
+                .post("/api/v1/accounts/refresh/", { refresh: tokenRefresh })
+                .then((tokensResponse) => {
+                    console.log(tokensResponse);
+                    this.$store.commit(
+                        "saveTokenAccessState",
+                        tokensResponse.data.access
+                    );
+                    this.$store.commit(
+                        "saveTokenRefreshState",
+                        tokensResponse.data.refresh
+                    );
+                })
+                .catch((error) => {
+                    console.log(error);
+                    if (error) {
+                        this.$store.commit("removeCredentialsState");
+                        this.$router.push("/accounts/login");
+                    }
+                });
+        },
         getUserProducts() {
             djangoAPI
                 .get(
@@ -49,6 +72,7 @@ export default {
                 .catch((error) => {
                     console.log(error);
                     if (error.response.status === 403) {
+                        this.$store.commit("removeCredentialsState");
                         this.$router.push({
                             name: "Error",
                             params: {
@@ -76,11 +100,18 @@ export default {
         },
     },
     beforeCreate() {
+        this.$store.commit("localStorageSavedTokens");
         this.$store.commit("localStorageSavedCurrentUserId");
     },
     created() {
+        this.refreshTokens();
         this.getUserProducts();
         this.setTitle();
+    },
+    mounted() {
+        setInterval(() => {
+            this.refreshTokens();
+        }, 250000);
     },
 };
 </script>

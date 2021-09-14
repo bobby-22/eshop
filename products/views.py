@@ -70,8 +70,8 @@ class ProfileView(generics.ListAPIView):
     def get_queryset(self):
         profile_id = self.kwargs["profile_id"]
         products = ProductModel.objects.filter(owner=profile_id)
-        # for product in products:
-        #     self.check_object_permissions(self.request, product)
+        for product in products:
+            self.check_object_permissions(self.request, product)
         return products
 
 

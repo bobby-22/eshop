@@ -28,25 +28,13 @@ export default {
     methods: {
         getUserProducts() {
             djangoAPI
-                .get("/api/v1/accounts/user/" + this.$route.params.user, {
-                    headers: {
-                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
-                    },
-                })
+                .get("/api/v1/accounts/user/" + this.$route.params.user)
                 .then((profileResponse) => {
                     console.log(profileResponse);
                     this.products = profileResponse.data;
                 })
                 .catch((error) => {
                     console.log(error);
-                    if (error.response.status === 403) {
-                        this.$router.push({
-                            name: "Error",
-                            params: {
-                                message: "403",
-                            },
-                        });
-                    }
                 });
         },
         setTitle() {

@@ -9,8 +9,6 @@
                 <div class="title" id="title">
                     <h1>
                         <router-link
-                            class="dropdown-item"
-                            id="first"
                             v-bind:to="{
                                 name: 'Category',
                                 params: { category: 'Cables' },
@@ -27,8 +25,6 @@
                 <div class="title" id="title">
                     <h1>
                         <router-link
-                            class="dropdown-item"
-                            id="first"
                             v-bind:to="{
                                 name: 'Category',
                                 params: { category: 'Cases' },
@@ -45,8 +41,6 @@
                 <div class="title" id="title">
                     <h1>
                         <router-link
-                            class="dropdown-item"
-                            id="first"
                             v-bind:to="{
                                 name: 'Category',
                                 params: { category: 'Deskmats' },
@@ -63,8 +57,6 @@
                 <div class="title" id="title">
                     <h1>
                         <router-link
-                            class="dropdown-item"
-                            id="first"
                             v-bind:to="{
                                 name: 'Category',
                                 params: { category: 'Keyboards' },
@@ -81,8 +73,6 @@
                 <div class="title" id="title">
                     <h1>
                         <router-link
-                            class="dropdown-item"
-                            id="first"
                             v-bind:to="{
                                 name: 'Category',
                                 params: { category: 'Keycaps' },
@@ -99,8 +89,6 @@
                 <div class="title" id="title">
                     <h1>
                         <router-link
-                            class="dropdown-item"
-                            id="first"
                             v-bind:to="{
                                 name: 'Category',
                                 params: { category: 'Others' },
@@ -117,8 +105,6 @@
                 <div class="title" id="title">
                     <h1>
                         <router-link
-                            class="dropdown-item"
-                            id="first"
                             v-bind:to="{
                                 name: 'Category',
                                 params: { category: 'PCBs' },
@@ -135,8 +121,6 @@
                 <div class="title" id="title">
                     <h1>
                         <router-link
-                            class="dropdown-item"
-                            id="first"
                             v-bind:to="{
                                 name: 'Category',
                                 params: { category: 'Plates' },
@@ -153,8 +137,6 @@
                 <div class="title" id="title">
                     <h1>
                         <router-link
-                            class="dropdown-item"
-                            id="first"
                             v-bind:to="{
                                 name: 'Category',
                                 params: { category: 'Switches' },
@@ -171,8 +153,6 @@
                 <div class="title" id="title">
                     <h1>
                         <router-link
-                            class="dropdown-item"
-                            id="first"
                             v-bind:to="{
                                 name: 'Category',
                                 params: { category: 'Travelling-cases' },
@@ -189,8 +169,6 @@
                 <div class="title" id="title">
                     <h1>
                         <router-link
-                            class="dropdown-item"
-                            id="first"
                             v-bind:to="{
                                 name: 'Category',
                                 params: { category: 'Wrist-rests' },
@@ -265,7 +243,7 @@ img:hover {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     font-size: 20px;
-    padding: 10px;
+    padding: 15px;
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.5s, visibility 0.5s;

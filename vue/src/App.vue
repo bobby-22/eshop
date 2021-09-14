@@ -17,42 +17,6 @@ export default {
         Navbar,
         Footer,
     },
-    methods: {
-        refreshToken() {
-            let tokenRefresh = this.$store.state.tokenRefresh;
-            djangoAPI
-                .post("/api/v1/accounts/refresh/", { refresh: tokenRefresh })
-                .then((tokensResponse) => {
-                    console.log(tokensResponse);
-                    this.$store.commit(
-                        "saveTokenAccessState",
-                        tokensResponse.data.access
-                    );
-                    this.$store.commit(
-                        "saveTokenRefreshState",
-                        tokensResponse.data.refresh
-                    );
-                })
-                .catch((error) => {
-                    console.log(error);
-                    if (error) {
-                        this.$store.commit("removeCredentialsState");
-                        this.$router.push("/accounts/login");
-                    }
-                });
-        },
-    },
-    beforeCreate() {
-        this.$store.commit("localStorageSavedTokens");
-    },
-    created() {
-        this.refreshToken();
-    },
-    mounted() {
-        setInterval(() => {
-            this.refreshToken();
-        }, 250000);
-    },
 };
 </script>
 

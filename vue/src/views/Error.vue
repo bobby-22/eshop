@@ -19,8 +19,7 @@ export default {
                 document.title = "Unauthorized | MechMarketEU";
                 this.errorMessage =
                     "You are not authorized to perform this action!";
-            }
-            if ((this.$router.params = "401")) {
+            } else if ((this.$router.params = "401")) {
                 document.title = "Unauthenticated | MechMarketEU";
                 this.errorMessage =
                     "You are not authenticated to perform this action! Please login.";

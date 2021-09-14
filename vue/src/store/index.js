@@ -3,44 +3,16 @@ import { djangoAPI } from "../axios";
 
 export default createStore({
     state: {
-        savedProducts: [],
         productData: Object,
         imagesCloud: [],
+        savedProducts: [],
         authenticated: false,
         tokenAccess: null,
         tokenRefresh: null,
-        currentUser: "",
+        currentUser: null,
         currentUserId: null,
     },
     mutations: {
-        localStorageSavedProducts(state) {
-            if (localStorage.getItem("savedProducts")) {
-                state.savedProducts = JSON.parse(
-                    localStorage.getItem("savedProducts")
-                );
-            } else {
-                localStorage.setItem(
-                    "savedProducts",
-                    JSON.stringify(state.savedProducts)
-                );
-            }
-        },
-        saveProductState(state, product) {
-            state.savedProducts.push(product);
-            localStorage.setItem(
-                "savedProducts",
-                JSON.stringify(state.savedProducts)
-            );
-        },
-        updateSavedProductsState(state, product) {
-            state.savedProducts = state.savedProducts.filter((i) => {
-                return i.stripe_product_id !== product.stripe_product_id;
-            });
-            localStorage.setItem(
-                "savedProducts",
-                JSON.stringify(state.savedProducts)
-            );
-        },
         localStorageProductData(state) {
             if (localStorage.getItem("productData")) {
                 state.productData = JSON.parse(
@@ -77,6 +49,34 @@ export default createStore({
             localStorage.setItem(
                 "imagesCloud",
                 JSON.stringify(state.imagesCloud)
+            );
+        },
+        localStorageSavedProducts(state) {
+            if (localStorage.getItem("savedProducts")) {
+                state.savedProducts = JSON.parse(
+                    localStorage.getItem("savedProducts")
+                );
+            } else {
+                localStorage.setItem(
+                    "savedProducts",
+                    JSON.stringify(state.savedProducts)
+                );
+            }
+        },
+        saveProductState(state, product) {
+            state.savedProducts.push(product);
+            localStorage.setItem(
+                "savedProducts",
+                JSON.stringify(state.savedProducts)
+            );
+        },
+        updateSavedProductsState(state, product) {
+            state.savedProducts = state.savedProducts.filter((i) => {
+                return i.stripe_product_id !== product.stripe_product_id;
+            });
+            localStorage.setItem(
+                "savedProducts",
+                JSON.stringify(state.savedProducts)
             );
         },
         localStorageAuthenticated(state) {
@@ -170,11 +170,21 @@ export default createStore({
             );
         },
         removeCredentialsState(state) {
+            state.productData = null;
+            state.imagesCloud = [];
             state.authenticated = false;
             state.tokenAccess = null;
             state.tokenRefresh = null;
-            state.currentUser = "";
+            state.currentUser = null;
             state.currentUserId = null;
+            localStorage.setItem(
+                "productData",
+                JSON.stringify(state.productData)
+            );
+            localStorage.setItem(
+                "imagesCloud",
+                JSON.stringify(state.imagesCloud)
+            );
             localStorage.setItem(
                 "authenticated",
                 JSON.stringify(state.authenticated)
