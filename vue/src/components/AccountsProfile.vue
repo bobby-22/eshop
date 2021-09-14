@@ -86,12 +86,7 @@ export default {
                     console.log(error);
                     if (error.response.status === 403) {
                         this.$store.commit("removeCredentialsState");
-                        this.$router.push({
-                            name: "Error",
-                            params: {
-                                message: "403",
-                            },
-                        });
+                        this.$router.push("/error");
                     }
                 });
             this.$emit("deleteProduct", this.product);

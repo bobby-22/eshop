@@ -7,11 +7,27 @@
         >
             <div class="details-left">
                 <div class="detail-thumbnail">
-                    <img v-bind:src="detail.thumbnail" />
+                    <img v-bind:src="photo" />
+                    <div class="gallery-control">
+                        <i
+                            class="fas fa-chevron-left"
+                            id="controls"
+                            v-on:click="previousPhoto"
+                        ></i>
+                        <i
+                            class="fas fa-chevron-right"
+                            id="controls"
+                            v-on:click="nextPhoto"
+                        ></i>
+                    </div>
                 </div>
                 <div class="detail-images">
-                    <div class="images" v-for="image in images" :key="image.id">
-                        <img id="image" v-bind:src="image.images" />
+                    <div
+                        class="images"
+                        v-for="photo in gallery"
+                        :key="photo.id"
+                    >
+                        <img id="image" v-bind:src="photo" />
                     </div>
                 </div>
             </div>
@@ -166,6 +182,8 @@ export default {
         return {
             details: [],
             images: [],
+            gallery: [],
+            photo: null,
             product: null,
             authenticated: this.$store.state.authenticated,
             email: null,
@@ -192,7 +210,10 @@ export default {
                     for (let i = 0; i < this.details.slice(0, 1).length; i++) {
                         this.product = this.details[i];
                     }
-                    document.title = `"${this.product.title}" | MechMarketEU`;
+                    this.gallery.push(this.product.thumbnail);
+                    this.photo = this.gallery[0];
+                    document.title = `${this.product.title} | MechMarketEU`;
+                    this.getImages();
                 })
                 .catch((error) => {
                     console.log(error);
@@ -207,12 +228,16 @@ export default {
                 .then((imagesResponse) => {
                     console.log(imagesResponse);
                     this.images = imagesResponse.data;
+                    for (let i = 0; i < this.images.length; i++) {
+                        this.gallery.push(this.images[i].images);
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
         contactUser() {
+            this.nextPhoto();
             if (!this.email) {
                 this.errorEmailBoolean = true;
                 this.errorMessageEmail = "Email cannot be empty";
@@ -255,19 +280,27 @@ export default {
                     console.log(error);
                     this.submittedBoolean = false;
                     if (error.response.status === 401) {
-                        this.$router.push({
-                            name: "Error",
-                            params: {
-                                message: "401",
-                            },
-                        });
+                        this.$router.push("/error");
                     }
                 });
+        },
+        previousPhoto() {
+            let currentPosition = this.gallery.indexOf(this.photo);
+            this.photo = this.gallery[currentPosition - 1];
+            if (this.photo === undefined) {
+                this.photo = this.gallery[this.gallery.length - 1];
+            }
+        },
+        nextPhoto() {
+            let currentPosition = this.gallery.indexOf(this.photo);
+            this.photo = this.gallery[currentPosition + 1];
+            if (this.photo === undefined) {
+                this.photo = this.gallery[0];
+            }
         },
     },
     created() {
         this.getDetails();
-        this.getImages();
     },
 };
 </script>
@@ -289,8 +322,37 @@ export default {
     flex-basis: 50%;
     margin-right: 30px;
 }
+.detail-thumbnail {
+    position: relative;
+    max-width: fit-content;
+}
 .detail-thumbnail > img {
     max-height: 600px;
+}
+.gallery-control {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+#controls {
+    opacity: 0.3;
+    background: #fafafa;
+    color: #616161;
+    transition: opacity 0.5s;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+#controls:hover {
+    color: black;
+    opacity: 0.7;
 }
 .detail-images {
     display: flex;
@@ -301,6 +363,7 @@ export default {
 }
 #image {
     height: 100px;
+    object-fit: cover;
 }
 .details-right {
     flex-basis: 50%;

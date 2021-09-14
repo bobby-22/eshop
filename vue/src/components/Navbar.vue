@@ -208,11 +208,14 @@ export default {
     left: 50%;
     border-radius: 50%;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 700;
-    font-size: 11px;
+    font-weight: 600;
+    font-size: 12px;
     background: #c9a0ff;
-    color: #4a4a4a;
-    padding: 3px;
+    color: #616161;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
 }
 @media (max-width: 1024px) {
     .navbar.is-light {

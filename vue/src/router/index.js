@@ -26,7 +26,7 @@ const routes = [
         component: Terms,
     },
     {
-        path: "/error/:message/",
+        path: "/error/",
         name: "Error",
         component: Error,
     },

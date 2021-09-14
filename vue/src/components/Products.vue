@@ -142,17 +142,19 @@ export default {
     top: 0;
     right: 0;
 }
-.bookmark:hover {
-    text-shadow: 0px 0px 30px rgba(50, 50, 50, 1);
-}
 .far.fa-bookmark {
-    border-radius: 5px;
+    border-radius: 7px;
     opacity: 0.3;
-    background: white;
+    background: #fafafa;
+    transition: opacity 0.5s;
     font-size: 25px;
     color: #616161;
-    padding: 5px;
+    padding: 6px;
     margin: 10px;
+}
+.far.fa-bookmark:hover {
+    color: black;
+    opacity: 0.7;
 }
 .card-content {
     padding: 15px;

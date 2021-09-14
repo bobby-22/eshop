@@ -1,29 +1,16 @@
 <template>
     <div class="container">
         <h1 class="title">Error</h1>
-        <p>{{ errorMessage }}</p>
+        <p>You are not allowed to perform this action!</p>
     </div>
 </template>
 
 <script>
 export default {
     name: "Latest",
-    data() {
-        return {
-            errorMessage: null,
-        };
-    },
     methods: {
         setTitle() {
-            if ((this.$router.params = "403")) {
-                document.title = "Unauthorized | MechMarketEU";
-                this.errorMessage =
-                    "You are not authorized to perform this action!";
-            } else if ((this.$router.params = "401")) {
-                document.title = "Unauthenticated | MechMarketEU";
-                this.errorMessage =
-                    "You are not authenticated to perform this action! Please login.";
-            }
+            document.title = "Access blocked | MechMarketEU";
         },
     },
     created() {
