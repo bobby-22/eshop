@@ -12,7 +12,7 @@
                 <a href="https://www.reddit.com/message/compose/?to=bobby--22">
                     <i class="fab fa-reddit"></i>
                 </a>
-                <a href="https://github.com/bobby-22/marketplace/issues/new">
+                <a href="https://github.com/bobby-22/mechmarket/issues/new">
                     <i class="fab fa-github"></i>
                 </a>
             </div>

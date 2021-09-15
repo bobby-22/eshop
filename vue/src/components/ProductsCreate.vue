@@ -89,6 +89,7 @@
                                 <option>Others</option>
                                 <option>PCBs</option>
                                 <option>Plates</option>
+                                <option>Switches</option>
                                 <option>Travelling-cases</option>
                                 <option>Wrist-rests</option>
                             </select>
