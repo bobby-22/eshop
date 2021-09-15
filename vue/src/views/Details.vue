@@ -22,13 +22,12 @@
                     </div>
                 </div>
                 <div class="detail-images">
-                    <div
-                        class="images"
+                    <img
+                        id="image"
                         v-for="photo in gallery"
                         :key="photo.id"
-                    >
-                        <img id="image" v-bind:src="photo" />
-                    </div>
+                        v-bind:src="photo"
+                    />
                 </div>
             </div>
 
@@ -327,7 +326,7 @@ export default {
     max-width: fit-content;
 }
 .detail-thumbnail > img {
-    max-height: 600px;
+    max-height: 500px;
 }
 .gallery-control {
     position: absolute;
@@ -363,7 +362,6 @@ export default {
 }
 #image {
     height: 100px;
-    object-fit: cover;
 }
 .details-right {
     flex-basis: 50%;
@@ -438,6 +436,10 @@ export default {
     }
     .modal-content {
         border-radius: 0px;
+    }
+    #image {
+        object-fit: contain;
+        margin-top: -25px;
     }
 }
 </style>
