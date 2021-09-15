@@ -5,16 +5,15 @@ from rest_framework.compat import md_filter_add_syntax_highlight
 
 # Create your models here.
 class ProductModel(models.Model):
-    title = models.CharField(max_length=40, default="")
+    title = models.CharField(max_length=50, default="")
     price = models.IntegerField(default="")
-    country = models.CharField(max_length=20, default="")
-    category = models.CharField(max_length=20, default="")
+    country = models.CharField(max_length=25, default="")
+    category = models.CharField(max_length=25, default="")
     date = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField(max_length=1000, default="")
     thumbnail = models.FileField(max_length=200, upload_to="thumbnails/")
-    stripe_product_id = models.SlugField(max_length=100, default="")
-    stripe_price_id = models.SlugField(max_length=100, default="")
+    post_id = models.SlugField(unique=True, default="")
 
     class Meta:
         verbose_name_plural = "Products"
@@ -23,7 +22,7 @@ class ProductModel(models.Model):
 
 class ImageModel(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    stripe_product_id = models.SlugField(max_length=100, default="")
+    post_id = models.SlugField(default="")
     images = models.FileField(max_length=200, upload_to="images/")
 
     class Meta:

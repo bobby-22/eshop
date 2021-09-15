@@ -38,7 +38,7 @@ export default {
                 });
         },
         setTitle() {
-            document.title = `${this.$route.params.user}'s Products | MechMarketEU`;
+            document.title = `${this.$route.params.user}'s Posts | MechMarketEU`;
         },
     },
     created() {

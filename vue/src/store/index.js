@@ -72,7 +72,7 @@ export default createStore({
         },
         updateSavedProductsState(state, product) {
             state.savedProducts = state.savedProducts.filter((i) => {
-                return i.stripe_product_id !== product.stripe_product_id;
+                return i.post_id !== product.post_id;
             });
             localStorage.setItem(
                 "savedProducts",

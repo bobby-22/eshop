@@ -19,7 +19,7 @@
                     </span>
                     <span
                         class="icon is-small is-right has-text-danger"
-                        v-if="titleLength > 40"
+                        v-if="titleLength > 50"
                     >
                         {{ titleLength }}
                     </span>
@@ -60,7 +60,7 @@
                         </span>
                         <span
                             class="icon is-small is-right has-text-danger"
-                            v-if="countryLength > 20"
+                            v-if="countryLength > 25"
                         >
                             {{ countryLength }}
                         </span>
@@ -264,10 +264,10 @@ export default {
             if (!this.title) {
                 this.errorTitleBoolean = true;
                 this.errorMessageTitle = "Title cannot be empty";
-            } else if (this.title.length > 40) {
+            } else if (this.title.length > 50) {
                 this.errorTitleBoolean = true;
                 this.errorMessageTitle =
-                    "Title cannot be longer than 40 characters";
+                    "Title cannot be longer than 50 characters";
             } else {
                 this.errorTitleBoolean = false;
             }
@@ -284,10 +284,10 @@ export default {
             if (!this.country) {
                 this.errorCountryBoolean = true;
                 this.errorMessageCountry = "Country cannot be empty";
-            } else if (this.country.length > 20) {
+            } else if (this.country.length > 25) {
                 this.errorCountryBoolean = true;
                 this.errorMessageCountry =
-                    "Country cannot be longer than 20 characters";
+                    "Country cannot be longer than 25 characters";
             } else {
                 this.errorCountryBoolean = false;
             }
@@ -352,11 +352,10 @@ export default {
             product.append("owner", this.product.owner);
             product.append("description", this.description);
             product.append("thumbnail", this.thumbnail);
-            product.append("stripe_product_id", this.product.stripe_product_id);
-            product.append("stripe_price_id", this.product.stripe_price_id);
+            product.append("post_id", this.product.post_id);
             djangoAPI
                 .put(
-                    `/api/v1/products/${this.product.stripe_product_id}/update/`,
+                    `/api/v1/products/${this.product.post_id}/update/`,
                     product,
                     {
                         headers: {
@@ -373,7 +372,7 @@ export default {
                             "/accounts/profile/" + this.$store.state.currentUser
                         );
                         toast({
-                            message: "Product has been successfully updated!",
+                            message: "Post has been successfully updated!",
                             type: "is-success",
                             dismissible: true,
                             pauseOnHover: true,
@@ -406,10 +405,7 @@ export default {
             let images = new FormData();
             for (let i = 0; i < this.images.length; i++) {
                 images.append("owner", this.$store.state.currentUserId);
-                images.append(
-                    "stripe_product_id",
-                    this.product.stripe_product_id
-                );
+                images.append("post_id", this.product.post_id);
                 images.append("images", this.images[i]);
             }
             djangoAPI
@@ -424,7 +420,7 @@ export default {
                         "/accounts/profile/" + this.$store.state.currentUser
                     );
                     toast({
-                        message: "Product has been successfully updated!",
+                        message: "Post has been successfully updated!",
                         type: "is-success",
                         dismissible: true,
                         pauseOnHover: true,

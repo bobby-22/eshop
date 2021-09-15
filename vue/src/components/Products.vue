@@ -6,7 +6,7 @@
                     v-bind:to="{
                         name: 'Details',
                         params: {
-                            stripe_product_id: product.stripe_product_id,
+                            post_id: product.post_id,
                         },
                     }"
                 >
@@ -43,8 +43,7 @@
                             :to="{
                                 name: 'Details',
                                 params: {
-                                    stripe_product_id:
-                                        product.stripe_product_id,
+                                    post_id: product.post_id,
                                 },
                             }"
                         >
@@ -89,7 +88,7 @@ export default {
             this.savedBoolean = !this.savedBoolean;
             this.$store.commit("saveProductState", this.product);
             toast({
-                message: "Product has been saved!",
+                message: "Post has been saved!",
                 type: "is-success",
                 dismissible: true,
                 pauseOnHover: true,
@@ -100,11 +99,11 @@ export default {
         unsaveProduct() {
             this.savedBoolean = !this.savedBoolean;
             this.savedProducts = this.savedProducts.filter((i) => {
-                return i.stripe_product_id !== this.product.stripe_product_id;
+                return i.post_id !== this.product.post_id;
             });
             this.$store.commit("updateSavedProductsState", this.product);
             toast({
-                message: "Product has been unsaved!",
+                message: "Post has been unsaved!",
                 type: "is-danger",
                 dismissible: true,
                 pauseOnHover: true,
@@ -115,7 +114,7 @@ export default {
         checkBookmark() {
             let array = JSON.parse(localStorage.getItem("savedProducts"));
             let checkSavedBoolean = JSON.stringify(array).includes(
-                this.product.stripe_product_id
+                this.product.post_id
             );
             this.checkSavedBoolean = !checkSavedBoolean;
         },

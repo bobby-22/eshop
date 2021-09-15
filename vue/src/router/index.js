@@ -31,27 +31,27 @@ const routes = [
         component: Error,
     },
     {
-        path: "/products/latest/",
+        path: "/posts/latest/",
         name: "Latest",
         component: Latest,
     },
     {
-        path: "/products/:stripe_product_id/",
+        path: "/posts/:post_id/",
         name: "Details",
         component: Details,
     },
     {
-        path: "/products/category/:category/",
+        path: "/posts/category/:category/",
         name: "Category",
         component: Category,
     },
     {
-        path: "/products/?search=:keyword/",
+        path: "/posts/?search=:keyword/",
         name: "Search",
         component: Search,
     },
     {
-        path: "/products/saved/",
+        path: "/posts/saved/",
         name: "Saved",
         component: Saved,
     },
@@ -76,12 +76,12 @@ const routes = [
         component: User,
     },
     {
-        path: "/products/create/",
+        path: "/posts/create/",
         name: "ProductsCreate",
         component: ProductsCreate,
     },
     {
-        path: "/products/:stripe_product_id/update/",
+        path: "/posts/:post_id/update/",
         name: "ProductsUpdate",
         component: ProductsUpdate,
     },

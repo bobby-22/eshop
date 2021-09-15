@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="title">Latest products</h1>
+        <h1 class="title">Latest posts</h1>
         <div class="columns is-multiline">
             <Products
                 v-for="product in products"
@@ -37,7 +37,7 @@ export default {
                 });
         },
         setTitle() {
-            document.title = "Latest Products | MechMarketEU";
+            document.title = "Latest Posts | MechMarketEU";
         },
     },
     created() {

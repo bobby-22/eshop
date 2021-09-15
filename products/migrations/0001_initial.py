@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(default='', max_length=500)),
                 ('thumbnail', models.ImageField(upload_to='images/')),
                 ('image', models.FileField(upload_to='images/')),
-                ('stripe_product_id', models.SlugField(default='', max_length=100)),
+                ('post_id', models.SlugField(default='', max_length=100)),
                 ('stripe_price_id', models.SlugField(default='', max_length=100)),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],

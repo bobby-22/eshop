@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <h1 class="title">Saved products</h1>
-        <p v-if="!this.savedProducts.length">No products saved...</p>
+        <h1 class="title">Saved posts</h1>
+        <p v-if="!this.savedProducts.length">No posts saved...</p>
 
         <ProductsSaved
             v-for="product in savedProducts"
@@ -28,11 +28,11 @@ export default {
     methods: {
         unsaveProduct(product) {
             this.savedProducts = this.savedProducts.filter((i) => {
-                return i.stripe_product_id !== product.stripe_product_id;
+                return i.post_id !== product.post_id;
             });
             this.$store.commit("updateSavedProductsState", product);
             toast({
-                message: "Product has been unsaved!",
+                message: "Post has been unsaved!",
                 type: "is-danger",
                 dismissible: true,
                 pauseOnHover: true,
@@ -41,7 +41,7 @@ export default {
             });
         },
         setTitle() {
-            document.title = "Saved Products | MechMarketEU";
+            document.title = "Saved Posts | MechMarketEU";
         },
     },
     beforeCreate() {

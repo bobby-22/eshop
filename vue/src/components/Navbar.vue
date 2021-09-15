@@ -4,7 +4,7 @@
             <router-link to="/" class="navbar-item" id="brand">
                 <strong>MechMarketEU</strong>
             </router-link>
-            <router-link to="/products/latest" class="navbar-item"
+            <router-link to="/posts/latest" class="navbar-item"
                 >Latest</router-link
             >
             <NavbarDropdown class="navbar-item" />
@@ -58,7 +58,7 @@
                         >&nbsp;{{ currentUser }}
                     </router-link>
                 </span>
-                <router-link to="/products/saved" class="navbar-item">
+                <router-link to="/posts/saved" class="navbar-item">
                     <span class="fas fa-bookmark">
                         <span class="counter">{{ bookmarkLength }}</span>
                     </span>
@@ -76,7 +76,7 @@
                 <router-link to="/accounts/login" class="navbar-item"
                     >Login</router-link
                 >
-                <router-link to="/products/savedProducts" class="navbar-item">
+                <router-link to="/posts/saved" class="navbar-item">
                     <span class="fas fa-bookmark">
                         <span class="counter">{{ bookmarkLength }}</span>
                     </span>

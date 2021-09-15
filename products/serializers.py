@@ -4,10 +4,9 @@ from .models import ProductModel, ImageModel
 from django.core.validators import MaxValueValidator
 from django.contrib.auth import get_user_model
 from django.core.exceptions import PermissionDenied
-import stripe
+from django.utils.crypto import get_random_string
 
 User = get_user_model()
-stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class ProductModelSerializer(serializers.ModelSerializer):
@@ -26,10 +25,10 @@ class ImageModelSerializer(serializers.ModelSerializer):
 
 
 class ProductModelCreateSerializer(serializers.ModelSerializer):
-    title = serializers.CharField(max_length=40)
+    title = serializers.CharField(max_length=50)
     price = serializers.IntegerField(validators=[MaxValueValidator(9999)])
-    country = serializers.CharField(max_length=20)
-    category = serializers.CharField(max_length=20)
+    country = serializers.CharField(max_length=25)
+    category = serializers.CharField(max_length=25)
     description = serializers.CharField(max_length=1000)
 
     class Meta:
@@ -40,14 +39,6 @@ class ProductModelCreateSerializer(serializers.ModelSerializer):
         if self.context["request"].user != validated_data["owner"]:
             raise PermissionDenied()
         else:
-            stripe_product = stripe.Product.create(
-                name=validated_data["title"], description=validated_data["description"]
-            )
-            stripe_price = stripe.Price.create(
-                product=stripe_product.id,
-                currency="EUR",
-                unit_amount=validated_data["price"] * 100,
-            )
             product = ProductModel.objects.create(
                 title=validated_data["title"],
                 price=validated_data["price"],
@@ -56,8 +47,7 @@ class ProductModelCreateSerializer(serializers.ModelSerializer):
                 owner=validated_data["owner"],
                 description=validated_data["description"],
                 thumbnail=validated_data["thumbnail"],
-                stripe_product_id=stripe_product.id,
-                stripe_price_id=stripe_price.id,
+                post_id="post_" + get_random_string(length=30),
             )
             return product
 
@@ -76,17 +66,17 @@ class ImageModelCreateSerializer(serializers.ModelSerializer):
             for image in validated_data.pop("images"):
                 images = ImageModel.objects.create(
                     owner=validated_data["owner"],
-                    stripe_product_id=validated_data["stripe_product_id"],
+                    post_id=validated_data["post_id"],
                     images=image,
                 )
             return images
 
 
 class ProductModelUpdateSerializer(serializers.ModelSerializer):
-    title = serializers.CharField(max_length=40)
+    title = serializers.CharField(max_length=50)
     price = serializers.IntegerField(validators=[MaxValueValidator(9999)])
-    country = serializers.CharField(max_length=20)
-    category = serializers.CharField(max_length=20)
+    country = serializers.CharField(max_length=25)
+    category = serializers.CharField(max_length=25)
     description = serializers.CharField(max_length=1000)
     thumbnail = serializers.ImageField(required=False)
 

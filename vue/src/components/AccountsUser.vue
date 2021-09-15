@@ -11,7 +11,7 @@
                         v-bind:to="{
                             name: 'Details',
                             params: {
-                                stripe_product_id: product.stripe_product_id,
+                                post_id: product.post_id,
                             },
                         }"
                         v-on:click="getProductData"

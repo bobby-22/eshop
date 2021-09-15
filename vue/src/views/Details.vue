@@ -49,7 +49,10 @@
                                 class="modal"
                                 v-bind:class="{ 'is-active': modalBoolean }"
                             >
-                                <div class="modal-background"></div>
+                                <div
+                                    class="modal-background"
+                                    v-on:click="modalBoolean = false"
+                                ></div>
                                 <div class="modal-content">
                                     <form class="form" @submit.prevent>
                                         <h1 class="title" id="title-modal">
@@ -198,10 +201,10 @@ export default {
     },
     methods: {
         getDetails() {
-            let stripe_product_id = this.$route.params.stripe_product_id;
+            let post_id = this.$route.params.post_id;
             djangoAPI({
                 method: "GET",
-                url: `/api/v1/products/${stripe_product_id}/details/`,
+                url: `/api/v1/products/${post_id}/details/`,
             })
                 .then((detailsResponse) => {
                     console.log(detailsResponse);
@@ -219,10 +222,10 @@ export default {
                 });
         },
         getImages() {
-            let stripe_product_id = this.$route.params.stripe_product_id;
+            let post_id = this.$route.params.post_id;
             djangoAPI({
                 method: "GET",
-                url: `/api/v1/products/${stripe_product_id}/images/`,
+                url: `/api/v1/products/${post_id}/images/`,
             })
                 .then((imagesResponse) => {
                     console.log(imagesResponse);

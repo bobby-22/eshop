@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
-from products import serializers
 from products.models import ProductModel, ImageModel
 from django.contrib.auth import get_user_model
 from products.serializers import (
@@ -32,8 +31,8 @@ class Details1View(generics.ListAPIView):
     serializer_class = ProductModelSerializer
 
     def get_queryset(self):
-        stripe_product_id = self.kwargs["stripe_product_id"]
-        details = ProductModel.objects.filter(stripe_product_id=stripe_product_id)
+        post_id = self.kwargs["post_id"]
+        details = ProductModel.objects.filter(post_id=post_id)
         return details
 
 
@@ -41,8 +40,8 @@ class Details2View(generics.ListAPIView):
     serializer_class = ImageModelSerializer
 
     def get_queryset(self):
-        stripe_product_id = self.kwargs["stripe_product_id"]
-        images = ImageModel.objects.filter(stripe_product_id=stripe_product_id)
+        post_id = self.kwargs["post_id"]
+        images = ImageModel.objects.filter(post_id=post_id)
         return images
 
 
@@ -99,22 +98,21 @@ class ImageModelCreateView(generics.CreateAPIView):
 class ProductModelUpdateView(generics.UpdateAPIView):
     queryset = ProductModel.objects.all()
     serializer_class = ProductModelUpdateSerializer
-    lookup_field = "stripe_product_id"
+    lookup_field = "post_id"
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
 
 class ProductModelDeleteView(generics.DestroyAPIView):
     queryset = ProductModel.objects.all()
-    lookup_field = "stripe_product_id"
+    lookup_field = "post_id"
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
     def get_queryset(self):
-        stripe_product_id = self.kwargs["stripe_product_id"]
-        stripe.Product.modify(stripe_product_id, active="false")
-        product = ProductModel.objects.get(stripe_product_id=stripe_product_id)
+        post_id = self.kwargs["post_id"]
+        product = ProductModel.objects.get(post_id=post_id)
         self.check_object_permissions(self.request, product)
         product.delete()
-        images = ImageModel.objects.filter(stripe_product_id=stripe_product_id)
+        images = ImageModel.objects.filter(post_id=post_id)
         for image in images:
             self.check_object_permissions(self.request, image)
         images.delete()

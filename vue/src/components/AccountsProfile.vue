@@ -11,7 +11,7 @@
                         v-bind:to="{
                             name: 'Details',
                             params: {
-                                stripe_product_id: product.stripe_product_id,
+                                post_id: product.post_id,
                             },
                         }"
                         v-on:click="getProductData"
@@ -26,8 +26,8 @@
                             v-bind:to="{
                                 name: 'ProductsUpdate',
                                 params: {
-                                    stripe_product_id:
-                                        product.stripe_product_id,
+                                    post_id:
+                                        product.post_id,
                                 },
                             }"
                         ></router-link>
@@ -72,7 +72,7 @@ export default {
         deleteProduct() {
             djangoAPI
                 .delete(
-                    `/api/v1/products/${this.product.stripe_product_id}/delete`,
+                    `/api/v1/products/${this.product.post_id}/delete`,
                     {
                         headers: {
                             Authorization: `JWT ${this.$store.state.tokenAccess}`,
@@ -92,10 +92,10 @@ export default {
             this.$emit("deleteProduct", this.product);
         },
         getImages() {
-            let stripe_product_id = this.product.stripe_product_id;
+            let post_id = this.product.post_id;
             djangoAPI({
                 method: "GET",
-                url: `/api/v1/products/${stripe_product_id}/images/`,
+                url: `/api/v1/products/${post_id}/images/`,
             })
                 .then((imagesResponse) => {
                     console.log(imagesResponse);

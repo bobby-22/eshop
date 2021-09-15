@@ -1,12 +1,12 @@
 <template>
     <div class="container">
         <h1 class="title">
-            My products
-            <router-link id="create" to="/products/create">
+            My posts
+            <router-link id="create" to="/posts/create">
                 <i class="far fa-plus-square"></i>
             </router-link>
         </h1>
-        <p v-if="!products.length">No products added...</p>
+        <p v-if="!products.length">No posts added...</p>
         <AccountsProfile
             v-for="product in products"
             v-bind:key="product.id"
@@ -59,10 +59,10 @@ export default {
         },
         deleteProduct(product) {
             this.products = this.products.filter((i) => {
-                return i.stripe_product_id !== product.stripe_product_id;
+                return i.post_id !== product.post_id;
             });
             toast({
-                message: "Product has been successfully deleted!",
+                message: "Post has been successfully deleted!",
                 type: "is-success",
                 dismissible: true,
                 pauseOnHover: true,
@@ -71,7 +71,7 @@ export default {
             });
         },
         setTitle() {
-            document.title = "My Products | MechMarketEU";
+            document.title = "My Posts | MechMarketEU";
         },
     },
     beforeCreate() {
