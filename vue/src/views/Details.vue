@@ -437,9 +437,5 @@ export default {
     .modal-content {
         border-radius: 0px;
     }
-    #image {
-        object-fit: contain;
-        margin-top: -25px;
-    }
 }
 </style>
