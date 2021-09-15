@@ -211,7 +211,7 @@ export default {
             category: "",
             description: "",
             thumbnail: null,
-            images: null,
+            images: [],
             stripe_product_id: null,
 
             errors: [],
@@ -338,7 +338,7 @@ export default {
                     console.log(createdProductResponse);
                     this.stripe_product_id =
                         createdProductResponse.data.stripe_product_id;
-                    if (this.images !== null) {
+                    if (this.images.length !== 0) {
                         this.submitNewImages();
                     } else {
                         this.$router.push(

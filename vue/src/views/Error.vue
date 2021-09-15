@@ -10,7 +10,7 @@ export default {
     name: "Latest",
     methods: {
         setTitle() {
-            document.title = "Access blocked | MechMarketEU";
+            document.title = "Access Blocked | MechMarketEU";
         },
     },
     created() {

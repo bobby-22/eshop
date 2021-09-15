@@ -236,7 +236,7 @@ export default {
 
             thumbnail: "",
             thumbnailCloud: this.$store.state.productData.thumbnail,
-            images: null,
+            images: [],
             imagesCloud: this.$store.state.imagesCloud,
 
             errors: [],
@@ -366,7 +366,7 @@ export default {
                 )
                 .then((updatedProductResponse) => {
                     console.log(updatedProductResponse);
-                    if (this.images !== null) {
+                    if (this.images.length !== 0) {
                         this.submitNewImages();
                     } else {
                         this.$router.push(
