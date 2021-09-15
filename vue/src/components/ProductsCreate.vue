@@ -178,6 +178,10 @@
                         ></a>
                     </span>
                 </div>
+                <p class="help is-danger" v-if="errorImagesBoolean">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ errorMessageImages }}
+                </p>
             </div>
             <div class="field">
                 <div class="control">
@@ -217,6 +221,7 @@ export default {
             errorCategoryBoolean: false,
             errorDescriptionBoolean: false,
             errorThumbnailBoolean: false,
+            errorImagesBoolean: false,
             submittedBoolean: false,
 
             errorMessageTitle: null,
@@ -225,6 +230,7 @@ export default {
             errorMessageCategory: null,
             errorMessageDescription: null,
             errorMessageThumbnail: null,
+            errorMessageImages: null,
 
             titleLength: null,
             countryLength: null,
@@ -305,7 +311,14 @@ export default {
             });
         },
         submitNewProduct() {
-            this.submittedBoolean = true;
+            if (this.images.length > 10) {
+                this.errorImagesBoolean = true;
+                this.errorMessageImages = "Max 10 images are allowed";
+                return;
+            } else {
+                this.submittedBoolean = true;
+                this.errorImagesBoolean = false;
+            }
             this.checkErrors();
             let product = new FormData();
             product.append("title", this.title);
@@ -354,7 +367,15 @@ export default {
                 });
         },
         submitNewImages() {
-            this.submittedBoolean = true;
+            if (this.images.length > 10) {
+                this.submittedBoolean = false;
+                this.errorImagesBoolean = true;
+                this.errorMessageImages = "Max 10 images are allowed";
+                return;
+            } else {
+                this.submittedBoolean = true;
+                this.errorImagesBoolean = false;
+            }
             let images = new FormData();
             for (let i = 0; i < this.images.length; i++) {
                 images.append("owner", this.$store.state.currentUserId);

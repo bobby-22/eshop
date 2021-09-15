@@ -4,7 +4,7 @@
         <div class="categories">
             <div class="grid-item">
                 <img
-                    src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/cables.jpg"
+                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/cables.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
@@ -20,7 +20,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/cases.jpg"
+                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/cases.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
@@ -36,7 +36,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/deskmats.jpg"
+                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/deskmats.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
@@ -52,7 +52,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/keyboards.jpg"
+                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/keyboards.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
@@ -68,7 +68,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/keycaps.jpg"
+                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/keycaps.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
@@ -84,7 +84,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/others.jpg"
+                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/others.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
@@ -100,7 +100,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/pcbs.jpg"
+                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/pcbs.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
@@ -116,7 +116,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/pcbs.jpg"
+                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/pcbs.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
@@ -132,7 +132,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/switches.jpg"
+                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/switches.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
@@ -148,7 +148,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/travelling_cases.jpg"
+                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/travelling-cases.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
@@ -164,7 +164,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketstockmedia.s3.eu-central-1.amazonaws.com/stock/wrist_rests.jpg"
+                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/wrist-rests.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
