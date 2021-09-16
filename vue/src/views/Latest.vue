@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <h1 class="title">Latest posts</h1>
-        <div class="columns is-multiline">
+        <div class="columns is-multiline is-variable is-2" id="columns">
             <Products
                 v-for="product in products"
                 v-bind:key="product.id"
@@ -53,9 +53,12 @@ export default {
     max-width: 100%;
     padding: 30px;
 }
+#columns {
+    margin-top: 0px;
+}
 .title {
-    padding-bottom: 15px;
     border-bottom: 1px solid #ededed;
-    margin-bottom: 26px;
+    padding-bottom: 15px;
+    margin-bottom: 8px;
 }
 </style>

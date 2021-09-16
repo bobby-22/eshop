@@ -14,7 +14,6 @@
                                 post_id: product.post_id,
                             },
                         }"
-                        v-on:click="getProductData"
                     >
                         {{ product.title }}
                     </router-link>

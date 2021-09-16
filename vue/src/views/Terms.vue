@@ -26,8 +26,8 @@ export default {
     padding: 30px;
 }
 .title {
-    padding-bottom: 15px;
     border-bottom: 1px solid #ededed;
-    margin-bottom: 26px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
 }
 </style>

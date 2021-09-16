@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="title">
+        <h1 class="title" id="main-title">
             My posts
             <router-link id="create" to="/posts/create">
                 <i class="far fa-plus-square"></i>
@@ -33,15 +33,11 @@ export default {
     methods: {
         getUserProducts() {
             djangoAPI
-                .get(
-                    "/api/v1/accounts/profile/" +
-                        this.$store.state.currentUserId,
-                    {
-                        headers: {
-                            Authorization: `JWT ${this.$store.state.tokenAccess}`,
-                        },
-                    }
-                )
+                .get("/api/v1/accounts/profile/", {
+                    headers: {
+                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                    },
+                })
                 .then((profileResponse) => {
                     console.log(profileResponse);
                     this.products = profileResponse.data;
@@ -74,9 +70,6 @@ export default {
             document.title = "My Posts | MechMarketEU";
         },
     },
-    beforeCreate() {
-        this.$store.commit("localStorageSavedCurrentUserId");
-    },
     created() {
         this.getUserProducts();
         this.setTitle();
@@ -93,10 +86,9 @@ export default {
 .title {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    padding-bottom: 15px;
     border-bottom: 1px solid #ededed;
-    margin-bottom: 26px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
 }
 a#create {
     color: #424242;

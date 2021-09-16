@@ -27,3 +27,14 @@ class ImageModel(models.Model):
 
     class Meta:
         verbose_name_plural = "Media"
+
+class ReviewModel(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    reviewer = models.CharField(max_length=20, default="")
+    rating = models.CharField(max_length=20, default="")
+    description = models.TextField(max_length=1000, default="")
+
+    class Meta:
+        verbose_name_plural = "Reviews"
+        ordering = ("-id",)

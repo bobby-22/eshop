@@ -85,8 +85,8 @@
                     <router-link to="/accounts/register" class="button is-info"
                         >Register</router-link
                     >
-                    <router-link to="/" class="button is-warning"
-                        >Donate</router-link
+                    <span class="button is-warning" v-on:click="donate"
+                        >Donate</span
                     >
                 </div>
             </div>
@@ -97,6 +97,7 @@
 <script>
 import NavbarDropdown from "./NavbarDropdown";
 import { toast } from "bulma-toast";
+import { djangoAPI } from "../axios";
 export default {
     name: "Navbar",
     components: {
@@ -132,6 +133,16 @@ export default {
                 duration: 3000,
                 position: "bottom-right",
             });
+        },
+        donate() {
+            djangoAPI
+                .get("/api/v1/donate")
+                .then((donateResponse) => {
+                    console.log(donateResponse);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         },
     },
     computed: {

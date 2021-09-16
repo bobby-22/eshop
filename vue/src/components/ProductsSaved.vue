@@ -17,11 +17,9 @@
                     >
                         {{ product.title }}
                     </router-link>
-                    <a
-                        id="unsave"
-                        class="fas fa-bookmark"
-                        v-on:click="unsaveProduct()"
-                    ></a>
+                    <span class="actions">
+                        <a class="fas fa-bookmark" id="unsave" v-on:click="unsaveProduct()"></a>
+                    </span>
                 </span>
             </div>
             <div class="content" id="content-bottom">
@@ -66,9 +64,9 @@ export default {
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
         rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
-    height: 250px;
     display: flex;
     justify-content: space-between;
+    height: 250px;
     margin-bottom: 16px;
 }
 .card-image {
@@ -95,7 +93,9 @@ export default {
 .title {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+}
+.actions {
+    white-space: nowrap;
 }
 #unsave {
     color: #424242;

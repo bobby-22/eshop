@@ -192,7 +192,7 @@
                         v-on:click="submitNewProduct"
                         v-bind:disabled="submittedBoolean"
                     >
-                        Submit
+                        Create
                     </button>
                 </div>
             </div>
@@ -327,7 +327,6 @@ export default {
             product.append("price", this.price);
             product.append("country", this.country);
             product.append("category", this.category);
-            product.append("owner", this.$store.state.currentUserId);
             product.append("description", this.description);
             product.append("thumbnail", this.thumbnail);
             djangoAPI
@@ -379,7 +378,6 @@ export default {
             }
             let images = new FormData();
             for (let i = 0; i < this.images.length; i++) {
-                images.append("owner", this.$store.state.currentUserId);
                 images.append("post_id", this.post_id);
                 images.append("images", this.images[i]);
             }
@@ -418,9 +416,6 @@ export default {
         setTitle() {
             document.title = "Create Post | MechMarketEU";
         },
-    },
-    beforeCreate() {
-        this.$store.commit("localStorageSavedCurrentUserId");
     },
     created() {
         this.countCharacters();

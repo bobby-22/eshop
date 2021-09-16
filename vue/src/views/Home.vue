@@ -205,12 +205,13 @@ export default {
 #main-title {
     border-bottom: 1px solid #ededed;
     padding-bottom: 15px;
-    margin-bottom: 26px;
+    margin-bottom: 20px;
 }
 .categories {
     display: grid;
     grid-template-columns: auto auto auto;
     grid-gap: 16px;
+    row-gap: 24px;
 }
 .grid-item {
     position: relative;

@@ -26,8 +26,7 @@
                             v-bind:to="{
                                 name: 'ProductsUpdate',
                                 params: {
-                                    post_id:
-                                        product.post_id,
+                                    post_id: product.post_id,
                                 },
                             }"
                         ></router-link>
@@ -71,14 +70,11 @@ export default {
     methods: {
         deleteProduct() {
             djangoAPI
-                .delete(
-                    `/api/v1/products/${this.product.post_id}/delete`,
-                    {
-                        headers: {
-                            Authorization: `JWT ${this.$store.state.tokenAccess}`,
-                        },
-                    }
-                )
+                .delete(`/api/v1/products/${this.product.post_id}/delete`, {
+                    headers: {
+                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                    },
+                })
                 .then((deletedProductResponse) => {
                     console.log(deletedProductResponse);
                 })
@@ -122,8 +118,8 @@ export default {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px,
         rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
     display: flex;
-    height: 250px;
     justify-content: space-between;
+    height: 250px;
     margin-bottom: 16px;
 }
 .card-image {
@@ -150,7 +146,6 @@ export default {
 .title {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
 }
 .actions {
     white-space: nowrap;

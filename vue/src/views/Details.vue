@@ -39,7 +39,7 @@
                         </h1>
                         <div class="modalActivate">
                             <button
-                                class="button is-success"
+                                class="button is-dark"
                                 v-if="authenticated"
                                 v-on:click="modalBoolean = true"
                             >
@@ -118,13 +118,13 @@
                                         <div class="field">
                                             <div class="control">
                                                 <button
-                                                    class="button is-success"
+                                                    class="button is-link"
                                                     v-on:click="contactUser"
                                                     v-bind:disabled="
                                                         submittedBoolean
                                                     "
                                                 >
-                                                    Send
+                                                    Contact
                                                 </button>
                                             </div>
                                         </div>
@@ -239,7 +239,6 @@ export default {
                 });
         },
         contactUser() {
-            this.nextPhoto();
             if (!this.email) {
                 this.errorEmailBoolean = true;
                 this.errorMessageEmail = "Email cannot be empty";
@@ -249,7 +248,7 @@ export default {
             }
             if (!this.description) {
                 this.errorDescriptionBoolean = true;
-                this.errorMessageDescription = "Description cannot be empty";
+                this.errorMessageDescription = "Message cannot be empty";
                 return;
             } else {
                 this.errorDescriptionBoolean = false;
@@ -372,7 +371,6 @@ export default {
 .detail-title {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     border-bottom: 1px solid #f0f0f0;
     padding-bottom: 15px;
     margin-bottom: 15px;
@@ -433,10 +431,6 @@ export default {
     text-align: center;
 }
 @media (max-width: 1024px) {
-    .container {
-        justify-content: start;
-        margin: 0px;
-    }
     .modal-content {
         border-radius: 0px;
     }

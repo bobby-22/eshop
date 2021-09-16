@@ -404,7 +404,6 @@ export default {
             }
             let images = new FormData();
             for (let i = 0; i < this.images.length; i++) {
-                images.append("owner", this.$store.state.currentUserId);
                 images.append("post_id", this.product.post_id);
                 images.append("images", this.images[i]);
             }

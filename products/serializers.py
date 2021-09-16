@@ -1,6 +1,6 @@
 from django.conf import settings
 from rest_framework import serializers
-from .models import ProductModel, ImageModel
+from .models import ProductModel, ImageModel, ReviewModel
 from django.core.validators import MaxValueValidator
 from django.contrib.auth import get_user_model
 from django.core.exceptions import PermissionDenied
@@ -23,6 +23,12 @@ class ImageModelSerializer(serializers.ModelSerializer):
         model = ImageModel
         fields = "__all__"
 
+class ReviewModelSerializer(serializers.ModelSerializer):
+    date = serializers.DateTimeField(format="%d/%m/%Y")
+    class Meta:
+        model = ReviewModel
+        fields = "__all__"
+
 
 class ProductModelCreateSerializer(serializers.ModelSerializer):
     title = serializers.CharField(max_length=50)
@@ -33,23 +39,20 @@ class ProductModelCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ProductModel
-        fields = "__all__"
+        exclude = ("owner",)
 
     def create(self, validated_data):
-        if self.context["request"].user != validated_data["owner"]:
-            raise PermissionDenied()
-        else:
-            product = ProductModel.objects.create(
-                title=validated_data["title"],
-                price=validated_data["price"],
-                country=validated_data["country"],
-                category=validated_data["category"],
-                owner=validated_data["owner"],
-                description=validated_data["description"],
-                thumbnail=validated_data["thumbnail"],
-                post_id="post_" + get_random_string(length=30),
-            )
-            return product
+        product = ProductModel.objects.create(
+            title=validated_data["title"],
+            price=validated_data["price"],
+            country=validated_data["country"],
+            category=validated_data["category"],
+            owner=self.context["request"].user,
+            description=validated_data["description"],
+            thumbnail=validated_data["thumbnail"],
+            post_id="post_" + get_random_string(length=30),
+        )
+        return product
 
 
 class ImageModelCreateSerializer(serializers.ModelSerializer):
@@ -57,19 +60,36 @@ class ImageModelCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ImageModel
-        fields = "__all__"
+        exclude = ("owner",)
 
     def create(self, validated_data):
-        if self.context["request"].user != validated_data["owner"]:
+        for image in validated_data.pop("images"):
+            images = ImageModel.objects.create(
+                owner=self.context["request"].user,
+                post_id=validated_data["post_id"],
+                images=image,
+            )
+        return images
+
+
+class ReviewModelCreateSerializer(serializers.ModelSerializer):
+    description = serializers.CharField(max_length=1000)
+
+    class Meta:
+        model = ReviewModel
+        exclude = ("reviewer",)
+
+    def create(self, validated_data):
+        if validated_data["owner"] == self.context["request"].user:
             raise PermissionDenied()
         else:
-            for image in validated_data.pop("images"):
-                images = ImageModel.objects.create(
-                    owner=validated_data["owner"],
-                    post_id=validated_data["post_id"],
-                    images=image,
-                )
-            return images
+            review = ReviewModel.objects.create(
+                owner=validated_data["owner"],
+                reviewer=self.context["request"].user,
+                rating=validated_data["rating"],
+                description=validated_data["description"],
+            )
+            return review
 
 
 class ProductModelUpdateSerializer(serializers.ModelSerializer):

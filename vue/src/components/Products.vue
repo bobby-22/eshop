@@ -37,7 +37,7 @@
             </div>
 
             <div class="card-content">
-                <div class="content">
+                <div class="content" id="content-title">
                     <span class="title is-5">
                         <router-link
                             :to="{
@@ -129,9 +129,6 @@ export default {
 </script>
 
 <style scoped>
-.column.is-one-third-desktop.is-half-tablet {
-    padding: 8px;
-}
 .card {
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
@@ -203,6 +200,13 @@ img {
 @media (max-width: 769px) {
     img {
         min-height: 100%;
+    }
+    #content-title {
+        overflow: visible;
+        white-space: pre-line;
+    }
+    #country {
+        overflow: hidden;
     }
 }
 </style>
