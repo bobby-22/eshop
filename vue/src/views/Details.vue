@@ -204,7 +204,7 @@ export default {
             let post_id = this.$route.params.post_id;
             djangoAPI({
                 method: "GET",
-                url: `/api/v1/products/${post_id}/details/`,
+                url: `/api/v1/products/${post_id}/`,
             })
                 .then((detailsResponse) => {
                     console.log(detailsResponse);
@@ -225,7 +225,7 @@ export default {
             let post_id = this.$route.params.post_id;
             djangoAPI({
                 method: "GET",
-                url: `/api/v1/products/${post_id}/images/`,
+                url: `/api/v1/images/${post_id}/`,
             })
                 .then((imagesResponse) => {
                     console.log(imagesResponse);
@@ -255,12 +255,11 @@ export default {
             }
             this.submittedBoolean = true;
             let message = {
-                owner: this.product.owner,
                 email: this.email,
                 description: this.description,
             };
             djangoAPI
-                .post("/api/v1/contact/user/", message, {
+                .post(`/api/v1/accounts/user/${this.product.user}/contact/`, message, {
                     headers: {
                         Authorization: `JWT ${this.$store.state.tokenAccess}`,
                     },

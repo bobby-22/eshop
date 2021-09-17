@@ -62,6 +62,7 @@
                                             </span>
                                         </div>
                                         <div class="right">
+                                            <i class="far fa-calendar-alt"></i>
                                             {{ review.date }}
                                         </div>
                                     </div>
@@ -264,11 +265,15 @@ export default {
                 description: this.description,
             };
             djangoAPI
-                .post("/api/v1/review/user/", review, {
-                    headers: {
-                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
-                    },
-                })
+                .post(
+                    `/api/v1/accounts/user/${this.product.user}/review/`,
+                    review,
+                    {
+                        headers: {
+                            Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                        },
+                    }
+                )
                 .then((reviewedUserResponse) => {
                     console.log(reviewedUserResponse);
                     this.modalBoolean = false;
@@ -300,6 +305,17 @@ export default {
         this.getUserProducts();
         this.getUserReviews();
         this.setTitle();
+    },
+    watch: {
+        $route(to, from) {
+            if (to.name === "User") {
+                (this.username = this.$route.params.user),
+                    (this.authenticated = this.$store.state.authenticated),
+                    this.getUserProducts();
+                this.getUserReviews();
+                this.setTitle();
+            }
+        },
     },
 };
 </script>
@@ -336,7 +352,7 @@ export default {
     margin-bottom: 5px;
 }
 .reviewer {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 .right {
     color: #949494;

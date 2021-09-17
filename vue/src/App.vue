@@ -66,6 +66,13 @@ export default {
     flex-direction: column;
     min-height: 100vh;
 }
+#columns {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.pagination {
+    margin-top: 18px;
+}
 ::selection {
     background-color: #fbe38b;
 }

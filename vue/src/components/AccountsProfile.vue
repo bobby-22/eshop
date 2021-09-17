@@ -91,7 +91,7 @@ export default {
             let post_id = this.product.post_id;
             djangoAPI({
                 method: "GET",
-                url: `/api/v1/products/${post_id}/images/`,
+                url: `/api/v1/images/${post_id}/`,
             })
                 .then((imagesResponse) => {
                     console.log(imagesResponse);

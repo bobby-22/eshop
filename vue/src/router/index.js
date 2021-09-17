@@ -41,12 +41,12 @@ const routes = [
         component: Details,
     },
     {
-        path: "/posts/category/:category/",
+        path: "/category/:category/",
         name: "Category",
         component: Category,
     },
     {
-        path: "/posts/?search=:keyword/",
+        path: "/?search=:keyword/",
         name: "Search",
         component: Search,
     },

@@ -137,10 +137,10 @@ class ImageModelDeleteView(generics.DestroyAPIView):
 class ContactView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def post(self, request):
-        owner = User.objects.get(id=request.data.get("owner"))
+    def post(self, request, username):
+        owner = User.objects.get(username=username)
         send_mail(
-            subject="MechMarketEU - Somebody is interested in your product",
+            subject="MechMarketEU - Somebody is interested in your post",
             message=request.data.get("description")
             + "\n"
             + "\nPlease contact me at this email adress: "

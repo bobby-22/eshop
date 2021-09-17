@@ -9,6 +9,38 @@
                 v-bind:src="product.thumbnail"
             />
         </div>
+        <nav class="pagination" role="navigation" aria-label="pagination">
+            <a class="pagination-previous">Previous</a>
+            <a class="pagination-next">Next page</a>
+            <ul class="pagination-list">
+                <li>
+                    <a class="pagination-link" aria-label="Goto page 1">1</a>
+                </li>
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
+                </li>
+                <li>
+                    <a class="pagination-link" aria-label="Goto page 45">45</a>
+                </li>
+                <li>
+                    <a
+                        class="pagination-link is-current"
+                        aria-label="Page 46"
+                        aria-current="page"
+                        >46</a
+                    >
+                </li>
+                <li>
+                    <a class="pagination-link" aria-label="Goto page 47">47</a>
+                </li>
+                <li>
+                    <span class="pagination-ellipsis">&hellip;</span>
+                </li>
+                <li>
+                    <a class="pagination-link" aria-label="Goto page 86">86</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </template>
 
@@ -31,7 +63,7 @@ export default {
             let keyword = this.$route.params.keyword;
             djangoAPI({
                 method: "GET",
-                url: `/api/v1/products/search/?search=${keyword}`,
+                url: `/api/v1/search/?search=${keyword}`,
             })
                 .then((searchResponse) => {
                     console.log(searchResponse);
@@ -70,9 +102,6 @@ export default {
     min-height: 100%;
     width: 100%;
     padding: 30px;
-}
-#columns {
-    margin-top: 0px;
 }
 .title {
     border-bottom: 1px solid #ededed;
