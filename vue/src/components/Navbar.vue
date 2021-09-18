@@ -4,7 +4,14 @@
             <router-link to="/" class="navbar-item" id="brand">
                 <strong>MechMarketEU</strong>
             </router-link>
-            <router-link to="/posts/latest" class="navbar-item"
+            <router-link
+                v-bind:to="{
+                    name: 'Latest',
+                    params: {
+                        page: 1,
+                    },
+                }"
+                class="navbar-item"
                 >Latest</router-link
             >
             <NavbarDropdown class="navbar-item" />
@@ -119,7 +126,7 @@ export default {
         submitSearch() {
             this.$router.push({
                 name: "Search",
-                params: { keyword: this.keyword },
+                params: { keyword: this.keyword, page: 1 },
             });
         },
         logoutUser() {

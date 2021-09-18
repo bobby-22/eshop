@@ -9,13 +9,19 @@
             <router-link
                 class="dropdown-item"
                 id="first"
-                v-bind:to="{ name: 'Category', params: { category: 'Cables' } }"
+                v-bind:to="{
+                    name: 'Category',
+                    params: { category: 'Cables', page: 1 },
+                }"
                 >Cables</router-link
             >
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
-                v-bind:to="{ name: 'Category', params: { category: 'Cases' } }"
+                v-bind:to="{
+                    name: 'Category',
+                    params: { category: 'Cases', page: 1 },
+                }"
                 >Cases</router-link
             >
             <hr class="dropdown-divider" />
@@ -23,7 +29,7 @@
                 class="dropdown-item"
                 v-bind:to="{
                     name: 'Category',
-                    params: { category: 'Deskmats' },
+                    params: { category: 'Deskmats', page: 1 },
                 }"
                 >Deskmats</router-link
             >
@@ -32,7 +38,7 @@
                 class="dropdown-item"
                 v-bind:to="{
                     name: 'Category',
-                    params: { category: 'Keyboards' },
+                    params: { category: 'Keyboards', page: 1 },
                 }"
                 >Keyboards</router-link
             >
@@ -41,26 +47,35 @@
                 class="dropdown-item"
                 v-bind:to="{
                     name: 'Category',
-                    params: { category: 'Keycaps' },
+                    params: { category: 'Keycaps', page: 1 },
                 }"
                 >Keycaps</router-link
             >
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
-                v-bind:to="{ name: 'Category', params: { category: 'Others' } }"
+                v-bind:to="{
+                    name: 'Category',
+                    params: { category: 'Others', page: 1 },
+                }"
                 >Others</router-link
             >
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
-                v-bind:to="{ name: 'Category', params: { category: 'PCBs' } }"
+                v-bind:to="{
+                    name: 'Category',
+                    params: { category: 'PCBs', page: 1 },
+                }"
                 >PCBs</router-link
             >
             <hr class="dropdown-divider" />
             <router-link
                 class="dropdown-item"
-                v-bind:to="{ name: 'Category', params: { category: 'Plates' } }"
+                v-bind:to="{
+                    name: 'Category',
+                    params: { category: 'Plates', page: 1 },
+                }"
                 >Plates</router-link
             >
             <hr class="dropdown-divider" />
@@ -68,7 +83,7 @@
                 class="dropdown-item"
                 v-bind:to="{
                     name: 'Category',
-                    params: { category: 'Switches' },
+                    params: { category: 'Switches', page: 1 },
                 }"
                 >Switches</router-link
             >
@@ -77,7 +92,7 @@
                 class="dropdown-item"
                 v-bind:to="{
                     name: 'Category',
-                    params: { category: 'Travelling-Cases' },
+                    params: { category: 'Travelling-Cases', page: 1 },
                 }"
                 >Travelling cases</router-link
             >
@@ -87,7 +102,7 @@
                 id="last"
                 v-bind:to="{
                     name: 'Category',
-                    params: { category: 'Wrist-rests' },
+                    params: { category: 'Wrist-rests', page: 1 },
                 }"
                 >Wrist-rests</router-link
             >

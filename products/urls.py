@@ -10,8 +10,8 @@ urlpatterns = [
     path("search/", views.SearchView.as_view()),
     path("accounts/profile/", views.ProfileView.as_view()),
     path("accounts/user/<slug:username>", views.UserView.as_view()),
-    path("products/create/", views.ProductModelCreateView.as_view()),
-    path("images/create/", views.ImageModelCreateView.as_view()),
+    path("products/", views.ProductModelCreateView.as_view()),
+    path("images/", views.ImageModelCreateView.as_view()),
     path(
         "products/<slug:post_id>/update/",
         views.ProductModelUpdateView.as_view(),

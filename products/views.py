@@ -15,15 +15,21 @@ from rest_framework.views import APIView
 from rest_framework import generics, filters
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 from .permissions import IsOwnerOrReadOnly
 from django.core.mail import send_mail
 
 User = get_user_model()
 
 # Create your views here.
+class CustomPagination(PageNumberPagination):
+    page_size = 21
+
+
 class LatestView(generics.ListAPIView):
     queryset = ProductModel.objects.all()
     serializer_class = ProductModelSerializer
+    pagination_class = CustomPagination
 
 
 class Details1View(generics.ListAPIView):
@@ -46,6 +52,7 @@ class Details2View(generics.ListAPIView):
 
 class CategoryView(generics.ListAPIView):
     serializer_class = ProductModelSerializer
+    pagination_class = CustomPagination
 
     def get_queryset(self):
         category = self.kwargs["category"]
@@ -58,6 +65,7 @@ class SearchView(generics.ListAPIView):
     serializer_class = ProductModelSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ["title", "country", "description"]
+    pagination_class = CustomPagination
 
 
 class ProfileView(generics.ListAPIView):

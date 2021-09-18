@@ -89,6 +89,7 @@
                                 <option>Others</option>
                                 <option>PCBs</option>
                                 <option>Plates</option>
+                                <option>Switches</option>
                                 <option>Travelling-cases</option>
                                 <option>Wrist-rests</option>
                             </select>
@@ -300,6 +301,9 @@ export default {
             if (!this.description) {
                 this.errorDescriptionBoolean = true;
                 this.errorMessageDescription = "Description cannot be empty";
+            } else if (this.description.length > 1000) {
+                this.errorDescriptionBoolean = true;
+                this.errorMessageDescription = "Description cannot be longer than 1000 characters";
             } else {
                 this.errorDescriptionBoolean = false;
             }
@@ -408,7 +412,7 @@ export default {
                 images.append("images", this.images[i]);
             }
             djangoAPI
-                .post("/api/v1/images/create/", images, {
+                .post("/api/v1/images/", images, {
                     headers: {
                         Authorization: `JWT ${this.$store.state.tokenAccess}`,
                     },

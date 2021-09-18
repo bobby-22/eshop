@@ -279,6 +279,10 @@ export default {
             if (!this.description) {
                 this.errorDescriptionBoolean = true;
                 this.errorMessageDescription = "Description cannot be empty";
+            } else if (this.description.length > 1000) {
+                this.errorDescriptionBoolean = true;
+                this.errorMessageDescription =
+                    "Description cannot be longer than 1000 characters";
             } else {
                 this.errorDescriptionBoolean = false;
             }
@@ -330,7 +334,7 @@ export default {
             product.append("description", this.description);
             product.append("thumbnail", this.thumbnail);
             djangoAPI
-                .post("/api/v1/products/create/", product, {
+                .post("/api/v1/products/", product, {
                     headers: {
                         Authorization: `JWT ${this.$store.state.tokenAccess}`,
                     },
@@ -382,7 +386,7 @@ export default {
                 images.append("images", this.images[i]);
             }
             djangoAPI
-                .post("/api/v1/images/create/", images, {
+                .post("/api/v1/images/", images, {
                     headers: {
                         Authorization: `JWT ${this.$store.state.tokenAccess}`,
                     },

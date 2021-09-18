@@ -1,10 +1,6 @@
 <template>
     <div class="container">
-        <div
-            class="details"
-            v-for="detail in details.slice(0, 1)"
-            :key="detail.id"
-        >
+        <div class="details" v-for="detail in details" :key="detail.id">
             <div class="details-left">
                 <div class="detail-thumbnail">
                     <img v-bind:src="photo" />
@@ -209,9 +205,7 @@ export default {
                 .then((detailsResponse) => {
                     console.log(detailsResponse);
                     this.details = detailsResponse.data;
-                    for (let i = 0; i < this.details.slice(0, 1).length; i++) {
-                        this.product = this.details[i];
-                    }
+                    this.product = this.details[0];
                     this.gallery.push(this.product.thumbnail);
                     this.photo = this.gallery[0];
                     document.title = `${this.product.title} | MechMarketEU`;
@@ -259,11 +253,15 @@ export default {
                 description: this.description,
             };
             djangoAPI
-                .post(`/api/v1/accounts/user/${this.product.user}/contact/`, message, {
-                    headers: {
-                        Authorization: `JWT ${this.$store.state.tokenAccess}`,
-                    },
-                })
+                .post(
+                    `/api/v1/accounts/user/${this.product.user}/contact/`,
+                    message,
+                    {
+                        headers: {
+                            Authorization: `JWT ${this.$store.state.tokenAccess}`,
+                        },
+                    }
+                )
                 .then((contactedUserResponse) => {
                     console.log(contactedUserResponse);
                     this.modalBoolean = false;

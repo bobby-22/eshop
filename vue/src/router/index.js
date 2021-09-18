@@ -31,7 +31,7 @@ const routes = [
         component: Error,
     },
     {
-        path: "/posts/latest/",
+        path: "/posts/latest/page=:page",
         name: "Latest",
         component: Latest,
     },
@@ -41,12 +41,12 @@ const routes = [
         component: Details,
     },
     {
-        path: "/category/:category/",
+        path: "/category/:category/page=:page?",
         name: "Category",
         component: Category,
     },
     {
-        path: "/?search=:keyword/",
+        path: "/search/keyword=:keyword/page=:page?",
         name: "Search",
         component: Search,
     },
