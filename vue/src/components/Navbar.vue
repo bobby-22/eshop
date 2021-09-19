@@ -74,8 +74,11 @@
                     <span class="button is-info" v-on:click="logoutUser"
                         >Logout</span
                     >
-                    <router-link to="/" class="button is-warning"
-                        >Donate</router-link
+                    <a
+                        href="https://www.paypal.com/donate?hosted_button_id=AJWDMT6HCCF5W"
+                        target="_blank"
+                        class="button is-warning"
+                        >Donate</a
                     >
                 </div>
             </div>
@@ -92,8 +95,11 @@
                     <router-link to="/accounts/register" class="button is-info"
                         >Register</router-link
                     >
-                    <span class="button is-warning" v-on:click="donate"
-                        >Donate</span
+                    <a
+                        href="https://www.paypal.com/donate?hosted_button_id=AJWDMT6HCCF5W"
+                        target="_blank"
+                        class="button is-warning"
+                        >Donate</a
                     >
                 </div>
             </div>
@@ -140,16 +146,6 @@ export default {
                 duration: 3000,
                 position: "bottom-right",
             });
-        },
-        donate() {
-            djangoAPI
-                .get("/api/v1/donate")
-                .then((donateResponse) => {
-                    console.log(donateResponse);
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
         },
     },
     computed: {

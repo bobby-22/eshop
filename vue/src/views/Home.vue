@@ -3,9 +3,7 @@
         <h1 class="title" id="main-title">Welcome to MechMarketEU</h1>
         <div class="categories">
             <div class="grid-item">
-                <img
-                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/cables.jpg"
-                />
+                <img src="https://d25efl8y6peufe.cloudfront.net/cables.jpg" />
                 <div class="title" id="title">
                     <h1>
                         <router-link
@@ -19,9 +17,7 @@
                 </div>
             </div>
             <div class="grid-item">
-                <img
-                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/cases.jpg"
-                />
+                <img src="https://d25efl8y6peufe.cloudfront.net/cases.jpg" />
                 <div class="title" id="title">
                     <h1>
                         <router-link
@@ -35,9 +31,7 @@
                 </div>
             </div>
             <div class="grid-item">
-                <img
-                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/deskmats.jpg"
-                />
+                <img src="https://d25efl8y6peufe.cloudfront.net/deskmats.jpg" />
                 <div class="title" id="title">
                     <h1>
                         <router-link
@@ -52,7 +46,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/keyboards.jpg"
+                    src="https://d25efl8y6peufe.cloudfront.net/keyboards.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
@@ -67,9 +61,7 @@
                 </div>
             </div>
             <div class="grid-item">
-                <img
-                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/keycaps.jpg"
-                />
+                <img src="https://d25efl8y6peufe.cloudfront.net/keycaps.jpg" />
                 <div class="title" id="title">
                     <h1>
                         <router-link
@@ -83,9 +75,7 @@
                 </div>
             </div>
             <div class="grid-item">
-                <img
-                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/others.jpg"
-                />
+                <img src="https://d25efl8y6peufe.cloudfront.net/others.jpg" />
                 <div class="title" id="title">
                     <h1>
                         <router-link
@@ -99,9 +89,7 @@
                 </div>
             </div>
             <div class="grid-item">
-                <img
-                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/pcbs.jpg"
-                />
+                <img src="https://d25efl8y6peufe.cloudfront.net/pcbs.jpg" />
                 <div class="title" id="title">
                     <h1>
                         <router-link
@@ -115,9 +103,7 @@
                 </div>
             </div>
             <div class="grid-item">
-                <img
-                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/pcbs.jpg"
-                />
+                <img src="https://d25efl8y6peufe.cloudfront.net/pcbs.jpg" />
                 <div class="title" id="title">
                     <h1>
                         <router-link
@@ -131,9 +117,7 @@
                 </div>
             </div>
             <div class="grid-item">
-                <img
-                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/switches.jpg"
-                />
+                <img src="https://d25efl8y6peufe.cloudfront.net/switches.jpg" />
                 <div class="title" id="title">
                     <h1>
                         <router-link
@@ -148,7 +132,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/travelling-cases.jpg"
+                    src="https://d25efl8y6peufe.cloudfront.net/travelling-cases.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
@@ -167,7 +151,7 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/wrist-rests.jpg"
+                    src="https://d25efl8y6peufe.cloudfront.net/wrist-rests.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
