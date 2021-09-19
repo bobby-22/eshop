@@ -97,6 +97,16 @@
                 >Terms and Conditions</router-link
             >
             <span>&copy; 2021 mechmarket.eu</span>
+            <div>
+                Icons made by
+                <a href="https://flat-icons.com/" title="Flat Icons"
+                    >Flat Icons</a
+                >
+                from
+                <a href="https://www.flaticon.com/" title="Flaticon"
+                    >www.flaticon.com</a
+                >
+            </div>
         </div>
     </footer>
 </template>

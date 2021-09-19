@@ -144,7 +144,7 @@ export default {
                 .post("/api/v1/accounts/register/", user)
                 .then((registerResponse) => {
                     console.log(registerResponse);
-                    this.$router.push("/");
+                    this.$router.push("/accounts/login");
                     toast({
                         message: "Account has been successfully created!",
                         type: "is-success",

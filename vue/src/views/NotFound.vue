@@ -1,16 +1,16 @@
 <template>
     <div class="container">
-        <h1 class="title">Error</h1>
-        <p>You are not allowed to perform this action!</p>
+        <h1 class="title">Page not found</h1>
+        <p>Are you sure you entered the right path?</p>
     </div>
 </template>
 
 <script>
 export default {
-    name: "Latest",
+    name: "NotFound",
     methods: {
         setTitle() {
-            document.title = "Access Denied | MechMarketEU";
+            document.title = "Page Not Found | MechMarketEU";
         },
     },
     created() {

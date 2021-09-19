@@ -11,6 +11,7 @@ import Register from "../components/Register.vue";
 import Login from "../components/Login.vue";
 import Profile from "../views/Profile.vue";
 import User from "../views/User.vue";
+import NotFound from "../views/NotFound.vue";
 import ProductsCreate from "../components/ProductsCreate.vue";
 import ProductsUpdate from "../components/ProductsUpdate.vue";
 
@@ -84,6 +85,11 @@ const routes = [
         path: "/posts/:post_id/update/",
         name: "ProductsUpdate",
         component: ProductsUpdate,
+    },
+    {
+        path: "/:catchAll(.*)",
+        name: "NotFound",
+        component: NotFound,
     },
 ];
 
