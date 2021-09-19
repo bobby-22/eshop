@@ -159,3 +159,18 @@ class ContactView(APIView):
             fail_silently=False,
         )
         return Response("Message has been successfully sent")
+
+class ContactAdminView(APIView):
+    def post(self, request):
+        owner = User.objects.get(username="long")
+        send_mail(
+            subject="MechMarketEU - Feedback",
+            message=request.data.get("description")
+            + "\n"
+            + "\nPlease contact me at this email adress: "
+            + request.data.get("email"),
+            from_email=request.data.get("email"),
+            recipient_list=[owner.email],
+            fail_silently=False,
+        )
+        return Response("Message has been successfully sent")

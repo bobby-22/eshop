@@ -172,7 +172,6 @@ export default {
     padding-bottom: 1px;
 }
 .subtitle {
-    -webkit-text-size-adjust: none;
     margin-bottom: 0px;
 }
 #country {

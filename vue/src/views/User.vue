@@ -67,7 +67,7 @@
                                         </div>
                                     </div>
                                     <div class="description">
-                                        {{ review.description }}
+                                        <i>{{ review.description }}</i>
                                     </div>
                                 </div>
                             </div>

@@ -25,6 +25,7 @@ urlpatterns = [
         views.ImageModelDeleteView.as_view(),
     ),
     path("accounts/user/<slug:username>/contact/", views.ContactView.as_view()),
+    path("accounts/user/admin/feedback/", views.ContactAdminView.as_view()),
     path("accounts/user/<slug:username>/reviews/", views.ReviewView.as_view()),
     path("accounts/user/<slug:username>/review/", views.ReviewModelCreateView.as_view()),
 ]

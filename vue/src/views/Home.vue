@@ -4,14 +4,14 @@
         <div class="categories">
             <div class="grid-item">
                 <img
-                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/cables.jpg"
+                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/cables.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
                         <router-link
                             v-bind:to="{
                                 name: 'Category',
-                                params: { category: 'Cables' },
+                                params: { category: 'Cables', page: 1 },
                             }"
                             >Cables</router-link
                         >
@@ -20,14 +20,14 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/cases.jpg"
+                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/cases.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
                         <router-link
                             v-bind:to="{
                                 name: 'Category',
-                                params: { category: 'Cases' },
+                                params: { category: 'Cases', page: 1 },
                             }"
                             >Cases</router-link
                         >
@@ -36,14 +36,14 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/deskmats.jpg"
+                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/deskmats.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
                         <router-link
                             v-bind:to="{
                                 name: 'Category',
-                                params: { category: 'Deskmats' },
+                                params: { category: 'Deskmats', page: 1 },
                             }"
                             >Deskmats</router-link
                         >
@@ -52,14 +52,14 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/keyboards.jpg"
+                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/keyboards.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
                         <router-link
                             v-bind:to="{
                                 name: 'Category',
-                                params: { category: 'Keyboards' },
+                                params: { category: 'Keyboards', page: 1 },
                             }"
                             >Keyboards</router-link
                         >
@@ -68,14 +68,14 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/keycaps.jpg"
+                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/keycaps.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
                         <router-link
                             v-bind:to="{
                                 name: 'Category',
-                                params: { category: 'Keycaps' },
+                                params: { category: 'Keycaps', page: 1 },
                             }"
                             >Keycaps</router-link
                         >
@@ -84,14 +84,14 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/others.jpg"
+                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/others.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
                         <router-link
                             v-bind:to="{
                                 name: 'Category',
-                                params: { category: 'Others' },
+                                params: { category: 'Others', page: 1 },
                             }"
                             >Others</router-link
                         >
@@ -100,14 +100,14 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/pcbs.jpg"
+                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/pcbs.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
                         <router-link
                             v-bind:to="{
                                 name: 'Category',
-                                params: { category: 'PCBs' },
+                                params: { category: 'PCBs', page: 1 },
                             }"
                             >PCBs</router-link
                         >
@@ -116,14 +116,14 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/pcbs.jpg"
+                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/pcbs.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
                         <router-link
                             v-bind:to="{
                                 name: 'Category',
-                                params: { category: 'Plates' },
+                                params: { category: 'Plates', page: 1 },
                             }"
                             >Plates</router-link
                         >
@@ -132,14 +132,14 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/switches.jpg"
+                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/switches.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
                         <router-link
                             v-bind:to="{
                                 name: 'Category',
-                                params: { category: 'Switches' },
+                                params: { category: 'Switches', page: 1 },
                             }"
                             >Switches</router-link
                         >
@@ -148,14 +148,17 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/travelling-cases.jpg"
+                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/travelling-cases.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
                         <router-link
                             v-bind:to="{
                                 name: 'Category',
-                                params: { category: 'Travelling-cases' },
+                                params: {
+                                    category: 'Travelling-cases',
+                                    page: 1,
+                                },
                             }"
                             >Travelling cases</router-link
                         >
@@ -164,14 +167,14 @@
             </div>
             <div class="grid-item">
                 <img
-                    src="https://mechmarketmediastock.s3.eu-central-1.amazonaws.com/wrist-rests.jpg"
+                    src="https://mechmarketeumediastock.s3.eu-central-1.amazonaws.com/wrist-rests.jpg"
                 />
                 <div class="title" id="title">
                     <h1>
                         <router-link
                             v-bind:to="{
                                 name: 'Category',
-                                params: { category: 'Wrist-rests' },
+                                params: { category: 'Wrist-rests', page: 1 },
                             }"
                             >Wrist-rests</router-link
                         >
@@ -220,7 +223,7 @@ export default {
 img {
     height: 300px;
     min-width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 10px;
 }
 img {

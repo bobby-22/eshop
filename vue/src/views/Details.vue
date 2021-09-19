@@ -392,7 +392,6 @@ export default {
     white-space: pre-line;
 }
 ::-webkit-scrollbar {
-    widows: 10px;
     height: 10px;
 }
 ::-webkit-scrollbar-thumb {
