@@ -1,1 +1,1 @@
-web: gunicorn mechmarket.wsgi
+web: gunicorn mechmarketeu.wsgi
