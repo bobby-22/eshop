@@ -60,7 +60,7 @@ REST_FRAMEWORK = {
         "rest_framework.parsers.MultiPartParser",
         "rest_framework.parsers.FileUploadParser",
     ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
 }
 
 from datetime import timedelta
@@ -78,7 +78,14 @@ SIMPLE_JWT = {
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = ["http://localhost:8080", "http://127.0.0.1:8080", "https://mechmarketeu.herokuapp.com", "https://mechmarket.eu", "https://mechmarketeu.vercel.app"]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
+    "https://mechmarketeu.herokuapp.com",
+    "https://mechmarket.eu",
+    "https://www.mechmarket.eu",
+    "https://mechmarketeu.vercel.app",
+]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -201,8 +208,10 @@ EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
 import dj_database_url
+
 db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+DATABASES["default"].update(db_from_env)
 
 import django_heroku
+
 django_heroku.settings(locals())
