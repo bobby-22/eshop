@@ -9,6 +9,14 @@ from django.utils.crypto import get_random_string
 User = get_user_model()
 
 
+class UserModelSerializer(serializers.ModelSerializer):
+    date_joined = serializers.DateTimeField(format="%d/%m/%Y")
+
+    class Meta:
+        model = User
+        fields = ["date_joined"]
+
+
 class ProductModelSerializer(serializers.ModelSerializer):
     user = serializers.CharField(source="owner.username", read_only=True)
     date = serializers.DateTimeField(format="%d/%m/%Y")
@@ -23,8 +31,10 @@ class ImageModelSerializer(serializers.ModelSerializer):
         model = ImageModel
         fields = "__all__"
 
+
 class ReviewModelSerializer(serializers.ModelSerializer):
     date = serializers.DateTimeField(format="%d/%m/%Y")
+
     class Meta:
         model = ReviewModel
         fields = "__all__"

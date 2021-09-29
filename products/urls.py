@@ -10,6 +10,7 @@ urlpatterns = [
     path("search/", views.SearchView.as_view()),
     path("accounts/profile/", views.ProfileView.as_view()),
     path("accounts/user/<slug:username>", views.UserView.as_view()),
+    path("accounts/user/<slug:username>/date_joined", views.DateJoinedView.as_view()),
     path("products/", views.ProductModelCreateView.as_view()),
     path("images/", views.ImageModelCreateView.as_view()),
     path(
@@ -27,5 +28,7 @@ urlpatterns = [
     path("accounts/user/<slug:username>/contact/", views.ContactView.as_view()),
     path("accounts/user/admin/feedback/", views.ContactAdminView.as_view()),
     path("accounts/user/<slug:username>/reviews/", views.ReviewView.as_view()),
-    path("accounts/user/<slug:username>/review/", views.ReviewModelCreateView.as_view()),
+    path(
+        "accounts/user/<slug:username>/review/", views.ReviewModelCreateView.as_view()
+    ),
 ]

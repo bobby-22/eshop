@@ -6,6 +6,7 @@ from products.serializers import (
     ProductModelSerializer,
     ImageModelSerializer,
     ReviewModelSerializer,
+    UserModelSerializer,
     ProductModelCreateSerializer,
     ImageModelCreateSerializer,
     ReviewModelCreateSerializer,
@@ -98,6 +99,11 @@ class ReviewView(generics.ListAPIView):
         return reviews
 
 
+class DateJoinedView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserModelSerializer
+
+
 class ProductModelCreateView(generics.CreateAPIView):
     serializer_class = ProductModelCreateSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
@@ -159,6 +165,7 @@ class ContactView(APIView):
             fail_silently=False,
         )
         return Response("Message has been successfully sent")
+
 
 class ContactAdminView(APIView):
     def post(self, request):
