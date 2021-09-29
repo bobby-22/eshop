@@ -28,6 +28,7 @@ class ImageModel(models.Model):
     class Meta:
         verbose_name_plural = "Media"
 
+
 class ReviewModel(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
@@ -37,4 +38,13 @@ class ReviewModel(models.Model):
 
     class Meta:
         verbose_name_plural = "Reviews"
+        ordering = ("-id",)
+
+
+class SavedModel(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    post_id = models.CharField(max_length=50, default="")
+
+    class Meta:
+        verbose_name_plural = "Saved posts"
         ordering = ("-id",)

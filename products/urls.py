@@ -14,6 +14,18 @@ urlpatterns = [
     path("products/", views.ProductModelCreateView.as_view()),
     path("images/", views.ImageModelCreateView.as_view()),
     path(
+        "products/<slug:post_id>/saved/",
+        views.SavedView.as_view(),
+    ),
+    path(
+        "products/<slug:post_id>/save/",
+        views.SavedModelCreateView.as_view(),
+    ),
+    path(
+        "products/<slug:post_id>/unsave/",
+        views.SavedModelDeleteView.as_view(),
+    ),
+    path(
         "products/<slug:post_id>/update/",
         views.ProductModelUpdateView.as_view(),
     ),

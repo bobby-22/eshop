@@ -1,6 +1,6 @@
 from django.conf import settings
 from rest_framework import serializers
-from .models import ProductModel, ImageModel, ReviewModel
+from .models import ProductModel, ImageModel, ReviewModel, SavedModel
 from django.core.validators import MaxValueValidator
 from django.contrib.auth import get_user_model
 from django.core.exceptions import PermissionDenied
@@ -37,6 +37,12 @@ class ReviewModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ReviewModel
+        fields = "__all__"
+
+
+class SavedModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SavedModel
         fields = "__all__"
 
 
@@ -100,6 +106,19 @@ class ReviewModelCreateSerializer(serializers.ModelSerializer):
                 description=validated_data["description"],
             )
             return review
+
+
+class SavedModelCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SavedModel
+        exclude = ("owner",)
+
+    def create(self, validated_data):
+        saved = SavedModel.objects.create(
+            owner=self.context["request"].user,
+            post=validated_data["post_id"],
+        )
+        return saved
 
 
 class ProductModelUpdateSerializer(serializers.ModelSerializer):
