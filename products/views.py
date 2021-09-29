@@ -1,17 +1,15 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
-from products.models import ProductModel, ImageModel, ReviewModel, SavedModel
+from products.models import ProductModel, ImageModel, ReviewModel
 from django.contrib.auth import get_user_model
 from products.serializers import (
-    UserModelSerializer,
     ProductModelSerializer,
     ImageModelSerializer,
     ReviewModelSerializer,
-    SavedModelSerializer,
+    UserModelSerializer,
     ProductModelCreateSerializer,
     ImageModelCreateSerializer,
     ReviewModelCreateSerializer,
-    SavedModelCreateSerializer,
     ProductModelUpdateSerializer,
 )
 from rest_framework.views import APIView
@@ -101,14 +99,6 @@ class ReviewView(generics.ListAPIView):
         return reviews
 
 
-class SavedView(generics.ListAPIView):
-    serializer_class = SavedModelSerializer
-
-    def get_queryset(self):
-        saved_products = SavedModel.objects.filter(post_id=self.kwargs["post_id"])
-        return saved_products
-
-
 class DateJoinedView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserModelSerializer
@@ -127,11 +117,6 @@ class ImageModelCreateView(generics.CreateAPIView):
 class ReviewModelCreateView(generics.CreateAPIView):
     serializer_class = ReviewModelCreateSerializer
     permission_classes = [IsAuthenticated]
-
-
-class SavedModelCreateView(generics.CreateAPIView):
-    permission_classes = [IsAuthenticated]
-    serializer_class = SavedModelCreateSerializer
 
 
 class ProductModelUpdateView(generics.UpdateAPIView):
@@ -161,18 +146,6 @@ class ImageModelDeleteView(generics.DestroyAPIView):
     queryset = ImageModel.objects.all()
     lookup_field = "id"
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
-
-
-class SavedModelDeleteView(generics.DestroyAPIView):
-    queryset = SavedModel.objects.all()
-    lookup_field = "post_id"
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
-
-    def get_queryset(self):
-        post_id = self.kwargs["post_id"]
-        saved_product = SavedModel.objects.get(post_id=post_id)
-        self.check_object_permissions(self.request, saved_product)
-        saved_product.delete()
 
 
 class ContactView(APIView):
