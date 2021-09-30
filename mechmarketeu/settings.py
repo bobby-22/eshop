@@ -90,13 +90,8 @@ SIMPLE_JWT = {
     "ALGORITHM": "HS256",
     "SIGNING_KEY": config("SECRET_KEY"),
 }
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SAMESITE = 'None'
-CSRF_COOKIE_DOMAIN = ".mechmarket.eu"
-SESSION_COOKIE_DOMAIN = ".mechmarket.eu"
-CSRF_TRUSTED_ORIGINS = ".mechmarket.eu"
+
+
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
@@ -108,16 +103,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://www.mechmarket.eu",
     "https://mechmarketeu.vercel.app",
 ]
-CORS_ORIGIN_WHITELIST = (
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
-    "https://mechmarketeu.herokuapp.com",
-    "https://api.mechmarket.eu",
-    "https://mechmarket.eu",
-    "https://www.mechmarket.eu",
-    "https://mechmarketeu.vercel.app",
-)
-CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
 
 MIDDLEWARE = [
     "accounts.middleware.MoveJWTRefreshCookieIntoTheBody",
