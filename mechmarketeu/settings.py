@@ -76,6 +76,7 @@ REST_SESSION_LOGIN = False
 REST_USE_JWT = True
 JWT_AUTH_COOKIE = "jwt-access-token"
 JWT_AUTH_REFRESH_COOKIE = "jwt-refresh-token"
+JWT_AUTH_SECURE = True
 
 from datetime import timedelta
 
