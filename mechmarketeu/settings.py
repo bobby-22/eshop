@@ -111,6 +111,15 @@ CORS_ORIGIN_WHITELIST = [
     "https://mechmarketeu.vercel.app",
 ]
 
+CORS_ALLOW_HEADERS = [
+    "x-requested-with",
+    "content-type",
+    "accept",
+    "origin",
+    "authorization",
+    "X-CSRFToken",
+]
+
 MIDDLEWARE = [
     "accounts.middleware.MoveJWTRefreshCookieIntoTheBody",
     "django.middleware.security.SecurityMiddleware",
