@@ -91,6 +91,8 @@ SIMPLE_JWT = {
     "SIGNING_KEY": config("SECRET_KEY"),
 }
 
+CSRF_COOKIE_SAMESITE = "Lax"
+SESSION_COOKIE_SAMESITE = "Lax"
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
@@ -102,6 +104,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://www.mechmarket.eu",
     "https://mechmarketeu.vercel.app",
 ]
+CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
 
 MIDDLEWARE = [
     "accounts.middleware.MoveJWTRefreshCookieIntoTheBody",
