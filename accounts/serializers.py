@@ -70,21 +70,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-class LoginSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(
-        error_messages={
-            "blank": "Username cannot be empty",
-        },
-    )
-    password1 = serializers.CharField(
-        style={"input_type": "password"},
-        write_only=True,
-        error_messages={
-            "blank": "Password cannot be empty",
-        },
-    )
-
-
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
