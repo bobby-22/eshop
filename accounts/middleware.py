@@ -14,7 +14,6 @@ class MoveJWTRefreshCookieIntoTheBody(MiddlewareMixin):
 
     def __call__(self, request):
         response = self.get_response(request)
-        response["Access-Control-Allow-Headers"] = "*"
         return response
 
     def process_view(self, request, view_func, *view_args, **view_kwargs):
