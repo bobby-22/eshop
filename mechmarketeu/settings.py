@@ -102,6 +102,15 @@ CORS_ALLOWED_ORIGINS = [
     "https://mechmarketeu.vercel.app",
 ]
 
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
+    "https://mechmarketeu.herokuapp.com",
+    "https://mechmarket.eu",
+    "https://www.mechmarket.eu",
+    "https://mechmarketeu.vercel.app",
+]
+
 MIDDLEWARE = [
     "accounts.middleware.MoveJWTRefreshCookieIntoTheBody",
     "django.middleware.security.SecurityMiddleware",
