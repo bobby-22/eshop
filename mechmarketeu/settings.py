@@ -90,6 +90,8 @@ SIMPLE_JWT = {
     "ALGORITHM": "HS256",
     "SIGNING_KEY": config("SECRET_KEY"),
 }
+SESSION_COOKIE_SAMESITE = None
+CSRF_COOKIE_SAMESITE = None
 CSRF_COOKIE_DOMAIN = ".mechmarket.eu"
 SESSION_COOKIE_DOMAIN = ".mechmarket.eu"
 CSRF_TRUSTED_ORIGINS = ".mechmarket.eu"
