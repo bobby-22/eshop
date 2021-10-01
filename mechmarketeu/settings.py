@@ -58,7 +58,10 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": ("accounts.authenticate.CustomAuthentication",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+    ),
     "DEFAULT_SCHEMA_CLASS": ("rest_framework.schemas.coreapi.AutoSchema",),
     "DEFAULT_PARSER_CLASSES": (
         "rest_framework.parsers.JSONParser",
@@ -71,9 +74,9 @@ REST_FRAMEWORK = {
 
 REST_SESSION_LOGIN = False
 REST_USE_JWT = True
-# JWT_AUTH_COOKIE = "jwt-access-token"
-# JWT_AUTH_REFRESH_COOKIE = "jwt-refresh-token"
-# JWT_AUTH_SECURE = True
+JWT_AUTH_COOKIE = "jwt-access-token"
+JWT_AUTH_REFRESH_COOKIE = "jwt-refresh-token"
+JWT_AUTH_SECURE = True
 
 from datetime import timedelta
 
@@ -86,11 +89,6 @@ SIMPLE_JWT = {
     "UPDATE_LAST_LOGIN": False,
     "ALGORITHM": "HS256",
     "SIGNING_KEY": config("SECRET_KEY"),
-    "AUTH_COOKIE": "jwt-access-token",
-    "AUTH_COOKIE_DOMAIN": "mechmarket.eu",
-    "AUTH_COOKIE_SECURE": True,
-    "AUTH_COOKIE_PATH": "/",
-    "AUTH_COOKIE_SAMESITE": "Lax",
 }
 
 CORS_ORIGIN_ALLOW_ALL = False
