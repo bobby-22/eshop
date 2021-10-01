@@ -100,6 +100,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://api.mechmarket.eu",
     "https://mechmarket.eu",
     "https://www.mechmarket.eu",
+    "https://app.mechmarket.eu",
     "https://mechmarketeu.vercel.app",
 ]
 
