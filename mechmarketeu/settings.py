@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django_cleanup.apps.CleanupConfig",
     "rest_framework",
-    "rest_framework.authtoken",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
     "corsheaders",
@@ -56,7 +55,6 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    "DEFAULT_SCHEMA_CLASS": ("rest_framework.schemas.coreapi.AutoSchema",),
     "DEFAULT_PARSER_CLASSES": (
         "rest_framework.parsers.JSONParser",
         "rest_framework.parsers.FormParser",
