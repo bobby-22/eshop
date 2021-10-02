@@ -48,19 +48,13 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "rest_framework_simplejwt",
     "rest_framework_simplejwt.token_blacklist",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "dj_rest_auth",
-    "dj_rest_auth.registration",
     "corsheaders",
     "storages",
 ]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.TokenAuthentication",
-        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
     "DEFAULT_SCHEMA_CLASS": ("rest_framework.schemas.coreapi.AutoSchema",),
     "DEFAULT_PARSER_CLASSES": (
@@ -71,14 +65,6 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
 }
-
-REST_SESSION_LOGIN = False
-REST_USE_JWT = True
-JWT_AUTH_COOKIE = "jwt-access-token"
-JWT_AUTH_REFRESH_COOKIE = "jwt-refresh-token"
-JWT_AUTH_SECURE = True
-SESSION_COOKIE_DOMAIN = ".mechmarket.eu"
-JWT_AUTH_SAMESITE = "None"
 
 from datetime import timedelta
 
@@ -92,27 +78,22 @@ SIMPLE_JWT = {
     "ALGORITHM": "HS256",
     "SIGNING_KEY": config("SECRET_KEY"),
 }
-CSRF_TRUSTED_ORIGINS = [
-    "https://mechmarket.eu",
-]
+
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
     "http://127.0.0.1:8080",
     "https://mechmarketeu.herokuapp.com",
-    "https://api.mechmarket.eu",
     "https://mechmarket.eu",
     "https://www.mechmarket.eu",
-    "https://app.mechmarket.eu",
     "https://mechmarketeu.vercel.app",
 ]
 
 MIDDLEWARE = [
-    "accounts.middleware.MoveJWTRefreshCookieIntoTheBody",
     "django.middleware.security.SecurityMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
