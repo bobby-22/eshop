@@ -77,6 +77,8 @@ REST_USE_JWT = True
 JWT_AUTH_COOKIE = "jwt-access-token"
 JWT_AUTH_REFRESH_COOKIE = "jwt-refresh-token"
 JWT_AUTH_SECURE = True
+SESSION_COOKIE_DOMAIN = ".mechmarket.eu"
+JWT_AUTH_SAMESITE = "None"
 
 from datetime import timedelta
 
@@ -90,7 +92,9 @@ SIMPLE_JWT = {
     "ALGORITHM": "HS256",
     "SIGNING_KEY": config("SECRET_KEY"),
 }
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://mechmarket.eu",
+]
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
