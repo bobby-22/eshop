@@ -52,6 +52,8 @@ class ProductModelCreateSerializer(serializers.ModelSerializer):
         exclude = ("owner",)
 
     def create(self, validated_data):
+        thumbnail = validated_data["thumbnail"]
+        thumbnail.name = get_random_string(10)
         product = ProductModel.objects.create(
             title=validated_data["title"],
             price=validated_data["price"],
@@ -59,7 +61,7 @@ class ProductModelCreateSerializer(serializers.ModelSerializer):
             category=validated_data["category"],
             owner=self.context["request"].user,
             description=validated_data["description"],
-            thumbnail=validated_data["thumbnail"],
+            thumbnail=thumbnail,
             post_id="post_" + get_random_string(length=30),
         )
         return product
@@ -74,6 +76,7 @@ class ImageModelCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         for image in validated_data.pop("images"):
+            image.name = get_random_string(length=10)
             images = ImageModel.objects.create(
                 owner=self.context["request"].user,
                 post_id=validated_data["post_id"],
